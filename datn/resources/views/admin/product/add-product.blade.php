@@ -50,25 +50,15 @@
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line">
-                                    <option></option>
-                                    <option>Thực phẩm</option>
-                                    <option>Nước uống</option>
-                                    <option>Gia dụng</option>
-                                    <option>Gia vị</option>
-                                    <option>...</option>
+                                    @foreach($cates as $cate)
+                                    <option value="{{  $cate->id}}">{{$cate->name}}</option>  
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-12">Loại hàng</label>
-                            <div class="col-sm-12">
-                                <select class="form-control form-control-line">
-                                    <option></option>
-                                    <option>Thông thường</option>
-                                    <option>Đi chợ</option>
-                                    <option>Cả 2</option>
-                                </select>
-                            </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">

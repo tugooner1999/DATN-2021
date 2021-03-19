@@ -29,19 +29,18 @@
             @endforeach
         </ul>
 @endif
-       
                     @csrf
                         <div class="form-group">
                             <label class="col-md-12">Tên tài khoản</label>
                             <div class="col-md-12">
-                                <input type="text" name="name" value="" class="form-control form-control-line">
+                                <input type="text" name="name" value="{{(old('name'))}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Mật khẩu</label>
                             <div class="col-md-12">
                                 <input type="password" value="" class="form-control form-control-line"
-                                    name="password" id="example-email">
+                                    name="example-email" id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,9 +52,9 @@
                         <div class="form-group">
                             <label class="col-sm-12">Phân quyền</label>
                             <div class="col-sm-12">
-                                <select class="form-control form-control-line">
-                                    <option>Thành Viên</option>
-                                    <option>Quản trị</option>
+                                <select class="form-control form-control-line" name="role_id">
+                                    <option value = "0">Thành Viên</option>
+                                    <option value = "1">Quản trị</option>
                                 </select>
                             </div>
                         </div>
@@ -63,27 +62,27 @@
                             <label class="col-sm-12">Trạng thái</label>
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line" name="status">
-                                    <option value="1">Hoạt động</option>
-                                    <option value="2">Cấm</option>
+                                    <option name="status" value="1">Hoạt động</option>
+                                    <option name="status" value="0">Cấm</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Email</label>
                             <div class="col-md-12">
-                                <input type="email" name="email" value="" class="form-control form-control-line">
+                                <input type="email" name="email" value="{{(old('email'))}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Phone</label>
                             <div class="col-md-12">
-                                <input type="number" name="phone" value="" class="form-control form-control-line">
+                                <input type="number" name="phone" value="{{(old('phone'))}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Địa chỉ</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="address" class="form-control form-control-line"></textarea>
+                                <textarea rows="5" name="address" value="{{(old('address'))}}" class="form-control form-control-line"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -99,7 +98,7 @@
                     <img src="" width="100%" height="200px" alt="">
                     <div class="form-group">
                         <label class="col-sm-12">Tải ảnh mới</label>
-                        <input class="col-sm-12" type="file">
+                        <input class="col-sm-12" type="file" name="image">
                     </div>
                 </div>
             </div>

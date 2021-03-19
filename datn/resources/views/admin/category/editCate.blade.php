@@ -19,21 +19,32 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                @isset($msg)
+                    <p style="color: green">{{$msg}}</p>
+                @endisset
+                @isset($errs)
+                    @foreach($errs as $e)
+                        <p style="color: red"> {{  implode('<br>', $e ) }}  </p>
+                    @endforeach
+                @endisset
+                                @csrf
+                                </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Tên danh mục</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="Thực phẩm" class="form-control form-control-line"> </div>
+                                        <input type="text" name="name" value="{{$objU->name}}" class="form-control form-control-line"> </div>
                                 </div>
-                                <img src="{{asset('assets/admin/plugins/images/users/arijit.jpg')}}" width="250px" height="200px" alt="">
+                                <img src="{{$objU->image}}" width="250px" height="200px" alt="">
                                 <div class="form-group">
-                                    <label class="col-sm-12">Tải ảnh mới</label>
-                                    <input class="col-sm-12" type="file">
+                                    <label class="col-sm-12" >Tải ảnh mới</label>
+                                    <input class="col-sm-12" type="file" name="image">
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-danger">Cập nhật</button>
-                                        <a href="listCategory.html" class="btn btn-success">Trở về</a>
+                                        <a href="{{route('admin.listCate')}}" class="btn btn-success">Trở về</a>
                                     </div>
                                 </div>
                             </form>
@@ -43,5 +54,5 @@
                 </div>
             </div>
         </div>
-
+        
         @endsection

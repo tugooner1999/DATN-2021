@@ -38,9 +38,10 @@
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->name}}</td>
                                                 <td><img src="{{$item->image}}" width="50" height="50" alt=""></td>
-                                                <td>{{count($item->products) }}</td>
+                                                
+                                                <td>{{ count($item->products) }}</td>
                                                 <td style="font-size: 20px;">
-                                                    <a style="padding-left: 10px;" href="{{route('admin.editCate')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                                    <a style="padding-left: 10px;" href="{{route('admin.editCate',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                     <a class="text-danger" href="{{route( 'admin.deteleCate',[ 'id'=>$item->id]) }}"  
                                                         onclick="return confirm('Bạn muốn xóa danh mục {{$item->name}}')"><i class="fa fa-trash" aria-hidden="true"></i>
                                                         </a>

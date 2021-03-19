@@ -3,41 +3,58 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+
+
+class User extends Model
 {
-    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    public $timestamps = false;
+    protected $table = 'users';
     protected $fillable = [
+        'id',
         'name',
-        'email',
-        'password',
+         'password', 
+         'avatar',
+         'role_id',
+         'email',
+         'phone',
+         'address',
+         'status',
+         'coins'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected  $primaryKey = 'id';
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
     /**
-     * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function SaveUpdate($id, $data){
+        return DB::table($this->table)
+            ->where('id',$id)
+            ->update($data);
+    }
+    public function SaveNew($data){
+        return DB::table($this->table)->insertGetId($data);
+    }
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+
 }

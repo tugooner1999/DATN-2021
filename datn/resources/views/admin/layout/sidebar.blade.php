@@ -41,6 +41,9 @@
                 <a href="{{route('admin.listComment')}}" class="waves-effect"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình
                     luận</a>
             </li>
+            <li>
+                <a href="{{route('admin.listSlider')}}" class="waves-effect"><i class="fa fa-sliders" aria-hidden="true"></i> Slider</a>
+            </li>
         </ul>
         <div class="center p-20">
             <a href="#" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Đăng Xuất <i

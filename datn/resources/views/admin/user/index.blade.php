@@ -40,9 +40,10 @@
                                     @forelse($user as $objU)
                                         <tr>
                                             <td>{{$objU->id}}</td>
-                                            <td>{{$objU->name}}</td>
+                                            <td><b style="font-weight: bold;">{{$objU->name}}</b></td>
                                             <td><img src="{{$objU->image}}" alt="" width="50"></td>
-                                            <td class="text-primary">{{$objU->role_id}}</td>
+                                            <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
+                                            {{$objU->role_id == 0 ? "Thành Viên" : "Quản Trị"}}</td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
                                             <td>{{$objU->address}}</td>
@@ -52,7 +53,9 @@
                                             <td>{{$objU->coins}}</td>
                                             <td style="font-size: 20px;">
                                                 <a style="padding-left: 10px;" href="{{route('admin.editUser')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="{{route( 'admin.deteleUser',[ 'id'=>$objU->id]) }}" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <a style="padding-left: 10px;" href="{{route( 'admin.deteleUser',[ 'id'=>$objU->id]) }}"
+                                                onclick="return confirm('Bạn muốn xóa tài khoản {{$objU->name}}')"
+                                                class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                         @empty

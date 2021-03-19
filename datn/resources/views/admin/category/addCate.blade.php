@@ -20,13 +20,20 @@
                             <div class="white-box">
                             
                                 <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data" >
+                                    @if ($errors->any())
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li style="color:red;">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
                                     @csrf
                                     <div class="form-group">
                                         <label class="col-md-12">Tên danh mục</label>
                                         <div class="col-md-12">
                                             <input type="text" name ="name"  class="form-control form-control-line"> </div>
                                     </div>
-                                   
+                                    
                                     <div class="form-group">
                                         <label class="col-sm-12">Tải ảnh mới</label>
                                         <input class="col-sm-12" type="file" name="image">
@@ -44,4 +51,5 @@
                     </div>
                 </div>
             </div>
+            
 @endsection
