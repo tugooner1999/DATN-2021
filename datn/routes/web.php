@@ -68,7 +68,8 @@ Route::prefix('admin')->group(function () {
         // slider
         Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
         Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
-        Route::match(['get', 'post'], '/slider/edit-slider', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
+        Route::match(['get', 'post'], '/slider/edit-slider/{id}', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
+        Route::match(['get','post'],'/slider/delete/{id}',[Admin\SliderController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleSlider');
 });
 
 

@@ -63,6 +63,13 @@
     <script src="{{asset('assets/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 </body>
 
 </html>

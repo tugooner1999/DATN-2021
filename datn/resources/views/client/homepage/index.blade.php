@@ -5,37 +5,28 @@
 <!-- Slider Arae Start -->
 <div class="slider-area">
     <div class="slider-active-3 owl-carousel slider-hm8 owl-dot-style">
+
+
         <!-- Slider Single Item Start -->
+        @foreach ($slider as $ad)    
         <div class="slider-height-6 d-flex align-items-start justify-content-start bg-img"
-            style="background-image: url(assets/client/images/slider-image/sample-1.jpg);">
+            style="background-image: url({{$ad->image}});">
             <div class="container">
                 <div class="slider-content-1 slider-animated-1 text-left">
-                    <span class="animated">Kẹo hoa quả</span>
+                    <span class="animated">{{ $ad->description }}</span>
                     <h1 class="animated">
-                        Kẹo hoa quả các loại<br />
-                        Dừa Dứa
+                        {{$ad->title}}
                     </h1>
-                    <p class="animated">Giao hàng miễn phí trong bán kính 500m</p>
+                    <p class="animated">Giao hàng miễn phí trong 500m</p>
                     <a href="shop-4-column.html" class="shop-btn animated">ĐẶT HÀNG</a>
                 </div>
             </div>
         </div>
+        @endforeach
+
         <!-- Slider Single Item End -->
-        <!-- Slider Single Item Start -->
-        <div class="slider-height-6 d-flex align-items-start justify-content-start bg-img"
-            style="background-image: url(assets/client/images/slider-image/sample-2.jpg);">
-            <div class="container">
-                <div class="slider-content-1 slider-animated-1 text-left">
-                    <span class="animated">100% TỰ NHIÊN</span>
-                    <h1 class="animated">
-                        Nước uống trái cây <br />
-                        Đồ uống mùa hè
-                    </h1>
-                    <a href="shop-4-column.html" class="shop-btn animated">ĐẶT HÀNG</a>
-                </div>
-            </div>
-        </div>
-        <!-- Slider Single Item End -->
+
+
     </div>
 </div>
 <!-- Slider Arae End -->
@@ -107,18 +98,19 @@
         <!-- Section Title End -->
         <!-- Best Sell Slider Carousel Start -->
         <div class="best-sell-slider owl-carousel owl-nav-style">
+            @foreach ($product as $item)
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product')}}" class="thumbnail">
-                        <img src="{{asset('assets/client//images/product-image/organic/product-1.jpg')}}" alt="" />
+                        <img src="{{$item->image}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
                 <ul class="product-flag">
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>THỰC PHẨM</span></a>
-                    <h2><a href="{{route('client.single-product')}}" class="product-link">Bim bim ôshi</a></h2>
+                    <a class="inner-link" href="shop-4-column.html"><span>{{$item->category_id}}</span></a>
+                    <h2><a href="{{route('client.single-product')}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
                         <i class="ion-android-star"></i>
@@ -128,9 +120,7 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price">7.000đ</li>
-                            <li class="current-price">5.000đ</li>
-                            <li class="discount-price">-20%</li>
+                            <li class="current-price">{{$item->price}}vnđ</li>
                         </ul>
                     </div>
                 </div>
@@ -142,7 +132,8 @@
                         </li>
                     </ul>
                 </div>
-            </article>
+            </article>  
+        @endforeach    
         </div>
         <!-- Best Sells Carousel End -->
     </div>
