@@ -1,7 +1,7 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style = "padding: 35px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -35,20 +35,37 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form
-                                        action="https://htmldemo.hasthemes.com/ecolife-preview/ecolife/assets/php/mail.php"
-                                        method="post">
-                                        <input type="text" name="user-name" placeholder="Tên tài khoản" />
-                                        <input type="password" name="user-password" placeholder="Mật khẩu" />
+                                <p>
+                                @foreach($errs as $e)
+    <p style="color: red">
+        @if(is_array($e))
+            {{implode('<br>',$e)}}
+        @else
+            {{$e}}
+        @endif
+    </p>
+@endforeach
+                               <form method="post" {{route('client.login')}}>
+                               @csrf
+                               <input type="text" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" />
+                                        <input type="password" name="password" placeholder="Mật khẩu" />
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <input type="checkbox" />
-                                                <a class="flote-none" href="javascript:void(0)">Nhớ mật khẩu</a>
-                                                <a href="#">Quên mật khẩu?</a>
+                                                <!-- <input type="checkbox" /> -->
+                                                <!-- <a class="flote-none" href="javascript:void(0)">Nhớ mật khẩu</a>
+                                                <a href="#">Quên mật khẩu?</a> -->
                                             </div>
+                                            @isset($msg)
+    <div>
+        <span style="color: red">{{$msg}}</span>
+    </div>
+    @endisset
+
                                             <button type="submit"><span>Đăng nhập</span></button>
                                         </div>
                                     </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -56,7 +73,6 @@
                             <div class="login-form-container">
                                 <div class="login-register-form">
                                     <form
-                                        action="https://htmldemo.hasthemes.com/ecolife-preview/ecolife/assets/php/mail.php"
                                         method="post">
                                         <input type="text" name="user-name" placeholder="Tên tài khoản" />
                                         <input type="password" name="user-password" placeholder="Mật khẩu" />

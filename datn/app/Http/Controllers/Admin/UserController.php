@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models;
 use App\Models\User;
+use Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
@@ -19,12 +21,11 @@ class UserController extends Controller
 
     public function create_user(Request $request){
         $dataView = ['errs'=>[] ]; // mảng để truyền dữ liệu ra view
-        
+
         if($request->isMethod('POST')){
             $rule = [
                 'name'=>'required|unique:users',
                 'image'=>'required|image',
-                
                 'role_id'=>'required',
                 'email'=>'required|email|max:255|unique:users',
                 'phone'=>'required|min:10|numeric',
@@ -44,9 +45,9 @@ class UserController extends Controller
                 ];
             $validator = Validator::make($request->all(), $rule, $msgE);
             // check có lỗi hay không
-            
-            if ($validator->fails()) {
 
+            if ($validator->fails()) {
+                // nó chết ở trong đây à
                 $request->flash();
                 return redirect()->route('admin.addUser')->withErrors($validator);
             }
@@ -54,14 +55,14 @@ class UserController extends Controller
                 // không có lỗi, ghi CSDL
                 $user = new user();
                 $user['name']= $request->get('name');
-                $user['password']= $request->get('password');
+                $user['password']= Hash::make($request->get('password'));
                 $user['role_id']= $request->get('role_id');
                 $user['email']= $request->get('email');
                 $user['phone']= $request->get('phone');
                 $user['address']= $request->get('address');
                 $user['status']= $request->get('status');
 
-                
+
                 $file = $request->file('image');
             $file_allow_upload = config('app.file_allow_upload');
 
@@ -80,12 +81,12 @@ class UserController extends Controller
             // dùng cái link dưới đây để lưu vào CSDL nhé.
             $file_info->link_img = 'frontend/images/'.$file->getClientOriginalName();
             $user['avatar']=$file_info->link_img;
-            $user['coins']= 0; 
+            $user['coins']= 0;
             $user->Save();
             return redirect()->route('admin.listUser');
             }
         }
-        
+
         return view('admin.user.add-user');
     }
 
