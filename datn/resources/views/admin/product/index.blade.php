@@ -59,7 +59,7 @@
                                             height="100" width="100"></td>
                                     <td>{{$item->price}}</td>
                                     <td>{{$item->quantily}}</td>
-                                    <td>Thông Thường</td>
+                                    <td>{{$item->allow_market == 1 ? "Đi chợ" : "Thông thường"}}</td>
                                     <td>{{isset($item->category) ? $item->category->name : ''}}</td>
                                     <td>{{$item->views}}</td>
                                     <td>{{$item->update_at}}</td>

@@ -49,7 +49,11 @@ class ProductController extends Controller
         $data['price'] = $request->product_price;
         $data['quantily'] = $request->product_quantily;
         $data['category_id'] = $request->product_cate;
-        $data['create_at'] = $dt_create; //lấy thời gian thực theo ngày tháng năm
+        $data['create_at'] = $dt_create;
+        $data['allow_market']=isset($_POST['allow_market'])
+        ? $_POST['allow_market'] : 2;
+
+         //lấy thời gian thực theo ngày tháng năm
 
         $get_image = $request->file('product_image');
         if($get_image){
@@ -76,7 +80,9 @@ class ProductController extends Controller
         $data['price'] = $request->product_price;
         $data['quantily'] = $request->product_quantily;
         $data['category_id'] = $request->product_cate;
-        $data['update_at'] = $dt_update; //lấy thời gian thực theo ngày tháng năm
+        $data['update_at'] = $dt_update;
+        $data['allow_market']=isset($_POST['allow_market'])
+        ? $_POST['allow_market'] : 2; //lấy thời gian thực theo ngày tháng năm
 
         $get_image = $request->file('product_image');
         if($get_image){
@@ -85,10 +91,12 @@ class ProductController extends Controller
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension(); //lưu file ảnh với đuôi file mở rộng và tên file
             $get_image->move('uploads/products', $new_image); //lưu file ảnh vào folder uploads/produts
             $data['image_gallery'] = $new_image;
+
             DB::table('products')->where('id', $id)->update($data);
             Session::put('message','Cập nhật sản phẩm thành công');
             return Redirect::to('/admin/products');
         }
+
         DB::table('products')->where('id', $id)->update($data);
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');
