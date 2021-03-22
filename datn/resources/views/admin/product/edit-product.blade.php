@@ -18,45 +18,48 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-xs-12">
-                <div class="white-box">
-                    <form class="form-horizontal form-material">
+            @foreach($edit_product as $key => $item)
+            <form class="form-horizontal form-material" action="{{URL::to('/admin/products/update/'.$item->id)}}" method="POST" enctype="multipart/form-data" role="form">
+            @csrf
+                <div class="col-md-8 col-xs-12">
+                    <div class="white-box">
                         <div class="form-group">
                             <label class="col-md-12">Tên sản phẩm</label>
                             <div class="col-md-12">
-                                <input type="text" value="Mì tôm hảo hảo siêu cay"
-                                    class="form-control form-control-line">
+                                <input type="text" name="product_name" value="{{$item->name}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
-                                <input type="email" value="120.000" class="form-control form-control-line"
-                                    name="example-email" id="example-email">
+                                <input type="number" value="{{$item->price}}" class="form-control form-control-line"
+                                    name="product_price" id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
-                                <input type="text" value="31" class="form-control form-control-line">
+                                <input type="number" name="product_quantily" value="{{$item->quantily}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5"
-                                    class="form-control form-control-line">Sản phẩm chất lượng cao</textarea>
+                                <textarea rows="5" name="product_description"
+                                    class="form-control form-control-line">{{$item->description}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
-                                <select class="form-control form-control-line">
-                                    <option>Thực phẩm</option>
-                                    <option>Nước uống</option>
-                                    <option>Gia dụng</option>
-                                    <option>Gia vị</option>
-                                    <option>...</option>
+                                <select name="product_cate" class="form-control form-control-line">
+                                    @foreach($cate_product as $key => $cate)
+                                    @if($cate->id == $item->category_id)
+                                    <option selected value="{{  $cate->id }}">{{$cate->name}}</option>
+                                    @else
+                                    <option value="{{  $cate->id }}">{{$cate->name}}</option>
+                                    @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -76,18 +79,20 @@
                                 <a href="{{route('admin.listProduct')}}" class="btn btn-success">Trở về</a>
                             </div>
                         </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="white-box">
-                    <img src="{{asset('assets/admin/plugins/images/users/arijit.jpg')}}" width="100%" height="200px" alt="">
-                    <div class="form-group">
-                        <label class="col-sm-12">Tải ảnh mới</label>
-                        <input class="col-sm-12" type="file">
                     </div>
                 </div>
-            </div>
+                <div class="col-md-4">
+                    <div class="white-box">
+                        <img src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="350px"
+                            alt="">
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input name="product_image" class="col-sm-12" type="file">
+                        </div>
+                    </div>
+                </div>
             </form>
+            @endforeach
         </div>
     </div>
 </div>

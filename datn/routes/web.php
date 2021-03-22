@@ -36,9 +36,11 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.addProduct');
-        Route::get('/products/edit', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
-
+        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
+        Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
+        Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
+        Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
+        Route::match(['get','post'], '/products/update/{id}',  [Admin\ProductController::class, 'updateProduct'])->name('admin.updateProduct');
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');

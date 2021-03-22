@@ -10,6 +10,7 @@ class Product extends Model
     public $timestamps = FALSE;
 
     protected $fillable = [
+        'id',
         'name',
         'image_gallery',
         'description ',
@@ -19,7 +20,10 @@ class Product extends Model
         'views',
         'updated_at',
         'created_at',
-        'type_id',
-        'product_market_id'
+        'allow_market',
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
