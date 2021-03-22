@@ -104,7 +104,7 @@ Route::prefix('client')->group(function () {
 
 
         // slider
-        Route::get('/admin/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
-        Route::match(['get', 'post'], '/admin/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
+        Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
+        Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
         // Route::get('/admin/user/edit', 'Admin\UserController@edit_user')->name('admin.editUser');
 });

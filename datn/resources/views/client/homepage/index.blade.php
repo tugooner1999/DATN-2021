@@ -102,7 +102,7 @@
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product')}}" class="thumbnail">
-                        <img src="{{$item->image}}" alt="" width="256" height="256"/>
+                        <img src="../public/uploads/products/{{$item->image_gallery}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
                 <ul class="product-flag">
