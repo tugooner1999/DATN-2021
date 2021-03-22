@@ -37,13 +37,13 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->title}}</td>
-                                                <td><img src="{{$item->image}}" width="50" height="50" alt=""></td>
+                                                <td><img src="{{$item->image}}" width="150" height="100" alt=""></td>
                                                 <td>{{$item->description}}</td>
                                                 <td style="font-size: 20px;">
                                                     <a style="padding-left: 10px;" href="{{route('admin.editSlider',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                    {{-- <a class="text-danger" href="{{route( 'admin.deteleSlider',[ 'id'=>$item->id]) }}"  
-                                                        onclick="return confirm('Bạn muốn xóa danh mục {{$item->name}}')"><i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </a> --}}
+                                                    <a class="text-danger" href="{{route( 'admin.deteleSlider',[ 'id'=>$item->id]) }}"  
+                                                        onclick="return confirm('Bạn muốn xóa danh mục {{$item->title}}')"><i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
                                                 </td>
                                             </tr>  
                                         @endforeach

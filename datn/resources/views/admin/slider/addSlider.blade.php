@@ -31,17 +31,17 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Title</label>
                                         <div class="col-md-12">
-                                            <input type="text" name ="title"  class="form-control form-control-line"> </div>
+                                            <input type="text" name ="title"  class="form-control form-control-line" value="{{ old('title') }}"> </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Mô tả</label>
                                         <div class="col-md-12">
-                                            <textarea rows="5" name="description" class="form-control form-control-line"></textarea>
+                                            <textarea rows="5" name="description" class="form-control form-control-line">{{ old('description') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-12">Tải ảnh mới</label>
-                                        <input class="col-sm-12" type="file" name="image">
+                                        <input class="col-sm-12" type="file" name="image" >
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">

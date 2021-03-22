@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Tên danh mục</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="name" value="{{$objU->name}}" class="form-control form-control-line"> </div>
+                                        <input type="text" name="name" value="{{$objU->name}}" class="form-control form-control-line " value="{{ old('name') }}"> </div>
                                 </div>
                                 <img src="{{$objU->image}}" width="250px" height="200px" alt="">
                                 <div class="form-group">
