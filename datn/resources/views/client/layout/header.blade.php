@@ -43,8 +43,16 @@
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                                <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng
+                            @if(!empty($msg))
+                <span class="text-danger" style="font-size: 22px;">{{$msg}}</span>
+                <br>
+               
+                @endif
+                @if(empty($msg))
+                <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng
                                         kí</b></a>
+                @endif
+                                
                             </div>
                         </div>
                         <!--Login info End -->
