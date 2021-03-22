@@ -40,16 +40,6 @@
        
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        });
-    </script>
     <script src="{{asset('assets/admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/admin/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js')}}"></script>
@@ -64,7 +54,13 @@
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
     <script src="{{asset('assets/admin/js/filterSort.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
-    
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 </body>
 
 </html>

@@ -36,9 +36,11 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.addProduct');
-        Route::get('/products/edit', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
-
+        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
+        Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
+        Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
+        Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
+        Route::match(['get','post'], '/products/update/{id}',  [Admin\ProductController::class, 'updateProduct'])->name('admin.updateProduct');
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
@@ -68,7 +70,8 @@ Route::prefix('admin')->group(function () {
         // slider
         Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
         Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
-        Route::match(['get', 'post'], '/slider/edit-slider', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
+        Route::match(['get', 'post'], '/slider/edit-slider/{id}', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
+        Route::match(['get','post'],'/slider/delete/{id}',[Admin\SliderController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleSlider');
 });
 
 
@@ -101,7 +104,7 @@ Route::prefix('client')->group(function () {
 
 
         // slider
-        Route::get('/admin/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
-        Route::match(['get', 'post'], '/admin/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
+        Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
+        Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
         // Route::get('/admin/user/edit', 'Admin\UserController@edit_user')->name('admin.editUser');
 });

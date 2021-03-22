@@ -18,9 +18,10 @@
                     <div class="col-sm-12">
                         <div class="white-box">
                                 <h3 class="box-title">Danh sách</h3>
-                                    <div class="app-search hidden-sm hidden-xs m-r-10">
-                                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
-                                    </div>
+                                <div class="app-search hidden-sm hidden-xs m-r-10">
+                                    <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid"
+                                        type="text" placeholder="Tìm kiếm" aria-label="Search">
+                                </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -32,9 +33,9 @@
                                             <th><a href="{{route('admin.addCate')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="myTable">
+                                    <tbody id="FilterContainer">
                                         @foreach ($category as $item)
-                                            <tr>
+                                            <tr class="column">
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->name}}</td>
                                                 <td><img src="{{$item->image}}" width="50" height="50" alt=""></td>

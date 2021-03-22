@@ -18,40 +18,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-xs-12">
-                <div class="white-box">
-                    <form class="form-horizontal form-material">
+            <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST" enctype="multipart/form-data" role="form">
+                @csrf
+                <div class="col-md-8 col-xs-12">
+                    <div class="white-box">
                         <div class="form-group">
                             <label class="col-md-12">Tên sản phẩm</label>
                             <div class="col-md-12">
-                                <input type="text" value="" class="form-control form-control-line">
+                                <input type="text" value="" name="product_name" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
-                                <input type="email" value="" class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="number" value="" name="product_price" class="form-control form-control-line"
+                                     id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
-                                <input type="text" value="" class="form-control form-control-line">
+                                <input type="number" name="product_quantily" value="" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                <textarea rows="5" name="product_description" class="form-control form-control-line"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
-                                <select class="form-control form-control-line">
+                                <select name="product_cate" class="form-control form-control-line">
                                     @foreach($cates as $cate)
-                                    <option value="{{  $cate->id}}">{{$cate->name}}</option>  
+                                    <option value="{{  $cate->id }}">{{$cate->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -60,23 +61,24 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-danger">Thêm mới</button>
-                                <a href="{{route('admin.listProduct')}}" class="btn btn-success">Trở về</a>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="white-box">
-                    <img src="" width="100%" height="200px" alt="">
+                    </div>
                     <div class="form-group">
-                        <label class="col-sm-12">Tải ảnh mới</label>
-                        <input class="col-sm-12" type="file">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-danger">Thêm mới</button>
+                            <a href="{{route('admin.listProduct')}}" class="btn btn-success">Trở về</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="col-md-4">
+                    <div class="white-box">
+                        <img src="" width="100%" height="200px" alt="">
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="product_image" type="file">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
