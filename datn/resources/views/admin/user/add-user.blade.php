@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Phone</label>
                             <div class="col-md-12">
-                                <input type="number" name="phone" value="{{(old('phone'))}}" class="form-control form-control-line">
+                                <input type="text" name="phone" value="{{(old('phone'))}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">

@@ -27,28 +27,35 @@
                                             <th>#</th>
                                             <th>Tài khoản</th>
                                             <th>Ảnh</th>
-                                            <th>Quyền</th>
                                             <th>Email</th>
                                             <th>SĐT</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Trạng thái</th>
+                                            <th><select class="sort1">
+                                                    <option value="all">All Quyền</option>
+                                                    <option value="0">Thành viên</option>
+                                                    <option value="1">Quản trị</option>
+                                                </select>
+                                            </th>
+                                            <th><select class="sort2">
+                                                    <option value="all">All Trạng thái</option>
+                                                    <option value="0">Hoạt Động</option>
+                                                    <option value="1">Bị cấm</option>
+                                                </select></th>
                                             <th>Điểm</th>
                                             <th><a href="{{route('admin.addUser')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="myTable">
+                                    <tbody id="FilterContainer">
                                     @forelse($user as $objU)
-                                        <tr>
+                                        <tr class="column" data-data1="{{$objU->role_id}}" data-data2="{{$objU->status}}">
                                             <td>{{$objU->id}}</td>
                                             <td><b style="font-weight: bold;">{{$objU->name}}</b></td>
-                                            <td><img src="{{$objU->image}}" alt="" width="50"></td>
-                                            <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
-                                            {{$objU->role_id == 0 ? "Thành Viên" : "Quản Trị"}}</td>
+                                            <td><img src="{{$objU->avatar}}" alt="" width="50"></td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
-                                            <td>{{$objU->address}}</td>
-                                            <td class='{{$objU->status == 1 ? "text-success" : "text-danger"}}'>
-                                            {{$objU->status == 1 ? "Hoạt động" : "Cấm"}}
+                                            <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
+                                            {{$objU->role_id == 0 ? "Thành Viên" : "Quản Trị"}}</td>
+                                            <td class='{{$objU->status == 0 ? "text-success" : "text-danger"}}'>
+                                            {{$objU->status == 0 ? "Hoạt động" : "Cấm"}}
                                             </td>
                                             <td>{{$objU->coins}}</td>
                                             <td style="font-size: 20px;">

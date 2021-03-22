@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>
-                                <a href="{{route('admin.listVouncher')}}" class="btn btn-success">Trở về</a>
+                                <a href="{{route('admin.listUser')}}" class="btn btn-success">Trở về</a>
                             </div>
                         </div>
                 </div>

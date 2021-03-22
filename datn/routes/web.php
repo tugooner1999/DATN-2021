@@ -47,15 +47,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
 
         // vouncher
-        Route::get('/vouncher',  [Admin\VouncherController::class , 'index'])->name('admin.listVouncher');
-        Route::get('/vouncher/add',  [Admin\VouncherController::class , 'create_vouncher'])->name('admin.addVouncher');
-        Route::get('/vouncher/edit',  [Admin\VouncherController::class , 'edit_vouncher'])->name('admin.editVouncher');
+        Route::get('/voucher',  [Admin\VouncherController::class , 'index'])->name('admin.listVouncher');
+        Route::get('/voucher/add',  [Admin\VouncherController::class , 'create_vouncher'])->name('admin.addVouncher');
+        Route::get('/voucher/edit',  [Admin\VouncherController::class , 'edit_vouncher'])->name('admin.editVouncher');
 
         // user
-        Route::get('/admin/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
-        Route::match(['get','post'],'/admin/user/add', [Admin\UserController::class, 'create_User'])->name('admin.addUser');
-        Route::get('/admin/user/edit', [Admin\UserController::class,'edit_user'])->name('admin.editUser');
-        Route::match(['get','post'],'/admin/user/delete/{id}',[Admin\UserController::class, 'destroy'])
+        Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
+        Route::match(['get','post'],'/user/add', [Admin\UserController::class, 'create_User'])->name('admin.addUser');
+        Route::get('/user/edit', [Admin\UserController::class,'edit_user'])->name('admin.editUser');
+        Route::match(['get','post'],'/user/delete/{id}',[Admin\UserController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleUser');
 

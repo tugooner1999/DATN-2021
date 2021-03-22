@@ -62,7 +62,9 @@
     <script src="{{asset('assets/admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
+    <script src="{{asset('assets/admin/js/filterSort.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
+    
 </body>
 
 </html>
