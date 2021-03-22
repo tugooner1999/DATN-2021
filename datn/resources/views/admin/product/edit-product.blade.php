@@ -63,15 +63,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-12">Loại hàng</label>
-                            <div class="col-sm-12">
-                                <select class="form-control form-control-line">
-                                    <option>Thông thường</option>
-                                    <option>Đi chợ</option>
-                                    <option>Cả 2</option>
-                                </select>
-                            </div>
+                        <div class="form-check">
+                        <input class="form-check-input" 
+                    @if($item->allow_market == 1)
+                        checked
+                    @endif
+                    type="checkbox" name="allow_market" id="allow_market" value="1">
+                            <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">

@@ -44,8 +44,8 @@
                                     <th>Số lượng</th>
                                     <th><select class="sort1">
                                                     <option value="all">All Loại hình</option>
-                                                    <option value="1">Thông thường</option>
-                                                    <option value="2">Đi chợ</option>
+                                                    <option value="2">Thông thường</option>
+                                                    <option value="1">Đi chợ</option>
                                                 </select></th>
                                     <th>
                                     <select class="sort2">
@@ -70,7 +70,7 @@
                                             height="100" width="100"></td>
                                     <td>{{$item->price}}</td>
                                     <td>{{$item->quantily}}</td>
-                                    <td>{{$item->allow_market == 1 ? "Thông thường" : "Đi chợ"}}</td>
+                                    <td>{{$item->allow_market == 1 ? "Đi chợ" : "Thông thường"}}</td>
                                     <td>{{isset($item->category) ? $item->category->name : ''}}</td>
                                     <td>{{$item->views}}</td>
                                     <td>{{$item->update_at}}</td>
