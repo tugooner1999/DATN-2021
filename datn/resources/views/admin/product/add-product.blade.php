@@ -72,10 +72,12 @@
 
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img src="" width="100%" height="200px" alt="">
+                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="200px"
+                                alt="">
+                        <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="product_image" type="file">
+                            <input class="col-sm-12" name="product_image" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                     </div>
                 </div>

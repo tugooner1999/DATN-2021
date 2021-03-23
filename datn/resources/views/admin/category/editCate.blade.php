@@ -36,10 +36,12 @@
                                     <div class="col-md-12">
                                         <input type="text" name="name" value="{{$objU->name}}" class="form-control form-control-line " value="{{ old('name') }}"> </div>
                                 </div>
-                                <img src="{{$objU->image}}" width="250px" height="200px" alt="">
+                                <img id="image" src="{{$objU->image}}" width="40%" height="200px"
+                                    alt="">
+                                <hr>
                                 <div class="form-group">
-                                    <label class="col-sm-12" >Tải ảnh mới</label>
-                                    <input class="col-sm-12" type="file" name="image">
+                                    <label class="col-sm-12">Tải ảnh mới</label>
+                                    <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">

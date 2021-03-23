@@ -50,8 +50,6 @@
                                             <td>{{$objU->id}}</td>
                                             <td><b style="font-weight: bold;">{{$objU->name}}</b></td>
                                             <td><img src="{{$objU->avatar}}" alt="" width="50"></td>
-                                            <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
-                                            {{$objU->role_id == 0 ? "Thành Viên" : "Quản Trị"}}</td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
                                             <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
