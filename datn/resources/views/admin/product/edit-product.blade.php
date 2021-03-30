@@ -81,11 +81,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="350px"
+                        <img src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="450px"
                             alt="">
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input name="product_image" class="col-sm-12" type="file">
+                            <input type="file" name="product_image"  value="../public/uploads/products/{{$item->image_gallery}}" class="col-sm-12">
                         </div>
                     </div>
                 </div>

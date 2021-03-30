@@ -18,7 +18,15 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST" enctype="multipart/form-data" role="form">
+            <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST"
+                enctype="multipart/form-data" role="form">
+                @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li style="color:red;">{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
                 @csrf
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
@@ -31,20 +39,22 @@
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
-                                <input type="number" value="" name="product_price" class="form-control form-control-line"
-                                     id="example-email">
+                                <input type="number" value="" name="product_price"
+                                    class="form-control form-control-line" id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
-                                <input type="number" name="product_quantily" value="" class="form-control form-control-line">
+                                <input type="number" name="product_quantily" value=""
+                                    class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="product_description" class="form-control form-control-line"></textarea>
+                                <textarea rows="5" name="product_description"
+                                    class="form-control form-control-line"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,7 +68,8 @@
                             </div>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market" id="allow_market" value="1">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market"
+                                id="allow_market" value="1">
                             <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
                     </div>
