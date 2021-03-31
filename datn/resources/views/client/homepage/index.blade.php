@@ -109,7 +109,7 @@
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>{{$item->category_id}}</span></a>
+                    <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
                     <h2><a href="{{route('client.single-product')}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
