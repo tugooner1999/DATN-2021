@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('client.homepage');
+    return view('welcome');
 });
 
 
@@ -97,7 +97,7 @@ Route::prefix('client')->group(function () {
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
 
         // cart
-        Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
+        Route::get('/cart', [Client\CartController::class , 'postlogin'])->name('client.cart');
 
         // login - register
         Route::match(['get', 'post'],'/login', [Client\AuthController::class , 'postLogin'])->name('client.login');
