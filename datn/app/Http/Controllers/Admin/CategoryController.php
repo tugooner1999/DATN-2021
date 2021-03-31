@@ -32,8 +32,7 @@ class CategoryController extends Controller
                 'name.unique'=>'Danh mục đã tồn tại',
                 'name.min'=>'Danh mục chỉ nhập từ 5 ký tự trở lên',
                 'image.required'=>'Không để trống ảnh của Danh mục',
-                'image.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)'
-            ];
+                'image.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)'            ];
             $validator = Validator::make($request->all(), $rule, $msgE);
             // check có lỗi hay không
             

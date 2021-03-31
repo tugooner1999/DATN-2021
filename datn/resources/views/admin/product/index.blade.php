@@ -83,7 +83,6 @@
                                             href="{{route('admin.removeProduct',['id' => $item->id])}}"
                                             class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
-                                    
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -95,5 +94,4 @@
     </div>
     <footer class="footer text-center"> 2021 &copy; Ample Admin brought to you by MarketNow.com </footer>
 </div>
-
 @endsection
