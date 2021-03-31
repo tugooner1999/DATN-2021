@@ -30,9 +30,10 @@
                     Lịch sử giao dịch</a>
             </li>
             <li>
-                <a href="{{route('admin.listVouncher')}}" class="waves-effect"><i class="fa fa-tags" aria-hidden="true"></i>
+                <a href="{{route('admin.listVoucher')}}" class="waves-effect"><i class="fa fa-tags" aria-hidden="true"></i>
                     Voucher</a>
             </li>
+            
             <li>
                 <a href="{{route('admin.listUser')}}" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i> Tài
                     khoản</a>
