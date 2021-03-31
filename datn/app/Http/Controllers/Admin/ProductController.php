@@ -8,9 +8,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-// use Illuminate\Database\Eloquent\Collection::intersect()
 use DB;
-use Session;
+// use Illuminate\Database\Eloquent\Collection::intersect()
+use Illuminate\Support\Facades\Session;
 session_start();
 
 class ProductController extends Controller
