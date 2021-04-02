@@ -28,9 +28,9 @@
 <!-- cart area start -->
 <div class="cart-main-area mtb-60px">
     <div class="container">
-        @if (isset($_SESSION['cart']))
+        @if (isset($_SESSION['cart']) && !empty($_SESSION['cart']))
         <h3 class="cart-page-title">Giỏ hàng của bạn</h3>
-        <div class="row">
+        <div class="row content-cart">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
                     <div class="table-content table-responsive cart-table-content">
@@ -49,7 +49,7 @@
                                     
                                     @foreach ($_SESSION['cart'] as $item)
                                         
-                                    <tr>
+                                    <tr id="{{$item['id']}}">
                                         <td class="product-thumbnail">
                                             <a href="#"><img src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
@@ -62,7 +62,7 @@
                                         </td>
                                         <td class="product-subtotal" prod-id="{{$item['id']}}">{{$item['price'] * $item['quantity']}} VNĐ</td>
                                         <td class="product-remove">
-                                            <a href="#"><i class="fa fa-times"></i></a>
+                                            <a href="#" prod-id="{{$item['id']}}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -75,11 +75,11 @@
                         <div class="col-lg-12">
                             <div class="cart-shiping-update-wrapper">
                                 <div class="cart-shiping-update">
-                                    <a href="#">Tiếp tục mua sắm</a>
+                                    <a href="{{route('client.homepage')}}">Tiếp tục mua sắm</a>
                                 </div>
                                 <div class="cart-clear">
                                     <button id="update-cart">Cập nhật giỏ hàng</button>
-                                    <a href="#">Xóa giỏ hàng</a>
+                                    <a href="#" id="delete-cart">Xóa giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
             </div>
         </div>
         @else
-            <h3 class="cart-page-title">Giỏ hàng trống!</h3>                    
+            <h3 class="container-fluid text-center">Giỏ hàng trống!</h3>                    
         @endif
     </div>
 </div>

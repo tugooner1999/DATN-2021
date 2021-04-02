@@ -44,6 +44,30 @@ class CartController extends Controller
         
         
     }
+    public function removeProductInCart(Request $rq){
+        $idPro = $rq->id;
+        if($rq->action=='remove-one'){
+            unset($_SESSION['cart'][$idPro]);
+
+        }
+        $totalItem = 0;
+        $totalPriceInCart = 0;
+        foreach($_SESSION['cart'] as $val){
+            $totalItem += $val['quantity'];
+            $totalPriceInCart += $val['price'] * $val['quantity'];
+        }
+        if($rq->action=='remove-all'){
+            unset($_SESSION['cart']);
+
+        }
+        return response()->json(
+            [
+                'status' => true,
+                'totalItem' => $totalItem,
+                'totalPriceInCart' => $totalPriceInCart
+            ]
+        );
+    }
     public function updateCart(Request $rq){
         $idPro = $rq->id;
         $quantityPro = $rq->quantity;

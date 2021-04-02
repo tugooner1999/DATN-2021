@@ -100,6 +100,7 @@ Route::prefix('client')->group(function () {
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
         Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
+        Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
 
         // login - register
         Route::match(['get', 'post'],'/login', [Client\AuthController::class , 'postLogin'])->name('client.login');

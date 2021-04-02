@@ -76,46 +76,6 @@
             
             
             // cập nhật giỏ hàng
-            // $('#update-cart').click(function(e){
-            //     e.preventDefault();
-            //     var updateCart = $('.cart-plus-minus-box').each(function(item){
-            //         var idProduct = $(this).attr('prod-id')
-            //         var quantity = $(this).val()
-            //         $.ajax({
-            //             type:"POST",
-            //             url: "{{route('client.update-cart')}}",
-            //             dataType:"json",
-            //             data:{
-            //                 id:idProduct,    
-            //                 quantity:quantity,
-            //                 _token:"{{csrf_token()}}"
-            //             },
-            //             success: function(result){
-            //                 if(result.status === true){
-            //                     var totalPrice = result.data[idProduct].quantity * result.data[idProduct].price
-            //                     $('.product-subtotal').each(function(item){
-            //                         var proId =$(this).attr("prod-id")
-            //                         if(result.data[idProduct].id == proId){
-            //                             $(this).html(totalPrice + " VNĐ")
-            //                             $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
-            //                         }  
-            //                     })
-            //                     Swal.fire('', 'Cập nhật giỏ hàng thành công', 'success') 
-            //                 }
-            //                 if(result.status === false){
-            //                     toastr.error(result.msg,'Lỗi')
-            //                 }
-            //             }
-
-            //         })
-                    
-                    
-                    
-            //     })              
-            
-
-                          
-            // })
             $('#update-cart').click(function(e){
                 e.preventDefault();
                 var arrayProduct = []
@@ -154,11 +114,67 @@
                             }
                             
                         }
-
-                    })           
+                })           
             
+            })
+            //remove item cart 
+            $('.product-remove a').click(function(e){
+                e.preventDefault();
+                var idProduct = $(this).attr('prod-id')
+                $("#" +idProduct).fadeOut(1000,function(){
+                    $.ajax({
+                        type:"POST",
+                        url: "{{route('client.remove-product-in-cart')}}",
+                        dataType:"json",
+                        data:{
+                            action:'remove-one',
+                            id:idProduct,    
+                            _token:"{{csrf_token()}}"
+                        },
+                        success: function(result){
+                            if(result.status === true){
+                                $('.grand-totall h5 span').html(result.totalPriceInCart +" VNĐ")
+                                $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
+                                $("#" +idProduct).remove()
+                                if(!$("tbody tr").html()){
+                                    $(".content-cart, .cart-page-title").empty()
+                                    setTimeout(function(){
+                                        $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
+                                    },200)    
+                                }
+                            }
+                            
+                        }
 
-                          
+                    })
+                })
+                     
+            })
+            //remove all item cart
+            $('#delete-cart').click(function(e){
+                e.preventDefault();
+                if(confirm("Bạn chắc chắn muốn xóa toàn bộ giỏ hàng ?")){
+                    $.ajax({
+                        type:"POST",
+                        url: "{{route('client.remove-product-in-cart')}}",
+                        dataType:"json",
+                        data:{
+                            action:'remove-all',  
+                            _token:"{{csrf_token()}}"
+                        },
+                        success: function(result){
+                            if(result.status === true){
+                                $('head').append(`<style>.count-cart::after{ content:'${0}' !important}</style>`);
+                                $(".content-cart, .cart-page-title").empty()
+                                setTimeout(function(){
+                                    $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
+                                },200)
+                            } 
+                        }
+
+                    })
+                }
+                
             })
            
         })
