@@ -109,7 +109,7 @@
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                    <a class="inner-link" href="shop-4-column.html"><span>{{$item->category_id}}</span></a>
                     <h2><a href="{{route('client.single-product')}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a class="cart-btn" href="#">Thêm vào giỏ</a></li>
+                        <li class="cart"><a class="cart-btn" product-id='{{$item->id}}'>Thêm vào giỏ</a></li>
                         <li>
                             <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
                         </li>

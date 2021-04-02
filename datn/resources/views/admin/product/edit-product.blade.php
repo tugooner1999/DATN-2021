@@ -81,20 +81,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-<<<<<<< HEAD
                         <img id="image" src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="200px"
-=======
-                        <img src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="450px"
->>>>>>> 3cdbcf8b3ff245f1b70af0a84ad019126bc13e7d
                             alt="">
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-<<<<<<< HEAD
                             <input class="col-sm-12" name="product_image" type="file" onchange="changeImage()" id="fileImage">
-=======
-                            <input type="file" name="product_image"  value="../public/uploads/products/{{$item->image_gallery}}" class="col-sm-12">
->>>>>>> 3cdbcf8b3ff245f1b70af0a84ad019126bc13e7d
                         </div>
                     </div>
                 </div>

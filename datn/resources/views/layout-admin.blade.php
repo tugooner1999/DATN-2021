@@ -24,8 +24,6 @@
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <!-- href="{{asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}" -->
 
-    <!-- sweetalert -->
-
 </head>
 
 <body class="fix-header">
@@ -39,7 +37,7 @@
         @include('admin/layout/sidebar')
         @yield('content')
         @include('admin/layout/footer')
-
+       
     </div>
 
     <script>
@@ -68,9 +66,7 @@
     <script src="{{asset('assets/admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/counterup/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/chartist-js/dist/chartist.min.js')}}"></script>
-    <script
-        src="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}">
-    </script>
+    <script src="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
@@ -78,12 +74,10 @@
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <!-- sweetalert -->
-
     <script>
-    tinymce.init({
+      tinymce.init({
         selector: '#mytextarea'
-    });
+      });
     </script>
 </body>
 
