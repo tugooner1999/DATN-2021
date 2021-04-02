@@ -2,7 +2,7 @@
     if(!isset($_SESSION)) 
     { 
         session_start();
-    } 
+    }                                
     $totalItem = 0;
     if(isset($_SESSION['cart'])){
         foreach($_SESSION['cart'] as $val){
@@ -145,6 +145,7 @@
                                         $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
                                     }  
                                 })
+                                $('.grand-totall h5 span').html(result.totalPriceInCart + " VNĐ")
                                 Swal.fire('', 'Cập nhật giỏ hàng thành công', 'success') 
                                 
                             }

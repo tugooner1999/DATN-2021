@@ -27,13 +27,16 @@ class CartController extends Controller
                 $_SESSION['cart'][$id]['quantity'] += 1;
             }
             $totalItem = 0;
+            $totalPriceInCart = 0;
             foreach($_SESSION['cart'] as $val){
                 $totalItem += $val['quantity'];
+                $totalPriceInCart += $val['price'] * $val['quantity'];
             }
             return response()->json(
                 [
                     'status' => true,
-                    'totalItem' => $totalItem
+                    'totalItem' => $totalItem,
+                    'totalPriceInCart' => $totalPriceInCart
                 ]
             );
         }
@@ -44,6 +47,7 @@ class CartController extends Controller
     public function updateCart(Request $rq){
         $idPro = $rq->id;
         $quantityPro = $rq->quantity;
+        // dd($quantityPro);
         $product = Product::whereIn('id',$idPro)->get();
 
         if($product){
@@ -65,22 +69,32 @@ class CartController extends Controller
                         ]
                     );
                 }
-                elseif(isset($_SESSION['cart'][$pro->id])==$idPro[$key]){    
-                    $_SESSION['cart'][$pro->id]['quantity'] =$quantityPro[$key];
+                elseif(isset($_SESSION['cart'][$pro->id])){ 
+                    if(isset($_SESSION['cart'][$idPro[$key]]['id']) == $idPro[$key]){
+                        $_SESSION['cart'][$idPro[$key]]['id'] = $idPro[$key];
+                        $_SESSION['cart'][$idPro[$key]]['quantity'] =$quantityPro[$key];
+                    } 
+                    
+                   
                 }        
                 
             }
             $totalItem = 0;
+            $totalPriceInCart = 0;
             foreach($_SESSION['cart'] as $val){
                 $totalItem += $val['quantity'];
+                $totalPriceInCart += $val['price'] * $val['quantity'];
             }
             return response()->json(
                 [
-                    'data' => $_SESSION['cart'],
                     'status' => true,
-                    'totalItem' => $totalItem
+                    'data' => $_SESSION['cart'],
+                    'totalItem' => $totalItem,
+                    'totalPriceInCart' => $totalPriceInCart
                 ]
             );
+            
+            
         }
         
         

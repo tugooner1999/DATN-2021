@@ -1,5 +1,13 @@
 @extends('layout-client')
 @section('content')
+<?php
+    $totalPriceInCart = 0;                               
+    if(isset($_SESSION['cart'])){
+        foreach($_SESSION['cart'] as $val){
+            $totalPriceInCart += $val['price'] * $val['quantity'];
+        }
+    }
+?>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area">
     <div class="container">
@@ -38,8 +46,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                    
                                     @foreach ($_SESSION['cart'] as $item)
+                                        
                                     <tr>
                                         <td class="product-thumbnail">
                                             <a href="#"><img src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
@@ -96,7 +105,7 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn chi tiết</h4>
                             </div>
-                            <h5>Tổng tiền sản phẩm <span>$260.00</span></h5>
+                            <h5>Tổng tiền sản phẩm <span>{{$totalPriceInCart}} VNĐ</span></h5>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
                                 <ul>
