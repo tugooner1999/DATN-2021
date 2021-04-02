@@ -40,4 +40,8 @@ class CartController extends Controller
         
         
     }
+    public function updateCart(Request $rq){
+        
+        
+    }
 }
