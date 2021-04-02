@@ -59,7 +59,7 @@
                         <!--Cart info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                                <a href="{{route('client.cart')}}" class="count-cart">500.000đ</a>
+                                <a href="{{route('client.cart')}}" class="count-cart"></a>
                             </div>
                         </div>
                         <!--Cart info End -->
