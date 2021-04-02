@@ -51,7 +51,7 @@
                                         
                                     <tr id="{{$item['id']}}">
                                         <td class="product-thumbnail">
-                                            <a href="#"><img src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
+                                            <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$item['name']}}</a></td>
                                         <td class="product-price-cart"><span class="amount">{{$item['price']}} VNĐ</span></td>

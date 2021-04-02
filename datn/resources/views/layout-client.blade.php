@@ -53,7 +53,8 @@
         $(document).ready(function(){
             
             // thêm vào giỏ hàng
-            $('.cart-btn').click(function(){
+            $('.cart-btn').click(function(e){
+                e.preventDefault();
                 var idProduct = $(this).attr('product-id')
                 $.ajax({
                     type:"POST",
