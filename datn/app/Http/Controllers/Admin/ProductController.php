@@ -8,12 +8,10 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
 // use Illuminate\Database\Eloquent\Collection::intersect()
->>>>>>> 3f328be4ac30d4c13c894e450ae9ced78e37bed8
+
 use DB;
 // use Illuminate\Database\Eloquent\Collection::intersect()
 use Illuminate\Support\Facades\Session;
