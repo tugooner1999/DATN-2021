@@ -102,7 +102,7 @@
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product')}}" class="thumbnail">
-                        <img src="../public/uploads/products/{{$item->image_gallery}}" alt="" width="256" height="256"/>
+                        <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
                 <ul class="product-flag">
@@ -167,7 +167,11 @@
                         <div class="name_categories">
                             <h4 style = "color: white">{{$item->name}}</h4>
                         </div>
+<<<<<<< HEAD
                         <span class="number_product" style = "color: red">{{ count($item->products) }}</span>
+=======
+                        <span class="number_product">{{count($item->products)}}</span>
+>>>>>>> 3f328be4ac30d4c13c894e450ae9ced78e37bed8
                     </div>
                 </div>
             </div>

@@ -66,8 +66,8 @@
                                 <tr class="column" data-data1="{{$item->allow_market}}" data-data2="{{$item->category_id}}">
                                     <td>{{$item->id}}</td>
                                     <td style="font-weight:bold;">{{$item->name}}</td>
-                                    <td><img src="../public/uploads/products/{{$item->image_gallery}}" alt=""
-                                            height="100" width="100"></td>
+                                    <td><img src="{{$item->image_gallery}}" alt=""
+                                            height="150" width="150"></td>
                                     <td>{{$item->price}}</td>
                                     <td>{{$item->quantily}}</td>
                                     <td>{{$item->allow_market == 1 ? "Đi chợ" : "Thông thường"}}</td>
@@ -83,6 +83,7 @@
                                             href="{{route('admin.removeProduct',['id' => $item->id])}}"
                                             class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -94,4 +95,5 @@
     </div>
     <footer class="footer text-center"> 2021 &copy; Ample Admin brought to you by MarketNow.com </footer>
 </div>
+
 @endsection

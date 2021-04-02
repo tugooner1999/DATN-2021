@@ -26,4 +26,10 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function saveUpdate($id, $objPro){
+        return DB::table($this->table)
+            ->where('id',$id)
+            ->update($obPro);
+    }
 }
