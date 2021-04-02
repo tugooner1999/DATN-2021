@@ -17,6 +17,7 @@ class CartController extends Controller
         $product = Product::where('id',$id)->first();
         if($product){
             if(!isset($_SESSION['cart'][$id])){
+                $_SESSION['cart'][$id]['id'] =$product->id;
                 $_SESSION['cart'][$id]['name'] =$product->name;
                 $_SESSION['cart'][$id]['image'] =$product->image_gallery;
                 $_SESSION['cart'][$id]['price'] =$product->price;
@@ -41,6 +42,92 @@ class CartController extends Controller
         
     }
     public function updateCart(Request $rq){
+        $idPro = $rq->id;
+        $quantityPro = $rq->quantity;
+        $product = Product::whereIn('id',$idPro)->get();
+
+        if($product){
+            foreach($product as $key => $pro){
+                if(!is_numeric($quantityPro[$key])){
+                    return response()->json(
+                        [
+                            'msg' => 'Số lượng k đúng định dạng',
+                            'status' => false,   
+                        ]
+                    );
+                }
+                else if($quantityPro[$key] < 1 ){
+                    return response()->json(
+                        [
+                            'msg' => 'Số lượng k được nhỏ hơn 1',
+                            'status' => false,
+                            
+                        ]
+                    );
+                }
+                elseif(isset($_SESSION['cart'][$pro->id])==$idPro[$key]){    
+                    $_SESSION['cart'][$pro->id]['quantity'] =$quantityPro[$key];
+                }        
+                
+            }
+            $totalItem = 0;
+            foreach($_SESSION['cart'] as $val){
+                $totalItem += $val['quantity'];
+            }
+            return response()->json(
+                [
+                    'data' => $_SESSION['cart'],
+                    'status' => true,
+                    'totalItem' => $totalItem
+                ]
+            );
+        }
+        
+        
+            
+        
+        // $id = $rq->id;
+        // $quantity = $rq->quantity;
+        // $product = Product::where('id',$id)->first();
+        // if(!is_numeric($quantity)){
+        //     return response()->json(
+        //         [
+        //             'msg' => 'Số lượng k đúng định dạng',
+        //             'status' => false,
+                    
+        //         ]
+        //     );
+        // }
+        // else if($quantity < 1 ){
+        //     return response()->json(
+        //         [
+        //             'msg' => 'Số lượng k được nhỏ hơn 1',
+        //             'status' => false,
+                    
+        //         ]
+        //     );
+        // }
+        // else{
+        //     if($product){
+        //         if(isset($_SESSION['cart'][$id])==$id){
+        //             $_SESSION['cart'][$id]['quantity'] =$quantity;
+        //         }
+        //         $totalItem = 0;
+        //         $price = 0;
+        //         foreach($_SESSION['cart'] as $val){
+        //             $totalItem += $val['quantity'];
+        //             $price += $val['quantity'] * $val['price'];
+        //         }
+        //         return response()->json(
+        //             [
+        //                 'data' => $_SESSION['cart'],
+        //                 'status' => true,
+        //                 'totalItem' => $totalItem
+        //             ]
+        //         );
+        //     }
+            
+        // }
         
         
     }

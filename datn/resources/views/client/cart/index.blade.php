@@ -48,10 +48,10 @@
                                         <td class="product-price-cart"><span class="amount">{{$item['price']}} VNĐ</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{$item['quantity']}}" />
+                                                <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">{{$item['price'] * $item['quantity']}} VNĐ</td>
+                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{$item['price'] * $item['quantity']}} VNĐ</td>
                                         <td class="product-remove">
                                             <a href="#"><i class="fa fa-times"></i></a>
                                         </td>
@@ -69,7 +69,7 @@
                                     <a href="#">Tiếp tục mua sắm</a>
                                 </div>
                                 <div class="cart-clear">
-                                    <button>Cập nhật giỏ hàng</button>
+                                    <button id="update-cart">Cập nhật giỏ hàng</button>
                                     <a href="#">Xóa giỏ hàng</a>
                                 </div>
                             </div>
