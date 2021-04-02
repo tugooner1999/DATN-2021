@@ -50,8 +50,9 @@
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-12">
+@foreach ($product as $item)
                 <div class="product-details-content">
-                    <h2>Bim bim Snack Oshi</h2>
+                    <h2>$item->name</h2>
                     <p class="reference">Thực phẩm</p>
                     <div class="pro-details-rating-wrap">
                         <div class="rating-product">
@@ -65,7 +66,7 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut">10.000đ</li>
+                            <li class="old-price not-cut">$item->price</li>
                         </ul>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore
@@ -111,6 +112,7 @@
                         </ul>
                     </div>
                 </div>
+@endforeach    
             </div>
         </div>
     </div>
