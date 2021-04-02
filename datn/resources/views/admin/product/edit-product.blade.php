@@ -85,7 +85,7 @@
                             alt="">
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input type="file" name="product_image"  value="../public/uploads/products/{{$item->image_gallery}}" class="col-sm-12">
+                            <input type="file" name="product_image"  value="{{$item->image_gallery}}" class="col-sm-12">
                         </div>
                     </div>
                 </div>

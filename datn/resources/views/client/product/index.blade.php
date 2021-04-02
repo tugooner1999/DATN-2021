@@ -23,6 +23,7 @@
                <div class="container">
                    <div class="row">
                        <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
+
                            <!-- Shop Top Area Start -->
                            <div class="shop-top-bar">
                                <!-- Left Side start -->
@@ -38,6 +39,7 @@
                                <!-- Left Side End -->
                                <!-- Right Side Start -->
                                <div class="select-shoing-wrap">
+
                                    <div class="shot-product">
                                        <p>Sắp xếp</p>
                                    </div>
@@ -60,23 +62,25 @@
                                <div class="tab-content jump">
                                    <!-- Tab One Start -->
                                    <div id="shop-1" class="tab-pane active">
+
                                        <div class="row">
+                                           @foreach($list_product as $item)
                                            <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
                                                <article class="list-product">
                                                    <div class="img-block">
                                                        <a href="{{route('client.single-product')}}" class="thumbnail">
-                                                           <img src="{{asset('assets/client/images/product-image/organic/product-1.jpg')}}"
-                                                               alt="" />
+                                                           <img src="../{{$item->image_gallery}}" alt="" width="256"
+                                                               height="256" />
                                                        </a>
                                                    </div>
                                                    <ul class="product-flag">
                                                        <li class="new">Mới</li>
                                                    </ul>
                                                    <div class="product-decs">
-                                                       <a class="inner-link" href="shop-4-column.html"><span>THỰC
-                                                               PHẨM</span></a>
-                                                       <h2><a href="{{route('client.single-product')}}" class="product-link">Bim bim
-                                                               ôshi</a></h2>
+                                                       <a class="inner-link"
+                                                           href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                                                       <h2><a href="{{route('client.single-product')}}"
+                                                               class="product-link">{{$item->name}}</a></h2>
                                                        <div class="rating-product">
                                                            <i class="ion-android-star"></i>
                                                            <i class="ion-android-star"></i>
@@ -86,9 +90,9 @@
                                                        </div>
                                                        <div class="pricing-meta">
                                                            <ul>
-                                                               <li class="old-price">7.000đ</li>
-                                                               <li class="current-price">5.000đ</li>
-                                                               <li class="discount-price">-20%</li>
+                                                               <!-- <li class="old-price">7.000đ</li> -->
+                                                               <li class="current-price">{{$item->price}}</li>
+                                                               <!-- <li class="discount-price">-20%</li> -->
                                                            </ul>
                                                        </div>
                                                    </div>
@@ -103,8 +107,11 @@
                                                        </ul>
                                                    </div>
                                                </article>
+
                                            </div>
+                                           @endforeach
                                        </div>
+
                                    </div>
                                    <!-- Tab One End -->
                                    <!-- Tab Two Start -->
@@ -116,7 +123,8 @@
                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                                            <div class="left-img">
                                                                <div class="img-block">
-                                                                   <a href="{{route('client.single-product')}}" class="thumbnail">
+                                                                   <a href="{{route('client.single-product')}}"
+                                                                       class="thumbnail">
                                                                        <img class="first-img"
                                                                            src="assets/images/product-image/organic/product-7.jpg"
                                                                            alt="" />
@@ -1430,6 +1438,7 @@
                                        </div>
                                    </div>
                                    <!-- Tab Two End -->
+
                                </div>
                                <!-- Shop Tab Content End -->
                                <!--  Pagination Area Start -->
@@ -1446,6 +1455,7 @@
                                    </ul>
                                </div>
                                <!--  Pagination Area End -->
+
                            </div>
                            <!-- Shop Bottom Area End -->
                        </div>
@@ -1461,34 +1471,22 @@
                                        <h4 class="pro-sidebar-title">Danh mục</h4>
                                        <div class="sidebar-widget-list">
                                            <ul>
+                                               @foreach($cates as $item)
                                                <li>
                                                    <div class="sidebar-widget-list-left">
-                                                       <input type="checkbox" /> <a href="#">Thực phẩm<span>(17)</span>
+                                                       <input type="checkbox" /> <a href="#">{{$item->name}}
+                                                       <span style="position: absolute;
+                                                                    top: -15%;
+                                                                    background: #d7d7d7;
+                                                                    padding: 0px 3px;
+                                                                    font-size: 9px;
+                                                                    color: #484848;
+                                                                    border-radius: 5px;">{{ count($item->products) }}</span>
                                                        </a>
                                                        <span class="checkmark"></span>
                                                    </div>
                                                </li>
-                                               <li>
-                                                   <div class="sidebar-widget-list-left">
-                                                       <input type="checkbox" value="" /> <a href="#">Đồ uống
-                                                           <span>(127)</span></a>
-                                                       <span class="checkmark"></span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="sidebar-widget-list-left">
-                                                       <input type="checkbox" value="" /> <a href="#">Gia
-                                                           dụng<span>(17)</span> </a>
-                                                       <span class="checkmark"></span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="sidebar-widget-list-left">
-                                                       <input type="checkbox" value="" /> <a href="#">Thiết
-                                                           yếu<span>(17)</span> </a>
-                                                       <span class="checkmark"></span>
-                                                   </div>
-                                               </li>
+                                               @endforeach
                                            </ul>
                                        </div>
                                    </div>
