@@ -88,7 +88,10 @@ Route::prefix('client')->group(function () {
 
         // product
         Route::get('/product', [Client\ProductController::class , 'index'])->name('client.product');
+        
         Route::get('/single-product', [Client\ProductController::class , 'single_Product'])->name('client.single-product');
+        
+
 
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');

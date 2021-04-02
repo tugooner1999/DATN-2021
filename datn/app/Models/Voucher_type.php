@@ -10,7 +10,7 @@ class Voucher_type extends Model
     protected $table = "vouchers_type";
     public $timestamps = FALSE;
         protected $fillable = [
-            'id',
+        'id',
         'name',
         'status'
     ];

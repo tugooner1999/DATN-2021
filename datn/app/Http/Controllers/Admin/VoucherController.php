@@ -14,6 +14,7 @@ class VoucherController extends Controller
     public function index(){
         $voucher = Voucher::all();
         $voucher_type = Voucher_type::all();
+        
         return view('admin.voucher.index',compact('voucher','voucher_type'));
 
     }
