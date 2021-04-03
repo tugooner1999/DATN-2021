@@ -59,7 +59,7 @@
                                             </td>
                                             <td>{{$objU->coins}}</td>
                                             <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editUser')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                                <a style="padding-left: 10px;" href="{{route( 'admin.editUser',[ 'id'=>$objU->id]) }}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                 <a style="padding-left: 10px;" href="{{route( 'admin.deteleUser',[ 'id'=>$objU->id]) }}"
                                                 onclick="return confirm('Bạn muốn xóa tài khoản {{$objU->name}}')"
                                                 class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>

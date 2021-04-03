@@ -19,11 +19,8 @@ class ProductController extends Controller
 
     }
     
-    
-
-    public function single_Product(){
-
-        $product = Product::all();
+    public function single_Product($id){
+        $product= Product::find($id);
         return view('client.product.single-product',compact('product'));
     }
 }

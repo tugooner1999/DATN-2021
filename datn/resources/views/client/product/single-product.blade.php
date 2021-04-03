@@ -51,7 +51,7 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-12">
                 <div class="product-details-content">
-                    <h2>Bim bim Snack Oshi</h2>
+                    <h2>{{$product->name}}</h2>
                     <p class="reference">Thực phẩm</p>
                     <div class="pro-details-rating-wrap">
                         <div class="rating-product">
@@ -65,11 +65,9 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut">10.000đ</li>
+                            <li class="old-price not-cut">{{$product->price}}</li>
                         </ul>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore
-                        magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
                     <div class="pro-details-quality mt-0px">
                         <div class="cart-plus-minus">
                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
@@ -127,14 +125,7 @@
             <div class="tab-content description-review-bottom">
                 <div id="des-details2" class="tab-pane active">
                     <div class="product-anotherinfo-wrapper">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <p>
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in reprehend in
-                            voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in culpa qui officia deserunt
-                        </p>
+                        <p>{{$product->description}}</p>
                     </div>
                 </div>
                 <div id="des-details3" class="tab-pane">
@@ -224,7 +215,7 @@
             <!-- Single Item -->
             <article class="list-product">
                 <div class="img-block">
-                    <a href="{{route('client.single-product')}}" class="thumbnail">
+                    <a href="" class="thumbnail">
                         <img src="{{asset('assets/client/images/product-image/organic/product-1.jpg')}}" alt="" />
                     </a>
                 </div>
@@ -233,7 +224,7 @@
                 </ul>
                 <div class="product-decs">
                     <a class="inner-link" href="#"><span>THỰC PHẨM</span></a>
-                    <h2><a href="{{route('client.single-product')}}" class="product-link">Bim bim ôshi</a></h2>
+                    <h2><a href="" class="product-link">Bim bim ôshi</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
                         <i class="ion-android-star"></i>

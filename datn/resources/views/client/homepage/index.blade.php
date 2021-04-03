@@ -101,7 +101,7 @@
             @foreach ($product as $item)
             <article class="list-product">
                 <div class="img-block">
-                    <a href="{{route('client.single-product')}}" class="thumbnail">
+                    <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
                         <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
@@ -109,8 +109,8 @@
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                    <h2><a href="{{route('client.single-product')}}" class="product-link">{{$item->name}}</a></h2>
+                    <a class="inner-link" href="shop-4-column.html"><span>{{$item->category_id}}</span></a>
+                    <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
                         <i class="ion-android-star"></i>

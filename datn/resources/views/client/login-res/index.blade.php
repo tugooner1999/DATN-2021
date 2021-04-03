@@ -35,37 +35,30 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                <p>
-                                @foreach($errs as $e)
-    <p style="color: red">
-        @if(is_array($e))
-            {{implode('<br>',$e)}}
-        @else
-            {{$e}}
-        @endif
-    </p>
-@endforeach
-                               <form method="post" {{route('client.login')}}>
-                               @csrf
-                               <input type="text" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" />
+                                    <form method="post" action="{{route('client.login')}}">
+                                        @error('msg')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        @csrf
+                                        <input type="text" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" />
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="password" name="password" placeholder="Mật khẩu" />
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <!-- <input type="checkbox" /> -->
-                                                <!-- <a class="flote-none" href="javascript:void(0)">Nhớ mật khẩu</a>
-                                                <a href="#">Quên mật khẩu?</a> -->
+                                                <input type="checkbox" name="remember_me" id="remember_me" />
+                                                <label class="flote-none" for="remember_me">Lưu đăng nhập</label>
+                                                <!-- <a href="#">Quên mật khẩu?</a> -->
                                             </div>
-                                            @isset($msg)
-    <div>
-        <span style="color: red">{{$msg}}</span>
-    </div>
-    @endisset
+                                            
 
                                             <button type="submit"><span>Đăng nhập</span></button>
                                         </div>
                                     </form>
-
-
                                 </div>
                             </div>
                         </div>

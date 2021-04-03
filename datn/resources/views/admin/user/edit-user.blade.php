@@ -21,18 +21,37 @@
             <div class="col-md-8 col-xs-12">
                 <div class="white-box">
                     <form class="form-horizontal form-material">
+                    @isset($msg)
+                    <p style="color: green">{{$msg}}</p>
+                @endisset
+                @isset($errs)
+                    @foreach($errs as $e)
+                        <p style="color: red"> {{  implode('<br>', $e ) }}  </p>
+                    @endforeach
+                @endisset
+                                @csrf
                         <div class="form-group">
                             <label class="col-md-12">Tên tài khoản</label>
                             <div class="col-md-12">
-                                <input type="text" value="taikhoan1" class="form-control form-control-line">
+                                <input type="text" class="form-control form-control-line" value="{{$objU->name}}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12">Phân quyền</label>
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line">
-                                    <option>Thành Viên</option>
-                                    <option>Quản trị</option>
+                                <?php
+                                if($objU->status == 0){
+                                    echo'<option value = "0">Thành Viên</option>';
+                                    echo'<option value = "1">Quản trị</option>';
+                                }else{
+                                    echo'<option value = "1">Quản trị</option>';
+                                    echo'<option value = "0">Thành Viên</option>';
+                                   
+                                };
+                            ?>
+                                
+                                
                                 </select>
                             </div>
                         </div>
@@ -40,27 +59,35 @@
                             <label class="col-sm-12">Trạng thái</label>
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line">
-                                    <option>Hoạt động</option>
-                                    <option>Cấm</option>
+                            <?php
+                                if($objU->status == 0){
+                                    echo'<option name="status" value="0">Hoạt động</option>';
+                                    echo'<option name="status" value="1">Cấm</option>
+                                    ';
+                                }else{
+                                    echo'<option name="status" value="1">Cấm</option>';
+                                    echo'<option name="status" value="0">Hoạt động</option>';
+                                   
+                                };
+                            ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Email</label>
                             <div class="col-md-12">
-                                <input type="email" value="hungdx@fpt.edu.vn" class="form-control form-control-line">
-                            </div>
+                            <input type="email" name="email" value="{{$objU->email}}" value="{{(old('email'))}}" class="form-control form-control-line">                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Phone</label>
                             <div class="col-md-12">
-                                <input type="number" value="0987654321" class="form-control form-control-line">
+                            <input type="text" name="phone" value="{{$objU->phone}}" value="{{(old('phone'))}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Địa chỉ</label>
                             <div class="col-md-12">
-                                <textarea rows="5" class="form-control form-control-line">Cầu Giấy - Hà Nội</textarea>
+                            <textarea rows="5" name="address" value="" class="form-control form-control-line">{{$objU->address}}{{(old('address'))}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,6 +107,7 @@
                     </div>
                 </div>
             </div>
+
             </form>
         </div>
     </div>
