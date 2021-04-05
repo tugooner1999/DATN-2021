@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             @foreach($edit_product as $key => $item)
-            <form class="form-horizontal form-material" action="{{URL::to('/admin/products/update/'.$item->id)}}" method="POST" enctype="multipart/form-data" role="form">
+            <form class="form-horizontal form-material" action="{{URL::to('/admin/products/update/'.$item->id)}}" method="POST" enctype="multipart/form-data"role="form">
             @csrf
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
@@ -81,11 +81,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="450px"
+                        <img id="image" src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="200px"
                             alt="">
+                        <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input type="file" name="product_image"  value="{{$item->image_gallery}}" class="col-sm-12">
+                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                     </div>
                 </div>

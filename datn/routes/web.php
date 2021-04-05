@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('client.homepage');
 });
 
 
@@ -48,10 +48,13 @@ Route::prefix('admin')->group(function () {
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
 
-        // vouncher
-        Route::get('/voucher',  [Admin\VouncherController::class , 'index'])->name('admin.listVouncher');
-        Route::get('/voucher/add',  [Admin\VouncherController::class , 'create_vouncher'])->name('admin.addVouncher');
-        Route::get('/voucher/edit',  [Admin\VouncherController::class , 'edit_vouncher'])->name('admin.editVouncher');
+        // voucher
+        Route::get('/voucher',  [Admin\VoucherController::class , 'index'])->name('admin.listVoucher');
+        Route::get('/voucher/add',  [Admin\VoucherController::class , 'create_voucher'])->name('admin.addVoucher');
+        Route::post('/voucher/add', [Admin\VoucherController::class, 'saveAdd'])->name('admin.save-add-form');
+        Route::get('/voucher/edit',  [Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        
+        
 
         // user
         Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
@@ -94,7 +97,8 @@ Route::prefix('client')->group(function () {
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
 
         // cart
-        Route::get('/cart', [Client\CartController::class , 'postlogin'])->name('client.cart');
+        Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
+        Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
 
         // login - register
         Route::match(['get', 'post'],'/login', [Client\AuthController::class , 'postLogin'])->name('client.login');

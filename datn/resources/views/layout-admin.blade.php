@@ -41,6 +41,24 @@
         @include('admin/layout/footer')
 
     </div>
+
+    <script>
+        function changeImage() {
+              var fileImage = document.getElementById("fileImage").files;
+              if (fileImage.length > 0) {
+                var fileToLoad = fileImage[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent) {
+                  var srcData = fileLoadedEvent.target.result;
+                  var newImage = document.getElementById('image');
+                  newImage.src = srcData;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+              }
+        }
+    </script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/admin/bootstrap/dist/js/bootstrap.min.js')}}"></script>

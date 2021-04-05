@@ -62,8 +62,8 @@
                             <label class="col-sm-12">Trạng thái</label>
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line" name="status">
-                                    <option name="status" value="1">Hoạt động</option>
-                                    <option name="status" value="0">Cấm</option>
+                                    <option name="status" value="0">Hoạt động</option>
+                                    <option name="status" value="1">Cấm</option>
                                 </select>
                             </div>
                         </div>
@@ -94,14 +94,15 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="white-box">
-                    <img src="" width="100%" height="200px" alt="">
-                    <div class="form-group">
-                        <label class="col-sm-12">Tải ảnh mới</label>
-                        <input class="col-sm-12" type="file" name="image">
+                    <div class="white-box">
+                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="200px"
+                                alt="">
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>

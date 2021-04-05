@@ -17,52 +17,52 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" method="post" action="">
+                                @csrf
                                 <div class="form-group">
                                     <label class="col-md-12">Tên Voucher</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="" class="form-control form-control-line"> </div>
+                                        <input type="text" value="" name="name" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Mã Code</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="text" value="" class="form-control form-control-line" name="code" id="example-email"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Ngày bắt đầu</label>
                                     <div class="col-md-12">
-                                        <input type="date" value="" class="form-control form-control-line">
+                                        <input type="date" value="" name="start_date" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-12">Ngày kết thúc</label>
                                     <div class="col-md-12">
-                                        <input type="date" value="" class="form-control form-control-line">
+                                        <input type="date" value="" name="finish_date" class="form-control form-control-line">
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="form-group">
                                     <label class="col-sm-12">Loại</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Theo giá trị</option>
-                                            <option>Theo %</option>
+                                        <select name="type_id" class="form-control form-control-line">
+                                            @foreach($voucher_type as $vou)
+                                            <option value="{{  $vou->id }}">{{$vou->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-12">Trạng thái</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Chưa sử dụng</option>
-                                            <option>Đã sử dụng</option>
-                                            <option>Hết hạn</option>
+                                        <select class="form-control form-control-line" name="status">
+                                            <option name="status" value="1">Chưa sử dụng</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-danger">Thêm mới</button>
-                                        <a href="{{route('admin.listVouncher')}}" class="btn btn-success">Trở về</a>
+                                        <a href="{{route('admin.listVoucher')}}" class="btn btn-success">Trở về</a>
                                     </div>
                                 </div>
                         </div>

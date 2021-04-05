@@ -1,3 +1,16 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start();
+    } 
+    $totalItem = 0;
+    if(isset($_SESSION['cart'])){
+        foreach($_SESSION['cart'] as $val){
+            $totalItem += $val['quantity'];
+        }
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +26,10 @@
     <link rel="stylesheet" href="{{asset('assets/client/css/vendor/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/client/css/style.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/client/css/responsive.min.css')}}">
+    <style>
+        
+        .count-cart::after{ content:'{{$totalItem}}' !important}
+    </style>
 </head>
 
 <body>
@@ -27,6 +44,29 @@
     <script src="{{asset('assets/client/js/vendor/modernizr-3.7.1.min.js')}}"></script>
     <script src="{{asset('assets/client/js/plugins.min.js')}}"></script>
     <script src="{{asset('assets/client/js/main.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.cart-btn').click(function(){
+                var idProduct = $(this).attr('product-id')
+                $.ajax({
+                    type:"POST",
+                    url: "{{route('client.add-to-cart')}}",
+                    dataType:"json",
+                    data:{
+                        id:idProduct,
+                        _token:"{{csrf_token()}}"
+                    },
+                    success: function(result){
+                        if(result.status === true){
+                            $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
+                        }
+                        
+                    }
+
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>

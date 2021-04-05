@@ -41,11 +41,11 @@
                                     class="form-control form-control-line " value="{{ old('name') }}">
                             </div>
                         </div>
-                        <img src="{{$objU->image}}" width="250px" height="200px" alt="">
+                        <img id="image" src="{{$objU->image}}" width="40%" height="200px" alt="">
+                        <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input type="file" class="col-sm-12" value="./public/frontend/images/{{$objU->image}}"
-                                value="{{ old('image') }}" name="image">
+                            <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
@@ -55,10 +55,31 @@
                         </div>
                     </form>
                 </div>
+                <!-- <div class="form-group">
+                    <label class="col-md-12">Tên danh mục</label>
+                    <div class="col-md-12">
+                        <input type="text" name="name" value="{{$objU->name}}" class="form-control form-control-line "
+                            value="{{ old('name') }}">
+                    </div>
+                </div>
+                <img src="{{$objU->image}}" width="250px" height="200px" alt="">
+                <div class="form-group">
+                    <label class="col-sm-12">Tải ảnh mới</label>
+                    <input type="file" class="col-sm-12" value="./public/frontend/images/{{$objU->image}}"
+                        value="{{ old('image') }}" name="image">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-danger">Cập nhật</button>
+                        <a href="{{route('admin.listCate')}}" class="btn btn-success">Trở về</a>
+                    </div>
+                </div>
+                </form> -->
             </div>
-
         </div>
+
     </div>
+</div>
 </div>
 
 @endsection
