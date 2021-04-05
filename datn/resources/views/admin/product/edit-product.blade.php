@@ -81,9 +81,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img id="image" src="../public/uploads/products/{{$item->image_gallery}}" width="100%" height="200px"
-                            alt="">
-                        <hr>
+                        <img id="image" src="{{$item->image_gallery}}" width="100%" height="400px"/>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">

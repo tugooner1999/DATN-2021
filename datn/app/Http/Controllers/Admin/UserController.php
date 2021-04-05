@@ -90,8 +90,12 @@ class UserController extends Controller
         return view('admin.user.add-user');
     }
 
-    public function edit_user(){
-        return view('admin.user.edit-user');
+    public function edit_user($id, Request $request){
+        $dataView = ['errs'=>[] ];
+        // lấy thông tin User để hiển thị ra form
+        $objU = User::where('id',$id)->first();
+        $dataView['objU'] = $objU;
+        return view('admin.user.edit-user',$dataView);
     }
     public function destroy($id)
     {

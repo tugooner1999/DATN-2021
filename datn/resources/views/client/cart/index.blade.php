@@ -1,5 +1,13 @@
 @extends('layout-client')
 @section('content')
+<?php
+    $totalPriceInCart = 0;                               
+    if(isset($_SESSION['cart'])){
+        foreach($_SESSION['cart'] as $val){
+            $totalPriceInCart += $val['price'] * $val['quantity'];
+        }
+    }
+?>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area">
     <div class="container">
@@ -20,9 +28,9 @@
 <!-- cart area start -->
 <div class="cart-main-area mtb-60px">
     <div class="container">
-        @if (isset($_SESSION['cart']))
+        @if (isset($_SESSION['cart']) && !empty($_SESSION['cart']))
         <h3 class="cart-page-title">Giỏ hàng của bạn</h3>
-        <div class="row">
+        <div class="row content-cart">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
                     <div class="table-content table-responsive cart-table-content">
@@ -38,22 +46,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                    
                                     @foreach ($_SESSION['cart'] as $item)
-                                    <tr>
+                                        
+                                    <tr id="{{$item['id']}}">
                                         <td class="product-thumbnail">
-                                            <a href="#"><img src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
+                                            <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$item['name']}}</a></td>
                                         <td class="product-price-cart"><span class="amount">{{$item['price']}} VNĐ</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{$item['quantity']}}" />
+                                                <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">{{$item['price'] * $item['quantity']}} VNĐ</td>
+                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{$item['price'] * $item['quantity']}} VNĐ</td>
                                         <td class="product-remove">
-                                            <a href="#"><i class="fa fa-times"></i></a>
+                                            <a href="#" prod-id="{{$item['id']}}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,11 +75,11 @@
                         <div class="col-lg-12">
                             <div class="cart-shiping-update-wrapper">
                                 <div class="cart-shiping-update">
-                                    <a href="#">Tiếp tục mua sắm</a>
+                                    <a href="{{route('client.homepage')}}">Tiếp tục mua sắm</a>
                                 </div>
                                 <div class="cart-clear">
-                                    <button>Cập nhật giỏ hàng</button>
-                                    <a href="#">Xóa giỏ hàng</a>
+                                    <button id="update-cart">Cập nhật giỏ hàng</button>
+                                    <a href="#" id="delete-cart">Xóa giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +105,7 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn chi tiết</h4>
                             </div>
-                            <h5>Tổng tiền sản phẩm <span>$260.00</span></h5>
+                            <h5>Tổng tiền sản phẩm <span>{{$totalPriceInCart}} VNĐ</span></h5>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
                                 <ul>
@@ -112,7 +121,7 @@
             </div>
         </div>
         @else
-            <h3 class="cart-page-title">Giỏ hàng trống!</h3>                    
+            <h3 class="container-fluid text-center">Giỏ hàng trống!</h3>                    
         @endif
     </div>
 </div>

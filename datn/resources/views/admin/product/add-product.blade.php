@@ -88,6 +88,7 @@
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
+
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                     </div>

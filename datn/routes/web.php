@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
+
 
 Route::get('/', function () {
     return redirect()->route('client.homepage');
 });
+
 
 
 
@@ -59,7 +62,9 @@ Route::prefix('admin')->group(function () {
         // user
         Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
         Route::match(['get','post'],'/user/add', [Admin\UserController::class, 'create_User'])->name('admin.addUser');
-        Route::get('/user/edit', [Admin\UserController::class,'edit_user'])->name('admin.editUser');
+        Route::match(['get','post'],'/user/edit/{id}',[Admin\UserController::class, 'edit_user'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.editUser');
         Route::match(['get','post'],'/user/delete/{id}',[Admin\UserController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleUser');
@@ -88,20 +93,35 @@ Route::prefix('client')->group(function () {
 
         // product
         Route::get('/product', [Client\ProductController::class , 'index'])->name('client.product');
+
+        
         Route::get('/single-product', [Client\ProductController::class , 'single_Product'])->name('client.single-product');
+        
+
+        // Route::match(['get','post'], '/single-product/{id}', [Client\ProductController::class , 'single_Product'])
+        // ->where('id', '[0-9]+')
+        // ->name('client.single-product');
+
 
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
+        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+
 
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
+        Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
+        Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
 
         // login - register
-        Route::match(['get', 'post'],'/login', [Client\AuthController::class , 'postLogin'])->name('client.login');
+        Route::get('login', [Client\AuthController::class, 'login_form'])->name('client.login');
+        Route::post('/login', [Client\AuthController::class , 'postLogin']);
+        Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
+
         // wishlist
         Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
 
