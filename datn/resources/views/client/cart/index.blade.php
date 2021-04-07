@@ -54,13 +54,13 @@
                                             <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$item['name']}}</a></td>
-                                        <td class="product-price-cart"><span class="amount">{{$item['price']}} VNĐ</span></td>
+                                        <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
                                                 <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
                                             </div>
                                         </td>
-                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{$item['price'] * $item['quantity']}} VNĐ</td>
+                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>
                                         <td class="product-remove">
                                             <a href="#" prod-id="{{$item['id']}}"><i class="fa fa-times"></i></a>
                                         </td>
@@ -105,15 +105,17 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn chi tiết</h4>
                             </div>
-                            <h5>Tổng tiền sản phẩm <span>{{$totalPriceInCart}} VNĐ</span></h5>
+                            <h5>Tổng tiền sản phẩm <span>{{number_format($totalPriceInCart)}} VNĐ</span></h5>
+                            <h5>Giảm giá <span>0 VNĐ</span></h5>
+                            <h5>Phí giao hàng <span>0 VNĐ</span></h5>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
                                 <ul>
-                                    <li><input type="checkbox" /> Thanh toán khi nhận hàng <span>$20.00</span></li>
-                                    <li><input type="checkbox" /> Thanh toán ATM <span>$30.00</span></li>
+                                    <li><input type="checkbox" /> Thanh toán khi nhận hàng</li>
+                                    <li><input type="checkbox" /> Thanh toán ATM</li>
                                 </ul>
                             </div>
-                            <h4 class="grand-totall-title">Tổng tiền <span>$260.00</span></h4>
+                            <h4 class="grand-totall-title">Tổng tiền {{number_format($totalPriceInCart)}} VNĐ</span></h4>
                             <a href="checkout.html">Thanh toán</a>
                         </div>
                     </div>

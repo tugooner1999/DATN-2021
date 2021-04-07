@@ -68,16 +68,16 @@
                                 
                                 <article class="list-product">
                                     <div class="img-block">
-                                        <a href="{{route('client.single-product')}}" class="thumbnail">
+                                        <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
                                             <img src="../{{$item->image_gallery}}" alt="" width="256" height="256"/>
                                         </a>
                                     </div>
                                     <ul class="product-flag">
-                                        <li class="new">Mới</li>
+                                        <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                                     </ul>
                                     <div class="product-decs">
                                         <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                                        <h2><a href="{{route('client.single-product')}}" class="product-link">{{$item->name}}</a></h2>
+                                        <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
                                         <div class="rating-product">
                                             <i class="ion-android-star"></i>
                                             <i class="ion-android-star"></i>
@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="pricing-meta">
                                             <ul>
-                                                <li class="current-price">{{$item->price}}vnđ</li>
+                                                <li class="current-price">{{number_format($item->price)}}đ</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -145,13 +145,7 @@
                                     @foreach($cates as $item)
                                     <li>
                                         <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" /> <a href="{{ route('client.product') }}">{{ $item->name }}<span style="background: red;
-                                            padding: 0px 4px;
-                                            color: #fff;
-                                            position: absolute;
-                                            top: -19%;
-                                            font-size: 9px;
-                                            border-radius: 10px;">{{  count($item->products) }}</span>
+                                            <input type="checkbox"  /> <a href="{{ route('client.product') }}">{{ $item->name }} ({{  count($item->products) }})</span>
                                             </a>
                                             <span class="checkmark"></span>
                                         </div>

@@ -19,7 +19,7 @@
                     Mục</a>
             </li>
             <li>
-                <a href="{{route('admin.listProduct')}}" class="waves-effect"><i class="fa fa-product-hunt" aria-hidden="true"></i>
+                <a href="{{route('admin.shop')}}" class="waves-effect"><i class="fa fa-product-hunt" aria-hidden="true"></i>
                     Sản phẩm</a>
             </li>
             <li>

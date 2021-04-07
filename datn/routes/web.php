@@ -92,15 +92,8 @@ Route::prefix('client')->group(function () {
 
 
         // product
-        Route::get('/product', [Client\ProductController::class , 'index'])->name('client.product');
-
-        
-        // Route::get('/single-product', [Client\ProductController::class , 'single_Product'])->name('client.single-product');
-        
-
-        Route::match(['get','post'], '/single-product/{id}', [Client\ProductController::class , 'single_Product'])
-        ->where('id', '[0-9]+')
-        ->name('client.single-product');
+        Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.product');
+        Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
 
 
         // about

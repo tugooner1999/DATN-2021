@@ -39,7 +39,6 @@
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->name}}</td>
                                                 <td><img src="{{$item->image}}" width="100" height="100" alt=""></td>
-                                                
                                                 <td>{{ count($item->products) }}</td>
                                                 <td style="font-size: 20px;">
                                                     <a style="padding-left: 10px;" href="{{route('admin.editCate',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>

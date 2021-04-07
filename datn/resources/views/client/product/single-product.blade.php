@@ -25,8 +25,8 @@
                 <div class="product-details-img product-details-tab">
                     <div class="zoompro-wrap zoompro-2">
                         <div class="zoompro-border zoompro-span">
-                            <img class="zoompro" src="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}"
-                                data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/1.jpg')}}" alt="" />
+                            <img src="../../{{$product->image_gallery}}"
+                                data-zoom-image="../../{{$product->image_gallery}}" alt="" />
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2">
@@ -52,7 +52,7 @@
             <div class="col-xl-6 col-lg-6 col-md-12">
                 <div class="product-details-content">
                     <h2>{{$product->name}}</h2>
-                    <p class="reference">Thực phẩm</p>
+                    <p class="reference">{{isset($product->category) ? $product->category->name : ''}}</p>
                     <div class="pro-details-rating-wrap">
                         <div class="rating-product">
                             <i class="ion-android-star"></i>
@@ -65,15 +65,17 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut">{{$product->price}}</li>
+                            <li class="old-price not-cut text-danger">{{number_format($product->price)}}đ</li><br>
+                            <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
                         <div class="cart-plus-minus">
                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="qtybutton" value="1" />
                         </div>
                         <div class="pro-details-cart btn-hover">
-                            <a href="#"> Thêm vào giỏ</a>
+                            <a class="cart-btn" product-id='{{$product->id}}'> Thêm vào giỏ</a>
                         </div>
                     </div>
                     <div class="pro-details-wish-com">
