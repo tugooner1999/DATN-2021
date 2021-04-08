@@ -79,25 +79,25 @@
                     <div class="contact-title mb-30">
                         <h2>Liên hệ với chúng tôi</h2>
                     </div>
-                    <form class="contact-form-style" id="contact-form"
-                        action="https://htmldemo.hasthemes.com/ecolife-preview/ecolife/assets/php/mail.php"
-                        method="post">
+                    <form class="contact-form-style" id="contact-form" action="{{route('client.sendMail')}}" method="post" role="form">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
-                                <input name="name" placeholder="Tên*" type="text" />
+                                <input name="name_contact" placeholder="Tên*" type="text" required />
                             </div>
                             <div class="col-lg-6">
-                                <input name="email" placeholder="Email*" type="email" />
+                                <input name="email_contact" placeholder="Email*" type="email" required />
                             </div>
                             <div class="col-lg-12">
-                                <input name="subject" placeholder="Tiêu đề*" type="text" />
+                                <input name="subject_contact" placeholder="Tiêu đề*" type="text" required/>
                             </div>
                             <div class="col-lg-12">
-                                <textarea name="message" placeholder="Lời nhắn*"></textarea>
+                                <textarea name="content_contact" placeholder="Nội dung*" required></textarea>
                                 <button class="submit" type="submit">Gửi</button>
                             </div>
                         </div>
                     </form>
+                    
                     <p class="form-messege"></p>
                 </div>
             </div>

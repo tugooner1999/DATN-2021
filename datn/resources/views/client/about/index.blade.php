@@ -30,24 +30,22 @@
             <div class="col-lg-6">
                 <div class="about-content">
                     <div class="about-title">
-                        <h2>Welcome To Ecolife</h2>
+                        <h2>Chào mừng đến với tạp hoá Chúc An</h2>
                     </div>
                     <p class="mb-30px">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore aperiam fugit consequuntur
-                        voluptatibus ex sint iure in, distinctio sed dolorem aspernatur veritatis repellendus dolorum
-                        voluptate, animi
-                        libero officiis eveniet accusamus recusandae. Temporibus amet ducimus sapiente voluptatibus
-                        autem dolorem magnam quas, porro suscipit. Quibusdam culpa asperiores exercitationem architecto
-                        quo, temporibus
-                        vel! porro suscipit. Quibusdam culpa asperiores exercitationem architecto quo, temporibus vel!
+                        Cửa hàng tạp hoá Chúc An là cửa hàng nhỏ lẻ nằm trên phố Đại Từ sầm uất của phường Đại Kim, quận Hoàng Mai. Được khai trương và đi vào kinh doanh từ ngày 26/08/1999
+                        cho đến nay đã được 22 năm, là một trong những cửa hàng tạp hoá lâu đời và uy tín nhất của phố Đại Từ. Là một cửa hàng tạp hoá kinh doanh theo mô hình hộ gia đình, không
+                        phải tư nhân nên cửa hàng không có nhiều cơ sở ở những nơi khác. Với phương châm là mang đến cho khách hàng những mặt hàng thiết yếu và chất lương với giá thành hợp lý, tạp hoá 
+                        Chúc An luôn chọn lọc những sản phẩm theo nhu cầu sử dụng của người tiêu dùng. Một điểm cộng nữa của Chúc An đó là thái độ của nhân viên rất thân thiện và vô cùng xinh đẹp:))
+
                     </p>
+                    </br>
                     <p>
-                        Sint voluptatum beatae necessitatibus quos mollitia vero, optio asperiores aut tempora iusto eum
-                        rerum, possimus, minus quidem ut saepe laboriosam. Praesentium aperiam accusantium minus
-                        repellendus
-                        accusamus neque iusto pariatur laudantium provident quod recusandae exercitationem natus
-                        dignissimos, molestias quibusdam doloremque eaque fugit molestiae modi quam unde. Error est
-                        dolor facere.
+                        ! số thành tích của cửa hàng
+                        </br>- Năm 2010, kỉ niệm 1000 năm Thăng Long - Hà Nội, cửa hàng đã vinh dự được nhân bằng khen hộ gia đình kinh doanh tạp hoá xuất sắc của quận
+                        </br>- Năm 2015, bằng khen về chất lượng sản phẩm tốt
+                        </br>- Năm 2019, Bằng khen về thu nhập tạp hoá hộ gia đình đạt mức trên 69% so với các kinh doanh hộ gia đình khác
+                        </br>- Năm 2020, Thi đua xuất sắc của tỉnh
                     </p>
                 </div>
             </div>

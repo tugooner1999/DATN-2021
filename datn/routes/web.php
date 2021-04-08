@@ -92,15 +92,8 @@ Route::prefix('client')->group(function () {
 
 
         // product
-        Route::get('/product', [Client\ProductController::class , 'index'])->name('client.product');
-
-        
-        // Route::get('/single-product', [Client\ProductController::class , 'single_Product'])->name('client.single-product');
-        
-
-        Route::match(['get','post'], '/single-product/{id}', [Client\ProductController::class , 'single_Product'])
-        ->where('id', '[0-9]+')
-        ->name('client.single-product');
+        Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.product');
+        Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
 
 
         // about
@@ -108,6 +101,8 @@ Route::prefix('client')->group(function () {
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
+        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+
 
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');

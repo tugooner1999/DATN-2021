@@ -30,6 +30,6 @@ class Product extends Model
     public function saveUpdate($id, $objPro){
         return DB::table($this->table)
             ->where('id',$id)
-            ->update($obPro);
+            ->update($objPro);
     }
 }
