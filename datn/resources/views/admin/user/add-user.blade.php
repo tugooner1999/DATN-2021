@@ -95,7 +95,7 @@
             </div>
             <div class="col-md-4">
                     <div class="white-box">
-                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="200px"
+                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="500px"
                                 alt="">
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
