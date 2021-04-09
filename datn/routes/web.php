@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/user/edit/{id}',[Admin\UserController::class, 'edit_user'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.editUser');
+        Route::match(['get','post'], '/user/update/{id}',  [Admin\UserController::class, 'updateUser'])->name('admin.updateUser');
         Route::match(['get','post'],'/user/delete/{id}',[Admin\UserController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleUser');

@@ -38,14 +38,14 @@
                                     <input placeholder="Tìm mọi thứ ở đây ..." type="text" />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
-                            </div>
                         </div>
+                    </div>
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
                 @if (Auth::check())
-                <span class="text-danger" style="font-size: 22px;">Hello {{Auth::user()->name}}</span>
-                                            <a href="{{route('Auth.Logout')}}">Đăng xuất</a>
+                                        <a href="#" class="login text-dark"><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</a>|
+                                        <a href="{{route('Auth.Logout')}}"><b>Đăng xuất <i class="fa fa-sign-out" aria-hidden="true"></i></b></a>
                                         @else
                                         <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
                                         @endif

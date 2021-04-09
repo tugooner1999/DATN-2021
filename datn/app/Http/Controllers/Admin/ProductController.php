@@ -91,22 +91,17 @@ class ProductController extends Controller
 
         
         $file = $request->file('image_gallery');
-        $file_allow_upload = config('app.file_allow_upload');
-        // đưa thông tin ra view:
-        $file_info = new \stdClass();
-        $file_info->name = $file->getClientOriginalName();
-        $file_info->extension = $file->getClientOriginalExtension();
-        $file_info->path = $file->getRealPath();
-        $file_info->size = $file->getSize();
-        $file_info->mime = $file->getMimeType();
-
-        //di chuyển file từ thư mục tạm vào thư mục lưu trữ trong /public để xem ảnh dạng web
-        $destinationPath = 'uploads/products';
-        $file->move($destinationPath,$file->getClientOriginalName());
-
-        // dùng cái link dưới đây để lưu vào CSDL nhé.
-        $file_info->link_img = 'uploads/products/'.$file->getClientOriginalName();
-        $data['image_gallery']=$file_info->link_img;
+            $file_allow_upload = config('app.file_allow_upload');
+            $file_info = new \stdClass();
+            $file_info->name = $file->getClientOriginalName();
+            $file_info->extension = $file->getClientOriginalExtension();
+            $file_info->path = $file->getRealPath();
+            $file_info->size = $file->getSize();
+            $file_info->mime = $file->getMimeType();
+            $destinationPath = 'uploads/products';
+            $file->move($destinationPath,$file->getClientOriginalName());
+            $file_info->link_img = 'uploads/products/'.$file->getClientOriginalName();
+            $data['image_gallery']=$file_info->link_img;
         DB::table('products')->where('id', $id)->update($data);
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');  

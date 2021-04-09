@@ -55,6 +55,4 @@ class User extends \Eloquent implements Authenticatable{
     {
         return $this->password;
     }
-
-
 }

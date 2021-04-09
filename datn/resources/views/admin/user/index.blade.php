@@ -20,6 +20,15 @@
                             <div class="app-search hidden-sm hidden-xs m-r-10">
                                 <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
                             </div>
+                            <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                            }
+                        ?>
+                    </p>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
