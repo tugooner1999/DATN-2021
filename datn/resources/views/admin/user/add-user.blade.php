@@ -99,7 +99,7 @@
                                 alt="">
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
+                            <input class="col-sm-12" name="avatar" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                     </div>
                 </div>

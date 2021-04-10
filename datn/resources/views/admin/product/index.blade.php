@@ -78,12 +78,11 @@
                                         <a style="padding-left: 10px;"
                                             href="{{URL::to('/admin/products/edit/'.$item->id)}}"><i
                                                 class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                        <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này')"
+                                        <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm : {{$item->name}}')"
                                             style="padding-left: 10px;"
                                             href="{{route('admin.removeProduct',['id' => $item->id])}}"
                                             class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
-                                    
                                 </tr>
                                 @endforeach
                             </tbody>

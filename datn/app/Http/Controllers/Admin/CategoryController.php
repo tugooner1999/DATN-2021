@@ -74,14 +74,10 @@ class CategoryController extends Controller
 
     public function edit_category($id, Request $request){
         $dataView = ['errs'=>[] ];
-
         // lấy thông tin User để hiển thị ra form
         $objU = Category::where('id',$id)->first();
         $dataView['objU'] = $objU;
-
-
         if($request->isMethod('POST')){
-          
             $rule = [
                 'name' =>'required|min:6',
                 'image'=>'required|image'            ];
@@ -105,7 +101,6 @@ class CategoryController extends Controller
                 ];
                 $file = $request->file('image');
             $file_allow_upload = config('app.file_allow_upload');
-
             // đưa thông tin ra view:
             $file_info = new \stdClass();
             $file_info->name = $file->getClientOriginalName();
@@ -119,20 +114,16 @@ class CategoryController extends Controller
             $dataSave['image']=$file_info->link_img;
                 $objModel = new category();
                 $rowUpdate = $objModel->SaveUpdate($id,$dataSave);
-
                 if($rowUpdate>0){
-
                     return redirect()->route('admin.listCate');
                 }
                 else
                     $dataView['errs'][] = ['Không có gì cập nhật!'];
-
             }
         } 
         return view('admin.category.editCate',$dataView);
-
     }
-
+    
     public function destroy($id, Request $request){
         $dataView = [ 'errs'=>[]];
         // lấy thông tin cate để hiển thị ra form

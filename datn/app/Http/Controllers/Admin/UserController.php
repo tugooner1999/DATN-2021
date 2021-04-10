@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Models;
 use App\Models\User;
 use Session;
@@ -25,7 +25,7 @@ class UserController extends Controller
         if($request->isMethod('POST')){
             $rule = [
                 'name'=>'required',
-                'image'=>'required|image',
+                'avatar'=>'required|image',
                 'role_id'=>'required',
                 'email'=>'required|email|max:255|unique:users',
                 'phone'=>'required|min:10|numeric',
@@ -33,8 +33,8 @@ class UserController extends Controller
                 ];
             $msgE = [
                 'name.required' =>'Bạn cần nhập Tên tài khoản',
-                'image.required'=>'Không để trống ảnh của sản phẩm',
-                'image.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)',
+                'avatar.required'=>'Không để trống ảnh của sản phẩm',
+                'avatar.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)',
                 'role_id.required'=>'Chọn trạng thái hoạt động',
                 'email.required'=>'Vui lòng nhập Email',
                 'email.unique'=>'Email đã tồn tại',
@@ -54,35 +54,15 @@ class UserController extends Controller
             else{
                 // không có lỗi, ghi CSDL
                 $user = new user();
-                $user['name']= $request->get('name');
-                $user['password']= Hash::make($request->get('password'));
-                $user['role_id']= $request->get('role_id');
-                $user['email']= $request->get('email');
-                $user['phone']= $request->get('phone');
-                $user['address']= $request->get('address');
-                $user['status']= $request->get('status');
-
-
-                $file = $request->file('image');
-            $file_allow_upload = config('app.file_allow_upload');
-
-            // đưa thông tin ra view:
-            $file_info = new \stdClass();
-            $file_info->name = $file->getClientOriginalName();
-            $file_info->extension = $file->getClientOriginalExtension();
-            $file_info->path = $file->getRealPath();
-            $file_info->size = $file->getSize();
-            $file_info->mime = $file->getMimeType();
-
-            //di chuyển file từ thư mục tạm vào thư mục lưu trữ trong /public để xem ảnh dạng web
-            $destinationPath = 'frontend/images';
-            $file->move($destinationPath,$file->getClientOriginalName());
-
-            // dùng cái link dưới đây để lưu vào CSDL nhé.
-            $file_info->link_img = 'frontend/images/'.$file->getClientOriginalName();
-            $user['avatar']=$file_info->link_img;
-            $user['coins']= 0;
+                $user->fill($request->all());
+                $user->password= Hash::make($request->get('password'));
+                if($request->hasFile('avatar')){
+                    $path = $request->file('avatar')->store('public/avatars');
+                    $user->avatar = str_replace("public/", "storage/", $path);
+                }
+            $user->coins= 0;
             $user->Save();
+            Session::put('message','Thêm tài khoản thành công');
             return redirect()->route('admin.listUser');
             }
         }
@@ -91,12 +71,26 @@ class UserController extends Controller
     }
 
     public function edit_user($id, Request $request){
-        $dataView = ['errs'=>[] ];
-        // lấy thông tin User để hiển thị ra form
-        $objU = User::where('id',$id)->first();
-        $dataView['objU'] = $objU;
-        return view('admin.user.edit-user',$dataView);
+        $objU = User::find($id);
+        return view('admin.user.edit-user',compact('objU'));
     }
+    public function updateUser($id, Request $request){
+        try{
+            $user = User::find($id);
+            $user->fill($request->all());
+
+            if($request->hasFile('avatar')){
+                $path = $request->file('avatar')->store('public/avatars');
+                $user->avatar = str_replace("public/", "storage/", $path);
+            }
+            $user->save();
+            Session::put('message','Cập nhật tài khoản thành công');
+        }catch(\Exception $ex){
+            Session::put('message','Cập nhật thất bại');
+        }
+
+        return redirect()->route('admin.listUser');
+    }   
     public function destroy($id)
     {
         $User = User::find($id);
