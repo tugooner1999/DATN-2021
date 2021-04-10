@@ -10,10 +10,9 @@ class Product extends Model
     public $timestamps = FALSE;
 
     protected $fillable = [
-        'id',
         'name',
         'image_gallery',
-        'description ',
+        'description',
         'price',
         'quantily',
         'category_id',

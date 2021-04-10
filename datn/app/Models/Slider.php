@@ -11,7 +11,6 @@ class Slider extends Model
     protected $table = "slider";
     public $timestamps = FALSE;
         protected $fillable = [
-        'id',
         'title',
         'description',
         'image'

@@ -26,38 +26,38 @@
                         <div class="form-group">
                             <label class="col-md-12">Tên sản phẩm</label>
                             <div class="col-md-12">
-                                <input type="text" name="product_name" value="{{$item->name}}" class="form-control form-control-line">
+                                <input type="text" name="name" value="{{$item->name}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
                                 <input type="number" value="{{$item->price}}" class="form-control form-control-line"
-                                    name="product_price" id="example-email">
+                                    name="price" id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
-                                <input type="number" name="product_quantily" value="{{$item->quantily}}" class="form-control form-control-line">
+                                <input type="number" name="quantily" value="{{$item->quantily}}" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="product_description"
+                                <textarea rows="5" name="description"
                                     class="form-control form-control-line">{{$item->description}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
-                                <select name="product_cate" class="form-control form-control-line">
+                                <select name="category_id" class="form-control form-control-line">
                                     @foreach($cate_product as $key => $cate)
                                     @if($cate->id == $item->category_id)
-                                    <option selected value="{{  $cate->id }}">{{$cate->name}}</option>
+                                    <option selected value="{{$cate->id }}">{{$cate->name}}</option>
                                     @else
-                                    <option value="{{  $cate->id }}">{{$cate->name}}</option>
+                                    <option value="{{$cate->id }}">{{$cate->name}}</option>
                                     @endif
                                     @endforeach
                                 </select>

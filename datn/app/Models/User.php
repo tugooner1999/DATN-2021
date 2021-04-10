@@ -19,16 +19,13 @@ class User extends \Eloquent implements Authenticatable{
     public $timestamps = false;
     protected $table = 'users';
     protected $fillable = [
-        'id',
         'name',
-         'password', 
-         'avatar',
-         'role_id',
-         'email',
-         'phone',
-         'address',
-         'status',
-         'coins'
+        'password', 
+        'role_id',
+        'email',
+        'phone',
+        'address',
+        'status',
     ];
 
     protected  $primaryKey = 'id';

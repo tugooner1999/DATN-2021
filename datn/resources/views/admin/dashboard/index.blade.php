@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Đơn hàng</h3>
                     <ul class="list-inline two-part">
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Sản phẩm</h3>
                     <ul class="list-inline two-part">
@@ -33,11 +33,11 @@
                             <div id="sparklinedash2"></div>
                         </li>
                         <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span
-                                class="counter text-purple">165</span></li>
+                                class="counter text-purple">{{$product}}</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Bình Luận</h3>
                     <ul class="list-inline two-part">
@@ -46,6 +46,30 @@
                         </li>
                         <li class="text-right"><i class="ti-arrow-up text-info"></i> <span
                                 class="counter text-info">911</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Mã giảm giá</h3>
+                    <ul class="list-inline two-part">
+                        <li>
+                            <div id="sparklinedash4"></div>
+                        </li>
+                        <li class="text-right"><i class="ti-arrow-up text-danger"></i> <span
+                                class="counter text-danger">{{$voucher}}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Tài khoản</h3>
+                    <ul class="list-inline two-part">
+                        <li>
+                        <i style="margin-left: 38px;" class="fa fa-users" aria-hidden="true"></i>
+                        </li>
+                        <li class="text-right" style="text-align: left;"><i class="ti-arrow-up text-dark" ></i> <span
+                                class="counter text-dark" >{{$user}}</span></li>
                     </ul>
                 </div>
             </div>
