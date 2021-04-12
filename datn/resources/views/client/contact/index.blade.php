@@ -1,7 +1,9 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);
+">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

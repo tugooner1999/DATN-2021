@@ -51,8 +51,12 @@ class ProductController extends Controller
         $product->create_at= $dt_create;
         $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 2;  
         if($request->hasFile('image_gallery')){
-            $path = $request->file('image_gallery')->store('public/frontend/images');
-            $product->image_gallery = str_replace("public/", "storage/", $path);
+            $request->validate([
+                'image_gallery' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.$request->image_gallery->extension();  
+            $product->image_gallery =$request->image_gallery->move(public_path('frontend\images'), $imageName);
+
         }
         $product->views = 1;
         $product->save();
