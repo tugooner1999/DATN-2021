@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/voucher',  [Admin\VoucherController::class , 'index'])->name('admin.listVoucher');
         Route::get('/voucher/add',  [Admin\VoucherController::class , 'create_voucher'])->name('admin.addVoucher');
         Route::post('/voucher/add', [Admin\VoucherController::class, 'saveAdd'])->name('admin.save-add-form');
-        Route::get('/voucher/edit',  [Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::get('/voucher/edit-voucher/{id}',[Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::post('/voucher/edit-voucher/{id}', [Admin\VoucherController::class, 'update_voucher'])->name('admin.save-update-form');
+        Route::match(['get','post'],'/voucher/delete/{id}',[Admin\VoucherController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleVoucher');
         
         
 

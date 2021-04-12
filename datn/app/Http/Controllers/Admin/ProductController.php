@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
 // use Illuminate\Database\Eloquent\Collection::intersect()
-use DB;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Eloquent\Collection::intersect()
 use Illuminate\Support\Facades\Session;
 session_start();
@@ -20,8 +20,8 @@ class ProductController extends Controller
 {
 
     public function index(Request $request){
-        $pro = Product::all();
         $category = Category::all();
+        $pro = Product::paginate(5);
         return view('admin.product.index',compact('pro','category'));
     }
 

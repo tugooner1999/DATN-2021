@@ -9,17 +9,25 @@ class Voucher extends Model
 {
     protected $table = "vouchers";
     public $timestamps = FALSE;
-        protected $fillable = [
+    protected  $primaryKey = 'id';
+
+    protected $fillable = [
         'name',
         'start_date',
         'finish_date',
         'code',
         'created_by',
         'created_at',
-        'type_id',
+        'amount',
+        'type',
+        'value',
         'status',
     ];
     public function user(){
         return $this->belongsTo(User::class, 'created_by');
     }
+    public function voucher_type(){
+        return $this->belongsTo(Voucher_type::class, 'type_id');
+    }
+    
 }

@@ -83,6 +83,9 @@
                     @endforelse   
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 offset-xs-8 text-center pull-right ">
+                                    {{$user->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>
