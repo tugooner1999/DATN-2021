@@ -166,11 +166,12 @@
                                         $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
                                     }  
                                 })
-                                if(typeVoucher=='2'){
+                                if(typeVoucher==2){
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * voucherValue / 100) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100) + " VNĐ")
                                 }
-                                if(typeVoucher=='1'){
+                                if(typeVoucher==1){
+                                    console.log(1)
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(voucherValue) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue) + " VNĐ")
                                 }
