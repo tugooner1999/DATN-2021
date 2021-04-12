@@ -1,7 +1,9 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);
+">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -113,14 +115,10 @@
                     <!-- Shop Tab Content End -->
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center">
+                    
                         <ul>
                             <li>
-                                <a class="prev" href="#"><i class="ion-ios-arrow-left"></i></a>
-                            </li>
-                            <li><a class="active" href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li>
-                                <a class="next" href="#"><i class="ion-ios-arrow-right"></i></a>
+                            {{$list_product->links()}}
                             </li>
                         </ul>
                     </div>
