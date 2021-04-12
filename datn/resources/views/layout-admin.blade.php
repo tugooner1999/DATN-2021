@@ -9,6 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/admin/plugins/images/favicon.png')}}">
     <title>Trang quản trị - hệ thống quản lý bán hàng tạp hoá Chúc An</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="{{asset('assets/admin/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/bootstrap/dist/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css')}}"
@@ -22,6 +23,7 @@
     <link href="{{asset('assets/admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
+    
     <!-- href="{{asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}" -->
 
     <!-- sweetalert -->

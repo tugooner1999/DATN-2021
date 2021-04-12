@@ -35,23 +35,24 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form method="post" action="{{route('client.login')}}">
+                                    <form method="post" action="{{route('client.login')}}" class="was-validated">
                                         @error('msg')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         @csrf
-                                        <input type="text" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" />
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" required />
                                         @error('email')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="password" name="password" placeholder="Mật khẩu" />
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required/>
                                         @error('password')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <input type="checkbox" name="remember_me" id="remember_me" />
+                                                <input type="checkbox"  class="form-check-input" name="remember_me" id="remember_me"/>
                                                 <label class="flote-none" for="remember_me">Lưu đăng nhập</label>
+                                                
                                                 <!-- <a href="#">Quên mật khẩu?</a> -->
                                             </div>
                                             
