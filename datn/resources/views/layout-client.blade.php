@@ -222,6 +222,7 @@
                                 $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
                                 $("#" +idProduct).remove()
                                 if(!$("tbody tr").html()){
+                                    sessionStorage.clear();
                                     $(".content-cart, .cart-page-title").empty()
                                     setTimeout(function(){
                                         $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
@@ -249,6 +250,7 @@
                         },
                         success: function(result){
                             if(result.status === true){
+                                sessionStorage.clear()
                                 $('head').append(`<style>.count-cart::after{ content:'${0}' !important}</style>`);
                                 $(".content-cart, .cart-page-title").empty()
                                 setTimeout(function(){
