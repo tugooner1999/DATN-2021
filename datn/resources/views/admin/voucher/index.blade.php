@@ -19,6 +19,7 @@
                             <h3 class="box-title">Danh sách</h3>
                             <div class="app-search hidden-sm hidden-xs m-r-10">
                                 <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
+                                <p><a href="" class="btn btn-default">Gửi mã voucher cho khách hàng</a></p>
                             </div>
                             <p class="success" style="color:green; font-size:20px; font-weight:bold;">
                                 <?php
@@ -119,6 +120,9 @@
                                         
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 offset-xs-8 text-center pull-right ">
+                                    {{$voucher->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>

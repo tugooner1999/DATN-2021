@@ -4,13 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
-use DB;
-use App\Models;
-use Facade\FlareClient\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Support\Facades\Http;
 class SliderController extends Controller
 {
     /**
@@ -20,6 +15,7 @@ class SliderController extends Controller
      */
     public function index(){
         $slider = Slider::all();
+        $slider = Slider::paginate(5);
         return view('admin.slider.index', [
             'slider' => $slider
         ]);

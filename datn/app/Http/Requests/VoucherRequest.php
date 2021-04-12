@@ -25,7 +25,7 @@ class VoucherRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required|unique:vouchers|min:5|max:11'.$this->get('id'),
+            'code' => 'required|min:5|max:11',
             'finish_date' => 'required',
             'amount' => 'required|min:1',
             'value' => 'required',
@@ -35,7 +35,6 @@ class VoucherRequest extends FormRequest
         return [
             'name.required' => 'name không được để trống',
             'code.required' => 'Mã code không được để trống',
-            'code.unique' => 'Mã code đã tồn tại',
             'code.min'=>'Mã code có ít nhất 5 kí tự và nhiều nhất 11 kí tự',
             'code.max'=>'Mã code có ít nhất 5 kí tự và nhiều nhất 11 kí tự',
             'finish_date.required' => 'Ngày kết thúc trống',

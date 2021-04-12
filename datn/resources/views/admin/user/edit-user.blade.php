@@ -28,6 +28,9 @@
                                 <input type="text" class="form-control form-control-line" name="name" value="{{$objU->name}}">
                             </div>
                         </div>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-sm-12">Phân quyền</label>
                             <div class="col-sm-12">
@@ -64,20 +67,29 @@
                         <div class="form-group">
                             <label class="col-md-12">Email</label>
                             <div class="col-md-12">
-                            <input type="email" name="email" value="{{$objU->email}}" value="{{(old('email'))}}" class="form-control form-control-line">                            </div>
+                            <input type="email"  name="email" value="{{$objU->email}}" value="{{(old('email'))}}" class="form-control form-control-line">                            </div>
                         </div>
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Phone</label>
                             <div class="col-md-12">
                             <input type="text" name="phone" value="{{$objU->phone}}" value="{{(old('phone'))}}" class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('phone')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Địa chỉ</label>
                             <div class="col-md-12">
                             <textarea rows="5" name="address" value="" class="form-control form-control-line">{{$objU->address}}{{(old('address'))}}</textarea>
                             </div>
                         </div>
+                        @error('address')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>
@@ -94,6 +106,9 @@
                         <input class="col-sm-12" name="avatar" type="file" onchange="changeImage()" id="fileImage">
                     </div>
                 </div>
+                @error('avatar')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             </form>

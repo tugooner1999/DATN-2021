@@ -13,10 +13,11 @@ class CategoryController extends Controller
 {
     //
     public function index(){
-        $cates = Category::all();
+        $cates = Category::paginate(5);
         $cates->load([
             'products'
         ]);
+        
         return view('admin.category.index', [
             'category' => $cates
         ]);

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Đơn hàng</h3>
                     <ul class="list-inline two-part">
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Sản phẩm</h3>
                     <ul class="list-inline two-part">
@@ -37,7 +37,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Bình Luận</h3>
                     <ul class="list-inline two-part">
@@ -49,7 +49,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Mã giảm giá</h3>
                     <ul class="list-inline two-part">
@@ -61,7 +61,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 280px;">
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Tài khoản</h3>
                     <ul class="list-inline two-part">

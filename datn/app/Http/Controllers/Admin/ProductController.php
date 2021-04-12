@@ -20,8 +20,8 @@ class ProductController extends Controller
 {
 
     public function index(Request $request){
-        $pro = Product::all();
         $category = Category::all();
+        $pro = Product::paginate(5);
         return view('admin.product.index',compact('pro','category'));
     }
 

@@ -4,18 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     //
     public function index(){
-        $user = User::all();
+        $user = User::paginate(5);
         return view('admin.user.index',compact('user'));
     }
 
@@ -30,10 +28,14 @@ class UserController extends Controller
                 'email'=>'required|email|max:255|unique:users',
                 'phone'=>'required|min:10|numeric',
                 'status'=>'required|min:1',
+                'address'=>'required',
+                'password' => 'required|string|min:6|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/',
+                'password-confirm'=>'requied|min4',
+
                 ];
             $msgE = [
                 'name.required' =>'Bạn cần nhập Tên tài khoản',
-                'avatar.required'=>'Không để trống ảnh của sản phẩm',
+                'avatar.required'=>'Không để trống ảnh của user',
                 'avatar.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)',
                 'role_id.required'=>'Chọn trạng thái hoạt động',
                 'email.required'=>'Vui lòng nhập Email',
@@ -41,13 +43,19 @@ class UserController extends Controller
                 'phone.required'=> 'Nhập số điện thoại',
                 'phone.min'=> 'Nhập số điện thoại có 10 chữ số',
                 'status.required'=>'Chọn trạng thái',
+                'password.required' => 'Bạn cần nhập mật khẩu ',
+                'password.min'=>'Mật khẩu phải có chữ hoa chữ thường và số từ 6 đến 16 kí tự',
+                'password.max'=>'Mật khẩu phải có chữ hoa chữ thường và số từ 6 đến 16 kí tự',
+                'password.regex' => 'Mật khẩu phải có chữ hoa chữ thường và số  từ 6 đến 16 kí tự',
+                'password.confirmed'=>'mật khẩu không trùng khớp',
                 'status.min'=>'Chọn trạng thái',
+                'address.required'=>'Bạn cần nhập địa chỉ',
+                
                 ];
             $validator = Validator::make($request->all(), $rule, $msgE);
             // check có lỗi hay không
 
             if ($validator->fails()) {
-                // nó chết ở trong đây à
                 $request->flash();
                 return redirect()->route('admin.addUser')->withErrors($validator);
             }
@@ -57,9 +65,9 @@ class UserController extends Controller
                 $user->fill($request->all());
                 $user->password= Hash::make($request->get('password'));
                 if($request->hasFile('avatar')){
-                    $path = $request->file('avatar')->store('public/avatars');
+                    $path = $request->file('avatar')->store('public/frontend/avatar');
                     $user->avatar = str_replace("public/", "storage/", $path);
-                }
+                                }
             $user->coins= 0;
             $user->Save();
             Session::put('message','Thêm tài khoản thành công');
@@ -74,7 +82,7 @@ class UserController extends Controller
         $objU = User::find($id);
         return view('admin.user.edit-user',compact('objU'));
     }
-    public function updateUser($id, Request $request){
+    public function updateUser($id,UserRequest $request){
         try{
             $user = User::find($id);
             $user->fill($request->all());
