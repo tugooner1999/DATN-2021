@@ -51,8 +51,7 @@
     <script>
         
         $(document).ready(function(){
-            var typeVoucher =sessionStorage.getItem('typeVoucher')
-            var voucherValue =sessionStorage.getItem('voucherValue')
+            
             $('.select-payment-method').click(function(){
                 $('.select-payment-method').not(this).prop("checked", false);
             })
@@ -140,6 +139,8 @@
             // cập nhật giỏ hàng
             
             $('#update-cart').click(function(e){
+                var typeVoucher =sessionStorage.getItem('typeVoucher')
+                var voucherValue =sessionStorage.getItem('voucherValue')
                 e.preventDefault();
                 var arrayProduct = []
                 var arrayQuantity = []
@@ -175,10 +176,13 @@
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * voucherValue / 100) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100) + " VNĐ")
                                 }
-                                if(typeVoucher==1){
+                                else if(typeVoucher==1){
                                     console.log(1)
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(voucherValue) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue) + " VNĐ")
+                                }
+                                else{
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
                                 }
                                 $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
                                 
@@ -195,6 +199,8 @@
             //remove item cart 
             $('.product-remove a').click(function(e){
                 e.preventDefault();
+                var typeVoucher =sessionStorage.getItem('typeVoucher')
+                var voucherValue =sessionStorage.getItem('voucherValue')
                 var idProduct = $(this).attr('prod-id')
                 $("#" +idProduct).fadeOut(1000,function(){
                     $.ajax({
@@ -209,16 +215,19 @@
                         success: function(result){
                             if(result.status === true){
                                 var totalPriceInCart = result.totalPriceInCart
-                                $('#total-price-cart').html(totalPriceInCart +" VNĐ")
+                                $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) +" VNĐ")
                                 if(typeVoucher ==2){
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * voucherValue / 100) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100) + " VNĐ")
                                 }
-                                if(typeVoucher ==1){
+                                else if(typeVoucher ==1){
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(voucherValue) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue) + " VNĐ")
                                 }
-                                // $('.grand-totall-title').html("Tổng tiền " + totalPriceInCart + " VNĐ")
+                                else{
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
+                                }
+                                
                                 $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
                                 $("#" +idProduct).remove()
                                 if(!$("tbody tr").html()){
