@@ -8,7 +8,7 @@ use App\Http\Requests\VoucherRequest;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-
+session_start();
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -23,7 +23,50 @@ class VoucherController extends Controller
         return view('admin.voucher.index',compact('voucher','today'));
 
     }
-
+    public function addVoucherToCart(Request $req){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        $voucherCode = Voucher::where('code',$req->voucherCode)->first();
+        if(!$voucherCode){
+            return response(
+                [
+                    'status' => false,
+                    'msg'=>"Mã giảm giá không chính xác"
+                ]
+            );
+        }
+        else{
+            if($voucherCode->finish_date < $today){
+                return response(
+                    [
+                        'status' => false,
+                        'msg'=>"Mã giảm giá đã hết hạn sử dụng"
+    
+                    ]
+                );
+            }
+           
+            else if($voucherCode->status != 1){
+                return response(
+                    [
+                        'status' => false,
+                        'msg'=>"Mã giảm giá chưa được kích hoạt"
+                    ]
+                );
+            }
+            $totalPriceInCart = 0;
+            foreach($_SESSION['cart'] as $val){
+                $totalPriceInCart += $val['price'] * $val['quantity'];
+            }    
+            return response(
+                [
+                    'totalPriceInCart' => $totalPriceInCart,
+                    'data' => $_SESSION['voucher']=$voucherCode,
+                    'status' => true,
+                    'msg'=>"Thêm mã giảm giá thành công"
+                ]
+            );
+        }
+    }
     public function create_voucher(Request $request){
         return view('admin.voucher.add-voucher');
     }
