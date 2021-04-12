@@ -51,8 +51,8 @@
     <script>
         
         $(document).ready(function(){
-            var typeVoucher =0
-            var voucherValue =0
+            var typeVoucher =sessionStorage.getItem('typeVoucher')
+            var voucherValue =sessionStorage.getItem('voucherValue')
             $('.select-payment-method').click(function(){
                 $('.select-payment-method').not(this).prop("checked", false);
             })
@@ -89,14 +89,18 @@
                                 Swal.fire('',result.msg , 'success')
                                 $('.voucher-box').empty()
                                 if(result.data.type ==2){
-                                    typeVoucher =result.data.type
-                                    voucherValue =result.data.value
+                                    sessionStorage.setItem("typeVoucher",result.data.type);
+                                    // typeVoucher =result.data.type
+                                    sessionStorage.setItem('voucherValue',result.data.value);
+                                    // voucherValue =result.data.value
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * result.data.value / 100) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * result.data.value / 100) + " VNĐ")
                                 }
                                 if(result.data.type ==1){
-                                    typeVoucher =result.data.type
-                                    voucherValue =result.data.value
+                                    // typeVoucher =result.data.type
+                                    // voucherValue =result.data.value
+                                    sessionStorage.setItem("typeVoucher",result.data.type);
+                                    sessionStorage.setItem('voucherValue',result.data.value);
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(result.data.value) + " VNĐ")
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - result.data.value) + " VNĐ")
                                     
@@ -156,6 +160,7 @@
                         },
                         success: function(result){
                             if(result.status === true){
+                                console.log(typeVoucher)
                                 var totalPriceInCart = result.totalPriceInCart
                                 Swal.fire('', 'Cập nhật giỏ hàng thành công', 'success')
                                 $('.product-subtotal').each(function(item){
