@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
-// use Illuminate\Database\Eloquent\Collection::intersect()
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Eloquent\Collection::intersect()
 use Illuminate\Support\Facades\Session;
