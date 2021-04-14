@@ -62,7 +62,8 @@ Route::prefix('admin')->group(function () {
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleVoucher');
         
-        
+        // mail
+        Route::get('/send-mail-voucher/{id}',  [Admin\MailController::class , 'sendMailVoucher'])->name('admin.sendMailVoucher');
 
         // user
         Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');

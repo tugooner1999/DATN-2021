@@ -19,7 +19,7 @@
                             <h3 class="box-title">Danh sách</h3>
                             <div class="app-search hidden-sm hidden-xs m-r-10">
                                 <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
-                                <p><a href="" class="btn btn-default">Gửi mã voucher cho khách hàng</a></p>
+                              
                             </div>
                             <p class="success" style="color:green; font-size:20px; font-weight:bold;">
                                 <?php
@@ -103,7 +103,8 @@
                                             @endif
                                             </td>
                                             
-                                            <td class="text-{{$item->status == 1 ? "success" : "danger"}}">{{$item->status == 1 ? "Đang kích hoạt" : "Đã khoá"}}</td>
+                                            <td class="text-{{$item->status == 1 ? "success" : "danger"}}">{{$item->status == 1 ? "Đang kích hoạt" : "Đã khoá"}}
+                                            </td>
                                             <td>
                                                 @if($item->finish_date>=$today)
                                                     <span class="text-success">Đang sử dụng</span>
@@ -114,6 +115,7 @@
                                             <td style="font-size: 20px;">
                                                 <a style="padding-left: 10px;" href="{{route('admin.editVoucher',['id' => $item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                 <a style="padding-left: 10px;" onclick="return confirm('bạn chắc chắn muốn xoá voucher: {{$item->name}}')"  href="{{route( 'admin.deteleVoucher',[ 'id'=>$item->id]) }}" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <a href="{{route('admin.sendMailVoucher',['id' => $item->id])}}" class="btn btn-default">Gửi mã voucher</a>
                                             </td>
                                         </tr>
                                         @endforeach

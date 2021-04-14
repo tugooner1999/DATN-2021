@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Client;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\LoginRequest;
-use Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Contracts\Auth\Authenticatable;
+
 class AuthController extends Controller
 {
     //
