@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market" id="allow_market" value="1">
+                            <input type="checkbox" class="styled" id="exampleCheck1" name="allow_market" id="checkbox2" value="1">
                             <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
                     </div>

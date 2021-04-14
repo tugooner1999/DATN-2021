@@ -7,12 +7,12 @@
                 <h4 class="page-title">Bảng điều khiển</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="width: 100%;">
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Đơn hàng</h3>

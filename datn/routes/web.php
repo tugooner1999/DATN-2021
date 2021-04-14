@@ -121,7 +121,7 @@ Route::prefix('client')->group(function () {
         Route::get('login', [Client\AuthController::class, 'login_form'])->name('client.login');
         Route::post('/login', [Client\AuthController::class , 'postLogin']);
         Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
-
+        Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist
         Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
 

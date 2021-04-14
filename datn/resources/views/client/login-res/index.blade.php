@@ -30,32 +30,38 @@
                         <a data-toggle="tab" href="#lg2">
                             <h4>Đăng kí</h4>
                         </a>
+                        
                     </div>
+                    <p style="text-align: center;font-size: 150%;color: #4fb68d;font-weight: bold;"><?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', NULL);
+                        }
+                    ?></p>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form method="post" action="{{route('client.login')}}">
+                                    <form method="post" action="{{route('client.login')}}" class="was-validated">
                                         @error('msg')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         @csrf
-                                        <input type="text" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" />
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" required />
                                         @error('email')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="password" name="password" placeholder="Mật khẩu" />
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required/>
                                         @error('password')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <input type="checkbox" name="remember_me" id="remember_me" />
+                                                <input type="checkbox"  class="form-check-input" name="remember_me" id="remember_me"/>
                                                 <label class="flote-none" for="remember_me">Lưu đăng nhập</label>
-                                                <!-- <a href="#">Quên mật khẩu?</a> -->
+                                                <a href="#">Quên mật khẩu?</a>
                                             </div>
-                                            
-
                                             <button type="submit"><span>Đăng nhập</span></button>
                                         </div>
                                     </form>
@@ -64,13 +70,15 @@
                         </div>
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
-                                <div class="login-register-form">
-                                    <form
-                                        method="post">
-                                        <input type="text" name="user-name" placeholder="Tên tài khoản" />
-                                        <input type="password" name="user-password" placeholder="Mật khẩu" />
-                                        <input name="user-email" placeholder="Email" type="email" />
-                                        <input name="user-email" placeholder="Điện thoại" type="number" />
+                                <div class="login-register-form" >
+                                    <form method="post" action="{{route('client.registration')}}"  enctype="multipart/form-data" class="was-validated">
+                                    @csrf
+                                        <input type="text" name="name" class="form-control" placeholder="Tên tài khoản"  required/>
+                                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required/>
+                                        <input type="file" class="form-control" name="avatar" required/>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" required />
+                                        <input name="phone" class="form-control" placeholder="Điện thoại" type="number" required/>
+                                        <input name="address" class="form-control" placeholder="Địa chỉ" type="text" required/>
                                         <div class="button-box">
                                             <button type="submit"><span>Đăng ký</span></button>
                                         </div>
