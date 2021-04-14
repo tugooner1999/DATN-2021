@@ -44,7 +44,7 @@
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
                 @if (Auth::check())
-                <span class="text-danger" style="font-size: 22px;">Hello {{Auth::user()->name}}</span>
+                <span class="text-danger" style="font-size: 18px;">Hello {{Auth::user()->name}}</span>
                                             <a href="{{route('Auth.Logout')}}">Đăng xuất</a>
                                         @else
                                         <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>

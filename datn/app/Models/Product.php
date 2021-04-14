@@ -21,6 +21,8 @@ class Product extends Model
         'updated_at',
         'created_at',
         'allow_market',
+        'pro_total_rating',
+        'pro_total_number',
     ];
 
     public function category(){
@@ -32,4 +34,5 @@ class Product extends Model
             ->where('id',$id)
             ->update($objPro);
     }
+
 }

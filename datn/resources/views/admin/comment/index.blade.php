@@ -21,15 +21,27 @@
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
                     <div class="app-search hidden-sm hidden-xs m-r-10">
-                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
+                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid"
+                            type="text" placeholder="Tìm kiếm" aria-label="Search">
                     </div>
+                    <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', NULL);
+                        }
+                    ?>
+                    </p>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th style="width:3%;">#</th>
+                                    <th>Người dùng</th>
                                     <th>Tài khoản</th>
-                                    <th>Nội dung</th>
+                                    <th>Điện thoại</th>
+                                    <th style="width:30%;">Nội dung</th>
                                     <th>Đánh giá</th>
                                     <th>Sản phẩm</th>
                                     <th>Ngày đăng</th>
@@ -37,75 +49,34 @@
                                 </tr>
                             </thead>
                             <tbody id="myTable">
+                                @foreach($comment as $no => $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
+                                    <td>{{$item->rating_id}}</td>
+                                    <td style="font-weight:bold;">
+                                        {{isset($item->user_comment) ? $item->user_comment->name : ''}}</td>
+                                    <td><a href="#">{{isset($item->user_comment) ? $item->user_comment->email : ''}}
+                                        </a></td>
+                                    <td style="font-weight:bold;">
+                                        {{isset($item->user_comment) ? $item->user_comment->phone : ''}}</td>
+                                    <td>{{$item->ra_content}}</td>
                                     <td>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
+                                    <td class="text-info"><a
+                                            href="">{{isset($item->product_comment) ? $item->product_comment->name : ''}}</a>
+                                    </td>
+                                    <td>{{$item->created_at}}</td>
                                     <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a style="padding-left: 10px;"
+                                            onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
+                                            href="{{route('admin.removeComment', ['rating_id' => $item->rating_id])}}"
+                                            class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

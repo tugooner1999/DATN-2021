@@ -71,6 +71,7 @@ Route::prefix('admin')->group(function () {
 
         // comment
         Route::get('/comment', [Admin\CommentController::class , 'index'])->name('admin.listComment');
+        Route::match(['get','post'], '/comment/remove/{rating_id}', [Admin\CommentController::class, 'deleteComment'])->name('admin.removeComment');
 
         // profile
         Route::get('/profile', [Admin\ProfileController::class , 'index'])->name('admin.profile');
@@ -94,7 +95,10 @@ Route::prefix('client')->group(function () {
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.product');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
-
+        
+        // comment product
+        Route::match(['get', 'post'], '/single-product/rating/{id}', [Client\CommentController::class , 'postComment'])->where('id', '[0-9]+')
+        ->name('client.comment_product');
 
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');
@@ -124,3 +128,9 @@ Route::prefix('client')->group(function () {
         Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
         // Route::get('/admin/user/edit', 'Admin\UserController@edit_user')->name('admin.editUser');
 });
+
+
+// rating
+// Route::group(['prefix' => 'ajax'], function(){
+//         Route::match(['get', 'post'], 'client/single-product/rating/{id}', [Client\CommentController::class, 'postComment'])->name('post.rating.product');
+// });
