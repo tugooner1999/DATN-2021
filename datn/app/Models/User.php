@@ -9,8 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Notifications\Notifiable;
 
-class User extends  \Eloquent implements Authenticatable
-{
+class User extends \Eloquent implements Authenticatable{
     /**
      * The attributes that are mass assignable.
      *

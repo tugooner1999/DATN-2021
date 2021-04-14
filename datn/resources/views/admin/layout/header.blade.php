@@ -23,8 +23,8 @@
                 </form>
             </li>
             <li>
-                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="{{Auth::user()->avatar}}" alt="user-img"
-                        width="36" class="img-circle"><b class="hidden-xs">{{Auth::user()->name}}</b></a>
+                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="@if(Auth::user()) {{Auth::user()->avatar}} @endif" alt="user-img"
+                        width="36" class="img-circle"><b class="hidden-xs">@if(Auth::user()) {{Auth::user()->name}} @endif</b></a>
             </li>
         </ul>
     </div>
