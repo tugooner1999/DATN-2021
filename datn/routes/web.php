@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +56,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/voucher',  [Admin\VoucherController::class , 'index'])->name('admin.listVoucher');
         Route::get('/voucher/add',  [Admin\VoucherController::class , 'create_voucher'])->name('admin.addVoucher');
         Route::post('/voucher/add', [Admin\VoucherController::class, 'saveAdd'])->name('admin.save-add-form');
-        Route::get('/voucher/edit',  [Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::get('/voucher/edit-voucher/{id}',[Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::post('/voucher/edit-voucher/{id}', [Admin\VoucherController::class, 'update_voucher'])->name('admin.save-update-form');
+        Route::match(['get','post'],'/voucher/delete/{id}',[Admin\VoucherController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleVoucher');
         
-        
+        // mail
+        Route::get('/send-mail-voucher/{id}',  [Admin\MailController::class , 'sendMailVoucher'])->name('admin.sendMailVoucher');
 
         // user
         Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
@@ -65,13 +71,14 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/user/edit/{id}',[Admin\UserController::class, 'edit_user'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.editUser');
+        Route::match(['get','post'], '/user/update/{id}',  [Admin\UserController::class, 'updateUser'])->name('admin.updateUser');
         Route::match(['get','post'],'/user/delete/{id}',[Admin\UserController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleUser');
 
         // comment
         Route::get('/comment', [Admin\CommentController::class , 'index'])->name('admin.listComment');
-        Route::match(['get','post'], '/comment/remove/{rating_id}', [Admin\CommentController::class, 'deleteComment'])->name('admin.removeComment');
+        Route::match(['get','post'], '/comment/remove/{id}', [Admin\CommentController::class, 'deleteComment'])->name('admin.removeComment');
 
         // profile
         Route::get('/profile', [Admin\ProfileController::class , 'index'])->name('admin.profile');

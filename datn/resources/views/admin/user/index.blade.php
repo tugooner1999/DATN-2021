@@ -20,6 +20,15 @@
                             <div class="app-search hidden-sm hidden-xs m-r-10">
                                 <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
                             </div>
+                            <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                            }
+                        ?>
+                    </p>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -49,7 +58,7 @@
                                         <tr class="column" data-data1="{{$objU->role_id}}" data-data2="{{$objU->status}}">
                                             <td>{{$objU->id}}</td>
                                             <td><b style="font-weight: bold;">{{$objU->name}}</b></td>
-                                            <td><img src="{{$objU->avatar}}" alt="" width="50"></td>
+                                            <td><img src="./{{$objU->avatar}}" alt="" width="50"></td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
                                             <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
@@ -67,13 +76,16 @@
                                         </tr>
                                         @empty
                         <tr>
-                            <td colspan="11" align="center">
+                            <td colspan="11" text-align="center">
                                 Danh sách trống
                             </td>
                         </tr>
                     @endforelse   
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 offset-xs-8 text-center pull-right ">
+                                    {{$user->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>

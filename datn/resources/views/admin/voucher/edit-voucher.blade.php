@@ -17,57 +17,101 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" method="post">
+                                @error('msg')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                @csrf
                                 <div class="form-group">
                                     <label class="col-md-12">Tên Voucher</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="Happy New Year" class="form-control form-control-line"> </div>
+                                        <input type="text" value="{{ $show->name}}" name="name" class="form-control form-control-line"> </div>
                                 </div>
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Mã Code</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="HPNEWYEAR2021" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="text" value="{{$show->code}}" class="form-control form-control-line" name="code" id="example-email"> </div>
                                 </div>
+                                @error('code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <label class="col-sm-12">Ngày kết thúc: <b><i>{{ $show->finish_date}}</i></b></label>
                                     <div class="col-md-12">
-                                        <input type="date" value="27/01/2021" class="form-control form-control-line">
+                                        <input type="datetime-local" name="finish_date" value="{{$show->finish_date}}" class="form-control form-control-line">
                                     </div>
-                                </div>
+                                </div> 
+                                @error('finish_date')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
-                                    <label class="col-sm-12">Ngày kết thúc</label>
+                                    <label for="example-email" class="col-md-12">Giá Trị</label>
                                     <div class="col-md-12">
-                                        <input type="date" value="27/01/2021" class="form-control form-control-line">
+                                    <input type="number" value="{{ $show->value }}" class="form-control form-control-line" name="value" id="example-email"> </div>
                                     </div>
-                                </div>
+                                @error('value')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Số lượng</label>
+                                    <div class="col-md-12">
+                                    <input type="number" value="{{ $show->amount}}" class="form-control form-control-line" name="amount" id="example-email"> </div>
+                                    </div>
+                                @error('amount')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <label class="col-sm-12">Loại</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Theo giá trị</option>
-                                            <option>Theo %</option>
+                                        <select name="type" class="form-control form-control-line">
+                                            <@php         
+                                            if($show->value > 100){
+                                                echo'<option value="1">Giảm theo giá tiền</option>';
+                                                echo'<option value="2">Giảm theo %</option>';
+                                            }else{
+                                                echo'<option value="2">Giảm theo %</option>';
+                                                echo'<option value="1">Giảm theo giá tiền</option>';
+                                               
+                                            };
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
+                                @error('type')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <label class="col-sm-12">Trạng thái</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Chưa sử dụng</option>
-                                            <option>Đã sử dụng</option>
-                                            <option>Hết hạn</option>
+                                        <select class="form-control form-control-line" name="status">
+                                            <@php         
+                                            if($show->status == 1){
+                                                echo'<option value="1">Kích hoạt</option>';
+                                                echo'<option value="2">Đã khoá</option>';
+                                            }else{
+                                                echo'<option value="2">Đã khoá</option>';
+                                                echo'<option value="1">Kích hoạt</option>';
+                                               
+                                            };
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
+                                @error('status')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-danger">Cập nhật</button>
-                                        <a href="{{route('admin.listVouncher')}}" class="btn btn-success">Trở về</a>
+                                        <a href="{{route('admin.listVoucher')}}" class="btn btn-success">Trở về</a>
                                     </div>
                                 </div>
-                        </div>
-                    </div>
-                </form>
+                            </form>
             </div>
         </div>
 @endsection

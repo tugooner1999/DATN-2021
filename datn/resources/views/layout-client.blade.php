@@ -198,60 +198,7 @@
 
 
     // rating product
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
-    // $(function() {
-    //     let listStart = $(".list_start .fa");
-
-    //     listRatingText = {
-    //         1: 'Không thích',
-    //         2: 'Tạm được',
-    //         3: 'Bình thường',
-    //         4: 'Rất tốt',
-    //         5: 'Tuyệt vời',
-    //     };
-
-    //     listStart.mouseover(function() {
-    //         let $this = $(this);
-    //         let number = $this.attr('data-key');
-    //         listStart.removeClass('rating_active');
-
-    //         $(".number_rating").val(number);
-
-    //         $.each(listStart, function(key, value) {
-    //             if (key + 1 <= number) {
-    //                 $(this).addClass('rating_active')
-    //             }
-    //         });
-
-    //         $(".list_text").text('').text(listRatingText[number]).show();
-
-    //         // console.log($this.attr('data-key'))
-
-    //         $(".js_rating_product").click(function(e) {
-    //             event.preventDefault();
-    //             // let content = $("#ra_content").val();
-    //             let number = $(".number_rating").val();
-    //             let url = $(".form-rating-submit").attr('action', '{{URL::to('/client/single-product/rating/'.$product->id)}}';
-
-    //             if (number) {
-    //                 $.ajax({
-    //                     url: ./client/single-product/rating/'.$product->id',
-    //                     type: 'POST',
-    //                     data: {
-    //                         number: number,
-    //                     }
-    //                 }).done(function($result) {
-    //                     // $(this).addClass("done");
-    //                     console.log($result);
-    //                 });
-    //             }
-    //         });
-    //     });
-    // });
+    // 
     </script>
 </body>
 

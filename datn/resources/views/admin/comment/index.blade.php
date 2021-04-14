@@ -51,7 +51,7 @@
                             <tbody id="myTable">
                                 @foreach($comment as $no => $item)
                                 <tr>
-                                    <td>{{$item->rating_id}}</td>
+                                    <td>{{$item->id}}</td>
                                     <td style="font-weight:bold;">
                                         {{isset($item->user_comment) ? $item->user_comment->name : ''}}</td>
                                     <td><a href="#">{{isset($item->user_comment) ? $item->user_comment->email : ''}}
@@ -72,7 +72,7 @@
                                     <td style="font-size: 20px;">
                                         <a style="padding-left: 10px;"
                                             onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
-                                            href="{{route('admin.removeComment', ['rating_id' => $item->rating_id])}}"
+                                            href="{{route('admin.removeComment', ['id' => $item->id])}}"
                                             class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
