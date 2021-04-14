@@ -50,6 +50,10 @@ class CartController extends Controller
             unset($_SESSION['cart'][$idPro]);
 
         }
+        if(empty($_SESSION['cart']) || !isset($_SESSION['cart'])){
+            unset($_SESSION['voucher']);
+
+        }
         $totalItem = 0;
         $totalPriceInCart = 0;
         foreach($_SESSION['cart'] as $val){
@@ -58,6 +62,8 @@ class CartController extends Controller
         }
         if($rq->action=='remove-all'){
             unset($_SESSION['cart']);
+            unset($_SESSION['voucher']);
+            
 
         }
         return response()->json(

@@ -70,10 +70,7 @@
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
-                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
-                        </div>
+
                         <div class="pro-details-cart btn-hover">
                             <a class="cart-btn" product-id='{{$product->id}}'> Thêm vào giỏ</a>
                         </div>

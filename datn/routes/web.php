@@ -109,8 +109,8 @@ Route::prefix('client')->group(function () {
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
         Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
-
-
+        // Add voucher
+        Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
