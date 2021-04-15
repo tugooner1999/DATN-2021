@@ -43,12 +43,18 @@
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                @if (Auth::check())
+
+                                        @if (Auth::check())
                                         <a href="#" class="login text-dark"><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</a>|
                                         <a href="{{route('Auth.Logout')}}"><b>Đăng xuất <i class="fa fa-sign-out" aria-hidden="true"></i></b></a>
+                                        @if (Auth::user()->role_id == 1)
+                                        <br>
+                                        <a href="{{route('admin.dashboard')}}"><b>Vào Trang Quản Trị<i class="fa fa-sign-out" aria-hidden="true"></i></b></a>
+                                        @endif
                                         @else
                                         <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
                                         @endif
+
                         </div>
                         <!--Login info End -->
                         <!--Cart info Start -->

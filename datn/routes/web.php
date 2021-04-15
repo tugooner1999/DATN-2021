@@ -13,17 +13,9 @@ use Illuminate\Support\Facades\DB;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
-
-
 Route::get('/', function () {
     return redirect()->route('client.homepage');
 });
-
-
-
-
-
 Route::prefix('admin')->group(function () {
         // dashboard
         Route::get('/',[Admin\DashboardController::class , 'admin'])->name('admin.dashboard');
@@ -124,10 +116,6 @@ Route::prefix('client')->group(function () {
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist
         Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
-
-
-        // slider
-        Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
-        Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
-        // Route::get('/admin/user/edit', 'Admin\UserController@edit_user')->name('admin.editUser');
 });
+        //chuyển trang phân quyền user
+        Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

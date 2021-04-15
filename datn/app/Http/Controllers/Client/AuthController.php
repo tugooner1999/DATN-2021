@@ -18,7 +18,11 @@ class AuthController extends Controller
         $remember = $request->has('remember_me');
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials,$remember)) {
-            return redirect()->intended('');
+            if(Auth::user()->role_id == 1){
+                return redirect()->route('client-admin'); 
+            }else{
+                return redirect()->intended('');
+            };
         }
         return back()->withErrors([
             'msg' => 'Tài khoản/mật khẩu không đúng',
