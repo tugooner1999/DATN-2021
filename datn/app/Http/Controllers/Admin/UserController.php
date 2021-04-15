@@ -82,6 +82,7 @@ class UserController extends Controller
     }
 
     public function edit_user($id, Request $request){
+        $this->authorize('admin');
         $objU = User::find($id);
         $this->authorize('admin');
         return view('admin.user.edit-user',compact('objU'));
@@ -95,6 +96,7 @@ class UserController extends Controller
             if($request->hasFile('avatar')){
                 $path = $request->file('avatar')->store('public/avatars');
                 $user->avatar = str_replace("public/", "storage/", $path);
+                
             }
             $user->save();
             Session::put('message','Cập nhật tài khoản thành công');
