@@ -40,6 +40,7 @@ class AuthController extends Controller
             $path = $request->file('avatar')->store('public/avatars');
             $user->avatar = str_replace("public/", "storage/", $path);
         }
+        $user->password= Hash::make($request->get('password'));
         $user->role_id = 0;
         $user->status = 0;
         $user->coins = 0;
