@@ -6,7 +6,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Cập nhật voucher</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
+                        <a href="{{route('client.homepage')}}" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
                         
                         <ol class="breadcrumb">
                             <li><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
@@ -91,10 +91,10 @@
                                             <@php         
                                             if($show->status == 1){
                                                 echo'<option value="1">Kích hoạt</option>';
-                                                echo'<option value="2">Đã khoá</option>';
+                                                echo'<option value="2">Tắt</option>';
                                             }else{
                                                 echo'<option value="2">Đã khoá</option>';
-                                                echo'<option value="1">Kích hoạt</option>';
+                                                echo'<option value="1">Tắt</option>';
                                                
                                             };
                                             @endphp

@@ -64,13 +64,13 @@
                         <div id="shop-1" class="tab-pane active">
 
                             <div class="row">
-                            @foreach ($list_product as $item)
+                            @foreach ($list_promarket as $item)
                                 <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
                                 
                                 <article class="list-product">
                                     <div class="img-block">
                                         <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                                            <img src="../{{$item->image_gallery}}" alt="" width="256" height="256"/>
+                                            <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
                                         </a>
                                     </div>
                                     <ul class="product-flag">
@@ -117,7 +117,7 @@
                     
                         <ul>
                             <li>
-                            {{$list_product->links()}}
+                            {{$list_promarket->links()}}
                             </li>
                         </ul>
                     </div>
@@ -142,7 +142,7 @@
                                     @foreach($cates as $item)
                                     <li>
                                         <div class="sidebar-widget-list-left">
-                                            <input type="checkbox"  /> <a href="{{ route('client.shop') }}">{{ $item->name }} ({{ count($item->products) }})</span>
+                                            <input type="checkbox"  /> <a href="{{ route('client.shop') }}">{{ $item->name }} ({{  count($item->products) }})</span>
                                             </a>
                                             <span class="checkmark"></span>
                                         </div>

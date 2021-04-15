@@ -3,7 +3,7 @@
     <div class="navbar-header">
         <div class="top-left-part">
             <!-- Logo -->
-            <a class="logo" href="index.html"><b>
+            <a class="logo" href="{{route('admin.dashboard')}}"><b>
                     <img src="plugins/images/admin-logo.png" alt="home" class="dark-logo" />
                     <!--This is light logo icon--><img src="{{asset('assets/admin/plugins/images/admin-logo-dark.png')}}" alt="home"
                         class="light-logo" />
@@ -17,14 +17,8 @@
         <!-- /Logo -->
         <ul class="nav navbar-top-links navbar-right pull-right">
             <li>
-                <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                    <input class="form-control form-control-navbar" type="search" id="search" placeholder="Search" aria-label="Search"> <a href=""><i
-                            class="fa fa-search"></i></a>
-                </form>
-            </li>
-            <li>
-                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="@if(Auth::user()) {{Auth::user()->avatar}} @endif" alt="user-img"
-                        width="36" class="img-circle"><b class="hidden-xs">@if(Auth::user()) {{Auth::user()->name}} @endif</b></a>
+                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="{{Auth::user()->avatar}}" alt="user-img"
+                        width="35" class="img-circle"><b class="hidden-xs">{{Auth::user()->name}}</b></a>
             </li>
         </ul>
     </div>

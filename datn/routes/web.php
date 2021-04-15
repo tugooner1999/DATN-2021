@@ -85,13 +85,14 @@ Route::prefix('admin')->group(function () {
 
 
         // CLIENT
-Route::prefix('client')->group(function () {
+        Route::prefix('client')->group(function () {
         // homepage
         Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
 
 
         // product
-        Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.product');
+        Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
 
 

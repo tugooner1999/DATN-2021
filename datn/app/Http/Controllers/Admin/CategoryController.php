@@ -14,7 +14,7 @@ class CategoryController extends Controller
     //
     public function index(){
         $this->authorize('admin');
-        $cates = Category::paginate(5);
+        $cates = Category::all();
         $cates->load([
             'products'
         ]);

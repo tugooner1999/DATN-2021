@@ -18,26 +18,23 @@
                     <div class="col-sm-12">
                         <div class="white-box">
                                 <h3 class="box-title">Slider</h3>
-                                    <div class="app-search hidden-sm hidden-xs m-r-10">
-                                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
-                                    </div>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tên</th>
+                                            <th>Tiêu đề</th>
                                             <th>Ảnh</th>
-                                            <th>Description</th>
+                                            <th>Mô tả ngắn</th>
                                             <th><a href="{{route('admin.addSlider')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="myTable">
+                                    <tbody>
                                         @foreach ($slider as $item)
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->title}}</td>
-                                                <td><img src="{{$item->image}}" width="150" height="100" alt=""></td>
+                                                <td><img src="{{$item->image}}" width="200" height="150" alt=""></td>
                                                 <td>{{$item->description}}</td>
                                                 <td style="font-size: 20px;">
                                                     <a style="padding-left: 10px;" href="{{route('admin.editSlider',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>

@@ -25,7 +25,6 @@ class VoucherController extends Controller
 
     }
     public function addVoucherToCart(Request $req){
-        $this->authorize('admin');
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $voucherCode = Voucher::where('code',$req->voucherCode)->first();
         if(!$voucherCode){
