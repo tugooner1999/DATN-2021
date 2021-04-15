@@ -86,12 +86,8 @@ class SliderController extends Controller
 
         // lấy thông tin User để hiển thị ra form
         $objU = Slider::where('id',$id)->first();
-
         $dataView['objU'] = $objU;
-
-
         if($request->isMethod('POST')){
-          
             $rule = [
                 'title' =>'required|min:6',
                 'description' =>'required|min:1',
