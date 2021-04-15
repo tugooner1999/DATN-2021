@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
+use App\Models\Rating;
 
 
 class ProductController extends Controller
@@ -21,6 +24,9 @@ class ProductController extends Controller
     
     public function single_Product($id){
         $product= Product::find($id);
-        return view('client.product.single-product',compact('product'));
+        // comment
+        $comments = Rating::where('ra_product_id', $id)->get();
+
+        return view('client.product.single-product',compact('product','comments'));
     }
 }

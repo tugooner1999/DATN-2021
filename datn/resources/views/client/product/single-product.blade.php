@@ -1,6 +1,47 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
+
+<style>
+.list_start i:hover {
+    cursor: pointer;
+}
+
+.rating-product{
+    margin-bottom:0;
+}
+
+.list_text{
+    display:inline-block;
+    margin-left:10px;
+    position: relative;
+    background:#4fb68d;
+    color:#fff;
+    padding:0px 8px;
+    box-sizing:border-box;
+    font-size:12px;
+    border-radius:2px;
+    display:none;
+}
+.list_text:after{
+    right:100%;
+    top:50%;
+    border:solid transparent;
+    content:" ";
+    height:0;
+    width:0;
+    position: absolute;
+    pointer-events:none;
+    border-color:rgba(82,184,88,0);
+    border-right-color:#4fb68d;
+    border-width:6px;
+    margin-top:-6px;
+}
+
+.list_start .rating_active{
+    color:#ff9705;
+}
+</style>
 <section class="breadcrumb-area">
     <div class="container">
         <div class="row">
@@ -30,7 +71,8 @@
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2">
-                        <a class="active" data-image="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}"
+                        <a class="active"
+                            data-image="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}"
                             data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/1.jpg')}}">
                             <img src="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}" alt="" />
                         </a>
@@ -61,12 +103,15 @@
                             <i class="ion-android-star"></i>
                             <i class="ion-android-star"></i>
                         </div>
+
                         <span class="read-review"><a class="reviews" href="#">Bình luận (1)</a></span>
                     </div>
                     <div class="pricing-meta">
                         <ul>
                             <li class="old-price not-cut text-danger">{{number_format($product->price)}}đ</li><br>
-                            <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
+                            <li class="tinhtrang pb-2">Tình trạng :
+                                <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b>
+                            </li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
@@ -101,9 +146,12 @@
                     </div>
                     <div class="pro-details-policy">
                         <ul>
-                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng miễn phí</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí đổi trả</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng mã giảm giá</span>
+                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng
+                                    miễn phí</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí
+                                    đổi trả</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng
+                                    mã giảm giá</span>
                             </li>
                         </ul>
                     </div>
@@ -118,28 +166,32 @@
     <div class="container">
         <div class="description-review-wrapper">
             <div class="description-review-topbar nav">
-                <a class="active" data-toggle="tab" href="#des-details2">MÔ TẢ</a>
-                <a data-toggle="tab" href="#des-details3">Bình Luận</a>
+                <a class="active" data-toggle="tab" href="#des-details3">Bình Luận</a>
+                <a data-toggle="tab" href="#des-details2">MÔ TẢ</a>
             </div>
             <div class="tab-content description-review-bottom">
-                <div id="des-details2" class="tab-pane active">
+                <div id="des-details2" class="tab-pane">
                     <div class="product-anotherinfo-wrapper">
                         <p>{{$product->description}}</p>
                     </div>
                 </div>
-                <div id="des-details3" class="tab-pane">
+                <div id="des-details3" class="tab-pane active">
                     <div class="row">
-                        <div class="col-lg-7">
+                        <div class="col-lg-12">
+                            @foreach($comments as $item)
                             <div class="review-wrapper">
                                 <div class="single-review">
                                     <div class="review-img">
-                                        <img src="{{asset('assets/client/images/testimonial-image/1.png')}}" alt="" />
+                                        <img src="../../{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}"
+                                            width="60" height="80" style="border-radius:100px;" alt="" />
                                     </div>
                                     <div class="review-content">
                                         <div class="review-top-wrap">
                                             <div class="review-left">
                                                 <div class="review-name">
-                                                    <h4>White Lewis</h4>
+                                                    <h4 style="line-height:2;font-weight:bold;">
+                                                        {{isset($item->user_comment) ? $item->user_comment->name : ''}}
+                                                    </h4>
                                                 </div>
                                                 <div class="rating-product">
                                                     <i class="ion-android-star"></i>
@@ -149,27 +201,72 @@
                                                     <i class="ion-android-star"></i>
                                                 </div>
                                             </div>
-                                            <div class="review-left">
+                                            <!-- <div class="review-left">
                                                 <a href="#">Reply</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="review-bottom">
-                                            <p>
-                                                Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia
-                                                Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula.
-                                                Phasellus quam nisi, congue id nulla.
+                                            <p style="width:100%;">
+                                                {{$item->ra_content}}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-12" style="height: 28px; border-top: 1px solid #ebebeb; margin-top: 30px;">
+                        </div>
+                        
+                        <div class="col-lg-12">
                             <div class="ratting-form-wrapper pl-50">
                                 <div class="ratting-form">
-                                    <form action="#">
-                                        <div class="star-box">
-                                            <span>Đánh giá:</span>
+
+
+                                    <!-- đánh giá sản phẩm theo rating -->
+                                    <div class="component_rating">
+                                        <h3 style="font-weight:bold; font-size:30px; ">Đánh giá sản phẩm</h3>
+                                        <div class="row component_rating_content"
+                                            style="display:flex; align-items:center; border:1px solid #dedede;width:100%;margin:25px auto;">
+                                            <div class="col-sm-3">
+                                                <div class="rating-item"
+                                                    style=" posision:relative; border-right: 1px solid #dedede;">
+                                                    <div class=""><span class="fa fa-star"
+                                                            style="font-size:100px; color:#ff9705;display:block; margin:0 auto; text-align:center;"></span>
+                                                        <b
+                                                            style="position:absolute; top:50%; left:50%;transform:translateX(-50%) translateY(-40%); font-size: 26px;color: #fff;">2.5</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-1"></div>
+
+                                            <div class="col-sm-7">
+                                                <div class="list_rating" style="padding:20px;">
+                                                    @for($i = 1; $i <= 5; $i++) <div class="item_rating"
+                                                        style="display:flex; align-items:center;">
+                                                        <div style="width:10%;">
+                                                            {{ $i }}<span class="fa fa-star" style="padding: 0 5px;"></span>
+                                                        </div>
+                                                        <div style="width:70%; margin:0 20px;">
+                                                            <span class=""
+                                                                style="width:100%; height:8px; display:block; border:1px solid #dedede; border-radius:5px;">
+                                                                <b
+                                                                    style="width:30%; background-color:#f25800; display:block; height:100%; border-radius:5px;"></b>
+                                                            </span>
+                                                        </div>
+                                                        <div style="width:20%;">
+                                                            <a style="color:#666;" href="">290 đánh giá</a>
+                                                        </div>
+                                                </div>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- <div class="star-box">
+                                            <span style="margin: 0px 15px 0 0;">Đánh giá:</span>
                                             <div class="rating-product">
                                                 <i class="ion-android-star"></i>
                                                 <i class="ion-android-star"></i>
@@ -177,25 +274,62 @@
                                                 <i class="ion-android-star"></i>
                                                 <i class="ion-android-star"></i>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="rating-form-style form-submit">
-                                                    <textarea name="Nội dung" placeholder="Message"></textarea>
-                                                    <input type="submit" value="Bình Luận" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </div> -->
+
+                                @if(isset(Auth::user()->name))
+                                <?php
+                                $listRatingText = [
+                                    1 => 'Không thích',
+                                    2 => 'Tạm được',
+                                    3 => 'Bình thường',
+                                    4 => 'Rất tốt',
+                                    5 => 'Tuyệt vời',
+                                ];
+                                ?>
+                                <div class="" style="display:flex; font-size:20px;">
+                                    <p style="font-weight:bold;margin-bottom:0;">Chọn đánh giá của bạn </p>
+                                    <span class="list_start" ; style="margin:0 30px;">
+                                        @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{ $i }}" style="padding: 0 3px;"></i>
+                                            @endfor
+                                    </span>
+                                    <span class="list_text"></span>
+                                    <input type="hidden" value="" class="number_rating">
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <br>
+                                    <div class="col-md-12">
+                                        <form method="POST" class="form-rating-submit" action="{{URL::to('/client/single-product/rating/'.$product->id)}}"
+                                            role="form">
+                                            @csrf
+                                            <p style="color:green; font-weight:bold;  font-size:18px; margin:15px 0px;">
+                                                @if(session('thongbao'))
+                                                {{session('thongbao')}}
+                                                @endif
+                                            </p>
+                                            <div class="rating-form-style form-submit">
+                                                <textarea name="ra_content" id="ra_content"
+                                                    placeholder="Viết bình luận ..."></textarea>
+                                                <input type="submit" class="js_rating_product" value="Bình Luận" />
+                                                <!-- <a class="js_rating_product" 
+                                                style="background:#4fb68d;color:#fff;padding:10px 31px;font-size:19px;border-radius:25px;"
+                                                 href="{{route('client.comment_product',$product->id)}}">GỬI</a> -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+<!-- {{URL::to('/client/single-product/rating/'.$product->id)}} -->
 <!-- product details description area end -->
 <!-- Recent Add Product Area Start -->
 <section class="recent-add-area">
@@ -255,3 +389,4 @@
 </section>
 <!-- Recent product area end -->
 @endsection
+

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Voucher;
-use App\Models\User;
+use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;

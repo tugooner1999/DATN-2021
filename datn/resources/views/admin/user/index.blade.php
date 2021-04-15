@@ -58,7 +58,7 @@
                                         <tr class="column" data-data1="{{$objU->role_id}}" data-data2="{{$objU->status}}">
                                             <td>{{$objU->id}}</td>
                                             <td><b style="font-weight: bold;">{{$objU->name}}</b></td>
-                                            <td><img src="{{$objU->avatar}}" alt="" width="50"></td>
+                                            <td><img src="./{{$objU->avatar}}" alt="" width="50"></td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
                                             <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
@@ -76,7 +76,7 @@
                                         </tr>
                                         @empty
                         <tr>
-                            <td colspan="11" align="center">
+                            <td colspan="11" text-align="center">
                                 Danh sách trống
                             </td>
                         </tr>

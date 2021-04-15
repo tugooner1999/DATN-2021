@@ -12,7 +12,7 @@
                     <i class="fa fa-home" aria-hidden="true"></i></a>
             </div>
         </div>
-        <div class="row" style="width: 100%;">
+        <div class="row" style="display: block;">
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Đơn hàng</h3>
