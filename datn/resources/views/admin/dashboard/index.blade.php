@@ -13,15 +13,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
+            <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-info">Đơn hàng</h3>
                     <span class="text-dark" >( 0 )</span><br>
                     <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
+            <div class="col-lg-2 col-sm-6 col-xs-12">
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title">Doanh Thu</h3>
+                    <span class="text-dark" >( 7.8M )</span><br>
+                    <a href="{{route('admin.totalCash')}}"><i class="fa fa-signal" style="font-size: 100px;" aria-hidden="true"></i></a>
+                </div>
+            </div>
 
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
+            <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-success">Sản phẩm</h3>
                     <span class="text-dark" >( {{$product}} )</span><br>
@@ -29,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
+            <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-warning">Bình luận</h3>
                     <span class="text-dark" >( 0 )</span><br>
@@ -37,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
+            <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-primary">Mã giảm giá</h3>
                     <span class="text-dark" >( {{$voucher}} )</span><br>
@@ -45,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
+            <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-danger">Tài khoản</h3>
                     <span class="text-dark" >( {{$voucher}} )</span><br>

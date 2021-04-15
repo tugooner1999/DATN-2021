@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-12">
                     <div class="white-box">
                         <img id="image" src="{{$item->image_gallery}}" width="100%" height="300px"/>
                         <div class="form-group">

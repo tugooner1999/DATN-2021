@@ -33,7 +33,6 @@ class ProductController extends Controller
 
     public function edit_product($id){
         $this->authorize('admin');
-        // $objU = Product::where('id',$id)->first();
         $cate_product = Category::all();
         $edit_product = DB::table('products')->where('id', $id)->get();
         return view('admin.product.edit-product', compact('cate_product','edit_product'));

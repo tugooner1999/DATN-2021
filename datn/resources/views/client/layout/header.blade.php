@@ -46,19 +46,25 @@
                     </div>
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
-                            <div class="mini-cart-warp">
-
-                                        @if (Auth::check())
-                                        <a href="#" class="login text-dark"><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</a>|
-                                        <a href="{{route('Auth.Logout')}}"><b>Đăng xuất <i class="fa fa-sign-out" aria-hidden="true"></i></b></a>
-                                        @if (Auth::user()->role_id == 1)
-                                        <br>
-                                        <a href="{{route('admin.dashboard')}}"><b>Vào Trang Quản Trị<i class="fa fa-sign-out" aria-hidden="true"></i></b></a>
-                                        @endif
-                                        @else
-                                        <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
-                                        @endif
-
+                            @if (Auth::check())
+                                <div class="main-navigation" style="margin: 0px;">
+                                    <ul>
+                                        <li class="menu-dropdown">
+                                            <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</b></span>
+                                            <ul class="sub-menu">
+                                            @if (Auth::user()->role_id == 1)
+                                                <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
+                                            @endif
+                                                <li><a href="#">Thông tin cá nhân</a></li>
+                                                <li><a href="#">Yêu thích</a></li>
+                                                <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                            <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
+                            @endif
                         </div>
                         <!--Login info End -->
                         <!--Cart info Start -->
