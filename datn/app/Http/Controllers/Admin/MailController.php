@@ -15,7 +15,7 @@ class MailController extends Controller
         $user = User::where('role_id','=',0)->get();
         $voucher = voucher::find($id);
         $start_date = $voucher->start_date;
-        $finish_date = $voucher->start_date;
+        $finish_date = $voucher->finish_date;
         $amount = $voucher->amount;
         $value = $voucher->value;
         $type = $voucher->type;
