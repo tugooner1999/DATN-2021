@@ -5,8 +5,6 @@
 <!-- Slider Arae Start -->
 <div class="slider-area">
     <div class="slider-active-3 owl-carousel slider-hm8 owl-dot-style">
-
-
         <!-- Slider Single Item Start -->
         @foreach ($slider as $ad)    
         <div class="slider-height-6 d-flex align-items-start justify-content-start bg-img"
@@ -91,7 +89,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h2>HOT DEAL!</h2>
+                    <h2>HOT DEAL!
+                    </h2>
                 </div>
             </div>
         </div>

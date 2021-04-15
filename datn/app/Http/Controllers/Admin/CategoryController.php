@@ -13,6 +13,7 @@ class CategoryController extends Controller
 {
     //
     public function index(){
+        $this->authorize('admin');
         $cates = Category::paginate(5);
         $cates->load([
             'products'
@@ -23,6 +24,7 @@ class CategoryController extends Controller
         ]);
     }
     public function addCategory(Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ]; // mảng để truyền dữ liệu ra view
         if($request->isMethod('POST')){
             $rule = [
@@ -74,6 +76,7 @@ class CategoryController extends Controller
     }
 
     public function edit_category($id, Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ];
         // lấy thông tin User để hiển thị ra form
         $objU = Category::where('id',$id)->first();
@@ -126,6 +129,7 @@ class CategoryController extends Controller
     }
     
     public function destroy($id, Request $request){
+        $this->authorize('admin');
         $dataView = [ 'errs'=>[]];
         // lấy thông tin cate để hiển thị ra form
         $objU = category::where('id',$id)->first();

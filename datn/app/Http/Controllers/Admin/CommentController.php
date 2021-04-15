@@ -9,6 +9,7 @@ class CommentController extends Controller
 {
     //
     public function index(){
+        $this->authorize('admin');
         return view('admin.comment.index');
     }
 }

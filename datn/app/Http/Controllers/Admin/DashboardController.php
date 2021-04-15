@@ -11,6 +11,7 @@ use App\Models\Voucher;
 class DashboardController extends Controller
 {
     public function admin(){
+        $this->authorize('admin');
         $product = count(Product::all());
         $user = count(User::all());
         $voucher = count(Voucher::all());

@@ -19,17 +19,20 @@ class ProductController extends Controller
 {
 
     public function index(Request $request){
+        $this->authorize('admin');
         $category = Category::all();
         $pro = Product::paginate(5);
         return view('admin.product.index',compact('pro','category'));
     }
 
     public function create_product(){
+        $this->authorize('admin');
         $cates = Category::all();
         return view('admin.product.add-product', compact('cates'));
     }
 
     public function edit_product($id){
+        $this->authorize('admin');
         // $objU = Product::where('id',$id)->first();
         $cate_product = Category::all();
         $edit_product = DB::table('products')->where('id', $id)->get();
@@ -37,12 +40,14 @@ class ProductController extends Controller
     }
 
     public function deleteProduct($id){
+        $this->authorize('admin');
         Product::destroy($id);
         Session::put('message','Xoá sản phẩm thành công');
         return  redirect()->back();; 
     }
 
     public function addProduct(Request $request){
+        $this->authorize('admin');
         $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $data = $_POST;
         $product = new Product();
@@ -64,6 +69,7 @@ class ProductController extends Controller
     }
 
     public function updateProduct(Request $request,$id){
+        $this->authorize('admin');
         $dt_update = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $product = Product::find($id);
         $data= $_POST;
