@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
@@ -42,7 +43,7 @@ class ProductController extends Controller
         return  redirect()->back();; 
     }
 
-    public function addProduct(Request $request){
+    public function addProduct(ProductRequest $request){
         $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $data = $_POST;
         $product = new Product();
@@ -63,7 +64,7 @@ class ProductController extends Controller
         return Redirect::to('/admin/products');
     }
 
-    public function updateProduct(Request $request,$id){
+    public function updateProduct(ProductRequest $request,$id){
         $dt_update = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $product = Product::find($id);
         $data= $_POST;

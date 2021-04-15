@@ -20,13 +20,7 @@
         <div class="row">
             <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST"
                 enctype="multipart/form-data" role="form">
-                @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li style="color:red;">{{ $error }}</li>
-                    @endforeach
-                </ul>
-                @endif
+                
                 @csrf
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
@@ -36,12 +30,18 @@
                                 <input type="text" value="" name="name" class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
                                 <input type="number" name="price" class="form-control form-control-line" id="example-email">
                             </div>
                         </div>
+                        @error('price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
@@ -49,12 +49,18 @@
                                     class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('quantily')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
                                 <textarea rows="5" name="description" class="form-control form-control-line"></textarea>
                             </div>
                         </div>
+                        @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
@@ -85,7 +91,11 @@
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
                         </div>
+                        @error('image_gallery')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     </div>
+                    
                 </div>
             </form>
         </div>

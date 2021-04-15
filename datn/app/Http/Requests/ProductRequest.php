@@ -24,22 +24,22 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name'=>'required',
-            'product_quantily'=>'required|min:1',
-            'product_description'=>'required',
-            'product_price'=>'required|min:4|regex:/^(\d+(,\d{1,2})?)?$/',
+            'name'=>'required',
+            'quantily'=>'required|min:1',
+            'description'=>'required',
+            'price'=>'required|min:4|regex:/^(\d+(,\d{1,2})?)?$/',
             'image_gallery'=>'required|image'
         ];
     }
     public function messages(){
         return [
-            'product_name.required' => 'Tên sản phẩm trống',
-            'product_quantily.required' => 'Số lượng sản phẩm trống',
-            'product_quantily.min'=>'Số lượng có ít nhất 1 sản phẩm',
-            'product_description.required' => 'Mổ tả trống',
-            'product_price.required' => 'Giá sản phẩm trống',
-            'product_price.min'=>'Giá sản phẩm phải lớn hơn 1000đ',
-            'product_price.regex' => 'Giá sản phẩm phải lớn hơn 1000đ',
+            'name.required' => 'Tên sản phẩm trống',
+            'quantily.required' => 'Số lượng sản phẩm trống',
+            'quantily.min'=>'Số lượng có ít nhất 1 sản phẩm',
+            'description.required' => 'Mổ tả trống',
+            'price.required' => 'Giá sản phẩm trống',
+            'price.min'=>'Giá sản phẩm phải lớn hơn 1000đ',
+            'price.regex' => 'Giá sản phẩm phải lớn hơn 1000đ',
             'image_gallery.required' => 'ảnh trống',
             'image_gallery.image' => 'file phải dạng hình ảnh'
         ];

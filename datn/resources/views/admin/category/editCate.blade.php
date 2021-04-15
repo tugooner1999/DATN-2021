@@ -24,14 +24,7 @@
                 <div class="white-box">
                     <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            @isset($msg)
-                            <p style="color: green">{{$msg}}</p>
-                            @endisset
-                            @isset($errs)
-                            @foreach($errs as $e)
-                            <p style="color: red"> {{  implode('<br>', $e ) }} </p>
-                            @endforeach
-                            @endisset
+                            
                             @csrf
                         </div>
                         <div class="form-group">
@@ -41,12 +34,18 @@
                                     class="form-control form-control-line " value="{{ old('name') }}">
                             </div>
                         </div>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <img id="image" src="{{$objU->image}}" width="40%" height="200px" alt="">
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                         </div>
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>
