@@ -14,63 +14,42 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Đơn hàng</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-success"></i> <span
-                                class="counter text-success">1275</span></li>
-                    </ul>
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-info">Đơn hàng</h3>
+                    <span class="text-dark" >( 0 )</span><br>
+                    <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Sản phẩm</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash2"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span
-                                class="counter text-purple">{{$product}}</span></li>
-                    </ul>
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-success">Sản phẩm</h3>
+                    <span class="text-dark" >( {{$product}} )</span><br>
+                    <a href="{{route('admin.listProduct')}}"><i class="fa fa-product-hunt text-success" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Bình Luận</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash3"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-info"></i> <span
-                                class="counter text-info">911</span></li>
-                    </ul>
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-warning">Bình luận</h3>
+                    <span class="text-dark" >( 0 )</span><br>
+                    <a href="{{route('admin.listComment')}}"><i class="fa fa-comments-o text-warning" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Mã giảm giá</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash4"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-danger"></i> <span
-                                class="counter text-danger">{{$voucher}}</span></li>
-                    </ul>
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-primary">Mã giảm giá</h3>
+                    <span class="text-dark" >( {{$voucher}} )</span><br>
+                    <a href="{{route('admin.listVoucher')}}"><i class="fa fa-tags text-primary" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12" style="width: 20%;">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Tài khoản</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                        <i style="margin-left: 38px;" class="fa fa-users" aria-hidden="true"></i>
-                        </li>
-                        <li class="text-right" style="text-align: left;"><i class="ti-arrow-up text-dark" ></i> <span
-                                class="counter text-dark" >{{$user}}</span></li>
-                    </ul>
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-danger">Tài khoản</h3>
+                    <span class="text-dark" >( {{$voucher}} )</span><br>
+                    <a href="{{route('admin.listUser')}}"><i class="fa fa-users text-danger" style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

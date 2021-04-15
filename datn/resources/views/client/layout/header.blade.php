@@ -20,7 +20,11 @@
                                 <a href="{{route('client.homepage')}}">Trang chủ</a>
                             </li>
                             <li class="menu-dropdown">
-                                <a href="{{route('client.product')}}">Sản phẩm</a>
+                                            <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                                <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                            </ul>
                             </li>
                             <li class="menu-dropdown">
                                 <a href="{{route('client.about')}}">Giới thiệu</a>

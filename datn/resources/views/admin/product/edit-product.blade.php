@@ -7,7 +7,7 @@
                 <h4 class="page-title">Cập nhật sản phẩm</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
 
@@ -64,11 +64,10 @@
                             </div>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" 
-                    @if($item->allow_market == 1)
-                        checked
-                    @endif
-                    type="checkbox" name="allow_market" id="allow_market" value="1">
+                        <input type="checkbox" name="allow_market" value="{{$item->allow_market}}" 
+                             @if($item->allow_market == 2) checked
+                            @endif
+                            >
                             <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
                         <div class="form-group">
@@ -81,7 +80,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img id="image" src="{{$item->image_gallery}}" width="100%" height="400px"/>
+                        <img id="image" src="{{$item->image_gallery}}" width="100%" height="300px"/>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">

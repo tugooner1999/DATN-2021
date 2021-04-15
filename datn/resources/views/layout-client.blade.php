@@ -31,8 +31,10 @@
     <link rel="stylesheet" href="{{asset('assets/client/css/responsive.min.css')}}">
     
     <style>
-        
-        .count-cart::after{ content:'{{$totalItem}}' !important}
+        .count-cart::after{ content:'{{$totalItem}}' !important};
+        .form-control form-control-sm{
+            visibility:hidden;
+        }
     </style>
 </head>
 

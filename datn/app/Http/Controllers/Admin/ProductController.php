@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index(Request $request){
         $this->authorize('admin');
         $category = Category::all();
-        $pro = Product::paginate(5);
+        $pro = Product::all();
         return view('admin.product.index',compact('pro','category'));
     }
 
@@ -53,7 +53,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($data);
         $product->create_at= $dt_create;
-        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 2;  
+        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;  
         if($request->hasFile('image_gallery')){
             $request->validate([
                 'image_gallery' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -80,7 +80,7 @@ class ProductController extends Controller
         }
         $product->update_at= $dt_update;
         $product->allow_market=isset($_POST['allow_market'])
-        ? $_POST['allow_market'] : 2; //lấy thời gian thực theo ngày tháng năm
+        ? $_POST['allow_market'] : 1;
         $product->save();
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');  
