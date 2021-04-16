@@ -9,6 +9,7 @@ class WishlistController extends Controller
 {
     //
     public function index(){
+        $this->authorize('member');
         return view('client.wishlist.index');
     }
 }

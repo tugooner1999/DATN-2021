@@ -71,10 +71,6 @@
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
-                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
-                        </div>
                         <div class="pro-details-cart btn-hover">
                         <a product-id='{{$product->id}}'
                         @if(Auth::check()) 
@@ -83,6 +79,10 @@
                         href="{{route('client.login')}}" 
                         @endif
                         >Thêm vào giỏ</a></li>
+                        </div>
+                        <div class="cart-plus-minus" style="visibility: hidden;">
+                            <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
+                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
                         </div>
                     </div>
                     <div class="pro-details-wish-com">
@@ -222,10 +222,11 @@
         <!-- Recent Product slider Start -->
         <div class="recent-product-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
+            @foreach($cates as $item)
             <article class="list-product">
                 <div class="img-block">
                     <a href="" class="thumbnail">
-                        <img src="{{asset('assets/client/images/product-image/organic/product-1.jpg')}}" alt="" />
+                        <img src="../../{{$item->image_gallery}}" alt="" />
                     </a>
                 </div>
                 <ul class="product-flag">
@@ -233,7 +234,7 @@
                 </ul>
                 <div class="product-decs">
                     <a class="inner-link" href="#"><span>THỰC PHẨM</span></a>
-                    <h2><a href="" class="product-link">Bim bim ôshi</a></h2>
+                    <h2><a href="" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
                         <i class="ion-android-star"></i>
@@ -243,8 +244,8 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price">7.000đ</li>
-                            <li class="current-price">5.000đ</li>
+                            <!-- <li class="old-price">{{$item->name}}</li> -->
+                            <li class="current-price">{{number_format($item->price)}}đ</li>
                             <li class="discount-price">-20%</li>
                         </ul>
                     </div>
@@ -258,6 +259,7 @@
                     </ul>
                 </div>
             </article>
+            @endforeach
             <!-- End Single Item -->
         </div>
         <!-- Recent product slider end -->

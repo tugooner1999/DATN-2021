@@ -14,6 +14,7 @@ class HomepageController extends Controller
 {
     //
     public function index(){
+        $this->authorize('member');
         $cates = Category::all();
         $slider = Slider::all();
         $product = Product::all();

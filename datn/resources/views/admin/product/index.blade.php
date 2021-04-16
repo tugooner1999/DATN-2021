@@ -48,8 +48,19 @@
                                 @foreach($pro as $no => $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
-                                    <td><img src="{{$item->image_gallery}}" alt=""
-                                            height="100px" width="100px"></td>
+                                    <td>
+                                    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
+    </button>
+    <ul class="dropdown-menu">
+      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
+      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
+      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
+      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
+    </ul>
+  </div>
+                                    </td>
                                     <td style="font-weight:bold;">{{$item->name}}</td>
                                     <td>{{$item->quantily}} SP</td>
                                     <td>{{$item->allow_market == 2 ? "Đi chợ" : "Thông thường"}}</td>
