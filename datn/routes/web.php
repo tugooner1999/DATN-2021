@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], '/categories/add-cate',[Admin\CategoryController::class , 'addCategory'])->name('admin.addCate');
         Route::match(['get','post'],'/categories/edit-cate/{id}',[Admin\CategoryController::class , 'edit_category'])->name('admin.editCate');
         Route::match(['get','post'],'/categories/delete/{id}',[Admin\CategoryController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleCate');
-
+        Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
         Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
@@ -113,6 +113,9 @@ Route::prefix('admin')->group(function () {
         // login - register
         Route::get('login', [Client\AuthController::class, 'login_form'])->name('client.login');
         Route::post('/login', [Client\AuthController::class , 'postLogin']);
+        Route::get('loginErr', [Client\AuthController::class, 'login_form_err'])->name('client.login.err');
+        Route::post('/loginErr', [Client\AuthController::class , 'postLogin']);
+
         Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist

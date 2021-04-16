@@ -57,9 +57,8 @@ class ProductController extends Controller
             $request->validate([
                 'image_gallery' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            $imageName = time().'.'.$request->image_gallery->extension();  
-            $product->image_gallery =$request->image_gallery->move(public_path('frontend\images'), $imageName);
-
+            $path = $request->file('image_gallery')->move('frontend/images', $request->file('image_gallery')->getClientOriginalName());
+            $product->image_gallery =str_replace("public/", "public/", $path);
         }
         $product->views = 1;
         $product->save();
@@ -74,12 +73,16 @@ class ProductController extends Controller
         $data= $_POST;
         $product->fill($data);
         if($request->hasFile('image_gallery')){
-            $path = $request->file('image_gallery')->store('public/frontend/images');
-            $product->image_gallery = str_replace("public/", "storage/", $path);
+            $request->validate([
+                'image_gallery' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $path = $request->file('image_gallery')->move('frontend/images', $request->file('image_gallery')->getClientOriginalName());
+            $product->image_gallery =str_replace("public/", "public/", $path);
         }
         $product->update_at= $dt_update;
         $product->allow_market=isset($_POST['allow_market'])
         ? $_POST['allow_market'] : 1;
+        $product->views = +1;
         $product->save();
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');  

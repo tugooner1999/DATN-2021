@@ -126,7 +126,14 @@
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a class="cart-btn" product-id='{{$item->id}}'>Thêm vào giỏ</a></li>
+                        <li class="cart"><a 
+                        @if(Auth::check()) 
+                        class="cart-btn"
+                        product-id='{{$item->id}}'
+                        @else
+                        href="{{route('client.login')}}" 
+                        @endif
+                        >Thêm vào giỏ</a></li>
                         <li>
                             <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
                         </li>

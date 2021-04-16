@@ -22,24 +22,19 @@
         <div class="row">
             <div class="col-md-8 col-xs-12">
                 <div class="white-box">
-                    <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            @isset($msg)
-                            <p style="color: green">{{$msg}}</p>
-                            @endisset
-                            @isset($errs)
-                            @foreach($errs as $e)
-                            <p style="color: red"> {{  implode('<br>', $e ) }} </p>
-                            @endforeach
-                            @endisset
+                    <form class="form-horizontal form-material"  action="{{URL::to('/admin/categories/update/'.$objU->id)}}" method="POST" enctype="multipart/form-data">
+        
                             @csrf
-                        </div>
                         <div class="form-group">
                             <label class="col-md-12">Tên danh mục</label>
                             <div class="col-md-12">
                                 <input type="text" name="name" value="{{$objU->name}}"
-                                    class="form-control form-control-line " value="{{ old('name') }}">
+                                    class="form-control form-control-line " value="{{ old('name') }}" require>
+                                    @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
+                           
                         </div>
                         <img id="image" src="{{$objU->image}}" width="40%" height="300px" alt="">
                         <hr>

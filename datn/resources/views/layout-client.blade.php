@@ -44,6 +44,7 @@
         @include('client/layout/header')
         @yield('content')
         @include('client/layout/footer')
+        
     </div>
     <script src="{{asset('assets/client/js/vendor/jquery-3.5.1.min.js')}}"></script>
     <script src="{{asset('assets/client/js/vendor/modernizr-3.7.1.min.js')}}"></script>
@@ -132,7 +133,7 @@
                     },
                     success: function(result){
                         if(result.status === true){
-                            toastr.success('Thêm vào giỏ hàng công', 'Thông báo')
+                            toastr.success('Thêm vào giỏ hàng thành công', 'Thông báo')
                             $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
                         }
                         

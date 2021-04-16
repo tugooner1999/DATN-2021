@@ -18,6 +18,15 @@
                     <div class="col-sm-12">
                         <div class="white-box">
                                 <h3 class="box-title">Danh sách</h3>
+                                <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', NULL);
+                        }
+                    ?>
+                    </p>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>

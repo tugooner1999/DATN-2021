@@ -76,7 +76,13 @@
                             <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
                         </div>
                         <div class="pro-details-cart btn-hover">
-                            <a class="cart-btn" product-id='{{$product->id}}'> Thêm vào giỏ</a>
+                        <a product-id='{{$product->id}}'
+                        @if(Auth::check()) 
+                        class="cart-btn"
+                        @else
+                        href="{{route('client.login')}}" 
+                        @endif
+                        >Thêm vào giỏ</a></li>
                         </div>
                     </div>
                     <div class="pro-details-wish-com">

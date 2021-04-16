@@ -18,16 +18,28 @@ class AuthController extends Controller
         $remember = $request->has('remember_me');
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials,$remember)) {
-            if(Auth::user()->role_id == 1){
-                return redirect()->route('client-admin'); 
+            if(Auth::user()->status == 0){
+                if(Auth::user()->role_id == 1){
+                    return redirect()->route('client-admin'); 
+                }else{
+                    return redirect()->intended('');
+                };
             }else{
-                return redirect()->intended('');
-            };
+                Auth::logout();  // xử lý logout
+                Session::flush(); // xóa hết các session khác
+                return redirect()->route('client.login.err');
+            }
+            
         }
         return back()->withErrors([
             'msg' => 'Tài khoản/mật khẩu không đúng',
         ]);
     }
+    public function login_form_err(request $request)
+    { 
+        return view('errors.403');
+    }
+    
     public function login_form(Request $request){
         return view('client.login-res.index');
     }

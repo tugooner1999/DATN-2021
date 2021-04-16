@@ -36,7 +36,7 @@
                             <div class="col-sm-12">
                                 <select class="form-control form-control-line" name = "role_id">
                                 <?php
-                                if($objU->status == 0){
+                                if($objU->role_id == 0){
                                     echo'<option value = "0" >Thành Viên</option>';
                                     echo'<option value = "1">Quản trị</option>';
                                 }else{
