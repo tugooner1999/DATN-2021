@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +46,7 @@ class ProductController extends Controller
         return  redirect()->back();; 
     }
 
-    public function addProduct(Request $request){
+    public function addProduct(ProductRequest $request){
         $this->authorize('admin');
         $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $data = $_POST;
