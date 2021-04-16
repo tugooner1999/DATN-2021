@@ -7,7 +7,7 @@
                 <h4 class="page-title">Danh sach bình luận</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
                 <ol class="breadcrumb">
@@ -20,11 +20,8 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
-                    <div class="app-search hidden-sm hidden-xs m-r-10">
-                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
-                    </div>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -36,7 +33,7 @@
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-                            <tbody id="myTable">
+                            <tbody>
                                 <tr>
                                     <td>1</td>
                                     <td><a href="profile.html">taikhoan1</a></td>

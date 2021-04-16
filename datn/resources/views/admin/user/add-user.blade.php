@@ -8,7 +8,7 @@
                 <h4 class="page-title">Thêm Tài khoản Mới</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
 
@@ -22,13 +22,7 @@
             <div class="col-md-8 col-xs-12">
                 <div class="white-box">
                     <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
-                    @if ($errors->any())
-                    <ul>
-            @foreach ($errors->all() as $error)
-                <li style="color:red;">{{ $error }}</li>
-            @endforeach
-        </ul>
-@endif
+                   
                     @csrf
                         <div class="form-group">
                             <label class="col-md-12">Tên tài khoản</label>
@@ -36,19 +30,27 @@
                                 <input type="text" name="name" value="{{(old('name'))}}" class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Mật khẩu</label>
                             <div class="col-md-12">
-                                <input type="password" value="" class="form-control form-control-line"
-                                    name="example-email" id="example-email">
+                                <input id="password" type="password" class="form-control form-control-line" name="password" autocomplete="new-password">
                             </div>
                         </div>
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Nhập lại mật khẩu</label>
                             <div class="col-md-12">
-                                <input type="password" value="" name="password" class="form-control form-control-line">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-sm-12">Phân quyền</label>
                             <div class="col-sm-12">
@@ -73,18 +75,27 @@
                                 <input type="email" name="email" value="{{(old('email'))}}" class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Phone</label>
                             <div class="col-md-12">
-                                <input type="text" name="phone" value="{{(old('phone'))}}" class="form-control form-control-line">
+                                <input type="number" name="phone" value="{{(old('phone'))}}" class="form-control form-control-line">
                             </div>
                         </div>
+                        @error('phone')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Địa chỉ</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="address" value="{{(old('address'))}}" class="form-control form-control-line"></textarea>
+                                <textarea rows="5" name="address" value="" class="form-control form-control-line">{{(old('address'))}}</textarea>
                             </div>
                         </div>
+                        @error('address')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Thêm mới</button>
@@ -95,13 +106,16 @@
             </div>
             <div class="col-md-4">
                     <div class="white-box">
-                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="200px"
+                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px"
                                 alt="">
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
+                            <input class="col-sm-12" name="avatar" type="file" onchange="changeImage()" id="fileImage">
                         </div>
                     </div>
+                    @error('avatar')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                 </div>
             </form>
         </div>

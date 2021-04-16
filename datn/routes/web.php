@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,17 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
-
-
 Route::get('/', function () {
     return redirect()->route('client.homepage');
 });
-
-
-
-
-
 Route::prefix('admin')->group(function () {
         // dashboard
         Route::get('/',[Admin\DashboardController::class , 'admin'])->name('admin.dashboard');
@@ -36,7 +29,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], '/categories/add-cate',[Admin\CategoryController::class , 'addCategory'])->name('admin.addCate');
         Route::match(['get','post'],'/categories/edit-cate/{id}',[Admin\CategoryController::class , 'edit_category'])->name('admin.editCate');
         Route::match(['get','post'],'/categories/delete/{id}',[Admin\CategoryController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleCate');
-
+        Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
         Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
@@ -55,9 +48,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/voucher',  [Admin\VoucherController::class , 'index'])->name('admin.listVoucher');
         Route::get('/voucher/add',  [Admin\VoucherController::class , 'create_voucher'])->name('admin.addVoucher');
         Route::post('/voucher/add', [Admin\VoucherController::class, 'saveAdd'])->name('admin.save-add-form');
-        Route::get('/voucher/edit',  [Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::get('/voucher/edit-voucher/{id}',[Admin\VoucherController::class , 'edit_voucher'])->name('admin.editVoucher');
+        Route::post('/voucher/edit-voucher/{id}', [Admin\VoucherController::class, 'update_voucher'])->name('admin.save-update-form');
+        Route::match(['get','post'],'/voucher/delete/{id}',[Admin\VoucherController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleVoucher');
         
-        
+        // mail
+        Route::get('/send-mail-voucher/{id}',  [Admin\MailController::class , 'sendMailVoucher'])->name('admin.sendMailVoucher');
 
         // user
         Route::get('/user', [Admin\UserController::class, 'index'])->name('admin.listUser');
@@ -65,6 +63,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/user/edit/{id}',[Admin\UserController::class, 'edit_user'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.editUser');
+        Route::match(['get','post'], '/user/update/{id}',  [Admin\UserController::class, 'updateUser'])->name('admin.updateUser');
         Route::match(['get','post'],'/user/delete/{id}',[Admin\UserController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleUser');
@@ -86,21 +85,15 @@ Route::prefix('admin')->group(function () {
 
 
         // CLIENT
-Route::prefix('client')->group(function () {
+        Route::prefix('client')->group(function () {
         // homepage
         Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
 
 
         // product
-        Route::get('/product', [Client\ProductController::class , 'index'])->name('client.product');
-
-        
-        // Route::get('/single-product', [Client\ProductController::class , 'single_Product'])->name('client.single-product');
-        
-
-        Route::match(['get','post'], '/single-product/{id}', [Client\ProductController::class , 'single_Product'])
-        ->where('id', '[0-9]+')
-        ->name('client.single-product');
+        Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
+        Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
 
 
         // about
@@ -108,7 +101,9 @@ Route::prefix('client')->group(function () {
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
-
+        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+        // Add voucher
+        Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
@@ -118,14 +113,13 @@ Route::prefix('client')->group(function () {
         // login - register
         Route::get('login', [Client\AuthController::class, 'login_form'])->name('client.login');
         Route::post('/login', [Client\AuthController::class , 'postLogin']);
-        Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
+        Route::get('loginErr', [Client\AuthController::class, 'login_form_err'])->name('client.login.err');
+        Route::post('/loginErr', [Client\AuthController::class , 'postLogin']);
 
+        Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
+        Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist
         Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
-
-
-        // slider
-        Route::get('/slider',  [Admin\SliderController::class , 'index'])->name('admin.listSlider');
-        Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
-        // Route::get('/admin/user/edit', 'Admin\UserController@edit_user')->name('admin.editUser');
 });
+        //chuyển trang phân quyền user
+        Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

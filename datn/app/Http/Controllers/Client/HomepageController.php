@@ -14,6 +14,7 @@ class HomepageController extends Controller
 {
     //
     public function index(){
+        $this->authorize('member');
         $cates = Category::all();
         $slider = Slider::all();
         $product = Product::all();
@@ -21,5 +22,8 @@ class HomepageController extends Controller
             'products'
         ]);
         return view('client.homepage.index',compact('cates','slider','product'));
+    }
+    public function client_admin(){
+        return view('welcome');
     }
 }

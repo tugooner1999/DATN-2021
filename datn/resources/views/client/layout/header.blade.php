@@ -20,7 +20,11 @@
                                 <a href="{{route('client.homepage')}}">Trang chủ</a>
                             </li>
                             <li class="menu-dropdown">
-                                <a href="{{route('client.product')}}">Sản phẩm</a>
+                                            <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                                <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                            </ul>
                             </li>
                             <li class="menu-dropdown">
                                 <a href="{{route('client.about')}}">Giới thiệu</a>
@@ -38,17 +42,29 @@
                                     <input placeholder="Tìm mọi thứ ở đây ..." type="text" />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
-                            </div>
                         </div>
+                    </div>
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
-                            <div class="mini-cart-warp">
-                @if (Auth::check())
-                <span class="text-danger" style="font-size: 22px;">Hello {{Auth::user()->name}}</span>
-                                            <a href="{{route('Auth.Logout')}}">Đăng xuất</a>
-                                        @else
-                                        <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
-                                        @endif
+                            @if (Auth::check())
+                                <div class="main-navigation" style="margin: 0px;">
+                                    <ul>
+                                        <li class="menu-dropdown">
+                                            <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</b></span>
+                                            <ul class="sub-menu">
+                                            @if (Auth::user()->role_id == 1)
+                                                <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
+                                            @endif
+                                                <li><a href="#">Thông tin cá nhân</a></li>
+                                                <li><a href="#">Yêu thích</a></li>
+                                                <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                            <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
+                            @endif
                         </div>
                         <!--Login info End -->
                         <!--Cart info Start -->

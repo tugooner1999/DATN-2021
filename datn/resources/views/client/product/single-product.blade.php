@@ -1,12 +1,13 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">chi tiết sản phẩm</h1>
+                    <h1 class="breadcrumb-hrading">Chi tiết sản phẩm</h1>
                     <ul class="breadcrumb-links">
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Chi tiết</li>
@@ -25,8 +26,8 @@
                 <div class="product-details-img product-details-tab">
                     <div class="zoompro-wrap zoompro-2">
                         <div class="zoompro-border zoompro-span">
-                            <img class="zoompro" src="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}"
-                                data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/1.jpg')}}" alt="" />
+                            <img src="../../{{$product->image_gallery}}"
+                                data-zoom-image="../../{{$product->image_gallery}}" alt="" />
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2">
@@ -52,7 +53,7 @@
             <div class="col-xl-6 col-lg-6 col-md-12">
                 <div class="product-details-content">
                     <h2>{{$product->name}}</h2>
-                    <p class="reference">Thực phẩm</p>
+                    <p class="reference">{{isset($product->category) ? $product->category->name : ''}}</p>
                     <div class="pro-details-rating-wrap">
                         <div class="rating-product">
                             <i class="ion-android-star"></i>
@@ -65,15 +66,23 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut">{{$product->price}}</li>
+                            <li class="old-price not-cut text-danger">{{number_format($product->price)}}đ</li><br>
+                            <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                        </div>
                         <div class="pro-details-cart btn-hover">
-                            <a href="#"> Thêm vào giỏ</a>
+                        <a product-id='{{$product->id}}'
+                        @if(Auth::check()) 
+                        class="cart-btn"
+                        @else
+                        href="{{route('client.login')}}" 
+                        @endif
+                        >Thêm vào giỏ</a></li>
+                        </div>
+                        <div class="cart-plus-minus" style="visibility: hidden;">
+                            <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
+                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
                         </div>
                     </div>
                     <div class="pro-details-wish-com">
@@ -213,10 +222,11 @@
         <!-- Recent Product slider Start -->
         <div class="recent-product-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
+            @foreach($cates as $item)
             <article class="list-product">
                 <div class="img-block">
                     <a href="" class="thumbnail">
-                        <img src="{{asset('assets/client/images/product-image/organic/product-1.jpg')}}" alt="" />
+                        <img src="../../{{$item->image_gallery}}" alt="" />
                     </a>
                 </div>
                 <ul class="product-flag">
@@ -224,7 +234,7 @@
                 </ul>
                 <div class="product-decs">
                     <a class="inner-link" href="#"><span>THỰC PHẨM</span></a>
-                    <h2><a href="" class="product-link">Bim bim ôshi</a></h2>
+                    <h2><a href="" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
                         <i class="ion-android-star"></i>
@@ -234,8 +244,8 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price">7.000đ</li>
-                            <li class="current-price">5.000đ</li>
+                            <!-- <li class="old-price">{{$item->name}}</li> -->
+                            <li class="current-price">{{number_format($item->price)}}đ</li>
                             <li class="discount-price">-20%</li>
                         </ul>
                     </div>
@@ -249,6 +259,7 @@
                     </ul>
                 </div>
             </article>
+            @endforeach
             <!-- End Single Item -->
         </div>
         <!-- Recent product slider end -->

@@ -9,6 +9,7 @@ class AboutController extends Controller
 {
     //
     public function index(){
+        $this->authorize('member');
         return view('client.about.index');
     }
 }

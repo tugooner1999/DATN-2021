@@ -5,8 +5,6 @@
 <!-- Slider Arae Start -->
 <div class="slider-area">
     <div class="slider-active-3 owl-carousel slider-hm8 owl-dot-style">
-
-
         <!-- Slider Single Item Start -->
         @foreach ($slider as $ad)    
         <div class="slider-height-6 d-flex align-items-start justify-content-start bg-img"
@@ -91,7 +89,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h2>HOT DEAL!</h2>
+                    <h2>HOT DEAL!
+                    </h2>
                 </div>
             </div>
         </div>
@@ -105,11 +104,12 @@
                         <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
+                
                 <ul class="product-flag">
-                    <li class="new">Mới</li>
+                    <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>{{$item->category_id}}</span></a>
+                    <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
                     <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
@@ -120,13 +120,20 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="current-price">{{$item->price}}vnđ</li>
+                            <li class="current-price">{{number_format($item->price)}}đ</li>
                         </ul>
                     </div>
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a class="cart-btn" product-id='{{$item->id}}'>Thêm vào giỏ</a></li>
+                        <li class="cart"><a 
+                        @if(Auth::check()) 
+                        class="cart-btn"
+                        product-id='{{$item->id}}'
+                        @else
+                        href="{{route('client.login')}}" 
+                        @endif
+                        >Thêm vào giỏ</a></li>
                         <li>
                             <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
                         </li>
@@ -193,16 +200,19 @@
         <!-- Feature Slider Start -->
         <div class="feature-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
-            <div class="feature-slider-item">
-                <article class="list-product">
+           
+                
+             @foreach ($product as $item)
+             <div class="feature-slider-item">
+             <article class="list-product">
                     <div class="img-block">
-                        <a href="single-product.html" class="thumbnail">
-                            <img class="first-img" src="{{asset('assets/client/images/product-image/organic/product-18.jpg')}}" alt="" />
+                        <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
+                            <img class="first-img" src="{{$item->image_gallery}}" alt="" />
                         </a>
                     </div>
                     <div class="product-decs">
-                        <a class="inner-link" href="shop-4-column.html"><span>THỰC PHẨM</span></a>
-                        <h2><a href="single-product.html" class="product-link">Mì tôm oshi</a></h2>
+                        <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                        <h2><a href="{{route('client.single-product', ['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
                         <div class="rating-product">
                             <i class="ion-android-star"></i>
                             <i class="ion-android-star"></i>
@@ -212,13 +222,14 @@
                         </div>
                         <div class="pricing-meta">
                             <ul>
-                                <li class="old-price not-cut">120.000đ</li>
+                                <li class="current-price">{{number_format($item->price)}}đ</li>
                             </ul>
                         </div>
                     </div>
                 </article>
-                <!-- Single Item -->
-            </div>
+                </div>
+        @endforeach 
+            
             <!-- Feature Slider End -->
         </div>
 </section>

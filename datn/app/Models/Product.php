@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class Product extends Model
 {
     protected $table = "products";
     public $timestamps = FALSE;
 
     protected $fillable = [
-        'id',
         'name',
         'image_gallery',
-        'description ',
+        'description',
         'price',
         'quantily',
         'category_id',
@@ -30,6 +29,6 @@ class Product extends Model
     public function saveUpdate($id, $objPro){
         return DB::table($this->table)
             ->where('id',$id)
-            ->update($obPro);
+            ->update($objPro);
     }
 }

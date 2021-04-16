@@ -7,7 +7,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">Thêm danh mục mới</h4> </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                            <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
+                            <a href="{{route('client.homepage')}}" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
                             
                             <ol class="breadcrumb">
                                 <li><a href="#">Bảng điều khiển</a></li>
@@ -20,26 +20,25 @@
                             <div class="white-box">
                             
                                 <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data" >
-                                    @if ($errors->any())
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li style="color:red;">{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
                                     @csrf
                                     <div class="form-group">
                                         <label class="col-md-12">Tên danh mục</label>
                                         <div class="col-md-12">
                                             <input type="text" name ="name"  class="form-control form-control-line" value="{{ old('name') }}"> </div>
                                     </div>
-                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="200px"
+                                    @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
                                             alt="">
                                     <hr>
                                     <div class="form-group">
                                         <label class="col-sm-12">Tải ảnh mới</label>
                                         <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                                     </div>
+                                    @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-danger">Thêm mới</button>

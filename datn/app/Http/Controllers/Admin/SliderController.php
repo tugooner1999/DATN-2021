@@ -4,13 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
-use DB;
-use App\Models;
-use Facade\FlareClient\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Support\Facades\Http;
 class SliderController extends Controller
 {
     /**
@@ -19,12 +14,15 @@ class SliderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        $this->authorize('admin');
         $slider = Slider::all();
+        $slider = Slider::paginate(5);
         return view('admin.slider.index', [
             'slider' => $slider
         ]);
     }
     public function addSlider(Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ]; // mảng để truyền dữ liệu ra view
         if($request->isMethod('POST')){
             $rule = [
@@ -76,8 +74,8 @@ class SliderController extends Controller
         return view('admin.slider.addSlider');
     }
     public function destroy($id, Request $request){
+        $this->authorize('admin');
         $dataView = [ 'errs'=>[]];
-        
         $objU = Slider::where('id',$id)->first();
         $dataView['objU'] = $objU;  
         if($request){
@@ -86,6 +84,7 @@ class SliderController extends Controller
             }
     }
     public function editSlider($id, Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ];
 
         // lấy thông tin User để hiển thị ra form

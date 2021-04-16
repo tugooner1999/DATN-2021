@@ -9,7 +9,8 @@
     }
 ?>
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -54,13 +55,13 @@
                                             <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$item['name']}}</a></td>
-                                        <td class="product-price-cart"><span class="amount">{{$item['price']}} VNĐ</span></td>
+                                        <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
                                                 <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
                                             </div>
                                         </td>
-                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{$item['price'] * $item['quantity']}} VNĐ</td>
+                                        <td class="product-subtotal" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>
                                         <td class="product-remove">
                                             <a href="#" prod-id="{{$item['id']}}"><i class="fa fa-times"></i></a>
                                         </td>
@@ -86,35 +87,65 @@
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    
+                    <div class="col-lg-4 col-md-6 voucher-box">
+                        <?php if(!isset($_SESSION['voucher'])) : ?>
                         <div class="discount-code-wrapper">
                             <div class="title-wrap">
+                                
                                 <h4 class="cart-bottom-title section-bg-gray">Mã giảm giá</h4>
                             </div>
                             <div class="discount-code">
                                 <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
                                 <form>
-                                    <input type="text" required="" name="name" />
-                                    <button class="cart-btn-2" type="submit">Áp dụng phiếu giảm giá</button>
+                                    <input type="text" id="voucher-code" required="" name="name" />
+                                    <button id="add-voucher" class="cart-btn-2" type="submit">Áp dụng phiếu giảm giá</button>
                                 </form>
                             </div>
                         </div>
+                        <?php endif ?>
                     </div>
+                    
                     <div class="col-lg-8 col-md-12">
                         <div class="grand-totall">
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn chi tiết</h4>
                             </div>
-                            <h5>Tổng tiền sản phẩm <span>{{$totalPriceInCart}} VNĐ</span></h5>
+                            <h5>Tổng tiền sản phẩm <span id="total-price-cart">{{number_format($totalPriceInCart)}} VNĐ</span></h5>
+                            <h5>Giảm giá 
+                                <span id="sale-off">
+                                    <?php 
+                                        $voucherPrice = 0;
+                                        if(isset($_SESSION['voucher'])){
+                                            if($_SESSION['voucher']['type'] == 1){
+                                                $voucherPrice = ($_SESSION['voucher']['value']);
+                                                echo number_format($voucherPrice). " VNĐ";
+                                            }
+                                            else if($_SESSION['voucher']['type'] == 2){
+                                                $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
+                                                echo number_format($voucherPrice) . " VNĐ";
+                                            }   
+                                        }
+                                        else {
+                                            echo $voucherPrice." VNĐ";
+                                        }
+                            
+                                    ?> 
+                                </span>
+                            </h5>
+                            <h5>Phí giao hàng <span>0 VNĐ</span></h5>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
                                 <ul>
-                                    <li><input type="checkbox" /> Thanh toán khi nhận hàng <span>$20.00</span></li>
-                                    <li><input type="checkbox" /> Thanh toán ATM <span>$30.00</span></li>
+                                    <li><input type="checkbox" class="select-payment-method" value="1"/> Thanh toán khi nhận hàng</li>
+                                    <li><input type="checkbox" class="select-payment-method" value="1"/> Thanh toán online qua VNPay</li>
                                 </ul>
                             </div>
-                            <h4 class="grand-totall-title">Tổng tiền <span>$260.00</span></h4>
-                            <a href="checkout.html">Thanh toán</a>
+                            <?php 
+                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice;
+                            ?>
+                            <h4 class="grand-totall-title">Tổng tiền {{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h4>
+                            <a id="checkout" href="checkout.html">Thanh toán</a>
                         </div>
                     </div>
                 </div>
