@@ -49,17 +49,7 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>
-                                    <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-    <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
-    </button>
-    <ul class="dropdown-menu">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-    </ul>
-  </div>
+                                    <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
                                     </td>
                                     <td style="font-weight:bold;">{{$item->name}}</td>
                                     <td>{{$item->quantily}} SP</td>
