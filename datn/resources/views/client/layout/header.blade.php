@@ -6,7 +6,7 @@
                 <!-- Logo Start -->
                 <div class="col-md-2 col-sm-2">
                     <div class="logo">
-                        <a href="{{route('client.homepage')}}"><img style="width:230px;"
+                        <a href="{{route('client.homepage')}}"><img style="width:190px;"
                                 src="{{asset('assets/client/images/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
