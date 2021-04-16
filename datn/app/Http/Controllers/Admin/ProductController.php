@@ -60,6 +60,7 @@ class ProductController extends Controller
         }
         $product->views = 1;
         $product->save();
+        dd($data);die;
         Session::put('message','Thêm sản phẩm thành công');
         return Redirect::to('/admin/products');
     }
