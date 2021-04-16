@@ -27,6 +27,9 @@
                             <label class="col-md-12">Tên sản phẩm</label>
                             <div class="col-md-12">
                                 <input type="text" name="name" value="{{$item->name}}" class="form-control form-control-line">
+                                @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <div class="form-group">
@@ -34,12 +37,18 @@
                             <div class="col-md-12">
                                 <input type="number" value="{{$item->price}}" class="form-control form-control-line"
                                     name="price" id="example-email">
+                                    @error('price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
                                 <input type="number" name="quantily" value="{{$item->quantily}}" class="form-control form-control-line">
+                                @error('quantily')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,6 +56,9 @@
                             <div class="col-md-12">
                                 <textarea rows="5" name="description"
                                     class="form-control form-control-line">{{$item->description}}</textarea>
+                                    @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <div class="form-group">
@@ -85,6 +97,9 @@
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
                         </div>
+                        @error('image_gallery')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                     </div>
                 </div>
             </form>

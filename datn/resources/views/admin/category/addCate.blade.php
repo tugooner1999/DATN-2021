@@ -20,19 +20,15 @@
                             <div class="white-box">
                             
                                 <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data" >
-                                    @if ($errors->any())
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li style="color:red;">{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
                                     @csrf
                                     <div class="form-group">
                                         <label class="col-md-12">Tên danh mục</label>
                                         <div class="col-md-12">
                                             <input type="text" name ="name"  class="form-control form-control-line" value="{{ old('name') }}"> </div>
                                     </div>
+                                    @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                                     <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
                                             alt="">
                                     <hr>
@@ -40,6 +36,9 @@
                                         <label class="col-sm-12">Tải ảnh mới</label>
                                         <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                                     </div>
+                                    @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-danger">Thêm mới</button>

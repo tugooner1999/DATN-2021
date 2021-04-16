@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
             'quantily'=>'required|min:1',
             'description'=>'required',
             'price'=>'required|min:4|regex:/^(\d+(,\d{1,2})?)?$/',
-            'image_gallery'=>'required|image'
+            'image_gallery'=>'image|mimes:jpeg,png,jpg,gif'
         ];
     }
     public function messages(){
@@ -40,8 +40,8 @@ class ProductRequest extends FormRequest
             'price.required' => 'Giá sản phẩm trống',
             'price.min'=>'Giá sản phẩm phải lớn hơn 1000đ',
             'price.regex' => 'Giá sản phẩm phải lớn hơn 1000đ',
-            'image_gallery.required' => 'Ảnh sản phẩm không được trống',
-            'image_gallery.image' => 'file phải dạng hình ảnh'
+            'image_gallery.image' => 'file phải dạng hình ảnh',
+            'image_gallery.mimes' => 'file phải có đuôi :jpeg,png,jpg,gif'
         ];
     }
 }
