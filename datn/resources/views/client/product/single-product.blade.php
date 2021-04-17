@@ -1,53 +1,13 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-
-<style>
-.list_start i:hover {
-    cursor: pointer;
-}
-
-.rating-product{
-    margin-bottom:0;
-}
-
-.list_text{
-    display:inline-block;
-    margin-left:10px;
-    position: relative;
-    background:#4fb68d;
-    color:#fff;
-    padding:0px 8px;
-    box-sizing:border-box;
-    font-size:12px;
-    border-radius:2px;
-    display:none;
-}
-.list_text:after{
-    right:100%;
-    top:50%;
-    border:solid transparent;
-    content:" ";
-    height:0;
-    width:0;
-    position: absolute;
-    pointer-events:none;
-    border-color:rgba(82,184,88,0);
-    border-right-color:#4fb68d;
-    border-width:6px;
-    margin-top:-6px;
-}
-
-.list_start .rating_active{
-    color:#ff9705;
-}
-</style>
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">chi tiết sản phẩm</h1>
+                    <h1 class="breadcrumb-hrading">Chi tiết sản phẩm</h1>
                     <ul class="breadcrumb-links">
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Chi tiết</li>
@@ -117,7 +77,13 @@
                     <div class="pro-details-quality mt-0px">
 
                         <div class="pro-details-cart btn-hover">
-                            <a class="cart-btn" product-id='{{$product->id}}'> Thêm vào giỏ</a>
+                        <a product-id='{{$product->id}}'
+                        @if(Auth::check()) 
+                        class="cart-btn"
+                        @else
+                        href="{{route('client.login')}}" 
+                        @endif
+                        >Thêm vào giỏ</a></li>
                         </div>
                     </div>
                     <div class="pro-details-wish-com">

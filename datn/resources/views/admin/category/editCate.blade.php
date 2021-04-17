@@ -9,7 +9,7 @@
                 <h4 class="page-title">Cập nhật danh mục</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
 
@@ -22,22 +22,21 @@
         <div class="row">
             <div class="col-md-8 col-xs-12">
                 <div class="white-box">
-                    <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            
+                    <form class="form-horizontal form-material"  action="{{URL::to('/admin/categories/update/'.$objU->id)}}" method="POST" enctype="multipart/form-data">
+        
                             @csrf
-                        </div>
                         <div class="form-group">
                             <label class="col-md-12">Tên danh mục</label>
                             <div class="col-md-12">
                                 <input type="text" name="name" value="{{$objU->name}}"
-                                    class="form-control form-control-line " value="{{ old('name') }}">
-                            </div>
-                        </div>
-                        @error('name')
+                                    class="form-control form-control-line " value="{{ old('name') }}" require>
+                                    @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <img id="image" src="{{$objU->image}}" width="40%" height="200px" alt="">
+                            @enderror
+                            </div>
+                           
+                        </div>
+                        <img id="image" src="{{$objU->image}}" width="40%" height="300px" alt="">
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>

@@ -20,21 +20,8 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
-                    <div class="app-search hidden-sm hidden-xs m-r-10">
-                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid"
-                            type="text" placeholder="Tìm kiếm" aria-label="Search">
-                    </div>
-                    <p class="success" style="color:green; font-size:20px; font-weight:bold;">
-                        <?php
-                        $message = Session::get('message');
-                        if($message){
-                            echo $message;
-                            Session::put('message', NULL);
-                        }
-                    ?>
-                    </p>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width:3%;">#</th>
@@ -48,8 +35,8 @@
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-                            <tbody id="myTable">
-                                @foreach($comment as $no => $item)
+                            <tbody>
+                                @foreach ($comment as $pro => $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td style="font-weight:bold;">
@@ -71,7 +58,7 @@
                                     <td>{{$item->created_at}}</td>
                                     <td style="font-size: 20px;">
                                         <a style="padding-left: 10px;"
-                                            onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
+                                            onclick="return confirm('Bạn có chắc muốn xoá bình luận này: {{$item->ra_content}}')"
                                             href="{{route('admin.removeComment', ['id' => $item->id])}}"
                                             class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>

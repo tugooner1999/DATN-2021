@@ -17,9 +17,9 @@ class VoucherController extends Controller
 {
     //
     public function index(){
+        $this->authorize('admin');
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $voucher = Voucher::all();
-        $voucher = Voucher::paginate(5);
         return view('admin.voucher.index',compact('voucher','today'));
 
     }
@@ -68,9 +68,11 @@ class VoucherController extends Controller
         }
     }
     public function create_voucher(Request $request){
+        $this->authorize('admin');
         return view('admin.voucher.add-voucher');
     }
     public function saveAdd(Request $request){
+        $this->authorize('admin');
         if($request->isMethod('POST')){
             $rule = [
                 'name' => 'required',
@@ -111,10 +113,12 @@ class VoucherController extends Controller
     }
 
     public function edit_voucher($id ,Request $request){
+        $this->authorize('admin');
         $show = Voucher::find($id);
             return view('admin.voucher.edit-voucher', compact('show'));
         }
     public function update_voucher($id,VoucherRequest $request){
+        $this->authorize('admin');
         $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $data= $_POST;
         $model = Voucher::find($id);
@@ -127,7 +131,8 @@ class VoucherController extends Controller
     }
 
     public function destroy($id)
-    {
+    {   
+        $this->authorize('admin');
         $User = Voucher::find($id);
         $User->delete();
         return back();

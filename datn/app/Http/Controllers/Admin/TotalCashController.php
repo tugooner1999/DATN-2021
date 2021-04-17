@@ -9,6 +9,7 @@ class TotalCashController extends Controller
 {
     //
     public function index(){
+        $this->authorize('admin');
         return view('admin.total-cash.index');
     }
 }

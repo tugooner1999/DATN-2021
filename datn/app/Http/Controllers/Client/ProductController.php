@@ -21,6 +21,13 @@ class ProductController extends Controller
         return view('client.product.index', compact('list_product','cates'));
 
     }
+
+    public function allow_market(){
+        $list_promarket = Product::where('allow_market','2')->paginate(12);
+        $cates  = Category::all();
+        return view('client.product.allow-market', compact('list_promarket','cates'));
+
+    }
     
     public function single_Product($id){
         $product= Product::find($id);

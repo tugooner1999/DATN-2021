@@ -14,11 +14,13 @@ class UserController extends Controller
 {
     //
     public function index(){    
-        $user = User::paginate(5);
+        $this->authorize('admin');
+        $user = User::all();
         return view('admin.user.index',compact('user'));
     }
 
     public function create_user(Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ]; // mảng để truyền dữ liệu ra view
 
         if($request->isMethod('POST')){
@@ -80,10 +82,13 @@ class UserController extends Controller
     }
 
     public function edit_user($id, Request $request){
+        $this->authorize('admin');
         $objU = User::find($id);
+        $this->authorize('admin');
         return view('admin.user.edit-user',compact('objU'));
     }
     public function updateUser($id,UserRequest $request){
+        $this->authorize('admin');
         try{
             $user = User::find($id);
             $user->fill($request->all());
@@ -91,6 +96,7 @@ class UserController extends Controller
             if($request->hasFile('avatar')){
                 $path = $request->file('avatar')->store('public/avatars');
                 $user->avatar = str_replace("public/", "storage/", $path);
+                
             }
             $user->save();
             Session::put('message','Cập nhật tài khoản thành công');
@@ -101,7 +107,8 @@ class UserController extends Controller
         return redirect()->route('admin.listUser');
     }   
     public function destroy($id)
-    {
+    {        $this->authorize('admin');
+
         $User = User::find($id);
         $User->delete();
         return back();

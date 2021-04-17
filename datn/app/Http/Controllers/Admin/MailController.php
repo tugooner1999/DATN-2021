@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
     public function sendMailVoucher($id,Request $Request)
-    {
+    {   
+        $this->authorize('admin');
         $user = User::where('role_id','=',0)->get();
         $voucher = voucher::find($id);
         $start_date = $voucher->start_date;

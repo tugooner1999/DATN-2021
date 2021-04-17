@@ -9,10 +9,11 @@ class CartController extends Controller
 {
     //
     public function index(){
-        
+        $this->authorize('member');
         return view('client.cart.index');
     }
     public function addToCart(Request $rq){
+        $this->authorize('member');
         $id = $rq ->id;
         $product = Product::where('id',$id)->first();
         if($product){

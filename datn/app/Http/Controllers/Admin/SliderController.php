@@ -14,6 +14,7 @@ class SliderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        $this->authorize('admin');
         $slider = Slider::all();
         $slider = Slider::paginate(5);
         return view('admin.slider.index', [
@@ -21,6 +22,7 @@ class SliderController extends Controller
         ]);
     }
     public function addSlider(Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ]; // mảng để truyền dữ liệu ra view
         if($request->isMethod('POST')){
             $rule = [
@@ -72,8 +74,8 @@ class SliderController extends Controller
         return view('admin.slider.addSlider');
     }
     public function destroy($id, Request $request){
+        $this->authorize('admin');
         $dataView = [ 'errs'=>[]];
-        
         $objU = Slider::where('id',$id)->first();
         $dataView['objU'] = $objU;  
         if($request){
@@ -82,6 +84,7 @@ class SliderController extends Controller
             }
     }
     public function editSlider($id, Request $request){
+        $this->authorize('admin');
         $dataView = ['errs'=>[] ];
 
         // lấy thông tin User để hiển thị ra form

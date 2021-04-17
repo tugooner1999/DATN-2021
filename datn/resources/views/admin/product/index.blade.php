@@ -20,10 +20,6 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
-                    <div class="app-search hidden-sm hidden-xs m-r-10">
-                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid" type="text" placeholder="Tìm kiếm" aria-label="Search">
-                    </div>
-                    </br>
                     <p class="success" style="color:green; font-size:20px; font-weight:bold;">
                         <?php
                         $message = Session::get('message');
@@ -34,46 +30,32 @@
                     ?>
                     </p>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên</th>
                                     <th>Ảnh</th>
+                                    <th>Tên</th>
+                                    <th>SL</th>
+                                    <th>Loại hình</th>
+                                    <th>Danh mục</th>
                                     <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th><select class="sort1">
-                                                    <option value="all">All Loại hình</option>
-                                                    <option value="2">Thông thường</option>
-                                                    <option value="1">Đi chợ</option>
-                                                </select></th>
-                                    <th>
-                                    <select class="sort2">
-                                        <option value="all">All Danh Mục</option>
-                                        @foreach($category as $cate)
-                                            <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                        @endforeach
-                                    </select></th>
-                                    
-                                    </th>
-                                    <th>Lượt xem</th>
-                                    <th>Ngày cập nhật</th>
+                                    <th>View</th>
                                     <th><a href="{{route('admin.createProduct')}}" class="btn btn-primary">Thêm</a></th>
                                 </tr>
                             </thead>
-                            <tbody id="FilterContainer">
+                            <tbody>
                                 @foreach($pro as $no => $item)
-                                <tr class="column" data-data1="{{$item->allow_market}}" data-data2="{{$item->category_id}}">
+                                <tr>
                                     <td>{{$item->id}}</td>
-                                    <td style="font-weight:bold;">{{$item->name}}</td>
                                     <td><img src="{{$item->image_gallery}}" alt=""
-                                            height="150" width="150"></td>
-                                    <td>{{$item->price}}</td>
-                                    <td>{{$item->quantily}}</td>
-                                    <td>{{$item->allow_market == 1 ? "Đi chợ" : "Thông thường"}}</td>
+                                            height="100px" width="100px"></td>
+                                    <td style="font-weight:bold;">{{$item->name}}</td>
+                                    <td>{{$item->quantily}} SP</td>
+                                    <td>{{$item->allow_market == 2 ? "Đi chợ" : "Thông thường"}}</td>
                                     <td>{{isset($item->category) ? $item->category->name : ''}}</td>
-                                    <td>{{$item->views}}</td>
-                                    <td>{{$item->update_at}}</td>
+                                    <td>{{number_format($item->price)}}đ</td>
+                                    <td>{{$item->views > 0 ? $item->views : '0'}} <i class="fa fa-eye text-primary" aria-hidden="true"></i></td>
                                     <td style="font-size: 20px;">
                                         <a style="padding-left: 10px;"
                                             href="{{URL::to('/admin/products/edit/'.$item->id)}}"><i
@@ -86,10 +68,20 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr style="border-top: 2px solid #000">
+                                    <th style="visibility:hidden;">#</th>
+                                    <th style="visibility:hidden;">Ảnh</th>
+                                    <th style="border:none">Tên</th>
+                                    <th style="border:none">SL</th>
+                                    <th style="border:none">Loại hình</th>
+                                    <th style="border:none">Danh mục</th>
+                                    <th style="visibility:hidden;">Giá</th>
+                                    <th style="visibility:hidden;">View</th>
+                                    <th style="visibility:hidden;">Hành động</th>
+                                </tr>
+                            </tfoot>
                         </table>
-                        <div class="col-xs-12 offset-xs-8 text-center pull-right ">
-                            {{$pro->links()}}
-                        </div>
                     </div>
                 </div>
             </div>

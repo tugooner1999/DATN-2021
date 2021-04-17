@@ -22,4 +22,7 @@ class HomepageController extends Controller
         ]);
         return view('client.homepage.index',compact('cates','slider','product'));
     }
+    public function client_admin(){
+        return view('welcome');
+    }
 }
