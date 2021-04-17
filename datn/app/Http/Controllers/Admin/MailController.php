@@ -5,17 +5,18 @@ use Carbon\Carbon;
 use App\Models\Voucher;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Models\Voucher_type;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Auth\Access\AuthorizationException;
 class MailController extends Controller
 {
-    public function sendMailVoucher($id,Request $Request)
-    {   
+    /**
+     * @throws AuthorizationException
+     */
+    public function sendMailVoucher($id): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
-        $user = User::where('role_id','=',1)->get();
+        $user = User::where('role_id','=',0)->get();
         $voucher = voucher::find($id);
         $start_date = $voucher->start_date;
         $finish_date = $voucher->finish_date;
@@ -30,9 +31,9 @@ class MailController extends Controller
         foreach($user as $vip){
             $data['email'][]=$vip->email;
         }
-        
+
         $voucher = [
-            'start_date'=> $start_date, 
+            'start_date'=> $start_date,
             'finish_date'=> $finish_date,
             'amount'=>$amount,
             'status'=>$status,

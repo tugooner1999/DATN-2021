@@ -4,21 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Gallery;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Database\Eloquent\Collection::intersect()
 use Illuminate\Support\Facades\Session;
 session_start();
 
 class ProductController extends Controller
 {
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index(Request $request){
         $this->authorize('admin');
         $category = Category::all();
@@ -26,12 +28,18 @@ class ProductController extends Controller
         return view('admin.product.index',compact('pro','category'));
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function create_product(){
         $this->authorize('admin');
         $cates = Category::all();
         return view('admin.product.add-product', compact('cates'));
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit_product($id){
         $this->authorize('admin');
         $cate_product = Category::all();
@@ -39,21 +47,29 @@ class ProductController extends Controller
         return view('admin.product.edit-product', compact('cate_product','edit_product'));
     }
 
-    public function deleteProduct($id){
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function deleteProduct($id): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
         Product::destroy($id);
         Session::put('message','Xoá sản phẩm thành công');
-        return  redirect()->back();; 
+        return  redirect()->back();;
     }
 
-    public function addProduct(ProductRequest $request){
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function addProduct(ProductRequest $request): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
         $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $data = $_POST;
         $product = new Product();
         $product->fill($data);
         $product->create_at= $dt_create;
-        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;
+        $product->allow_market= $_POST['allow_market'] ?? 1;
             $rule = ['image_gallery'=>'required|image'];
             $msgE = ['image_gallery.required'=>'Không để trống ảnh của Danh mục',];
             $validator = Validator::make($request->all(), $rule, $msgE);
@@ -87,6 +103,6 @@ class ProductController extends Controller
         $product->views = +1;
         $product->save();
         Session::put('message','Cập nhật sản phẩm thành công');
-        return Redirect::to('/admin/products');  
+        return Redirect::to('/admin/products');
     }
 }

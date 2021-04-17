@@ -6,7 +6,7 @@
 <div class="slider-area">
     <div class="slider-active-3 owl-carousel slider-hm8 owl-dot-style">
         <!-- Slider Single Item Start -->
-        @foreach ($slider as $ad)    
+        @foreach ($slider as $ad)
         <div class="slider-height-6 d-flex align-items-start justify-content-start bg-img"
             style="background-image: url({{$ad->image}});">
             <div class="container">
@@ -104,7 +104,7 @@
                         <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
                     </a>
                 </div>
-                
+
                 <ul class="product-flag">
                     <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                 </ul>
@@ -126,12 +126,12 @@
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a 
-                        @if(Auth::check()) 
+                        <li class="cart"><a
+                        @if(Auth::check())
                         class="cart-btn"
                         product-id='{{$item->id}}'
                         @else
-                        href="{{route('client.login')}}" 
+                        href="{{route('client.login')}}"
                         @endif
                         >Thêm vào giỏ</a></li>
                         <li>
@@ -139,8 +139,8 @@
                         </li>
                     </ul>
                 </div>
-            </article>  
-        @endforeach    
+            </article>
+        @endforeach
         </div>
         <!-- Best Sells Carousel End -->
     </div>
@@ -164,22 +164,22 @@
             <!-- Single item -->
             @foreach($cates as $item)
             <div class="category-item">
-                <div class="category-list mb-30px">
+                <div class="category-list mb-30px" style="border: outset;">
                     <div class="category-thumb">
-                        <a href="shop-4-column.html">
-                            <img src="{{$item->image}}" alt="" with="200" height="200"/>
+                        <a href="{{route('client.shop')}}">
+                            <img src="{{$item->image}}" alt="" width="" height="200"/>
                         </a>
                     </div>
                     <div class="desc-listcategoreis">
                         <div class="name_categories">
-                            <h4 style = "color: white">{{$item->name}}</h4>
+                            <h4>{{$item->name}}</h4>
                         </div>
-                        <span class="number_product" style = "color: red">{{ count($item->products) }}</span>
-                        <span class="number_product">{{count($item->products)}}</span>
+                        <span class="number_product" >{{count($item->products) }} Sản phẩm</span>
+                        <a href="{{route('client.shop')}}"> Shop Now <i class="ion-android-arrow-dropright-circle"></i></a>
                     </div>
                 </div>
             </div>
-            @endforeach            
+            @endforeach
         </div>
     </div>
 </section>
@@ -200,8 +200,8 @@
         <!-- Feature Slider Start -->
         <div class="feature-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
-           
-                
+
+
              @foreach ($product as $item)
              <div class="feature-slider-item">
              <article class="list-product">
@@ -228,8 +228,8 @@
                     </div>
                 </article>
                 </div>
-        @endforeach 
-            
+        @endforeach
+
             <!-- Feature Slider End -->
         </div>
 </section>

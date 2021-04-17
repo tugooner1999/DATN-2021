@@ -66,11 +66,11 @@
                             <div class="row">
                             @foreach ($list_promarket as $item)
                                 <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
-                                
+
                                 <article class="list-product">
                                     <div class="img-block">
                                         <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                                            <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
+                                            <img src="../{{$item->image_gallery}}" alt="" width="256" height="256"/>
                                         </a>
                                     </div>
                                     <ul class="product-flag">
@@ -102,19 +102,19 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </article>  
-                            
+                                </article>
+
                                 </div>
-                                @endforeach    
+                                @endforeach
                             </div>
 
                         </div>
-            
+
                     </div>
                     <!-- Shop Tab Content End -->
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center">
-                    
+
                         <ul>
                             <li>
                             {{$list_promarket->links()}}
@@ -136,7 +136,7 @@
                         <!-- Sidebar single item -->
                         <div class="sidebar-widget">
                             <h4 class="pro-sidebar-title">Danh mục</h4>
-                          
+
                             <div class="sidebar-widget-list">
                                 <ul>
                                     @foreach($cates as $item)
@@ -147,10 +147,10 @@
                                             <span class="checkmark"></span>
                                         </div>
                                     </li>
-                                    @endforeach   
+                                    @endforeach
                                 </ul>
                             </div>
-                            
+
                         </div>
                         <!-- Sidebar single item -->
                     </div>

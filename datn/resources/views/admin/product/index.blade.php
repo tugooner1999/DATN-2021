@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ảnh</th>
+                                    <th>Toàn bộ ảnh</th>
                                     <th>Tên</th>
                                     <th>SL</th>
                                     <th>Loại hình</th>
@@ -50,6 +51,34 @@
                                     <td>{{$item->id}}</td>
                                     <td>
                                     <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
+                                    </td>
+                                    <td style="text-align: center;">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                                            Show
+                                    </button>
+                                        <div class="modal fade" id="myModal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Toàn bộ sản phẩm : {{$item->name}}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body" style="text-align: center;">
+                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
+                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
+                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
+
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Thêm ảnh cho sản phẩm</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td style="font-weight:bold;">{{$item->name}}</td>
                                     <td>{{$item->quantily}} SP</td>
