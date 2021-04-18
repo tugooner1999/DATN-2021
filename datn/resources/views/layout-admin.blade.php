@@ -122,6 +122,22 @@ $.ajaxSetup({
                 }
             })
         })
+        $('.btn-outline-info').click(function(){
+            var url = $(this).attr('data-url');
+					if (confirm('Bạn có chắc muốn xóa không?')) {
+						$.ajax({
+							type: 'get',
+							url: url,
+							success: function(response) {
+                                window.location.reload()
+                                toastr.success('Xóa thành công', 'Thông báo')
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								//xử lý lỗi tại đây
+							}
+						})
+					}
+				})
     </script>
 
 </body>

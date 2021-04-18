@@ -37,6 +37,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
         Route::match(['get','post'], '/products/update/{id}',  [Admin\ProductController::class, 'updateProduct'])->name('admin.updateProduct');
         Route::get('/product/{id}',[Admin\ProductController::class, 'show'])->name('product-show');
+        Route::get('product/edit/{id}',[Admin\ProductController::class, 'destroy'])->name('product-delete');
+
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');

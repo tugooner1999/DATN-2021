@@ -42,6 +42,14 @@
                             @enderror
                             </div>
                         </div>
+                        <img id="image" src="{{$item->image_gallery}}" width="100%"  height="300px"/>
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
+                        </div>
+                        @error('image_gallery')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
@@ -92,23 +100,28 @@
                 </div>
                 <div class="col-md-4 col-xs-12">
                     <div class="white-box">
-                        <img id="image" src="{{$item->image_gallery}}" width="100%" height="300px"/>
-                        <div class="form-group">
-                            <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
-                        </div>
-                        @error('image_gallery')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                        @for($i = 1 ; $i <= 6 ; $i++)
+                            <div class="form-group">
+                            <label class="col-sm-12">Tải thêm ảnh mới {{$i}}</label>
+                            <input class="col-sm-12" name="gallery_img[]" type="file">
+                            </div>
+                        @endfor
                     </div>
+                    </form>
+                    @endforeach
+
                     <div class="white-box">
+                    <label class="col-sm-12">Toàn bộ ảnh sản phẩm: <b>{{count($product_img)}}</b></label>
                         @foreach($product_img as $item)
-                        <img src="{{$item->gallery_img}}" alt="" width= '110px' height ="170px">
+                        <div class="col-sm-12" style="width: 50%;margin: 10px 0">
+                        <img src="{{$item->gallery_img}}"  width="110px" height ="170px">
+                        <button  data-url="{{route('product-delete',['id' => $item->id])}}"  type="button" 
+                        data-target="#delete" data-toggle="modal" class="btn btn-outline-info" 
+                        style="margin-left: -86px;font-weight: bold;color: white;">Xóa</button>
+                        </div>  
                         @endforeach
                     </div>
                 </div>
-            </form>
-            @endforeach
         </div>
     </div>
 </div>

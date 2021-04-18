@@ -93,7 +93,7 @@ class ProductController extends Controller
             $product_img = new Gallery();
             if(isset($file)){
                 $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
-                $product_img->image_gallery =str_replace("public/", "public/", $path);
+                $product_img->gallery_img =str_replace("public/", "public/", $path);
                 $product_img->product_id = $product_id;
                 $product_img->save();
             }
@@ -121,6 +121,18 @@ class ProductController extends Controller
         $product->allow_market= $_POST['allow_market'] ?? 1;
         $product->views = +1;
         $product->save();
+        $product_id = $product->id;
+        if($request->hasFile('gallery_img')){
+            foreach($request->File('gallery_img') as $file){
+            $product_img = new Gallery();
+            if(isset($file)){
+                $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
+                $product_img->gallery_img =str_replace("public/", "public/", $path);
+                $product_img->product_id = $product_id;
+                $product_img->save();
+            }
+        }
+        }
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');
     }
@@ -130,5 +142,10 @@ class ProductController extends Controller
         foreach($gallery as $gallery){
         return response()->json(['data'=>$gallery,'message'=>'không có ảnh sản phẩm'],200); // 200 là mã lỗi
         }
+    }
+    public function destroy($id)
+    {
+        Gallery::destroy($id);
+        return response()->json(['data'=>'removed'],200);
     }
 }

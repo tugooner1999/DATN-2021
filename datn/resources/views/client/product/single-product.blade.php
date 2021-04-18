@@ -37,9 +37,9 @@
                             <img src="../../{{$product->image_gallery}}" alt="" />
                         </a>
                         @foreach($img_url as $img)
-                        <a data-image="../../{{$img->img_url}}"
-                            data-zoom-image="../../{{$img->img_url}}">
-                            <img src="../../{{$img->img_url}}" alt="" />
+                        <a data-image="../../{{$img->gallery_img}}"
+                            data-zoom-image="../../{{$img->gallery_img}}">
+                        <img class="active" src="../../{{$img->gallery_img}}" alt="" />
                         </a>
                         @endforeach
                     </div>
