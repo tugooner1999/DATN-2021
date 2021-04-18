@@ -101,6 +101,11 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                     </div>
+                    <div class="white-box">
+                        @foreach($product_img as $item)
+                        <img src="{{$item->gallery_img}}" alt="" width= '110px' height ="170px">
+                        @endforeach
+                    </div>
                 </div>
             </form>
             @endforeach

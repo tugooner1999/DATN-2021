@@ -70,6 +70,16 @@
                                 </select>
                             </div>
                         </div>
+                        <img id="image" src="../public/uploads/products/image-default.png" width="auto" height="300px" alt="">
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
+                        </div>
+                        @error('image_gallery')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        <hr>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market" id="allow_market" value="2" >
                             <label class="form-check-label" for="exampleCheck1" style="padding: 0 20px;">Sản phẩm để đi chợ</label>
@@ -84,15 +94,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px" alt="">
-                        <hr>
-                        <div class="form-group">
-                            <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
-                        </div>
-                        @error('image_gallery')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                        @for($i = 1 ; $i <= 6 ; $i++)
+                            <div class="form-group">
+                            <label class="col-sm-12">Tải thêm ảnh mới {{$i}}</label>
+                            <input class="col-sm-12" name="gallery_img[]" type="file">
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </form>

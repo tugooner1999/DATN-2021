@@ -36,7 +36,7 @@ class ProductController extends Controller
         $product= Product::find($id);
         $id_cate = $product->category_id;
         $cates = Product::all()->where('category_id', $id_cate);
-        $img_url = Gallery::all()->where('product_id' , $id);
+        $img_url = Gallery::all()->where('id' , $id);
         return view('client.product.single-product',compact('product','img_url','cates'));
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use Illuminate\Database\Query;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,8 @@ class ProductController extends Controller
         $this->authorize('admin');
         $category = Category::all();
         $pro = Product::all();
-        return view('admin.product.index',compact('pro','category'));
+        $gallery = Gallery::all();
+        return view('admin.product.index',compact('gallery','pro','category'));
     }
 
     /**
@@ -44,7 +46,8 @@ class ProductController extends Controller
         $this->authorize('admin');
         $cate_product = Category::all();
         $edit_product = DB::table('products')->where('id', $id)->get();
-        return view('admin.product.edit-product', compact('cate_product','edit_product'));
+        $product_img = Gallery::all()->where('product_id',$id);
+        return view('admin.product.edit-product', compact('cate_product','product_img','edit_product'));
     }
 
     /**
@@ -54,6 +57,7 @@ class ProductController extends Controller
     {
         $this->authorize('admin');
         Product::destroy($id);
+        DB::table('galleries')->where('product_id',$id)->delete();
         Session::put('message','Xoá sản phẩm thành công');
         return  redirect()->back();;
     }
@@ -71,7 +75,7 @@ class ProductController extends Controller
         $product->create_at= $dt_create;
         $product->allow_market= $_POST['allow_market'] ?? 1;
             $rule = ['image_gallery'=>'required|image'];
-            $msgE = ['image_gallery.required'=>'Không để trống ảnh của Danh mục',];
+            $msgE = ['image_gallery.required'=>'Không để trống ảnh của sản phẩm',];
             $validator = Validator::make($request->all(), $rule, $msgE);
             if ($validator->fails()) {
                 $request->flash();
@@ -83,11 +87,27 @@ class ProductController extends Controller
         }
         $product->views = 1;
         $product->save();
+        $product_id = $product->id;
+        if($request->hasFile('gallery_img')){
+            foreach($request->File('gallery_img') as $file){
+            $product_img = new Gallery();
+            if(isset($file)){
+                $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
+                $product_img->image_gallery =str_replace("public/", "public/", $path);
+                $product_img->product_id = $product_id;
+                $product_img->save();
+            }
+        }
+        }
         Session::put('message','Thêm sản phẩm thành công');
         return Redirect::to('/admin/products');
     }
 
-    public function updateProduct(ProductRequest $request,$id){
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateProduct(ProductRequest $request, $id): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
         $dt_update = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $product = Product::find($id);
@@ -98,11 +118,17 @@ class ProductController extends Controller
             $product->image_gallery =str_replace("public/", "public/", $path);
         }
         $product->update_at= $dt_update;
-        $product->allow_market=isset($_POST['allow_market'])
-        ? $_POST['allow_market'] : 1;
+        $product->allow_market= $_POST['allow_market'] ?? 1;
         $product->views = +1;
         $product->save();
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('/admin/products');
+    }
+    public function show($id)
+    {
+        $gallery = Gallery::all()->where('id',$id);
+        foreach($gallery as $gallery){
+        return response()->json(['data'=>$gallery,'message'=>'không có ảnh sản phẩm'],200); // 200 là mã lỗi
+        }
     }
 }
