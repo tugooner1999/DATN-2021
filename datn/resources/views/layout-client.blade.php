@@ -108,8 +108,7 @@
                                     sessionStorage.setItem("typeVoucher",result.data.type);
                                     sessionStorage.setItem('voucherValue',result.data.value);
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(result.data.value) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - result.data.value) + " VNĐ")
-                                    
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - result.data.value) + " VNĐ") 
                                 }
                                 
                             }

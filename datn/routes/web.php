@@ -105,7 +105,8 @@ Route::prefix('admin')->group(function () {
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
-        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+        Route::post('/contact', [Client\ContactController::class , 'postcontact'])->name('client.postcontact');
+
         // Add voucher
         Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart

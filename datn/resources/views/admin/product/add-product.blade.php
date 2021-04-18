@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Tên sản phẩm</label>
                             <div class="col-md-12">
-                                <input type="text" value="" name="name" class="form-control form-control-line" value="{{(old('name'))}}">
+                                <input type="text" name="name" class="form-control form-control-line" value="{{(old('name'))}}">
                             @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -96,7 +96,7 @@
                         </div>
                         @error('image_gallery')
                             <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                        @enderror
                     </div>
                     
                 </div>

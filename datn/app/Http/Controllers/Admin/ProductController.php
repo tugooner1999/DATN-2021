@@ -53,11 +53,15 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($data);
         $product->create_at= $dt_create;
-        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;  
+        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;
+            $rule = ['image_gallery'=>'required|image'];
+            $msgE = ['image_gallery.required'=>'Không để trống ảnh của Danh mục',];
+            $validator = Validator::make($request->all(), $rule, $msgE);
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->route('admin.addProduct')->withErrors($validator);
+            }
         if($request->hasFile('image_gallery')){
-            $request->validate([
-                'image_gallery' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $path = $request->file('image_gallery')->move('frontend/images', $request->file('image_gallery')->getClientOriginalName());
             $product->image_gallery =str_replace("public/", "public/", $path);
         }
@@ -75,9 +79,6 @@ class ProductController extends Controller
         $data= $_POST;
         $product->fill($data);
         if($request->hasFile('image_gallery')){
-            $request->validate([
-                'image_gallery' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $path = $request->file('image_gallery')->move('frontend/images', $request->file('image_gallery')->getClientOriginalName());
             $product->image_gallery =str_replace("public/", "public/", $path);
         }

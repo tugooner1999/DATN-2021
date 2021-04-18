@@ -20,7 +20,6 @@
                             <div class="white-box">
                             
                                 <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data" >
-                                    
                                     @csrf
                                     <div class="form-group">
                                         <label class="col-md-12">Tên danh mục</label>
@@ -28,8 +27,8 @@
                                             <input type="text" name ="name"  class="form-control form-control-line" value="{{ old('name') }}"> </div>
                                     </div>
                                     @error('name')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                                     <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
                                             alt="">
                                     <hr>
@@ -38,8 +37,8 @@
                                         <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                                     </div>
                                     @error('image')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-danger">Thêm mới</button>
