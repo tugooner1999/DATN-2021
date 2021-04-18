@@ -111,6 +111,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
+        Route::post('/check-out', [Client\CartController::class , 'checkOut'])->name('client.checkOut');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
         Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
         Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
