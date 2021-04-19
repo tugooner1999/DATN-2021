@@ -11,7 +11,6 @@ class ContactController extends Controller
 {
     //
     public function index(){
-        $this->authorize('member');
         return view('client.contact.index');
     }
 

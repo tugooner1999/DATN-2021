@@ -13,8 +13,10 @@ use App\Models\Product;
 class HomepageController extends Controller
 {
     //
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index(){
-        $this->authorize('member');
         $cates = Category::all();
         $slider = Slider::all();
         $product = Product::all();

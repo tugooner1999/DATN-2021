@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    //
+    //trang giới thiệu (about)
+
     public function index(){
-        $this->authorize('member');
         return view('client.about.index');
     }
 }

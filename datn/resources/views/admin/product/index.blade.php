@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ảnh</th>
+                                    <th>Toàn bộ ảnh</th>
                                     <th>Tên</th>
                                     <th>SL</th>
                                     <th>Loại hình</th>
@@ -49,17 +50,34 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>
-                                    <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-    <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
-    </button>
-    <ul class="dropdown-menu">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-      <img src="{{$item->image_gallery}}" alt="" height="100px" width="100px">
-    </ul>
-  </div>
+                                    <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button type="button" data-url="{{route('product-show',['id' => $item->id])}}" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
+                                            Show
+                                    </button>
+                                        <div class="modal fade" id="show">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Toàn bộ ảnh sản phẩm :</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body" style="text-align: center;">
+                                                    <p id="id">
+                                                    <p>
+                                                    
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Thêm ảnh cho sản phẩm</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td style="font-weight:bold;">{{$item->name}}</td>
                                     <td>{{$item->quantily}} SP</td>

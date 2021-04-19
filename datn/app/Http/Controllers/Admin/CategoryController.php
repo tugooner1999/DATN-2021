@@ -5,26 +5,30 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use DB;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Session;
-use App\Models;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
 class CategoryController extends Controller
 {
     //
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index(){
         $this->authorize('admin');
         $cates = Category::all();
         $cates->load([
             'products'
         ]);
-        
+
         return view('admin.category.index', [
             'category' => $cates
         ]);
     }
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function addCategory(Request $request){
         $this->authorize('admin');
         if($request->isMethod('POST')){
@@ -59,13 +63,21 @@ class CategoryController extends Controller
         return view('admin.category.addCate');
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit_category($id, Request $request){
         $this->authorize('admin');
         $dataView = ['errs'=>[] ];
         $objU = Category::where('id',$id)->first();
         return view('admin.category.editCate',compact('objU','dataView'));
     }
-    public function update_category(CategoryRequest $request,$id){
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update_category(CategoryRequest $request, $id): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
         $Category = Category::find($id);
         $Category->fill($request->all());
@@ -77,12 +89,17 @@ class CategoryController extends Controller
         Session::put('message','Cập nhật danh mục thành công');
         return redirect()->route('admin.listCate');
     }
-    public function destroy($id, Request $request){
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy($id, Request $request): \Illuminate\Http\RedirectResponse
+    {
         $this->authorize('admin');
         $dataView = [ 'errs'=>[]];
         // lấy thông tin cate để hiển thị ra form
         $objU = category::where('id',$id)->first();
-        $dataView['objU'] = $objU;  
+        $dataView['objU'] = $objU;
         if($request){
                 $objU->delete();
                 Session::put('message','Xóa danh mục thành công');
@@ -90,5 +107,5 @@ class CategoryController extends Controller
             }
     }
 
-    
+
 }
