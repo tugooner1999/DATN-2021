@@ -59,7 +59,7 @@
                         </div>
                         <span class="read-review"><a class="reviews" href="#">Bình luận (1)</a></span>
                     </div>
-                    <p>{{$product->description}}</p>
+                    <div>{{$product->description}}</div>
                     <div class="pricing-meta">
                         <ul>
                             <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>

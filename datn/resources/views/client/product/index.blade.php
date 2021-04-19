@@ -70,7 +70,7 @@
                                 <article class="list-product">
                                     <div class="img-block">
                                         <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                                            <img src="../{{$item->image_gallery}}" alt="" width="256" height="256"/>
+                                            <img src="{{asset($item->image_gallery)}}" alt="" width="256" height="256"/>
                                         </a>
                                     </div>
                                     <ul class="product-flag">
@@ -142,7 +142,7 @@
                                     @foreach($cates as $item)
                                     <li>
                                         <div class="sidebar-widget-list-left">
-                                            <input type="checkbox"  /> <a href="{{ route('client.shop') }}">{{ $item->name }} ({{ count($item->products) }})</span>
+                                            <input type="checkbox"/><a href="{{route('client.cate-product',['id'=>$item->id])}}">{{ $item->name }} ({{ count($item->products) }})</span>
                                             </a>
                                             <span class="checkmark"></span>
                                         </div>

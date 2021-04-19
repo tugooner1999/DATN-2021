@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="description" class="form-control form-control-line">{{(old('description'))}}</textarea>
+                                <textarea rows="5"  name="description" id="description" class="form-control form-control-line">{{(old('description'))}}</textarea>
                                 @error('description')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

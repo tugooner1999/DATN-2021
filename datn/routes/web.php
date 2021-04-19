@@ -30,8 +30,8 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-    Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-    Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
+        Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
+        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
         Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
         Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
         Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
@@ -94,6 +94,7 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/shop/{id}', [Client\ProductController::class , 'cate_product'])->where('id', '[0-9]+')->name('client.cate-product');
         Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
 
