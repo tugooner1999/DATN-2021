@@ -12,7 +12,6 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Rating;
 use DB;
-use Illuminate\Database;
 
 class ProductController extends Controller
 {
@@ -30,13 +29,10 @@ class ProductController extends Controller
     public function allow_market(){
         $this->authorize('member');
         $list_product = Product::where('allow_market','2')->paginate(12);
-        $id = Product::where('allow_market','2')->paginate(12);
-        
         $cates  = Category::all();
         return view('client.product.index', compact('list_product','cates'));
 
     }
-
     public function single_Product($id){
         $product= Product::find($id);
         // comment

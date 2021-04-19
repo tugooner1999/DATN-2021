@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Voucher;
-use App\Models\User;
+use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
@@ -17,6 +17,7 @@ class MailController extends Controller
     {
         $this->authorize('admin');
         $user = User::where('role_id','=',0)->get();
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $voucher = voucher::find($id);
         $start_date = $voucher->start_date;
         $finish_date = $voucher->finish_date;
@@ -41,12 +42,16 @@ class MailController extends Controller
             'type'=>$type,
             'code'=>$code
         ];
-        if($voucher['status'] == 1){
-            Mail::send('admin.sendmail.senMailVoucher',compact('voucher'), function($message) use ($title_mail,$data){
-                $message->to($data['email'])->subject($title_mail);
-                $message->from($data['email'],$title_mail);
-            });
-            Session::put('message','Gửi mãi khuyến mại thành công');
+        if($voucher['status'] ==1){
+            if($finish_date >= $today){ 
+                Mail::send('admin.sendmail.senMailVoucher',compact('voucher'), function($message) use ($title_mail,$data){
+                    $message->to($data['email'])->subject($title_mail);
+                    $message->from($data['email'],$title_mail);
+                });
+                Session::put('message','Gửi mãi khuyến mại thành công');
+            }else{
+                Session::put('message','Gửi mãi khuyến mại thất bại');
+             }
         }
         if($voucher['status'] == 2){
             Session::put('message','Gửi mãi khuyến mại thất bại');

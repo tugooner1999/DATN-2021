@@ -21,6 +21,13 @@ Route::prefix('admin')->group(function () {
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
 
+        // about
+        Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
+        Route::get('/about/add', [Admin\AboutController::class , 'create_about'])->name('admin.createAbout');
+        Route::post('about/add', [Admin\AboutController::class , 'saveAbout'])->name('admin.saveAbout');
+        Route::match(['get','post'],'/about/delete/{id}',[Admin\AboutController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleAbout');
 
         // category
         Route::get('/categories', [Admin\CategoryController::class , 'index'])->name('admin.listCate');
@@ -107,7 +114,8 @@ Route::prefix('admin')->group(function () {
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
-        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+        Route::post('/contact', [Client\ContactController::class , 'postcontact'])->name('client.postcontact');
+
         // Add voucher
         Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart

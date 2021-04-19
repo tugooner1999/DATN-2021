@@ -68,7 +68,7 @@
                                                 <?php 
                                                     if ($item->type==1) {
                                                     ?>
-                                                    Giảm {{ number_format($item->value) }}đ
+                                                    Giảm {{ number_format($item->value) }}VND
                                                 <?php 
                                                 }else {
                                                 ?>
@@ -89,7 +89,7 @@
                                         @endforeach
                                     </tbody>
                                     <tfoot>
-                                        <tr>
+                                        <tr style="">
                                             <th style="visibility:hidden;">ID</th>
                                             <th style="visibility:hidden;">Tên Voucher</th>
                                             <th style="visibility:hidden;">Mã code</th>

@@ -20,7 +20,6 @@ class VoucherController extends Controller
         $this->authorize('admin');
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $voucher = Voucher::all();
-        $voucher = Voucher::paginate(5);
         return view('admin.voucher.index',compact('voucher','today'));
 
     }
@@ -134,8 +133,8 @@ class VoucherController extends Controller
     public function destroy($id)
     {   
         $this->authorize('admin');
-        $User = Voucher::find($id);
-        $User->delete();
+        $voucher = Voucher::find($id);
+        $voucher->delete();
         return back();
         
     }

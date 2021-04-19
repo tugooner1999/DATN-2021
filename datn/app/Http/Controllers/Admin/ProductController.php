@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
-use App\Models\Rating;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-use Illuminate\Database\Query;
-use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -90,18 +88,7 @@ class ProductController extends Controller
         }
         $product->views = 1;
         $product->save();
-        $product_id = $product->id;
-        if($request->hasFile('gallery_img')){
-            foreach($request->File('gallery_img') as $file){
-            $product_img = new Gallery();
-            if(isset($file)){
-                $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
-                $product_img->gallery_img =str_replace("public/", "public/", $path);
-                $product_img->product_id = $product_id;
-                $product_img->save();
-            }
-        }
-        }
+        dd($data);die;
         Session::put('message','Thêm sản phẩm thành công');
         return Redirect::to('/admin/products');
     }

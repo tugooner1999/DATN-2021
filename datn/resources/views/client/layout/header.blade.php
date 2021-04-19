@@ -81,6 +81,7 @@
                                     <a href="{{route('client.cart')}}" class="count-cart"></a>
                                 </div>
                             </div> -->
+                            
                             <!--Cart info End -->
                         </div>
                     </div>

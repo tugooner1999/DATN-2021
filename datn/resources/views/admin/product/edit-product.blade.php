@@ -32,6 +32,9 @@
                             @enderror
                             </div>
                         </div>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
@@ -42,6 +45,7 @@
                             @enderror
                             </div>
                         </div>
+<<<<<<< HEAD
                         <img id="image" src="{{$item->image_gallery}}" width="100%"  height="300px"/>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
@@ -50,6 +54,11 @@
                         @error('image_gallery')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+=======
+                        @error('price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+>>>>>>> e73721976a616c3fef98db1679ea4d6126495793
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
@@ -59,6 +68,9 @@
                             @enderror
                             </div>
                         </div>
+                        @error('quantily')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
@@ -69,6 +81,9 @@
                             @enderror
                             </div>
                         </div>
+                        @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">

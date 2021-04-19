@@ -10,11 +10,9 @@
 .list_start i:hover {
     cursor: pointer;
 }
-
 .rating-product {
     margin-bottom: 0;
 }
-
 .list_text {
     display: inline-block;
     margin-left: 10px;
@@ -27,7 +25,6 @@
     border-radius: 2px;
     display: none;
 }
-
 .list_text:after {
     right: 100%;
     top: 50%;
@@ -42,11 +39,9 @@
     border-width: 6px;
     margin-top: -6px;
 }
-
 .list_start .rating_active {
     color: #ff9705;
 }
-
 .rating-active .active {
     color: #ff9705 !important;
 }
@@ -297,7 +292,7 @@
                                         <p style="font-weight:bold;margin-bottom:0;">Chọn đánh giá của bạn </p>
                                         <span class="list_start" ; style="margin:0 30px;">
 
-                                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{ $i }}"
+                                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{$i}}"
                                                 style="padding: 0 3px;"></i>
                                                 @endfor
                                         </span>
@@ -430,18 +425,15 @@ $(function() {
         let $this = $(this);
         let number = $this.attr('data-key');
         listStart.removeClass('rating_active');
-
         $(".number_rating").val(number);
         $.each(listStart, function(key, value) {
             if (key + 1 <= number) {
                 $(this).addClass('rating_active')
             }
         });
-
         $(".list_text").text('').text(listRatingText[$this.attr('data-key')]).show();
         console.log(number);
     });
-
     $(".js_rating_product").click(function(e) {
         event.preventDefault();
         let number = $(".number_rating").val();

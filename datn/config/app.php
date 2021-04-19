@@ -233,7 +233,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-
     ],
 
 ];
