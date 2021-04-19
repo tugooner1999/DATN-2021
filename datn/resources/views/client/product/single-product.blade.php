@@ -297,7 +297,7 @@
                                         <p style="font-weight:bold;margin-bottom:0;">Chọn đánh giá của bạn </p>
                                         <span class="list_start" ; style="margin:0 30px;">
 
-                                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{$i}}"
+                                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{ $i }}"
                                                 style="padding: 0 3px;"></i>
                                                 @endfor
                                         </span>
