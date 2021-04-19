@@ -27,9 +27,9 @@ class AuthController extends Controller
             }else{
                 Auth::logout();  // xử lý logout
                 Session::flush(); // xóa hết các session khác
+                Session::put('message','Tài khoản của bạn đã bị khóa vui lòng đăng nhập bằng tài khoản khác');
                 return redirect()->route('client.login.err');
-            }
-            
+            }  
         }
         return back()->withErrors([
             'msg' => 'Tài khoản/mật khẩu không đúng',

@@ -24,11 +24,13 @@ class Product extends Model
         'pro_total_number',
     ];
 
-    public function category(){
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function saveUpdate($id, $objPro){
+    public function saveUpdate($id, $objPro): int
+    {
         return DB::table($this->table)
             ->where('id',$id)
             ->update($objPro);

@@ -30,11 +30,19 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function($user){
             if($user->role_id == 1){
-                return true;
+                if($user->status == 0){
+                    return true;
+                }
+                if($user->status == 1){
+                    Auth::logout();  // xử lý logout
+                    Session::flush();
+                    return false;
+                }
             }
             if($user->role_id == 0){
                 return false;
             }
+
         });
         Gate::define('member', function($user){
             if($user->status == 0){

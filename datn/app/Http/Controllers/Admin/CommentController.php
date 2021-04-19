@@ -15,7 +15,11 @@ session_start();
 class CommentController extends Controller
 {
     //
-    public function index(Request $request){
+    // public function index(Request $request){
+    // /**
+    //  * @throws \Illuminate\Auth\Access\AuthorizationException
+    //  */
+    public function index(){
         $this->authorize('admin');
         $user_comment = User::all();
         $product_comment = Product::all();

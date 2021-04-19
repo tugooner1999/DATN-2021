@@ -14,6 +14,9 @@ use App\Models\Product;
 class HomepageController extends Controller
 {
     //
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index(){
         $cates = Category::all();
         $slider = Slider::all();

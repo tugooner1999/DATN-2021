@@ -11,7 +11,8 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
         $this->authorize('admin');
@@ -37,9 +38,9 @@ class SliderController extends Controller
                 'image.image'=>'Ảnh phải có đuôi là file(jpeg, png, bmp, gif, or svg)'            ];
             $validator = Validator::make($request->all(), $rule, $msgE);
             // check có lỗi hay không
-            
+
             if ($validator->fails()) {
-                
+
                 $request->flash();
                 return redirect()->route('admin.addSlider')->withErrors($validator);
             }
@@ -77,7 +78,7 @@ class SliderController extends Controller
         $this->authorize('admin');
         $dataView = [ 'errs'=>[]];
         $objU = Slider::where('id',$id)->first();
-        $dataView['objU'] = $objU;  
+        $dataView['objU'] = $objU;
         if($request){
                 $objU->delete();
                 return redirect()->route('admin.listSlider');
@@ -94,7 +95,7 @@ class SliderController extends Controller
 
 
         if($request->isMethod('POST')){
-          
+
             $rule = [
                 'title' =>'required|min:6',
                 'description' =>'required|min:1',
@@ -141,7 +142,7 @@ class SliderController extends Controller
                     $dataView['errs'][] = ['Không có gì cập nhật!'];
 
             }
-        } 
+        }
         return view('admin.slider.editSlider',$dataView ,compact('objU'));
 
     }

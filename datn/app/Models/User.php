@@ -21,7 +21,7 @@ class User extends \Eloquent implements Authenticatable
     protected $table = 'users';
     protected $fillable = [
         'name',
-        'password', 
+        'password',
         'role_id',
         'email',
         'phone',

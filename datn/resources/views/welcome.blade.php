@@ -5,10 +5,11 @@
     position: relative;
     top: 20%;
     margin:0 auto;
-
 }
 
-
+body{
+    background-image: url('https://cdn.hipwallpaper.com/i/38/77/KGRu48.jpg');
+}
 img {
     width: 200px;
 }
@@ -43,7 +44,7 @@ img {
     <div class="title-client-admin">
         <img src="{{asset('assets/client/images/logo/logo.png')}}" alt="">
         <h1>CỬA HÀNG TẠP HOÁ CHÚC AN </h1>
-        <h2>Xin kính chào quý khách !</h2>
+        <h2><i>Xin chào</i> : {{Auth::user()->name}}</h2>
     </div>
 <br>
     <div class="button-client-admin contaier-fluid">
