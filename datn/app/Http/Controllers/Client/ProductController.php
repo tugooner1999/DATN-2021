@@ -26,6 +26,8 @@ class ProductController extends Controller
     public function allow_market(){
         $this->authorize('member');
         $list_product = Product::where('allow_market','2')->paginate(12);
+        $id = Product::where('allow_market','2')->paginate(12);
+        
         $cates  = Category::all();
         return view('client.product.index', compact('list_product','cates'));
 

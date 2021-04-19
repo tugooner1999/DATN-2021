@@ -98,6 +98,7 @@
         <!-- Best Sell Slider Carousel Start -->
         <div class="best-sell-slider owl-carousel owl-nav-style">
             @foreach ($product as $item)
+            
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">

@@ -60,16 +60,82 @@
     <script>
 
         $(document).ready(function(){
-
+            var paymentMethod = ''
             $('.select-payment-method').click(function(){
                 $('.select-payment-method').not(this).prop("checked", false);
+                paymentMethod = $(this).val()
             })
             $('#checkout').click(function(e){
                 e.preventDefault()
                 var checkBoxPayment = $('.select-payment-method').is(':checked')
-                console.log(checkBoxPayment)
-                if(checkBoxPayment){
-                    alert('checked')
+                var fullNameCustomer = $('#full-name-customer').val()
+                var addressCustomer = $('#address-customer').val()
+                var phoneCustomer = $('#phone-customer').val()
+                var emailCustomer = $('#email-customer').val()
+                if(checkBoxPayment ===true){
+                    if(paymentMethod == 'vnpay'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi...',
+                            text: 'Phương thức thanh toán này chưa được hỗ trợ, vui lòng chọn phương thức thanh toán khác!'
+                        })
+                    }
+                    else{
+                        $.ajax({
+                            type:"POST",
+                            url: "{{route('client.checkOut')}}",
+                            dataType:"json",
+                            data:{
+                                paymentMethod:paymentMethod,
+                                fullname:fullNameCustomer,
+                                address:addressCustomer,
+                                phone:phoneCustomer,
+                                email:emailCustomer,
+                                _token:"{{csrf_token()}}"
+                            },
+                            success: function(result){
+                                if(result.status ===false){
+                                    result.msg.map(function(item,index){
+                                        if(item.fullname){
+                                            toastr.error(item.fullname[index],'Lỗi')
+                                        }
+                                        if(item.phone){
+                                            toastr.error(item.phone[index],'Lỗi')
+                                        }
+                                        if(item.email){
+                                            toastr.error(item.email[index],'Lỗi')
+                                        }
+                                        if(item.address){
+                                            toastr.error(item.address[index],'Lỗi')
+                                        }
+                                       
+                                    })
+                                }
+                                if(result.status ===true){
+                                    Swal.fire('',result.msg , 'success')
+                                    sessionStorage.clear();
+                                    $('head').append(`<style>.count-cart::after{ content:'${0}' !important}</style>`);
+                                    $(".content-cart, .cart-page-title").empty()
+                                    setTimeout(function(){
+                                        $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
+                                    },200)
+                                }
+                            }
+                        })
+                    }
+                    
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi...',
+                        text: 'Bạn chưa chọn phương thức thanh toán!',
+                    })
+                    // alert("")
+                    // toastr.error("Họ tên k đc để trống",'Lỗi')
+                    // toastr.error("Email k đc để trống",'Lỗi')
+                    // toastr.error("Sđt k đc để trống",'Lỗi')
+                    // toastr.error("Địa chỉ nhận hàng k đc để trống",'Lỗi')
                 }
             })
             // Thêm mã giảm giá
