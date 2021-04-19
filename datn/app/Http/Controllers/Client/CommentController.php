@@ -17,31 +17,27 @@ class CommentController extends Controller
     //
 
     public function postComment(Request $request, $id){
-        $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString(); // biến lấy giá trị thời gian ngày bình luận
+        // $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+        $product = Product::find($id);
         $idProduct = $id;
-        $comment = new Rating();
-        $comment->ra_product_id = $idProduct;
-        $comment->ra_user_id = Auth::User()->id;
-        $comment->ra_content = $request->ra_content;
-        $comment->created_at = $dt_create;
 
-        // if($request -> ajax())
-        // {
-        //     Rating::insert([
-        //         'ra_product_id'  => $id,
-        //         'ra_content'     => $request->ra_content,
-        //         'ra_user_id'     => get_data_user('web'),
-        //         'ra_number'      => $request->number,
-        //         'created_at'     => $dt_create,
-        //     ]);
-        // }
-        // $comment = new Rating();
-        // $product = Product::find($id);
-        // $product->pro_total_number += $request->number;
-        // $product->pro_total_rating += 1;
-        // $product->save();
-        $comment->save();
-        return redirect()->back()->with('thongbao','bình luận sản phẩm thành công');
+        if($request -> ajax())
+        {
+            Rating::insert([
+                'ra_product_id'  => $idProduct,
+                'ra_content'     => $request->r_content,
+                'ra_user_id'     => Auth::User()->id,
+                'ra_number'      => $request->number,
+                'created_at'     => $dt_create,
+            ]);
+        }
+        
+        $product->pro_total_number += $request->number;
+        $product->pro_total_rating += 1;
+        $product->save();
+
+        return response()->json(['code' => '1']);
     }
     
 }

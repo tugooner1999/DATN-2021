@@ -47,7 +47,7 @@
             </li>
         </ul>
         <div class="center p-20">
-            <a href="{{route('client.login')}}" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Đăng Xuất <i
+            <a href="{{route('Auth.Logout')}}" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Đăng Xuất <i
                     class="fa fa-sign-out" aria-hidden="true"></i></a>
         </div>
     </div>

@@ -7,7 +7,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">Thêm danh mục mới</h4> </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                            <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
+                            <a href="{{route('client.homepage')}}" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
                             
                             <ol class="breadcrumb">
                                 <li><a href="#">Bảng điều khiển</a></li>
@@ -33,7 +33,7 @@
                                         <div class="col-md-12">
                                             <input type="text" name ="name"  class="form-control form-control-line" value="{{ old('name') }}"> </div>
                                     </div>
-                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="200px"
+                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
                                             alt="">
                                     <hr>
                                     <div class="form-group">

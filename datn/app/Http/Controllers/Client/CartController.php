@@ -9,10 +9,11 @@ class CartController extends Controller
 {
     //
     public function index(){
-        
+        $this->authorize('member');
         return view('client.cart.index');
     }
     public function addToCart(Request $rq){
+        $this->authorize('member');
         $id = $rq ->id;
         $product = Product::where('id',$id)->first();
         if($product){
@@ -50,6 +51,10 @@ class CartController extends Controller
             unset($_SESSION['cart'][$idPro]);
 
         }
+        if(empty($_SESSION['cart']) || !isset($_SESSION['cart'])){
+            unset($_SESSION['voucher']);
+
+        }
         $totalItem = 0;
         $totalPriceInCart = 0;
         foreach($_SESSION['cart'] as $val){
@@ -58,6 +63,8 @@ class CartController extends Controller
         }
         if($rq->action=='remove-all'){
             unset($_SESSION['cart']);
+            unset($_SESSION['voucher']);
+            
 
         }
         return response()->json(

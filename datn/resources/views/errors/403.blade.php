@@ -1,4 +1,11 @@
 @extends('layout-client')
+<header class="main-header">
+<style>
+        .main-header{
+            visibility:hidden;
+        }
+</style>
+</header>
 @section('content')
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area" style = "padding: 35px 0;">
@@ -6,10 +13,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">Đăng nhập / Đăng ký</h1>
-                    <ul class="breadcrumb-links">
-                        <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
-                        <li>Đăng nhập / Đăng ký</li>
+                <h2>Tài khoản của bạn đã bị khóa hoặc bạn không có quyền truy cập trang</h2>
+                        <h4>Bạn hãy đăng nhập bằng tài khoản khác hoặc đăng kí tài khoản mới</h4>
+                        <ul class="breadcrumb-links">
                     </ul>
                 </div>
             </div>
@@ -24,13 +30,12 @@
             <div class="col-lg-7 col-md-12 ml-auto mr-auto">
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
-                        <a class="active" data-toggle="tab" href="#lg1">
+                    <a class="active" data-toggle="tab" href="#lg1">
                             <h4>Đăng nhập</h4>
                         </a>
                         <a data-toggle="tab" href="#lg2">
                             <h4>Đăng kí</h4>
                         </a>
-                        
                     </div>
                     <p style="text-align: center;font-size: 150%;color: #4fb68d;font-weight: bold;"><?php
                         $message = Session::get('message');
@@ -43,7 +48,7 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form method="post" action="{{route('client.login')}}" class="was-validated">
+                                    <form method="POST" action="{{route('client.login.err')}}" enctype="multipart/form-data" class="was-validated">
                                         @error('msg')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

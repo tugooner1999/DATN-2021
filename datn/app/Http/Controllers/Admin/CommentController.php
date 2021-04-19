@@ -16,6 +16,7 @@ class CommentController extends Controller
 {
     //
     public function index(Request $request){
+        $this->authorize('admin');
         $user_comment = User::all();
         $product_comment = Product::all();
         $comment = Rating::all();

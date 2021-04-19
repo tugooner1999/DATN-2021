@@ -50,7 +50,7 @@
                                     <a href="{{route('client.homepage')}}">Trang chủ</a>
                                 </li>
                                 <li class="menu-dropdown">
-                                    <a href="{{route('client.product')}}">Sản phẩm</a>
+                                    <a href="{{route('client.shop')}}">Sản phẩm</a>
                                 </li>
                                 <li class="menu-dropdown">
                                     <a href="{{route('client.about')}}">Giới thiệu</a>

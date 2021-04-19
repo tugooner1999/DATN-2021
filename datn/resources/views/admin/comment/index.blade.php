@@ -1,5 +1,10 @@
 @extends('layout-admin')
 @section('content')
+<style>
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -7,7 +12,7 @@
                 <h4 class="page-title">Danh sach bình luận</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank"
+                <a href="{{route('client.homepage')}}" target="_blank"
                     class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Về trang chủ
                     <i class="fa fa-home" aria-hidden="true"></i></a>
                 <ol class="breadcrumb">
@@ -34,7 +39,7 @@
                     ?>
                     </p>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width:3%;">#</th>
@@ -60,10 +65,11 @@
                                         {{isset($item->user_comment) ? $item->user_comment->phone : ''}}</td>
                                     <td>{{$item->ra_content}}</td>
                                     <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <span class="rating-active">
+                                            @for($i = 1; $i <= 5; $i++) <i
+                                                class="fa fa-star {{ $i <= $item->ra_number ? 'active' : '' }}"></i>
+                                            @endfor
+                                        </span>
                                     </td>
                                     <td class="text-info"><a
                                             href="">{{isset($item->product_comment) ? $item->product_comment->name : ''}}</a>

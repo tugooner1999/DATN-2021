@@ -20,7 +20,11 @@
                                 <a href="{{route('client.homepage')}}">Trang chủ</a>
                             </li>
                             <li class="menu-dropdown">
-                                <a href="{{route('client.product')}}">Sản phẩm</a>
+                                <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                    <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                </ul>
                             </li>
                             <li class="menu-dropdown">
                                 <a href="{{route('client.about')}}">Giới thiệu</a>
@@ -42,24 +46,41 @@
                         </div>
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
+                            @if (Auth::check())
+                            <div class="main-navigation" style="margin: 0px;">
+                                <ul>
+                                    <li class="menu-dropdown">
+                                        <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello:
+                                                {{Auth::user()->name}}</b></span>
+                                        <ul class="sub-menu">
+                                            @if (Auth::user()->role_id == 1)
+                                            <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
+                                            @endif
+                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="#">Yêu thích</a></li>
+                                            <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            @else
+                            <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
+                            @endif
+                        </div>
+                        <!--Login info End -->
+                        <!--Cart info Start -->
+                        <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                                @if (Auth::check())
-                                <a href="#" class="login text-dark"><b><i class="fa fa-user" aria-hidden="true"></i>
-                                        Hello: {{Auth::user()->name}}</a>|
-                                <a href="{{route('Auth.Logout')}}"><b>Đăng xuất <i class="fa fa-sign-out"
-                                            aria-hidden="true"></i></b></a>
-                                @else
-                                <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng
-                                        kí</b></a>
-                                @endif
+                                <a href="{{route('client.cart')}}" class="count-cart"></a>
                             </div>
                             <!--Login info End -->
                             <!--Cart info Start -->
-                            <div class="cart-info d-flex">
+                            <!-- <div class="cart-info d-flex">
                                 <div class="mini-cart-warp">
                                     <a href="{{route('client.cart')}}" class="count-cart"></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!--Cart info End -->
                         </div>
                     </div>

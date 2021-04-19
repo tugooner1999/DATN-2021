@@ -9,10 +9,12 @@ class OrderController extends Controller
 {
     //
     public function index(){
+        $this->authorize('admin');
         return view('admin.order.index');
     }
 
     public function edit_order(){
+        $this->authorize('admin');
         return view('admin.order.edit-order');
     }
 }

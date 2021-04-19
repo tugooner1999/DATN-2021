@@ -1,53 +1,64 @@
 @extends('layout-client')
 @section('content')
-<!-- Breadcrumb Area start -->
-
+<?php
+    $avg = 0;
+    if($product->pro_total_rating){
+        $avg = round($product->pro_total_number / $product->pro_total_rating, 2);
+    }
+    ?>
 <style>
 .list_start i:hover {
     cursor: pointer;
 }
 
-.rating-product{
-    margin-bottom:0;
+.rating-product {
+    margin-bottom: 0;
 }
 
-.list_text{
-    display:inline-block;
-    margin-left:10px;
+.list_text {
+    display: inline-block;
+    margin-left: 10px;
     position: relative;
-    background:#4fb68d;
-    color:#fff;
-    padding:0px 8px;
-    box-sizing:border-box;
-    font-size:12px;
-    border-radius:2px;
-    display:none;
-}
-.list_text:after{
-    right:100%;
-    top:50%;
-    border:solid transparent;
-    content:" ";
-    height:0;
-    width:0;
-    position: absolute;
-    pointer-events:none;
-    border-color:rgba(82,184,88,0);
-    border-right-color:#4fb68d;
-    border-width:6px;
-    margin-top:-6px;
+    background: #4fb68d;
+    color: #fff;
+    padding: 0px 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 2px;
+    display: none;
 }
 
-.list_start .rating_active{
-    color:#ff9705;
+.list_text:after {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(82, 184, 88, 0);
+    border-right-color: #4fb68d;
+    border-width: 6px;
+    margin-top: -6px;
+}
+
+.list_start .rating_active {
+    color: #ff9705;
+}
+
+.rating-active .active {
+    color: #ff9705 !important;
 }
 </style>
-<section class="breadcrumb-area">
+<!-- Breadcrumb Area start -->
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">chi tiết sản phẩm</h1>
+                    <h1 class="breadcrumb-hrading">Chi tiết sản phẩm</h1>
                     <ul class="breadcrumb-links">
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Chi tiết</li>
@@ -96,15 +107,13 @@
                     <h2>{{$product->name}}</h2>
                     <p class="reference">{{isset($product->category) ? $product->category->name : ''}}</p>
                     <div class="pro-details-rating-wrap">
-                        <div class="rating-product">
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
+                        <div class="rating-active">
+                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                @endfor
                         </div>
 
-                        <span class="read-review"><a class="reviews" href="#">Bình luận (1)</a></span>
+                        <span style="margin-left: 15px;" class="read-review"><a class="reviews" href="#">Bình luận
+                                ({{count($comments)}})</a></span>
                     </div>
                     <div class="pricing-meta">
                         <ul>
@@ -117,10 +126,12 @@
                     <div class="pro-details-quality mt-0px">
                         <div class="cart-plus-minus">
                             <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
-                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
+                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily"
+                                value="1" />
                         </div>
                         <div class="pro-details-cart btn-hover">
-                            <a class="cart-btn" product-id='{{$product->id}}'> Thêm vào giỏ</a>
+                            <a product-id='{{$product->id}}' @if(Auth::check()) class="cart-btn" @else
+                                href="{{route('client.login')}}" @endif>Thêm vào giỏ</a></li>
                         </div>
                     </div>
                     <div class="pro-details-wish-com">
@@ -189,29 +200,33 @@
                                             width="60" height="80" style="border-radius:100px;" alt="" />
                                     </div>
                                     <div class="review-content">
-                                        <div class="review-top-wrap">
+                                        <div class="review-top-wrap" style="margin: 0 0px 0px;">
                                             <div class="review-left">
                                                 <div class="review-name">
-                                                    <h4 style="line-height:2;font-weight:bold;">
+                                                    <h4 style="line-height:2;font-weight:bold;color:#111;">
                                                         {{isset($item->user_comment) ? $item->user_comment->name : ''}}
                                                     </h4>
                                                 </div>
-                                                <div class="rating-product">
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                </div>
+
+                                                <span class="rating-active">
+                                                    @for($i = 1; $i <= 5; $i++) <i
+                                                        class="fa fa-star {{ $i <= $item->ra_number ? 'active' : '' }}">
+                                                        </i>
+                                                        @endfor
+                                                </span>
+
                                             </div>
                                             <!-- <div class="review-left">
                                                 <a href="#">Reply</a>
                                             </div> -->
                                         </div>
-                                        <div class="review-bottom">
-                                            <p style="width:100%;">
+                                        <div class="review-bottom" style="margin: 0 0px 6px 0px;">
+                                            <p style="width:100%; color:#333;">
                                                 {{$item->ra_content}}
                                             </p>
+                                        </div>
+                                        <div class="review-time">
+                                            <p>{{$item->created_at}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -220,12 +235,10 @@
                         </div>
                         <div class="col-lg-12" style="height: 28px; border-top: 1px solid #ebebeb; margin-top: 30px;">
                         </div>
-                        
+
                         <div class="col-lg-12">
                             <div class="ratting-form-wrapper pl-50">
                                 <div class="ratting-form">
-
-
                                     <!-- đánh giá sản phẩm theo rating -->
                                     <div class="component_rating">
                                         <h3 style="font-weight:bold; font-size:30px; ">Đánh giá sản phẩm</h3>
@@ -237,7 +250,8 @@
                                                     <div class=""><span class="fa fa-star"
                                                             style="font-size:100px; color:#ff9705;display:block; margin:0 auto; text-align:center;"></span>
                                                         <b
-                                                            style="position:absolute; top:50%; left:50%;transform:translateX(-50%) translateY(-40%); font-size: 26px;color: #fff;">2.5</b>
+                                                            style="position:absolute; top:50%; left:50%;transform:translateX(-50%) translateY(-40%); font-size: 26px;color: #fff;">
+                                                            {{$avg}}</b>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,41 +260,38 @@
 
                                             <div class="col-sm-7">
                                                 <div class="list_rating" style="padding:20px;">
-                                                    @for($i = 1; $i <= 5; $i++) <div class="item_rating"
-                                                        style="display:flex; align-items:center;">
+                                                    @foreach($arrayRatings as $key => $arrayRating)
+                                                    <?php
+                                                       $itemAge = round(($arrayRating['total'] / $product->pro_total_rating) * 100,0);
+                                                    //    dd($product->pro_total_rating);
+                                                    ?>
+
+                                                    <div class="item_rating" style="display:flex; align-items:center;">
                                                         <div style="width:10%;">
-                                                            {{ $i }}<span class="fa fa-star" style="padding: 0 5px;"></span>
+                                                            {{ $key }}<span class="fa fa-star"
+                                                                style="padding: 0 5px; color: #ff9705;"></span>
                                                         </div>
                                                         <div style="width:70%; margin:0 20px;">
                                                             <span class=""
                                                                 style="width:100%; height:8px; display:block; border:1px solid #dedede; border-radius:5px;">
                                                                 <b
-                                                                    style="width:30%; background-color:#f25800; display:block; height:100%; border-radius:5px;"></b>
+                                                                    style="width:{{$itemAge}}%; background-color:#f25800; display:block; height:100%; border-radius:5px;"></b>
                                                             </span>
                                                         </div>
                                                         <div style="width:20%;">
-                                                            <a style="color:#666;" href="">290 đánh giá</a>
+                                                            <a style="color:#666;" href="">{{$arrayRating['total']}}
+                                                                đánh giá ({{$itemAge}}%)</a>
                                                         </div>
+                                                    </div>
+                                                    @endforeach
                                                 </div>
-                                                @endfor
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <br>
-                                <!-- <div class="star-box">
-                                            <span style="margin: 0px 15px 0 0;">Đánh giá:</span>
-                                            <div class="rating-product">
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                            </div>
-                                        </div> -->
+                                    <br>
 
-                                @if(isset(Auth::user()->name))
-                                <?php
+                                    @if(isset(Auth::user()->name))
+                                    <?php
                                 $listRatingText = [
                                     1 => 'Không thích',
                                     2 => 'Tạm được',
@@ -289,48 +300,54 @@
                                     5 => 'Tuyệt vời',
                                 ];
                                 ?>
-                                <div class="" style="display:flex; font-size:20px;">
-                                    <p style="font-weight:bold;margin-bottom:0;">Chọn đánh giá của bạn </p>
-                                    <span class="list_start" ; style="margin:0 30px;">
-                                        @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{ $i }}" style="padding: 0 3px;"></i>
-                                            @endfor
-                                    </span>
-                                    <span class="list_text"></span>
-                                    <input type="hidden" value="" class="number_rating">
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <br>
-                                    <div class="col-md-12">
-                                        <form method="POST" class="form-rating-submit" action="{{URL::to('/client/single-product/rating/'.$product->id)}}"
-                                            role="form">
-                                            @csrf
-                                            <p style="color:green; font-weight:bold;  font-size:18px; margin:15px 0px;">
-                                                @if(session('thongbao'))
-                                                {{session('thongbao')}}
-                                                @endif
-                                            </p>
-                                            <div class="rating-form-style form-submit">
-                                                <textarea name="ra_content" id="ra_content"
-                                                    placeholder="Viết bình luận ..."></textarea>
-                                                <input type="submit" class="js_rating_product" value="Bình Luận" />
-                                                <!-- <a class="js_rating_product" 
-                                                style="background:#4fb68d;color:#fff;padding:10px 31px;font-size:19px;border-radius:25px;"
-                                                 href="{{route('client.comment_product',$product->id)}}">GỬI</a> -->
-                                            </div>
-                                        </form>
+                                    <div class="" style="display:flex; font-size:20px;">
+                                        <p style="font-weight:bold;margin-bottom:0;">Chọn đánh giá của bạn </p>
+                                        <span class="list_start" ; style="margin:0 30px;">
+
+                                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star" data-key="{{$i}}"
+                                                style="padding: 0 3px;"></i>
+                                                @endfor
+                                        </span>
+                                        <span class="list_text"></span>
+
                                     </div>
+                                    <br>
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-md-12">
+                                            <form method="POST">
+                                                @csrf
+                                                <input type="hidden" value="" class="number_rating">
+                                                <input type="hidden" value="{{$product->id}}" class="id_product">
+                                                <p
+                                                    style="color:green; font-weight:bold;  font-size:18px; margin:15px 0px;">
+                                                    @if(session('thongbao'))
+                                                    {{session('thongbao')}}
+                                                    @endif
+                                                </p>
+                                                <div class="rating-form-style form-submit">
+                                                    <textarea name="ra_content" id="ra_content"
+                                                        placeholder="Viết bình luận ..."></textarea>
+
+                                                    <input type="submit" class="js_rating_product"
+                                                        value="Bình Luận" />
+                                                    <!-- <a class="js_rating_product" 
+                                                style="background:#4fb68d;color:#fff;padding:10px 31px;font-size:19px;border-radius:25px;"
+                                                 href="{{route('post.rating.product',$product)}}">GỬI</a> -->
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
                         </div>
+
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- {{URL::to('/client/single-product/rating/'.$product->id)}} -->
 <!-- product details description area end -->
@@ -393,3 +410,61 @@
 <!-- Recent product area end -->
 @endsection
 
+
+@section('script')
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+// rating product
+$(function() {
+    let listStart = $(".list_start .fa");
+    listRatingText = {
+        1: 'Không thích',
+        2: 'Tạm được',
+        3: 'Bình thường',
+        4: 'Rất tốt',
+        5: 'Rất tuyệt vời',
+    }
+    listStart.mouseover(function() {
+        let $this = $(this);
+        let number = $this.attr('data-key');
+        listStart.removeClass('rating_active');
+
+        $(".number_rating").val(number);
+        $.each(listStart, function(key, value) {
+            if (key + 1 <= number) {
+                $(this).addClass('rating_active')
+            }
+        });
+
+        $(".list_text").text('').text(listRatingText[$this.attr('data-key')]).show();
+        console.log(number);
+    });
+
+    $(".js_rating_product").click(function(e) {
+        event.preventDefault();
+        let number = $(".number_rating").val();
+        let content = $("#ra_content").val();
+        let url = $(this).attr('href');
+        let idProduct = $(".id_product").val();
+        if (content && number) {
+            $.ajax({
+                url: '/DATN-2021/datn/public/client/single-product/rating/' + idProduct,
+                type: 'POST',
+                data: {
+                    number: number,
+                    r_content: content,
+                }
+            }).done(function(result) {
+                if (result.code == 1) {
+                    location.reload();
+                }
+            });
+        }
+    });
+});
+</script>
+@stop

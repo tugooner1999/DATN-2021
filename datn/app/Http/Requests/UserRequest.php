@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'email' => 'required|email',
             'phone'=>'required|digits:10',
             'address' => 'required',
-            'avatar' => 'required|image',
+            'avatar' => 'image',
         ];
     }
     
@@ -40,7 +40,6 @@ class UserRequest extends FormRequest
             'phone.required'=>'Vui lòng điền số điện thoại!',
             'phone.digits'=>'Vui lòng nhập số điện thoại có độ dài 10 ký tự !',
             'address.required' => 'Vui lòng điền địa chỉ',
-            'avatar.required' => 'Ảnh không được để trống',
             'avatar.image' => 'Ảnh phải đúng định dạng',
         ];
     }
