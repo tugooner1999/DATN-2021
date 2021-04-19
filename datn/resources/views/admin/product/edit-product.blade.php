@@ -98,20 +98,21 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-4 col-xs-12">
                     <div class="white-box">
-                        @for($i = 1 ; $i <= 6 ; $i++)
+                            <div id="btnThemFile" class="btn btn-primary">Thêm ảnh cho sản phẩm</div>
                             <div class="form-group">
-                            <label class="col-sm-12">Tải thêm ảnh mới {{$i}}</label>
+                            <hr>
+                            <div id="chonFile">
                             <input class="col-sm-12" name="gallery_img[]" type="file">
                             </div>
-                        @endfor
+                            </div>
                     </div>
                     </form>
                     @endforeach
-
-                    <div class="white-box">
-                    <label class="col-sm-12">Toàn bộ ảnh sản phẩm: <b>{{count($product_img)}}</b></label>
+                    <div class="white-box" style="padding-bottom: 110%;">
+                        <label class="col-sm-12">Toàn bộ ảnh sản phẩm: <b>{{count($product_img)}}</b></label>
                         @foreach($product_img as $item)
                         <div class="col-sm-12" style="width: 50%;margin: 10px 0">
                         <img src="{{$item->gallery_img}}"  width="110px" height ="170px">

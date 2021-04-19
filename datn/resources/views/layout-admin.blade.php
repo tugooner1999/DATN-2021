@@ -25,6 +25,7 @@
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
 </head>
 
 <body class="fix-header">
@@ -139,7 +140,13 @@ $.ajaxSetup({
 					}
 				})
     </script>
-
+    <script>
+    $(document).ready(function(){
+        $("#btnThemFile").click(function(){
+            $("#chonFile").append("<br><input class='col-sm-12' name='gallery_img[]' type='file'>");
+        });
+    });
+    </script>
 </body>
 
 </html>

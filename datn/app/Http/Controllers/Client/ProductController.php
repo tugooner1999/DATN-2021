@@ -17,7 +17,6 @@ class ProductController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
-        $this->authorize('member');
         $list_product = Product::paginate(12);
         $cates  = Category::all();
         return view('client.product.index', compact('list_product','cates'));
@@ -26,9 +25,9 @@ class ProductController extends Controller
 
     public function allow_market(){
         $this->authorize('member');
-        $list_promarket = Product::where('allow_market','2')->paginate(12);
+        $list_product = Product::where('allow_market','2')->paginate(12);
         $cates  = Category::all();
-        return view('client.product.allow-market', compact('list_promarket','cates'));
+        return view('client.product.index', compact('list_product','cates'));
 
     }
 

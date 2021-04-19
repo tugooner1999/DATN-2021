@@ -94,12 +94,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                        @for($i = 1 ; $i <= 6 ; $i++)
+                            <div id="btnThemFile" class="btn btn-primary">Thêm ảnh cho sản phẩm</div>
                             <div class="form-group">
-                            <label class="col-sm-12">Tải thêm ảnh mới {{$i}}</label>
+                            <hr>
+                            <div id="chonFile">
                             <input class="col-sm-12" name="gallery_img[]" type="file">
                             </div>
-                        @endfor
+                            </div>
                     </div>
                 </div>
             </form>
