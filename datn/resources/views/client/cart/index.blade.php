@@ -133,19 +133,30 @@
                                     ?> 
                                 </span>
                             </h5>
+                            
                             <h5>Phí giao hàng <span>0 VNĐ</span></h5>
+                            <div class="title-wrap">
+                                <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đặt hàng</h4>
+                                
+                            </div>
+                            {{-- <label for="">Họ Tên</label> --}}
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="full-name-customer" placeholder="Nhập họ tên">
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" placeholder="Nhập địa chỉ email">
+                            {{-- <label for="">Số điện thoại</label> --}}
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="phone-customer" placeholder="Nhập số điện thoại">
+                            <textarea class="mt-4 pl-2" rows="5" type="text" style="width:100%;height:px;" id="address-customer" placeholder="Địa chỉ nhận hàng"></textarea>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
                                 <ul>
-                                    <li><input type="checkbox" class="select-payment-method" value="1"/> Thanh toán khi nhận hàng</li>
-                                    <li><input type="checkbox" class="select-payment-method" value="1"/> Thanh toán online qua VNPay</li>
+                                    <li><input type="checkbox" class="select-payment-method" value="cod"/> Thanh toán khi nhận hàng</li>
+                                    <li><input type="checkbox" class="select-payment-method" value="vnpay"/> Thanh toán online qua VNPay</li>
                                 </ul>
                             </div>
                             <?php 
                                 $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice;
                             ?>
                             <h4 class="grand-totall-title">Tổng tiền {{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h4>
-                            <a id="checkout" href="checkout.html">Thanh toán</a>
+                            <a id="checkout" href="">Thanh toán</a>
                         </div>
                     </div>
                 </div>
