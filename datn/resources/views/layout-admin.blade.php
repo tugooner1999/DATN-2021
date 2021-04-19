@@ -102,6 +102,12 @@
         selector: '#mytextarea'
     });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('description');
+</script>
 </body>
 
 </html>

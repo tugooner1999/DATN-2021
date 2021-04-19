@@ -133,8 +133,8 @@ class VoucherController extends Controller
     public function destroy($id)
     {   
         $this->authorize('admin');
-        $User = Voucher::find($id);
-        $User->delete();
+        $voucher = Voucher::find($id);
+        $voucher->delete();
         return back();
         
     }

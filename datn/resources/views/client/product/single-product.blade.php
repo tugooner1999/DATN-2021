@@ -22,32 +22,26 @@
 <section class="product-details-area mtb-60px">
     <div class="container">
         <div class="row">
+
             <div class="col-xl-6 col-lg-6 col-md-12">
                 <div class="product-details-img product-details-tab">
                     <div class="zoompro-wrap zoompro-2">
                         <div class="zoompro-border zoompro-span">
-                            <img src="../../{{$product->image_gallery}}"
-                                data-zoom-image="../../{{$product->image_gallery}}" alt="" />
+                            <img class="zoompro" src="../../{{$product->image_gallery}}" data-zoom-image="../../{{$product->image_gallery}}" alt="" width="80" height="500"/>
                         </div>
                     </div>
-                    <div id="gallery" class="product-dec-slider-2">
-                        <a class="active"
-                            data-image="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}"
-                            data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/1.jpg')}}">
-                            <img src="{{asset('assets/client/images/product-image/organic/product-11.jpg')}}" alt="" />
+                    <div id="gallery" class="product-dec-slider-2" style="text-align: left">
+
+                        <a class="active" data-image="../../{{$product->image_gallery}}"
+                            data-zoom-image="../../{{$product->image_gallery}}">
+                            <img src="../../{{$product->image_gallery}}" alt="" />
                         </a>
-                        <a data-image="{{asset('assets/client/images/product-image/organic/product-9.jpg')}}"
-                            data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/2.jpg')}}">
-                            <img src="{{asset('assets/client/images/product-image/organic/product-9.jpg')}}" alt="" />
+                        @foreach($img_url as $img)
+                        <a data-image="../../{{$img->img_url}}"
+                            data-zoom-image="../../{{$img->img_url}}">
+                            <img src="../../{{$img->img_url}}" alt="" />
                         </a>
-                        <a data-image="{{asset('assets/client/images/product-image/organic/product-20.jpg')}}"
-                            data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/3.jpg')}}">
-                            <img src="{{asset('assets/client/images/product-image/organic/product-20.jpg')}}" alt="" />
-                        </a>
-                        <a data-image="{{asset('assets/client/images/product-image/organic/product-19.jpg')}}"
-                            data-zoom-image="{{asset('assets/client/images/product-image/organic/zoom/4.jpg')}}">
-                            <img src="{{asset('assets/client/images/product-image/organic/product-19.jpg')}}" alt="" />
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -66,21 +60,20 @@
 
                         <span class="read-review"><a class="reviews" href="#">Bình luận (1)</a></span>
                     </div>
+                    <p>{{$product->description}}</p>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut text-danger">{{number_format($product->price)}}đ</li><br>
-                            <li class="tinhtrang pb-2">Tình trạng :
-                                <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b>
-                            </li>
+                            <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
+                            <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
                         <div class="pro-details-cart btn-hover">
                         <a product-id='{{$product->id}}'
-                        @if(Auth::check()) 
+                        @if(Auth::check())
                         class="cart-btn"
                         @else
-                        href="{{route('client.login')}}" 
+                        href="{{route('client.login')}}"
                         @endif
                         >Thêm vào giỏ</a></li>
                         </div>
@@ -115,13 +108,9 @@
                     </div>
                     <div class="pro-details-policy">
                         <ul>
-                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng
-                                    miễn phí</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí
-                                    đổi trả</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng
-                                    mã giảm giá</span>
-                            </li>
+                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng miễn phí</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí đổi trả</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng mã giảm giá</span>s</li>
                         </ul>
                     </div>
                 </div>
@@ -319,7 +308,7 @@
             @foreach($cates as $item)
             <article class="list-product">
                 <div class="img-block">
-                    <a href="" class="thumbnail">
+                    <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
                         <img src="../../{{$item->image_gallery}}" alt="" />
                     </a>
                 </div>
@@ -327,7 +316,7 @@
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="#"><span>THỰC PHẨM</span></a>
+                    <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC PHẨM</span></a>
                     <h2><a href="" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-product">
                         <i class="ion-android-star"></i>
@@ -346,7 +335,10 @@
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a class="cart-btn" href="#">Thêm vào giỏ</a></li>
+                        <li class="cart"><a @if(Auth::check()) class="cart-btn"  product-id='{{$item->id}}'
+                                            @else href="{{route('client.login')}}"
+                                            @endif>Thêm vào giỏ</a>
+                        </li>
                         <li>
                             <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
                         </li>

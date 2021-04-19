@@ -5,6 +5,7 @@ session_start();
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Order;
+use Illuminate\Support\Facades\Http;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -130,6 +131,13 @@ class CartController extends Controller
                             unset($_SESSION['voucher']);
                         }
                     }
+                    $HostDomain = config('common.HostDomain_servesms');
+                                    $key        = config('common.key_servesms');       
+                                    $devices    = config('common.devices_servesms');
+                                    $number     = $rq->phone;
+                                    $message    = "Cửa Hàng Tạp Hóa Chúc An cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi";
+                                    $Api_SMS    = $HostDomain .'key=' . $key .'&number=' . $number .'&message='.$message. '&devices=' . $devices;
+                                    $response   = Http::get($Api_SMS);
                     return response()->json(
                         [
                             'status' => true,

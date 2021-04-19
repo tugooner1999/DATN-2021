@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +21,13 @@ Route::prefix('admin')->group(function () {
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
 
+        // about
+        Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
+        Route::get('/about/add', [Admin\AboutController::class , 'create_about'])->name('admin.createAbout');
+        Route::post('about/add', [Admin\AboutController::class , 'saveAbout'])->name('admin.saveAbout');
+        Route::match(['get','post'],'/about/delete/{id}',[Admin\AboutController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleAbout');
 
         // category
         Route::get('/categories', [Admin\CategoryController::class , 'index'])->name('admin.listCate');
@@ -32,7 +37,8 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
+    Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
+    Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
         Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
         Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
         Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
@@ -53,7 +59,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/voucher/delete/{id}',[Admin\VoucherController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleVoucher');
-        
+
         // mail
         Route::get('/send-mail-voucher/{id}',  [Admin\MailController::class , 'sendMailVoucher'])->name('admin.sendMailVoucher');
 
