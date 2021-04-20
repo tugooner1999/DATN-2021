@@ -35,24 +35,11 @@ class VoucherController extends Controller
             );
         }
         else{
-            $totalPriceInCart = 0;
-            foreach($_SESSION['cart'] as $val){
-                $totalPriceInCart += $val['price'] * $val['quantity'];
-            }
             if($voucherCode->finish_date < $today){
                 return response(
                     [
                         'status' => false,
                         'msg'=>"Mã giảm giá đã hết hạn sử dụng"
-    
-                    ]
-                );
-            }
-            elseif($totalPriceInCart < 300000){
-                return response(
-                    [
-                        'status' => false,
-                        'msg'=>"Đơn hàng từ 300k trở lên mới có thể áp dụng mã giảm giá"
     
                     ]
                 );
@@ -66,7 +53,10 @@ class VoucherController extends Controller
                     ]
                 );
             }
-                
+            $totalPriceInCart = 0;
+            foreach($_SESSION['cart'] as $val){
+                $totalPriceInCart += $val['price'] * $val['quantity'];
+            }    
             return response(
                 [
                     'totalPriceInCart' => $totalPriceInCart,
