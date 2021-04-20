@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -74,7 +75,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($data);
         $product->create_at= $dt_create;
-        $product->allow_market= $_POST['allow_market'] ?? 1;
+        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;
             $rule = ['image_gallery'=>'required|image'];
             $msgE = ['image_gallery.required'=>'Không để trống ảnh của sản phẩm',];
             $validator = Validator::make($request->all(), $rule, $msgE);
@@ -88,7 +89,6 @@ class ProductController extends Controller
         }
         $product->views = 1;
         $product->save();
-        dd($data);die;
         Session::put('message','Thêm sản phẩm thành công');
         return Redirect::to('/admin/products');
     }
@@ -108,8 +108,8 @@ class ProductController extends Controller
             $product->image_gallery =str_replace("public/", "public/", $path);
         }
         $product->update_at= $dt_update;
-        $product->allow_market= $_POST['allow_market'] ?? 1;
-        $product->views = +1;
+        $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;
+        $product->views  +=1;
         $product->save();
         $product_id = $product->id;
         if($request->hasFile('gallery_img')){
@@ -139,3 +139,6 @@ class ProductController extends Controller
         return response()->json(['data'=>'removed'],200);
     }
 }
+
+
+// Rating::where('ra_product_id', $id)->delete();

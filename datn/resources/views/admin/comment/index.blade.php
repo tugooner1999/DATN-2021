@@ -25,7 +25,6 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
-<<<<<<< HEAD
                     <div class="app-search hidden-sm hidden-xs m-r-10">
                         <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid"
                             type="text" placeholder="Tìm kiếm" aria-label="Search">
@@ -39,8 +38,6 @@
                         }
                     ?>
                     </p>
-=======
->>>>>>> e73721976a616c3fef98db1679ea4d6126495793
                     <div class="table-responsive">
                         <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
@@ -56,13 +53,8 @@
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-<<<<<<< HEAD
                             <tbody id="myTable">
                                 @foreach($comment as $no => $item)
-=======
-                            <tbody>
-                                @foreach ($comment as $pro => $item)
->>>>>>> e73721976a616c3fef98db1679ea4d6126495793
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td style="font-weight:bold;">

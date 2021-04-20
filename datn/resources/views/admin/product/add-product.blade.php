@@ -98,15 +98,6 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-<<<<<<< HEAD
-                            <div id="btnThemFile" class="btn btn-primary">Thêm ảnh cho sản phẩm</div>
-                            <div class="form-group">
-                            <hr>
-                            <div id="chonFile">
-                            <input class="col-sm-12" name="gallery_img[]" type="file">
-                            </div>
-                            </div>
-=======
                         <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px" alt="">
                         <hr>
                         <div class="form-group">
@@ -116,7 +107,6 @@
                         @error('image_gallery')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
->>>>>>> e73721976a616c3fef98db1679ea4d6126495793
                     </div>
                     
                 </div>

@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             @foreach($edit_product as $key => $item)
-            <form class="form-horizontal form-material" action="{{URL::to('/admin/products/update/'.$item->id)}}" method="POST" enctype="multipart/form-data"role="form">
+            <form class="form-horizontal form-material" action="{{URL::to('/admin/products/update/'.$item->id)}}" method="POST" enctype="multipart/form-data"role="form" style="width:100%;">
             @csrf
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
@@ -45,8 +45,7 @@
                             @enderror
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <img id="image" src="{{$item->image_gallery}}" width="100%"  height="300px"/>
+                        <img id="image" src="{{$item->image_gallery}}" width="100%"  height="500px"/>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
@@ -54,11 +53,6 @@
                         @error('image_gallery')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-=======
-                        @error('price')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
->>>>>>> e73721976a616c3fef98db1679ea4d6126495793
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
@@ -99,13 +93,13 @@
                             </div>
                         </div>
                         <div class="form-check">
-                        <input type="checkbox" name="allow_market" value="{{$item->allow_market}}" 
-                             @if($item->allow_market == 2) checked
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market" id="allow_market" value="2" 
+                            @if($item->allow_market == 2) checked
                             @endif
                             >
-                            <label class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
+                            <label style="margin: 0 20px;" class="form-check-label" for="exampleCheck1">Sản phẩm để đi chợ</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: 20px;">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>
                                 <a href="{{route('admin.listProduct')}}" class="btn btn-success">Trở về</a>
