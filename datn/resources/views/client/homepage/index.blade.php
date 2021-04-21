@@ -162,6 +162,8 @@
 </section>
 <!-- Best Sells Slider End -->
 
+
+
 <!-- Category Area Start -->
 <section class="categorie-area">
     <div class="container">
