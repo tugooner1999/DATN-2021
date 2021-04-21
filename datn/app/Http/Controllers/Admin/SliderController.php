@@ -17,7 +17,6 @@ class SliderController extends Controller
      */
     public function index(){
         $this->authorize('admin');
-        $slider = Slider::all();
         $slider = Slider::paginate(5);
         return view('admin.slider.index', [
             'slider' => $slider

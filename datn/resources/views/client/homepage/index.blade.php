@@ -230,7 +230,7 @@
                 <article class="list-product">
                     <div class="img-block">
                         <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
-                            <img class="first-img" src="{{$item->image_gallery}}" alt="" />
+                            <img class="first-img" src="{{asset($item->image_gallery)}}" alt="" />
                         </a>
                     </div>
                     <div class="product-decs">
