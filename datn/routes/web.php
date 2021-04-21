@@ -28,6 +28,8 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/about/delete/{id}',[Admin\AboutController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleAbout');
+        Route::get('/about/editAbout/{id}',[Admin\AboutController::class , 'edit_about'])->name('admin.editAbout');
+        Route::post('/about/editAbout/{id}', [Admin\AboutController::class, 'update_about'])->name('admin.save-update-form');
 
         // category
         Route::get('/categories', [Admin\CategoryController::class , 'index'])->name('admin.listCate');

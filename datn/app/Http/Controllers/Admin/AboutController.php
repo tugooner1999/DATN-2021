@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\About;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\AboutRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -13,9 +14,7 @@ class AboutController extends Controller
     public function index(){
         $this->authorize('admin');
     $about = About::all();
-    return view('admin.about.index', [
-        'about' => $about
-    ]);
+    return view('admin.about.index',compact('about') );
     }
     
     public function create_about(){
@@ -58,6 +57,29 @@ class AboutController extends Controller
             }
         }
     }
+
+    public function edit_about($id ,Request $request){
+        $this->authorize('admin');
+        $about = About::find($id);
+            return view('admin.about.editAbout', compact('about'));
+    }
+    
+    public function update_about($id,AboutRequest $request){
+        $this->authorize('admin');
+        $dt_create = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+        $data= $_POST;
+        $model = About::find($id);
+        $model->fill($data);
+        if($request->hasFile('image')){
+            $path = $request->file('image')->move('frontend/images', $request->file('image')->getClientOriginalName());
+            $model->image =str_replace("public/", "public/", $path);
+        }
+        $model->created_at = $dt_create;
+        $model->save();
+        Session::put('message','Cập nhật thành công');
+        return redirect(route('admin.listAbout'));
+    }
+
     public function destroy($id)
     {   
         $this->authorize('admin');

@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="form-check">
-                        <input type="checkbox" name="allow_market" value="{{$item->allow_market}}" 
+                        <input type="checkbox" name="allow_market" value="2" 
                              @if($item->allow_market == 2) checked
                             @endif
                             >
