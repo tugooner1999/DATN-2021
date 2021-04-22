@@ -40,7 +40,7 @@
                                             <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
                                             <td class="text-success">Đã thanh toán</td>
-                                            <td class=' {{$item->status == null ? "text-warning" : "text-success"}}'>
+                                            <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>

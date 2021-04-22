@@ -106,7 +106,7 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
+                            <li class="old-price not-cut text-danger">Giá: {{number_format($product->price)}}đ</li><br>
                             <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
@@ -185,7 +185,7 @@
                             <div class="review-wrapper">
                                 <div class="single-review">
                                     <div class="review-img">
-                                        <img src="{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}"
+                                        <img src="{{isset($item->user_comment) ? asset($item->user_comment->avatar) : ''}}"
                                             width="60" height="80" style="border-radius:100px;" alt="" />
                                     </div>
                                     <div class="review-content">
