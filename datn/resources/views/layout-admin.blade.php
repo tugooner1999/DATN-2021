@@ -123,6 +123,21 @@ $.ajaxSetup({
                 }
             })
         })
+        $('.btn-warning').click(function(){
+            var url = $(this).attr('data-url');
+            if (confirm('Hóa đơn này đã được hoàn thành')) {
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function(response) {
+                    window.location.reload()
+                    toastr.success('Cập nhật thành công', 'Thông báo')
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            })
+            }
+        })
         $('.btn-outline-info').click(function(){
             var url = $(this).attr('data-url');
 					if (confirm('Bạn có chắc muốn xóa không?')) {
@@ -147,8 +162,12 @@ $.ajaxSetup({
         });
     });
     </script>
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('description');
 </script>
+</body>
+
 </html>

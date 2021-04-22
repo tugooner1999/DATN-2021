@@ -42,6 +42,9 @@
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                         </div>
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>

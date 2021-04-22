@@ -1,5 +1,12 @@
 @extends('layout-admin')
 @section('content')
+
+<style>
+.rating-active .active {
+    color:#ff9705 !important;
+    
+}
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -40,6 +47,7 @@
                                     <th>SL</th>
                                     <th>Loại hình</th>
                                     <th>Danh mục</th>
+                                    <th>Đánh giá</th>
                                     <th>Giá</th>
                                     <th>View</th>
                                     <th><a href="{{route('admin.createProduct')}}" class="btn btn-primary">Thêm</a></th>
@@ -47,6 +55,12 @@
                             </thead>
                             <tbody>
                                 @foreach($pro as $no => $item)
+                                <?php
+                                $avg = 0;
+                                if($item->pro_total_rating){
+                                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                                }
+                                ?>
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>
@@ -81,6 +95,12 @@
                                     <td>{{$item->quantily}} SP</td>
                                     <td>{{$item->allow_market == 2 ? "Đi chợ" : "Thông thường"}}</td>
                                     <td>{{isset($item->category) ? $item->category->name : ''}}</td>
+                                    <td><span class="rating-active">
+                                    @for($i = 1; $i <= 5; $i++)
+                                    <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                    @endfor
+                                    </span>
+                                    </td>
                                     <td>{{number_format($item->price)}}đ</td>
                                     <td>{{$item->views > 0 ? $item->views : '0'}} <i class="fa fa-eye text-primary" aria-hidden="true"></i></td>
                                     <td style="font-size: 20px;">

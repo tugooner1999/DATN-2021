@@ -45,6 +45,9 @@
             <li>
                 <a href="{{route('admin.listSlider')}}" class="waves-effect"><i class="fa fa-sliders" aria-hidden="true"></i> Slider</a>
             </li>
+            <li>
+                <a href="{{route('admin.listAbout')}}" class="waves-effect"><i class="fa fa-sliders" aria-hidden="true"></i> Giới Thiệu</a>
+            </li>
         </ul>
         <div class="center p-20">
             <a href="{{route('Auth.Logout')}}" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Đăng Xuất <i

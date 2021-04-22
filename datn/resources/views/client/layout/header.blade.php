@@ -6,8 +6,8 @@
                 <!-- Logo Start -->
                 <div class="col-md-2 col-sm-2">
                     <div class="logo">
-                        <a href="{{route('client.homepage')}}"><img
-                                src="{{asset('assets/client/images/logo/logo.jpg')}}" alt="" /></a>
+                        <a href="{{route('client.homepage')}}"><img style="width:190px;"
+                                src="{{asset('assets/client/images/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
                 <!-- Logo End -->
@@ -20,11 +20,11 @@
                                 <a href="{{route('client.homepage')}}">Trang chủ</a>
                             </li>
                             <li class="menu-dropdown">
-                                            <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
-                                                <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
-                                            </ul>
+                                <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                    <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                </ul>
                             </li>
                             <li class="menu-dropdown">
                                 <a href="{{route('client.about')}}">Giới thiệu</a>
@@ -42,26 +42,28 @@
                                     <input placeholder="Tìm mọi thứ ở đây ..." type="text" />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
+                            </div>
                         </div>
-                    </div>
                         <!--Login info Start -->
                         <div class="cart-info d-flex">
                             @if (Auth::check())
-                                <div class="main-navigation" style="margin: 0px;">
-                                    <ul>
-                                        <li class="menu-dropdown">
-                                            <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello: {{Auth::user()->name}}</b></span>
-                                            <ul class="sub-menu">
+                            <div class="main-navigation" style="margin: 0px;">
+                                <ul>
+                                    <li class="menu-dropdown">
+                                        <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello:
+                                                {{Auth::user()->name}}</b></span>
+                                        <ul class="sub-menu">
                                             @if (Auth::user()->role_id == 1)
-                                                <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
+                                            <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                             @endif
-                                                <li><a href="#">Thông tin cá nhân</a></li>
-                                                <li><a href="#">Yêu thích</a></li>
-                                                <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="#">Yêu thích</a></li>
+                                            <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                             @else
                             <a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a>
                             @endif
@@ -72,27 +74,34 @@
                             <div class="mini-cart-warp">
                                 <a href="{{route('client.cart')}}" class="count-cart"></a>
                             </div>
+                            <!--Login info End -->
+                            <!--Cart info Start -->
+                            <!-- <div class="cart-info d-flex">
+                                <div class="mini-cart-warp">
+                                    <a href="{{route('client.cart')}}" class="count-cart"></a>
+                                </div>
+                            </div> -->
+                            
+                            <!--Cart info End -->
                         </div>
-                        <!--Cart info End -->
                     </div>
                 </div>
-            </div>
-            <!-- mobile menu -->
-            <div class="mobile-menu-area">
-                <div class="mobile-menu">
-                    <nav id="mobile-menu-active">
-                        <ul class="menu-overflow">
-                            <li><a href="shop-left-sidebar.html">Sản phẩm</a></li>
-                            <li><a href="about.html">giới thiệu</a></li>
-                            <li><a href="contact.html">Liên hệ</a></li>
-                            <li><a href="my-account.html">Tài khoản</a></li>
-                            <li><a href="" style="text-decoration: underline;">Đăng xuất</a></li>
-                        </ul>
-                    </nav>
+                <!-- mobile menu -->
+                <div class="mobile-menu-area">
+                    <div class="mobile-menu">
+                        <nav id="mobile-menu-active">
+                            <ul class="menu-overflow">
+                                <li><a href="shop-left-sidebar.html">Sản phẩm</a></li>
+                                <li><a href="about.html">giới thiệu</a></li>
+                                <li><a href="contact.html">Liên hệ</a></li>
+                                <li><a href="my-account.html">Tài khoản</a></li>
+                                <li><a href="" style="text-decoration: underline;">Đăng xuất</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
+                <!-- mobile menu end-->
             </div>
-            <!-- mobile menu end-->
         </div>
-    </div>
-    <!--Header Bottom Account End -->
+        <!--Header Bottom Account End -->
 </header>
