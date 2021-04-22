@@ -88,14 +88,15 @@
                                         </div>
                                         <div class="pricing-meta">
                                             <ul>
-                                                <li class="current-price">{{number_format($item->price)}}đ</li>
+                                                <li class="current-price">{{number_format($item->price_sale)}}đ</li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="add-to-link">
                                         <ul>
                                             <li class="cart">
-                                                <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ</a>
+                                                <a clas
+                                                s="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ</a>
                                             </li>
                                             <li>
                                                 <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>

@@ -59,7 +59,6 @@
                         </div>
                         <span class="read-review"><a class="reviews" href="#">Bình luận (1)</a></span>
                     </div>
-                    <div>{{$product->description}}</div>
                     <div class="pricing-meta">
                         <ul>
                             <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
@@ -129,7 +128,9 @@
             <div class="tab-content description-review-bottom">
                 <div id="des-details2" class="tab-pane active">
                     <div class="product-anotherinfo-wrapper">
-                        <p>{{$product->description}}</p>
+                    <h2>{{$product->name}}</h2>
+                    <br>
+                        <p>{!!$product->description!!}</p>
                     </div>
                 </div>
                 <div id="des-details3" class="tab-pane">

@@ -116,7 +116,7 @@ $.ajaxSetup({
                 dataType:"json",
                 success: function(response) {
                     console.log(response)
-                    $('p#id').html('<img src = "' + response.data.img_url + '" width= "126px" />')
+                    $('p#id').html(response.data.description)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //xử lý lỗi tại đây

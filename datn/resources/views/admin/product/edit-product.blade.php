@@ -62,8 +62,10 @@
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
-                                <textarea rows="5" name="description"
-                                    class="form-control form-control-line">{{$item->description}}</textarea>
+                            <textarea rows="5"  name="description" id="description" class="form-control form-control-line">
+                            {{(old('description'))}}  {{$item->description}}
+                            </textarea>
+
                                     @error('description')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -84,7 +86,7 @@
                             </div>
                         </div>
                         <div class="form-check">
-                        <input type="checkbox" name="allow_market" value="{{$item->allow_market}}" 
+                        <input type="checkbox" name="allow_market" value="2"
                              @if($item->allow_market == 2) checked
                             @endif
                             >
