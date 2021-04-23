@@ -31,7 +31,6 @@
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2" style="text-align: left">
-
                         <a class="active" data-image="../../{{$product->image_gallery}}"
                             data-zoom-image="../../{{$product->image_gallery}}">
                             <img src="../../{{$product->image_gallery}}" alt="" />
@@ -63,12 +62,12 @@
                     <p>{{$product->description}}</p>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
+                            <li  class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
                             <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="pro-details-cart btn-hover">
+                        <div class="pro-details-cart btn-hover" >
                         <a product-id='{{$product->id}}'
                         @if(Auth::check())
                         class="cart-btn"

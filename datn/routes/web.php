@@ -101,6 +101,7 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/conventional', [Client\ProductController::class , 'shops'])->name('client.shops');
         Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
         

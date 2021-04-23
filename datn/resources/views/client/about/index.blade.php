@@ -63,8 +63,10 @@
                            <i class="ion-android-star"></i>
                            <i class="ion-android-star"></i>
                        </div>
+                       <p>{{($item->views)}} Views</p>
                        <div class="pricing-meta">
                            <ul>
+                           
                                <li class="current-price">{{number_format($item->price)}}đ</li>
                            </ul>
                        </div>

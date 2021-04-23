@@ -11,7 +11,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Rating;
-
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -20,18 +20,28 @@ class ProductController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
-        $this->authorize('member');
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::paginate(12);
+        $pro = Product::all();
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','pro','cates','today'));
+
+    }
+    public function shops(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+        $list_product = Product::where('allow_market','1')->paginate(12);
+        $cates  = Category::all();        
+        $pro = Product::all()->where('allow_market','1');
+        return view('client.product.index', compact('list_product','pro','cates','today'));
 
     }
 
     public function allow_market(){
-        $this->authorize('member');
+        $pro = Product::all()->where('allow_market','2');
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::where('allow_market','2')->paginate(12);
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','cates','pro','today'));
 
     }
     public function single_Product($id){

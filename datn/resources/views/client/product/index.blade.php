@@ -12,6 +12,18 @@
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Sản phẩm</li>
                     </ul>
+                    
+                    <div class="col-md-3 text-right" style="margin-left: 37%; margin-top: 3%; margin-bottom: -3%">
+                        <div class="card bg-info text-white center " >
+                        <h3 class="card-title text-center ">
+                        <div class="d-flex flex-wrap justify-content-center mt-2">
+                        <a><span class="badge hours"></span></a> :
+                        <a><span class="badge min"></span></a> :
+                        <a><span class="badge sec"></span></a>
+                        </div>
+                        </h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,7 +46,7 @@
                         <a href="#shop-2" data-toggle="tab">
                             <i class="fa fa-list-ul"></i>
                         </a>
-                        <p>Hiển thị 10 / 327 sản phẩm</p>
+                        <p>Hiển thị {{ count($list_product) }} / {{ count($pro) }} sản phẩm</p>
                     </div>
                     <!-- Left Side End -->
                     <!-- Right Side Start -->
@@ -95,7 +107,19 @@
                                     <div class="add-to-link">
                                         <ul>
                                             <li class="cart">
-                                                <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ</a>
+                                                @if ($today <= "09:00:00" && $item->allow_market ==2)
+                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                @endif
+
+                                                @if ($item->allow_market ==1)
+                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                @endif
+
+                                                @if($today > "09:00:00" && $item->allow_market ==2)
+                                                <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                @endif
+                                                
+                                                
                                             </li>
                                             <li>
                                                 <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
@@ -113,7 +137,7 @@
                     </div>
                     <!-- Shop Tab Content End -->
                     <!--  Pagination Area Start -->
-                    <div class="pro-pagination-style text-center">
+                    <div class="pro-pagination-style text-center " >
                     
                         <ul>
                             <li>

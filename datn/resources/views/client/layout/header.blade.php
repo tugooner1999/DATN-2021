@@ -22,7 +22,7 @@
                             <li class="menu-dropdown">
                                             <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
                                             <ul class="sub-menu">
-                                                <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                                <li><a href="{{route('client.shops')}}">Sản phẩm thông thường</a></li>
                                                 <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
                                             </ul>
                             </li>
