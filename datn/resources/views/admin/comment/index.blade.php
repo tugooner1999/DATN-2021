@@ -46,7 +46,7 @@
                                     <th>Người dùng</th>
                                     <th>Tài khoản</th>
                                     <th>Điện thoại</th>
-                                    <th style="width:30%;">Nội dung</th>
+                                    <th>Nội dung</th>
                                     <th>Đánh giá</th>
                                     <th>Sản phẩm</th>
                                     <th>Ngày đăng</th>
@@ -63,7 +63,31 @@
                                         </a></td>
                                     <td style="font-weight:bold;">
                                         {{isset($item->user_comment) ? $item->user_comment->phone : ''}}</td>
-                                    <td>{{$item->ra_content}}</td>
+                                    
+                                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                                        Show
+                                </button>
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Mô Tả</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body" style="text-align: center;">
+                                                    {{$item->ra_content}}
+
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                  
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></td>
                                     <td>
                                         <span class="rating-active">
                                             @for($i = 1; $i <= 5; $i++) <i

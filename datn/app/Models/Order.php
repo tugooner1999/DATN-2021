@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = "orders";
-    // public $timestamps = true;
-    //     protected $fillable = [
-    //     'image',
-    //     'name'
-    // ];
-    // public function products(){
-    //     return $this->hasMany(Product::class, 'category_id');
-    // }
-    // public function SaveUpdate($id, $objU){
-    //     return DB::table($this->table)
-    //         ->where('id',$id)
-    //         ->update($objU);
-    // }
+    public $timestamps = FALSE;
+    protected $fillable = [
+    'voucher_id',
+    'totalMoney',
+    'order_by',
+    'created_at',
+    'type_id',
+    'payment_method',
+    'customer_email',
+    'customer_address',
+    'customer_phone',
+    'customer_fullname',
+    'status'
+    ];
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Order;
 class OrderController extends Controller
 {
     //
@@ -13,7 +13,8 @@ class OrderController extends Controller
      */
     public function index(){
         $this->authorize('admin');
-        return view('admin.order.index');
+        $oder = Order::all();
+        return view('admin.order.index',compact('oder'));
     }
 
     /**
@@ -23,9 +24,11 @@ class OrderController extends Controller
         $this->authorize('admin');
         return view('admin.order.edit-order');
     }
-
-    public function order_detail(){
+    public function order_update($id){
         $this->authorize('admin');
-        return view('admin.order.order_detail');
+        $order = Order::find($id);
+        $order->status = 1;
+        $order->save();
+        return response()->json(['data'=>'update'],200);
     }
 }

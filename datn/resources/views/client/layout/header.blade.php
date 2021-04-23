@@ -20,11 +20,11 @@
                                 <a href="{{route('client.homepage')}}">Trang chủ</a>
                             </li>
                             <li class="menu-dropdown">
-                                <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
-                                    <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
-                                </ul>
+                                            <a href="{{route('client.shop')}}">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{{route('client.shops')}}">Sản phẩm thông thường</a></li>
+                                                <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                            </ul>
                             </li>
                             <li class="menu-dropdown">
                                 <a href="{{route('client.about')}}">Giới thiệu</a>
@@ -87,15 +87,39 @@
                     </div>
                 </div>
                 <!-- mobile menu -->
+                
                 <div class="mobile-menu-area">
                     <div class="mobile-menu">
                         <nav id="mobile-menu-active">
+                            
+                        @if (Auth::check())
                             <ul class="menu-overflow">
-                                <li><a href="shop-left-sidebar.html">Sản phẩm</a></li>
-                                <li><a href="about.html">giới thiệu</a></li>
-                                <li><a href="contact.html">Liên hệ</a></li>
-                                <li><a href="my-account.html">Tài khoản</a></li>
-                                <li><a href="" style="text-decoration: underline;">Đăng xuất</a></li>
+                                <li>
+                                    <a href="#">Xin chào : {{Auth::user()->name}}</a>
+                                    <ul>
+                                    @if (Auth::user()->role_id == 1)
+                                    <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
+                                    @endif
+                                        <li><a href="#">Thông tin cá nhân</a></li>
+                                        <li><a href="#">Yêu thích</a></li>
+                                        <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
+                                    </ul>
+                                </li>
+                            @else
+                            <ul class="menu-overflow">
+                                <li><a href="{{route('client.login')}}" class="login text-dark"><b>Đăng nhập / Đăng kí</b></a></li>
+                            @endif
+ 
+                                <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
+                                <li>
+                                    <a href="{{route('client.shop')}}">Cửa hàng</a>
+                                    <ul>
+                                        <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                        <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{route('client.about')}}">Giới thiệu</a></li>
+                                <li><a href="{{route('client.contact')}}">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>

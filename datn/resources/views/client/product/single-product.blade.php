@@ -77,7 +77,6 @@
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2" style="text-align: left">
-
                         <a class="active" data-image="../../{{$product->image_gallery}}"
                             data-zoom-image="../../{{$product->image_gallery}}">
                             <img src="../../{{$product->image_gallery}}" alt="" />
@@ -104,15 +103,14 @@
                         <span style="margin-left: 15px;" class="read-review"><a class="reviews" href="#">Bình luận
                                 ({{count($comments)}})</a></span>
                     </div>
-                    <p>{{$product->description}}</p>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
+                            <li class="old-price not-cut text-danger">Giá: {{number_format($product->price)}}đ</li><br>
                             <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="pro-details-cart btn-hover">
+                        <div class="pro-details-cart btn-hover" >
                         <a product-id='{{$product->id}}'
                         @if(Auth::check())
                         class="cart-btn"
@@ -174,7 +172,9 @@
             <div class="tab-content description-review-bottom">
                 <div id="des-details2" class="tab-pane">
                     <div class="product-anotherinfo-wrapper">
-                        <p>{{$product->description}}</p>
+                    <h2>{{$product->name}}</h2>
+                    <br>
+                        <p>{!!$product->description!!}</p>
                     </div>
                 </div>
                 <div id="des-details3" class="tab-pane active">
@@ -184,7 +184,7 @@
                             <div class="review-wrapper">
                                 <div class="single-review">
                                     <div class="review-img">
-                                        <img src="../../{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}"
+                                        <img src="{{isset($item->user_comment) ? asset($item->user_comment->avatar) : ''}}"
                                             width="60" height="80" style="border-radius:100px;" alt="" />
                                     </div>
                                     <div class="review-content">
@@ -319,9 +319,7 @@
 
                                                     <input type="submit" class="js_rating_product"
                                                         value="Bình Luận" />
-                                                    <!-- <a class="js_rating_product" 
-                                                style="background:#4fb68d;color:#fff;padding:10px 31px;font-size:19px;border-radius:25px;"
-                                                 href="{{route('post.rating.product',$product)}}">GỬI</a> -->
+                                                    
                                                 </div>
                                             </form>
                                         </div>

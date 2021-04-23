@@ -128,10 +128,8 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-        $gallery = Gallery::all()->where('id',$id);
-        foreach($gallery as $gallery){
-        return response()->json(['data'=>$gallery,'message'=>'không có ảnh sản phẩm'],200); // 200 là mã lỗi
-        }
+        $Product = Product::find($id);
+        return response()->json(['data'=>$Product],200); // 200 là mã lỗi
     }
     public function destroy($id)
     {

@@ -47,12 +47,11 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], '/products/update/{id}',  [Admin\ProductController::class, 'updateProduct'])->name('admin.updateProduct');
         Route::get('/product/{id}',[Admin\ProductController::class, 'show'])->name('product-show');
         Route::get('product/edit/{id}',[Admin\ProductController::class, 'destroy'])->name('product-delete');
-
+        
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
-        Route::get('/order/order-detail',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
-
+        Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
 
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
@@ -106,12 +105,14 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/conventional', [Client\ProductController::class , 'shops'])->name('client.shops');
+        Route::get('/shop/{id}', [Client\ProductController::class , 'cate_product'])->where('id', '[0-9]+')->name('client.cate-product');
         Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
         
         // comment product
-        Route::match(['get', 'post'], '/single-product/rating/{id}', [Client\CommentController::class , 'postComment'])
-        ->name('post.rating.product');
+        Route::match(['get', 'post'], '/single-product/rating/{id}', [Client\CommentController::class , 'postComment'])->where('id', '[0-9]+')
+        ->name('client.comment_product');
 
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');
@@ -144,11 +145,5 @@ Route::prefix('admin')->group(function () {
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
 
 });
-
-
-// rating
-// Route::group(['prefix' => 'ajax'], function(){
-//         Route::match(['get', 'post'], 'client/single-product/rating/{id}', [Client\CommentController::class, 'postComment'])->name('post.rating.product');
-// });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

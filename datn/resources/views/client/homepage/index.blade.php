@@ -165,7 +165,9 @@
 
 
 <!-- Category Area Start -->
-<section class="categorie-area">
+<section class="categorie-area" style="
+    height: 326px;
+">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -181,7 +183,7 @@
             <!-- Single item -->
             @foreach($cates as $item)
             <div class="category-item">
-                <div class="category-list mb-30px" style="border: outset;">
+                <div class="category-list banner-inner banner-box" style="border: outset; ">
                     <div class="category-thumb">
                         <a href="{{route('client.shop')}}">
                             <img src="{{$item->image}}" alt="" width="" height="200"/>
@@ -201,7 +203,6 @@
     </div>
 </section>
 <!-- Category Area End  -->
-
 <!-- Feature Area Start -->
 <section class="feature-area">
     <div class="container">
@@ -217,17 +218,9 @@
         <!-- Feature Slider Start -->
         <div class="feature-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
-
-
-            @foreach ($product as $item)
-            <?php
-                $avg = 0;
-                if($item->pro_total_rating){
-                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
-                }
-            ?>
-            <div class="feature-slider-item">
-                <article class="list-product">
+             @foreach ($product as $item)
+             <div class="feature-slider-item">
+             <article class="list-product">
                     <div class="img-block">
                         <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
                             <img class="first-img" src="{{asset($item->image_gallery)}}" alt="" />
@@ -256,4 +249,15 @@
             <!-- Feature Slider End -->
         </div>
 </section>
+<div class="banner-area-2 mt-0px mb-100px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="banner-inner banner-box">
+                            <a href="shop-4-column.html"><img src="{{asset('assets/client/images/banner-image/4.jpg')}}" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 @endsection

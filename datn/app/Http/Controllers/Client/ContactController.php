@@ -23,7 +23,7 @@ class ContactController extends Controller
             'content' => $request->content,
         ];
         Mail::to('cuahangtaphoachucan@gmail.com')->send(new ContactMail($details));  
-        return redirect()->back()->with('message','Gửi mã liên hệ thành công');
+        return redirect()->back()->with('message','Gửi liên hệ thành công');
     }
     
 
