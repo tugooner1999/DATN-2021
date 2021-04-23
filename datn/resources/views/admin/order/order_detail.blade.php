@@ -1,191 +1,6 @@
 @extends('layout-admin')
 @section('content')
-<style>
-.shopee-svg-icon {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-    position: relative;
-}
 
-.order-detail-header__note {
-    right: 50px;
-    position: absolute;
-    top: 34px;
-    font-size: 15px;
-    line-height: 2rem;
-}
-
-.order-detail-page__delivery__container-wrapper {
-    margin-bottom: .625rem;
-    background: #fff;
-    margin-top: 45px;
-}
-
-._1AsWWl {
-    height: .1875rem;
-    width: 100%;
-    background-position-x: -1.875rem;
-    background-size: 7.25rem .1875rem;
-    background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
-}
-
-.order-detail-page__delivery__container {
-    padding: 1.1875rem 1.5rem 1.625rem;
-}
-
-.order-detail-page__delivery__header {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: end;
-    -webkit-align-items: flex-end;
-    -moz-box-align: end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    padding-bottom: .8125rem;
-}
-
-.order-detail-page__delivery__header__title {
-    color: rgba(0, 0, 0, .8);
-    font-size: 19px;
-    line-height: 25px;
-    text-transform: capitalize;
-}
-
-.order-detail-page__delivery__shipping-address__container:last-child {
-    max-width: 100%;
-}
-
-.order-detail-page__delivery__shipping-address__container {
-    text-align: start;
-    margin-right: 6%;
-    padding-top: .625rem;
-    -webkit-flex-shrink: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    max-width: 12.5rem;
-}
-
-.order-detail-page__delivery__shipping-address__shipping-name {
-    line-height: 1.375rem;
-    margin-bottom: .4375rem;
-}
-
-.order-detail-page__delivery__shipping-address__shipping-name {
-    color: rgba(0, 0, 0, .8);
-}
-
-.order-detail-page__delivery__shipping-address__detail {
-    line-height: 2;
-}
-
-.order-detail-page__delivery__shipping-address__detail {
-    color: rgba(0, 0, 0, .54);
-    font-size: 15px;
-}
-
-._1LhNIx,
-.Ovq6t9 {
-    border-bottom: 1px solid rgba(0, 0, 0, .09);
-}
-
-._1LhNIx {
-    background: #fafafa;
-    padding: .8125rem 1.5rem 0;
-    height: auto;
-}
-
-.info-bottom {
-    width: 100%;
-    height: auto;
-    background: #fafafa;
-    margin-top: -30px;
-}
-
-.info-people {
-    width: 100%;
-    height: 70px;
-    background: #fafafa;
-    position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, .09);
-}
-
-.images-name-order img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-}
-
-.images-product-order {
-    position: absolute;
-    top: 13%;
-    bottom: 0;
-    left: 2%;
-    right: 0;
-    margin: 0;
-}
-
-.name-kh {
-    position: absolute;
-    top: 30%;
-    bottom: 0;
-    left: 8%;
-    right: 0;
-    margin: 0;
-}
-
-.name-kh a {
-    color: #000;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.name-kh a:hover {
-    color: #f33155;
-}
-
-.info-product-order {
-    background: #fafafa;
-}
-
-.info-product-order .all-info {
-    width: 100%;
-    height: 120px;
-}
-
-.info-product-order .all-info .image-item-product {
-    width: 18%;
-    height: 100%;
-    float: left;
-}
-
-.info-product-order .all-info .image-item-product img {
-    width: 100%;
-    height: 100%;
-}
-
-.info-product-order .all-info .content-info {
-    width: 82%;
-    height: 100%;
-    border: 1px solid #000;
-    float: right;
-    padding: 14px;
-}
-.info-product-order .price-product{
-    width:100%;
-    height:120px;
-    border:1px solid #000;
-}
-</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -271,8 +86,57 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4" style="padding: 15px 5px;">
-                            <div class="price-product"><span>150.000</span></div>
+                        <div class="col-sm-4" style="padding: 15px 5px;position:relative;">
+                            <div class="price-product" style="position:relative;"><span>đ150.000</span></div>
+                        </div>
+                    </div>
+
+                    <!-- payment_setail -->
+                    <div class="payment-detail__container Ovq6t9">
+                        <div class="payment-detail__item">
+                            <div class="payment-detail__item__description">Tổng tiền hàng</div>
+                            <div class="payment-detail__item__value">
+                                <div class="payment-detail__item__value-text">₫155.000</div>
+                            </div>
+                        </div>
+                        <div class="payment-detail__item">
+                            <div class="payment-detail__item__description">Vận chuyển-J&amp;T Express</div>
+                            <div class="payment-detail__item__value">
+                                <div class="payment-detail__item__value-text">₫16.050</div>
+                            </div>
+                        </div>
+                        <div class="payment-detail__item">
+                            <div class="payment-detail__item__description">Miễn Phí Vận Chuyển<div
+                                    class="shopee-drawer"></div>
+                            </div>
+                            <div class="payment-detail__item__value">
+                                <div class="payment-detail__item__value-text">-₫14.550</div>
+                            </div>
+                        </div>
+                        <div class="payment-detail__item payment-detail__item--last">
+                            <div class="payment-detail__item__description">Tổng số tiền</div>
+                            <div class="payment-detail__item__value payment-detail__item__value--highlighted">
+                                <div class="payment-detail__item__value-text">
+                                    <div>
+                                        <div style="margin: 5px -26px;">₫156.500</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-detail__container">
+                        <div class="payment-detail__item payment-detail__item--last">
+                            <div class="payment-detail__item__description">
+                                <div class="payment-detail__item__description-inner" style="padding: 7px;">
+                                Phương thức Thanh toán
+                                </div>
+                            </div>
+                            <div class="payment-detail__item__value" style="padding: 10px;">
+                                <div class="payment-detail__item__value-text"><span
+                                        class="payment-detail__payment-method-value">Thanh toán khi nhận hàng</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

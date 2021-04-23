@@ -10,9 +10,11 @@
 .list_start i:hover {
     cursor: pointer;
 }
+
 .rating-product {
     margin-bottom: 0;
 }
+
 .list_text {
     display: inline-block;
     margin-left: 10px;
@@ -25,6 +27,7 @@
     border-radius: 2px;
     display: none;
 }
+
 .list_text:after {
     right: 100%;
     top: 50%;
@@ -39,9 +42,11 @@
     border-width: 6px;
     margin-top: -6px;
 }
+
 .list_start .rating_active {
     color: #ff9705;
 }
+
 .rating-active .active {
     color: #ff9705 !important;
 }
@@ -73,7 +78,8 @@
                 <div class="product-details-img product-details-tab">
                     <div class="zoompro-wrap zoompro-2">
                         <div class="zoompro-border zoompro-span">
-                            <img class="zoompro" src="../../{{$product->image_gallery}}" data-zoom-image="../../{{$product->image_gallery}}" alt="" width="80" height="500"/>
+                            <img class="zoompro" src="../../{{$product->image_gallery}}"
+                                data-zoom-image="../../{{$product->image_gallery}}" alt="" width="80" height="500" />
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2" style="text-align: left">
@@ -83,9 +89,8 @@
                             <img src="../../{{$product->image_gallery}}" alt="" />
                         </a>
                         @foreach($img_url as $img)
-                        <a data-image="../../{{$img->gallery_img}}"
-                            data-zoom-image="../../{{$img->gallery_img}}">
-                        <img class="active" src="../../{{$img->gallery_img}}" alt="" />
+                        <a data-image="../../{{$img->gallery_img}}" data-zoom-image="../../{{$img->gallery_img}}">
+                            <img class="active" src="../../{{$img->gallery_img}}" alt="" />
                         </a>
                         @endforeach
                     </div>
@@ -108,22 +113,19 @@
                     <div class="pricing-meta">
                         <ul>
                             <li class="old-price not-cut text-danger">Giá :{{number_format($product->price)}}đ</li><br>
-                            <li class="tinhtrang pb-2">Tình trạng : <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
+                            <li class="tinhtrang pb-2">Tình trạng :
+                                <b>{{$product->quantily <= 0 ? " Hết hàng " : " Còn hàng "}}</b></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
                         <div class="pro-details-cart btn-hover">
-                        <a product-id='{{$product->id}}'
-                        @if(Auth::check())
-                        class="cart-btn"
-                        @else
-                        href="{{route('client.login')}}"
-                        @endif
-                        >Thêm vào giỏ</a></li>
+                            <a product-id='{{$product->id}}' @if(Auth::check()) class="cart-btn" @else
+                                href="{{route('client.login')}}" @endif>Thêm vào giỏ</a></li>
                         </div>
                         <div class="cart-plus-minus" style="visibility: hidden;">
                             <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
-                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily" value="1" />
+                            <input class="cart-plus-minus-box" prod-id="{{$product['id']}}" type="text" name="quantily"
+                                value="1" />
                         </div>
                     </div>
                     <div class="pro-details-wish-com">
@@ -152,9 +154,12 @@
                     </div>
                     <div class="pro-details-policy">
                         <ul>
-                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng miễn phí</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí đổi trả</span></li>
-                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng mã giảm giá</span>s</li>
+                            <li><img src="{{asset('assets/client/images/icons/policy.png')}}" alt="" /><span>Giao hàng
+                                    miễn phí</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-2.png')}}" alt="" /><span>Miễn phí
+                                    đổi trả</span></li>
+                            <li><img src="{{asset('assets/client/images/icons/policy-3.png')}}" alt="" /><span>Áp dụng
+                                    mã giảm giá</span>s</li>
                         </ul>
                     </div>
                 </div>
@@ -355,6 +360,12 @@
         <div class="recent-product-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
             @foreach($cates as $item)
+            <?php
+                $avg = 0;
+                if($item->pro_total_rating){
+                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                }
+            ?>
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
@@ -365,15 +376,13 @@
                     <li class="new">Mới</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC PHẨM</span></a>
+                    <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC
+                            PHẨM</span></a>
                     <h2><a href="" class="product-link">{{$item->name}}</a></h2>
-                    <div class="rating-product">
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                    </div>
+                    <div class="rating-active">
+                            @for($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                @endfor
+                        </div>
                     <div class="pricing-meta">
                         <ul>
                             <!-- <li class="old-price">{{$item->name}}</li> -->
@@ -384,9 +393,8 @@
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a @if(Auth::check()) class="cart-btn"  product-id='{{$item->id}}'
-                                            @else href="{{route('client.login')}}"
-                                            @endif>Thêm vào giỏ</a>
+                        <li class="cart"><a @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}' @else
+                                href="{{route('client.login')}}" @endif>Thêm vào giỏ</a>
                         </li>
                         <li>
                             <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
