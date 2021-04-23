@@ -35,6 +35,7 @@
                                             <th>Tiêu đề</th>
                                             <th>Ảnh</th>
                                             <th>Mô tả ngắn</th>
+                                            <th>Show</th>
                                             <th><a href="{{route('admin.addSlider')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
