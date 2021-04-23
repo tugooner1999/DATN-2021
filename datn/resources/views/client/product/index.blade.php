@@ -77,25 +77,30 @@
                             <div class="row">
                             @foreach ($list_product as $item)
                                 <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
-                                
-                                <article class="list-product">
-                                    <div class="img-block">
-                                        <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                                            <img src="../{{$item->image_gallery}}" alt="" width="256" height="256"/>
-                                        </a>
-                                    </div>
-                                    <ul class="product-flag">
-                                        <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
-                                    </ul>
-                                    <div class="product-decs">
-                                        <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                                        <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
-                                        <div class="rating-product">
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
+
+                                    <article class="list-product">
+                                        <div class="img-block">
+                                            <a href="{{route('client.single-product',['id'=>$item->id])}}"
+                                                class="thumbnail">
+                                                <img src="{{asset($item->image_gallery)}}" alt="" width="256"
+                                                    height="256" />
+                                            </a>
+                                        </div>
+                                        <ul class="product-flag">
+                                            <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">
+                                                {{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
+                                        </ul>
+                                        <div class="product-decs">
+                                            <a class="inner-link"
+                                                href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                                            <h2><a href="{{route('client.single-product',['id'=>$item->id])}}"
+                                                    class="product-link">{{$item->name}}</a></h2>
+                                            <div class="rating-active">
+                                                @for($i = 1; $i <= 5; $i++) <i
+                                                    class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                                    @endfor
+                                                    <p class="current-price">{{$item->price}}đ</p>
+                                            </div>
                                         </div>
                                         <div class="pricing-meta">
                                             <ul>
