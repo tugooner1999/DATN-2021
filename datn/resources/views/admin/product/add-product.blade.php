@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST"
+            <form class="form-horizontal form-material" action="{{route('admin.addProduct')}}" method="POST" style="width:100%;"
                 enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="col-md-8 col-xs-12">
@@ -32,6 +32,7 @@
                             @enderror
                             </div>
                         </div>
+                       
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
@@ -41,6 +42,7 @@
                             @enderror
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label class="col-md-12">Số lượng</label>
                             <div class="col-md-12">
@@ -51,6 +53,7 @@
 
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
@@ -60,6 +63,7 @@
                             @enderror
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">
@@ -94,14 +98,17 @@
                 </div>
                 <div class="col-md-4">
                     <div class="white-box">
-                            <div id="btnThemFile" class="btn btn-primary">Thêm ảnh cho sản phẩm</div>
-                            <div class="form-group">
-                            <hr>
-                            <div id="chonFile">
-                            <input class="col-sm-12" name="gallery_img[]" type="file">
-                            </div>
-                            </div>
+                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px" alt="">
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
+                        </div>
+                        @error('image_gallery')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+                    
                 </div>
             </form>
         </div>

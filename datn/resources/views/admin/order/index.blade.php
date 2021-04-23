@@ -41,49 +41,7 @@
                                             <td class="text-success">Đã thanh toán</td>
                                             <td class="text-warning">Chưa hoàn thành</td>
                                             <td>24/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan2</a></td>
-                                            <td>245.000đ</td>
-                                            <td>Thông thường</td>
-                                            <td class="text-success">Đã thanh toán</td>
-                                            <td class="text-success">Đã hoàn thành</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>155.000đ</td>
-                                            <td>Đi chợ</td>
-                                            <td class="text-warning">Chưa thanh toán</td>
-                                            <td class="text-warning">Chưa hoàn thành</td>
-                                            <td>28/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>123.000đ</td>
-                                            <td>Đi chợ</td>
-                                            <td class="text-warning">Chưa thanh toán</td>
-                                            <td class="text-danger">Đã Hủy</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
+                                            <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
                                                 <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                 <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>

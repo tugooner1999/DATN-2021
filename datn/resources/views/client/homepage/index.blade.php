@@ -1,7 +1,10 @@
 @extends('layout-client')
 @section('content')
-
-
+<style>
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <!-- Slider Arae Start -->
 <div class="slider-area">
     <div class="slider-active-3 owl-carousel slider-hm8 owl-dot-style">
@@ -36,7 +39,8 @@
                 <!-- Static Single Item Start -->
                 <div class="col-lg-3 col-xs-12 col-md-6 col-sm-6">
                     <div class="single-static pb-res-md-0 pb-res-sm-0 pb-res-xs-0">
-                        <img src="{{asset('assets/client/images/icons/static-icons-1.png')}}" alt="" class="img-responsive" />
+                        <img src="{{asset('assets/client/images/icons/static-icons-1.png')}}" alt=""
+                            class="img-responsive" />
                         <div class="single-static-meta">
                             <h4>Miễn phí giao hàng</h4>
                             <p>cho đơn hàng bán kính dưới 500m tại cửa hàng</p>
@@ -47,7 +51,8 @@
                 <!-- Static Single Item Start -->
                 <div class="col-lg-3 col-xs-12 col-md-6 col-sm-6">
                     <div class="single-static pb-res-md-0 pb-res-sm-0 pb-res-xs-0 pt-res-xs-20">
-                        <img src="{{asset('assets/client/images/icons/static-icons-2.png')}}" alt="" class="img-responsive" />
+                        <img src="{{asset('assets/client/images/icons/static-icons-2.png')}}" alt=""
+                            class="img-responsive" />
                         <div class="single-static-meta">
                             <h4>Đặt hàng trực tuyến</h4>
                             <p>Đặt hàng nhanh gọn trực tuyến trên internet</p>
@@ -58,7 +63,8 @@
                 <!-- Static Single Item Start -->
                 <div class="col-lg-3 col-xs-12 col-md-6 col-sm-6">
                     <div class="single-static pt-res-md-30 pb-res-sm-30 pb-res-xs-0 pt-res-xs-20">
-                        <img src="{{asset('assets/client/images/icons/static-icons-3.png')}}" alt="" class="img-responsive" />
+                        <img src="{{asset('assets/client/images/icons/static-icons-3.png')}}" alt=""
+                            class="img-responsive" />
                         <div class="single-static-meta">
                             <h4>Thanh toán đa dạng</h4>
                             <p>Thanh toán đa dạng theo nhiều loại hình </p>
@@ -69,7 +75,8 @@
                 <!-- Static Single Item Start -->
                 <div class="col-lg-3 col-xs-12 col-md-6 col-sm-6">
                     <div class="single-static pt-res-md-30 pb-res-sm-30 pt-res-xs-20">
-                        <img src="{{asset('assets/client/images/icons/static-icons-4.png')}}" alt="" class="img-responsive" />
+                        <img src="{{asset('assets/client/images/icons/static-icons-4.png')}}" alt=""
+                            class="img-responsive" />
                         <div class="single-static-meta">
                             <h4>Hỗ trợ 24/7</h4>
                             <p>Gọi cho chúng tôi nếu bạn có thắc mắc</p>
@@ -98,26 +105,33 @@
         <!-- Best Sell Slider Carousel Start -->
         <div class="best-sell-slider owl-carousel owl-nav-style">
             @foreach ($product as $item)
-            
+            <?php
+                $avg = 0;
+                if($item->pro_total_rating){
+                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                }
+            ?>
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
-                        <img src="{{$item->image_gallery}}" alt="" width="256" height="256"/>
+                        <img src="{{$item->image_gallery}}" alt="" width="256" height="256" />
                     </a>
                 </div>
 
                 <ul class="product-flag">
-                    <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
+                    <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">
+                        {{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                    <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
-                    <div class="rating-product">
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
+                    <a class="inner-link"
+                        href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                    <h2><a href="{{route('client.single-product',['id'=>$item->id])}}"
+                            class="product-link">{{$item->name}}</a></h2>
+                    <div class="rating-active">
+                        @for($i = 1; $i <= 5; $i++) <i
+                            class="fa fa-star {{ $i <= $avg ? 'active' : '' }}">
+                            </i>
+                            @endfor
                     </div>
                     <div class="pricing-meta">
                         <ul>
@@ -147,6 +161,8 @@
     </div>
 </section>
 <!-- Best Sells Slider End -->
+
+
 
 <!-- Category Area Start -->
 <section class="categorie-area">
@@ -203,23 +219,29 @@
             <!-- Single Item -->
 
 
-             @foreach ($product as $item)
-             <div class="feature-slider-item">
-             <article class="list-product">
+            @foreach ($product as $item)
+            <?php
+                $avg = 0;
+                if($item->pro_total_rating){
+                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                }
+            ?>
+            <div class="feature-slider-item">
+                <article class="list-product">
                     <div class="img-block">
                         <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
-                            <img class="first-img" src="{{$item->image_gallery}}" alt="" />
+                            <img class="first-img" src="{{asset($item->image_gallery)}}" alt="" />
                         </a>
                     </div>
                     <div class="product-decs">
-                        <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                        <h2><a href="{{route('client.single-product', ['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
-                        <div class="rating-product">
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
+                        <a class="inner-link"
+                            href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                        <h2><a href="{{route('client.single-product', ['id'=>$item->id])}}"
+                                class="product-link">{{$item->name}}</a></h2>
+                        <div class="rating-active">
+                            @for($i = 1; $i <= 5; $i++) <i
+                                class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                @endfor
                         </div>
                         <div class="pricing-meta">
                             <ul>
@@ -228,8 +250,8 @@
                         </div>
                     </div>
                 </article>
-                </div>
-        @endforeach
+            </div>
+            @endforeach
 
             <!-- Feature Slider End -->
         </div>

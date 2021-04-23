@@ -68,7 +68,7 @@
                                                 <?php 
                                                     if ($item->type==1) {
                                                     ?>
-                                                    Giảm {{ number_format($item->value) }}đ
+                                                    Giảm {{ number_format($item->value) }}VND
                                                 <?php 
                                                 }else {
                                                 ?>
@@ -82,13 +82,14 @@
                                             <td style="font-size: 20px;">
                                                 <a style="padding-left: 10px;" href="{{route('admin.editVoucher',['id' => $item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                 <a style="padding-left: 10px;" onclick="return confirm('bạn chắc chắn muốn xoá voucher: {{$item->name}}')"  href="{{route( 'admin.deteleVoucher',[ 'id'=>$item->id]) }}" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <br>
                                                 <a href="{{route('admin.sendMailVoucher',['id' => $item->id])}}" class="btn btn-default">Gửi mã voucher</a>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
-                                        <tr>
+                                        <tr style="">
                                             <th style="visibility:hidden;">ID</th>
                                             <th style="visibility:hidden;">Tên Voucher</th>
                                             <th style="visibility:hidden;">Mã code</th>

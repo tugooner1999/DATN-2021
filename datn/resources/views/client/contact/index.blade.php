@@ -81,20 +81,23 @@
                     <div class="contact-title mb-30">
                         <h2>Liên hệ với chúng tôi</h2>
                     </div>
-                    <form class="contact-form-style" id="contact-form" action="{{route('client.sendMail')}}" method="post" role="form">
+                    @if(Session::has('message'))
+                    <div class="alert alert-success">{{ Session::get('message') }}</div>
+                    @endif
+                    <form class="contact-form-style" id="contact-form" action="{{route('client.postcontact')}}" method="post" role="form">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">
-                                <input name="name_contact" placeholder="Tên*" type="text" required />
+                                <input name="name" placeholder="Tên*" type="text" required />
                             </div>
                             <div class="col-lg-6">
-                                <input name="email_contact" placeholder="Email*" type="email" required />
+                                <input name="email" placeholder="Email*" type="email" required />
                             </div>
                             <div class="col-lg-12">
-                                <input name="subject_contact" placeholder="Tiêu đề*" type="text" required/>
+                                <input name="title" placeholder="Tiêu đề*" type="text" required/>
                             </div>
                             <div class="col-lg-12">
-                                <textarea name="content_contact" placeholder="Nội dung*" required></textarea>
+                                <textarea name="content" placeholder="Nội dung*" required></textarea>
                                 <button class="submit" type="submit">Gửi</button>
                             </div>
                         </div>
@@ -108,3 +111,4 @@
 </div>
 <!-- contact area end -->
 @endsection
+
