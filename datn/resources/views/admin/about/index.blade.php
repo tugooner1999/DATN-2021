@@ -36,7 +36,7 @@
                                             <th>Mô Tả</th>
                                             <th>Ảnh</th>
                                             <th>
-                                                {{-- <a href="{{route('admin.createAbout')}}" class="btn btn-primary">Thêm</a> --}}
+                                               Hành động
                                             </th>
                                         </tr>
                                     </thead>
@@ -72,9 +72,7 @@
                                                 <td><img src="{{$item->image}}" width="100" height="100" alt=""></td>
                                                 <td style="font-size: 20px;">
                                                     <a style="padding-left: 10px;" href="{{route('admin.editAbout',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                    <a class="text-danger" href="{{route( 'admin.deteleAbout',[ 'id'=>$item->id]) }}"  
-                                                        onclick="return confirm('Bạn có muốn xóa giới thiệu {{$item->title}}?')"><i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </a>
+                                                    
                                                 </td>
                                             </tr>  
                                         @endforeach

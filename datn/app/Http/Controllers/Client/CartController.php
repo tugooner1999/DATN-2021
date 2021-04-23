@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 class CartController extends Controller
 {
     //

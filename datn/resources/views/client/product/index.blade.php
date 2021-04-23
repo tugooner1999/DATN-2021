@@ -12,7 +12,6 @@
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Sản phẩm</li>
                     </ul>
-                    
                     <div class="col-md-3 text-right" style="margin-left: 37%; margin-top: 3%; margin-bottom: -3%">
                         <div class="card bg-info text-white center " >
                         <h3 class="card-title text-center ">
@@ -166,7 +165,7 @@
                                     @foreach($cates as $item)
                                     <li>
                                         <div class="sidebar-widget-list-left">
-                                            <input type="checkbox"  /> <a href="{{ route('client.shop') }}">{{ $item->name }} ({{ count($item->products) }})</span>
+                                            <input type="checkbox"/><a href="{{route('client.cate-product',['id'=>$item->id])}}">{{ $item->name }} ({{ count($item->products) }})</span>
                                             </a>
                                             <span class="checkmark"></span>
                                         </div>

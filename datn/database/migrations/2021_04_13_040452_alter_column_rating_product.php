@@ -26,6 +26,9 @@ class AlterColumnRatingProduct extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::table('products', function(Blueprint $table){
+            $table->dropColumn('pro_pay');
+            $table->dropColumn('pro_number');
+        });
     }
 }

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/admin/plugins/images/favicon.png')}}">
     <title>Trang quản trị - hệ thống quản lý bán hàng tạp hoá Chúc An</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -24,6 +25,7 @@
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
 </head>
 
 <body class="fix-header">
@@ -71,6 +73,8 @@
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable( {
@@ -83,12 +87,10 @@
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
-
                             column
                                 .search( val ? '^'+val+'$' : '', true, false )
                                 .draw();
                         } );
-
                     column.data().unique().sort().each( function ( d, j ) {
                         select.append( '<option value="'+d+'">'+d+'</option>' )
                     } );
@@ -97,9 +99,67 @@
         } );
         } );
         </script>
+
+    <script type="text/javascript" charset="UTF-8">
+$.ajaxSetup({
+    header:{
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+})
+    </script>
     <script>
-    tinymce.init({
-        selector: '#mytextarea'
+        $('.btn-show').click(function(){
+            var url = $(this).attr('data-url');
+            $.ajax({
+                type: 'get',
+                url: url,
+                dataType:"json",
+                success: function(response) {
+                    console.log(response)
+                    $('p#id').html(response.data.description)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //xử lý lỗi tại đây
+                }
+            })
+        })
+        $('.btn-warning').click(function(){
+            var url = $(this).attr('data-url');
+            if (confirm('Hóa đơn này đã được hoàn thành')) {
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function(response) {
+                    window.location.reload()
+                    toastr.success('Cập nhật thành công', 'Thông báo')
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            })
+            }
+        })
+        $('.btn-outline-info').click(function(){
+            var url = $(this).attr('data-url');
+					if (confirm('Bạn có chắc muốn xóa không?')) {
+						$.ajax({
+							type: 'get',
+							url: url,
+							success: function(response) {
+                                window.location.reload()
+                                toastr.success('Xóa thành công', 'Thông báo')
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								//xử lý lỗi tại đây
+							}
+						})
+					}
+				})
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#btnThemFile").click(function(){
+            $("#chonFile").append("<br><input class='col-sm-12' name='gallery_img[]' type='file'>");
+        });
     });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

@@ -1,5 +1,10 @@
 @extends('layout-admin')
 @section('content')
+<style>
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -20,6 +25,19 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">Danh sách</h3>
+                    <div class="app-search hidden-sm hidden-xs m-r-10">
+                        <input id="myInput" class="form-control form-control-navbar" style="border: 0.5px solid"
+                            type="text" placeholder="Tìm kiếm" aria-label="Search">
+                    </div>
+                    <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', NULL);
+                        }
+                    ?>
+                    </p>
                     <div class="table-responsive">
                         <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
@@ -28,15 +46,15 @@
                                     <th>Người dùng</th>
                                     <th>Tài khoản</th>
                                     <th>Điện thoại</th>
-                                    <th style="width:30%;">Nội dung</th>
+                                    <th>Nội dung</th>
                                     <th>Đánh giá</th>
                                     <th>Sản phẩm</th>
                                     <th>Ngày đăng</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($comment as $pro => $item)
+                            <tbody id="myTable">
+                                @foreach($comment as $no => $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td style="font-weight:bold;">
@@ -45,12 +63,37 @@
                                         </a></td>
                                     <td style="font-weight:bold;">
                                         {{isset($item->user_comment) ? $item->user_comment->phone : ''}}</td>
-                                    <td>{{$item->ra_content}}</td>
+                                    
+                                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                                        Show
+                                </button>
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Mô Tả</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body" style="text-align: center;">
+                                                    {{$item->ra_content}}
+
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                  
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></td>
                                     <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <span class="rating-active">
+                                            @for($i = 1; $i <= 5; $i++) <i
+                                                class="fa fa-star {{ $i <= $item->ra_number ? 'active' : '' }}"></i>
+                                            @endfor
+                                        </span>
                                     </td>
                                     <td class="text-info"><a
                                             href="">{{isset($item->product_comment) ? $item->product_comment->name : ''}}</a>

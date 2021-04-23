@@ -1,5 +1,12 @@
 @extends('layout-admin')
 @section('content')
+
+<style>
+.rating-active .active {
+    color:#ff9705 !important;
+    
+}
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -35,11 +42,12 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ảnh</th>
-                                    <th>Toàn bộ ảnh</th>
+                                    <th>Mô tả</th>
                                     <th>Tên</th>
                                     <th>SL</th>
                                     <th>Loại hình</th>
                                     <th>Danh mục</th>
+                                    <th>Đánh giá</th>
                                     <th>Giá</th>
                                     <th>View</th>
                                     <th><a href="{{route('admin.createProduct')}}" class="btn btn-primary">Thêm</a></th>
@@ -47,33 +55,36 @@
                             </thead>
                             <tbody>
                                 @foreach($pro as $no => $item)
+                                <?php
+                                $avg = 0;
+                                if($item->pro_total_rating){
+                                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                                }
+                                ?>
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>
                                     <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
                                     </td>
                                     <td style="text-align: center;">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                                        <button type="button" data-url="{{route('product-show',['id' => $item->id])}}" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
                                             Show
                                     </button>
-                                        <div class="modal fade" id="myModal">
+                                        <div class="modal fade" id="show">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">Toàn bộ sản phẩm : {{$item->name}}</h4>
+                                                        <h4 class="modal-title">Mô tả sản phẩm :</h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
                                                     <!-- Modal body -->
                                                     <div class="modal-body" style="text-align: center;">
-                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
-                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
-                                                        <img src="{{$item->img_url}}" alt=""height="100px" width="150" style="border: outset;">
-
+                                                    <p id="id">
+                                                    <p>
                                                     </div>
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Thêm ảnh cho sản phẩm</button>
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
@@ -84,6 +95,12 @@
                                     <td>{{$item->quantily}} SP</td>
                                     <td>{{$item->allow_market == 2 ? "Đi chợ" : "Thông thường"}}</td>
                                     <td>{{isset($item->category) ? $item->category->name : ''}}</td>
+                                    <td><span class="rating-active">
+                                    @for($i = 1; $i <= 5; $i++)
+                                    <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                    @endfor
+                                    </span>
+                                    </td>
                                     <td>{{number_format($item->price)}}đ</td>
                                     <td>{{$item->views > 0 ? $item->views : '0'}} <i class="fa fa-eye text-primary" aria-hidden="true"></i></td>
                                     <td style="font-size: 20px;">

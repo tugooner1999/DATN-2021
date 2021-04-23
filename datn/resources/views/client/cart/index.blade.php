@@ -140,10 +140,10 @@
                                 
                             </div>
                             {{-- <label for="">Họ Tên</label> --}}
-                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="full-name-customer" placeholder="Nhập họ tên">
-                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" placeholder="Nhập địa chỉ email">
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="full-name-customer" value="@if(Auth::user()) {{Auth::user()->name}} @endif">
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" value="@if(Auth::user()) {{Auth::user()->email}} @endif">
                             {{-- <label for="">Số điện thoại</label> --}}
-                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="phone-customer" placeholder="Nhập số điện thoại">
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="phone-customer" value="@if(Auth::user()) {{Auth::user()->phone}} @endif">
                             <textarea class="mt-4 pl-2" rows="5" type="text" style="width:100%;height:px;" id="address-customer" placeholder="Địa chỉ nhận hàng"></textarea>
                             <div class="total-shipping">
                                 <h5>Phí phát sinh</h5>
