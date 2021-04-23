@@ -33,20 +33,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($oder as $item)
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>675.000đ</td>
+                                            <td>{{$item->id}}</td>
+                                            <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
+                                            <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
                                             <td class="text-success">Đã thanh toán</td>
-                                            <td class="text-warning">Chưa hoàn thành</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
+                                            <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
+                                            {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
+                                            </td>
+                                            <td>{{$item->created_at}}</td>
+                                            <td><a href="#"><i class="fa fa-edit"></i>Xem</a></td>
                                             <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>

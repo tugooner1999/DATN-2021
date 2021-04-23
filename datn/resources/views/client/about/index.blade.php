@@ -5,7 +5,6 @@
 body {
     line-height: 30px;
 }
-
 .rating-active .active {
     color: #ff9705 !important;
 }
@@ -81,6 +80,9 @@ body {
                             @endfor
                     </div>
                     <div class="pricing-meta">
+                        <ul>
+                            <li class="">{{($item->views)}} Views</li>
+                        </ul>
                         <ul>
                             <li class="current-price">{{number_format($item->price)}}đ</li>
                         </ul>

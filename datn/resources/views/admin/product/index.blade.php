@@ -42,7 +42,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ảnh</th>
-                                    <th>Toàn bộ ảnh</th>
+                                    <th>Mô tả</th>
                                     <th>Tên</th>
                                     <th>SL</th>
                                     <th>Loại hình</th>
@@ -75,18 +75,16 @@
                                                 <div class="modal-content">
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">Toàn bộ ảnh sản phẩm :</h4>
+                                                        <h4 class="modal-title">Mô tả sản phẩm :</h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
                                                     <!-- Modal body -->
                                                     <div class="modal-body" style="text-align: center;">
                                                     <p id="id">
                                                     <p>
-                                                    
                                                     </div>
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Thêm ảnh cho sản phẩm</button>
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>

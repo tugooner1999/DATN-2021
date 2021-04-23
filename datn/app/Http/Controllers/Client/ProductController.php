@@ -11,8 +11,8 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Rating;
-use DB;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
@@ -20,24 +20,43 @@ class ProductController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::paginate(12);
+        $pro = Product::all();
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','pro','cates','today'));
+
+    }
+    public function shops(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+        $list_product = Product::where('allow_market','1')->paginate(12);
+        $cates  = Category::all();        
+        $pro = Product::all()->where('allow_market','1');
+        return view('client.product.index', compact('list_product','pro','cates','today'));
 
     }
 
     public function allow_market(){
-        $this->authorize('member');
+        $pro = Product::all()->where('allow_market','2');
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::where('allow_market','2')->paginate(12);
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','cates','pro','today'));
+    }
 
+    public function cate_product($id){
+        $list_product= Product::where('category_id',$id)->paginate(12);
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+        $cates  = Category::all();
+        $pro = Product::all()->where('allow_market','1');
+        return view('client.product.index', compact('list_product','pro','cates','today'));
     }
     public function single_Product($id){
         $product= Product::find($id);
         // comment
         $comments = Rating::where('ra_product_id', $id)->get();
-
+        $product->views += 1;
+        $product->save();
         // thống kê số lượt đánh giá
         $ratingsDashboard = Rating::groupBy('ra_number')
         ->where('ra_product_id',$id)

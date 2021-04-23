@@ -117,12 +117,27 @@ $.ajaxSetup({
                 dataType:"json",
                 success: function(response) {
                     console.log(response)
-                    $('p#id').html('<img src = "' + response.data.img_url + '" width= "126px" />')
+                    $('p#id').html(response.data.description)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //xử lý lỗi tại đây
                 }
             })
+        })
+        $('.btn-warning').click(function(){
+            var url = $(this).attr('data-url');
+            if (confirm('Hóa đơn này đã được hoàn thành')) {
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function(response) {
+                    window.location.reload()
+                    toastr.success('Cập nhật thành công', 'Thông báo')
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            })
+            }
         })
         $('.btn-outline-info').click(function(){
             var url = $(this).attr('data-url');
