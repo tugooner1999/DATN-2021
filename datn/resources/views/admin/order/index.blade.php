@@ -40,17 +40,11 @@
                                             <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
                                             <td class="text-success">Đã thanh toán</td>
-<<<<<<< HEAD
-                                            <td class="text-warning">Chưa hoàn thành</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
-=======
                                             <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>
                                             <td><a href="#"><i class="fa fa-edit"></i>Xem</a></td>
->>>>>>> b36716f88d75792b23df699eb827e7d3ede33c14
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             </td>
