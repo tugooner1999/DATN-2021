@@ -135,6 +135,9 @@
                     </div>
                     <div class="pricing-meta">
                         <ul>
+                            <li class="">{{($item->views)}} Views</li>
+                        </ul>
+                        <ul>
                             <li class="current-price">{{number_format($item->price)}}đ</li>
                         </ul>
                     </div>
@@ -219,6 +222,12 @@
         <div class="feature-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
              @foreach ($product as $item)
+             <?php
+                $avg = 0;
+                if($item->pro_total_rating){
+                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                }
+            ?>
              <div class="feature-slider-item">
              <article class="list-product">
                     <div class="img-block">
@@ -237,6 +246,9 @@
                                 @endfor
                         </div>
                         <div class="pricing-meta">
+                            <ul>
+                                <li class="">{{($item->views)}} Views</li>
+                            </ul>
                             <ul>
                                 <li class="current-price">{{number_format($item->price)}}đ</li>
                             </ul>

@@ -1,5 +1,10 @@
 @extends('layout-client')
 @section('content')
+<style>
+    .rating-active .active {
+        color: #ff9705 !important;
+    }
+    </style>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area" style="
     background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
@@ -76,6 +81,12 @@
 
                             <div class="row">
                             @foreach ($list_product as $item)
+                            <?php
+                                $avg = 0;
+                                if($item->pro_total_rating){
+                                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                                }
+                            ?>
                                 <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
                                 
                                 <article class="list-product">
@@ -88,15 +99,15 @@
                                         <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">{{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                                     </ul>
                                     <div class="product-decs">
-                                        <a class="inner-link" href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                                        <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
-                                        <div class="rating-product">
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                        </div>
+                                        <a class="inner-link"
+                                                href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                                            <h2><a href="{{route('client.single-product',['id'=>$item->id])}}"
+                                                    class="product-link">{{$item->name}}</a></h2>
+                                            <div class="rating-active">
+                                                @for($i = 1; $i <= 5; $i++) <i
+                                                    class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                                    @endfor
+                                            </div>
                                         <div class="pricing-meta">
                                             <ul>
                                                 <li class="current-price">{{number_format($item->price)}}đ</li>
