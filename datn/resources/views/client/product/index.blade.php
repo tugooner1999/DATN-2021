@@ -99,6 +99,7 @@
                                                 @for($i = 1; $i <= 5; $i++) <i
                                                     class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
                                                     @endfor
+                                                    <p class="current-price">{{$item->price}}đ</p>
                                             </div>
                                         </div>
                                         <div class="add-to-link">
