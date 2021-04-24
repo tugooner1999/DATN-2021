@@ -96,21 +96,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-12">
                     <div class="white-box">
-                        <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px" alt="">
-                        <hr>
-                        <div class="form-group">
-                            <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
-                        </div>
-                        @error('image_gallery')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            <div id="btnThemFile" class="btn btn-primary">Thêm ảnh cho sản phẩm</div>
+                            <div class="form-group">
+                            <hr>
+                            <div id="chonFile">
+                            <input class="col-sm-12" name="gallery_img[]" type="file">
+                            </div>
+                            </div>
                     </div>
-                    
-                </div>
             </form>
+            
         </div>
     </div>
 </div>

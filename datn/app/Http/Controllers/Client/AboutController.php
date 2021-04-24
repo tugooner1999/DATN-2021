@@ -14,7 +14,6 @@ class AboutController extends Controller
     //trang giới thiệu (about)
 
     public function index(){
-        $this->authorize('member');
         $cates = Category::all();
         $about = About::all();
         $rating_pro = Product::all();
