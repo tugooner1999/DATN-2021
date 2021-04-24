@@ -39,8 +39,8 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-    Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
-    Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
+        Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
+        Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
         Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
         Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
         Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
@@ -51,6 +51,8 @@ Route::prefix('admin')->group(function () {
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
+        Route::get('/order/order-detail',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
+
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
 
         // transaction
@@ -146,6 +148,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist
         Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
+
+        //my-account
+        Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
+
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

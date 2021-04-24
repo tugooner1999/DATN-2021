@@ -24,6 +24,12 @@ class OrderController extends Controller
         $this->authorize('admin');
         return view('admin.order.edit-order');
     }
+
+    public function order_detail(){
+        $this->authorize('admin');
+        return view('admin.order.order_detail');
+    }
+    
     public function order_update($id){
         $this->authorize('admin');
         $order = Order::find($id);
