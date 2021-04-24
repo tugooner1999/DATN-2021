@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-xs-12">
+            <div class="col-md-12 col-xs-12">
                 <div class="white-box">
                     <form class="form-horizontal form-material"  action="{{URL::to('/admin/categories/update/'.$objU->id)}}" method="POST" enctype="multipart/form-data">
         
@@ -36,7 +36,7 @@
                             </div>
                            
                         </div>
-                        <img id="image" src="{{$objU->image}}" width="40%" height="300px" alt="">
+                        <img id="image" src="{{$objU->image}}" width="30%" height="300px" alt="">
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>

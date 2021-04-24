@@ -71,7 +71,6 @@ class UserController extends Controller
                     $path = $request->file('avatar')->move('storage/avatars', $request->file('avatar')->getClientOriginalName());
                     $user->avatar =str_replace("public/", "public/", $path);
                 }
-            $user->coins= 0;
             $user->Save();
             Session::put('message','Thêm tài khoản thành công');
             return redirect()->route('admin.listUser');

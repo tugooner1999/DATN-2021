@@ -28,13 +28,10 @@
                             <div class="col-md-12">
                                 <input type="text" name="name" value="{{$item->name}}" class="form-control form-control-line">
                                 @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Giá</label>
                             <div class="col-md-12">
@@ -62,24 +59,17 @@
                             @enderror
                             </div>
                         </div>
-                        @error('quantily')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
                             <textarea rows="5"  name="description" id="description" class="form-control form-control-line">
                             {{(old('description'))}}  {{$item->description}}
                             </textarea>
-
                                     @error('description')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             </div>
                         </div>
-                        @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
                         <div class="form-group">
                             <label class="col-sm-12">Danh Mục</label>
                             <div class="col-sm-12">

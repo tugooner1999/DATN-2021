@@ -16,16 +16,16 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Danh sách</h3>
-                            <p class="success" style="color:green; font-size:20px; font-weight:bold;">
-                        <?php
-                        $message = Session::get('message');
+                        <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                            <?php
+                            $message = Session::get('message');
                             if($message){
                                 echo $message;
                                 Session::put('message', NULL);
-                            }
-                        ?>
-                    </p>
+                                }
+                            ?>
+                        </p>
+                            <h3 class="box-title">Danh sách</h3>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
@@ -34,20 +34,18 @@
                                             <th>Ảnh</th>
                                             <th>Email</th>
                                             <th>SĐT</th>
-                                            <th>Coins</th>
                                             <th>Quyền</th>
                                             <th>Trạng thái</th>
                                             <th><a href="{{route('admin.addUser')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
                                     <tbody id="FilterContainer">
-                                    @foreach($user as $objU)
+                                    @foreach($user as $key => $objU)
                                         <tr class="column" data-data1="{{$objU->role_id}}" data-data2="{{$objU->status}}">
-                                            <td>{{$objU->id}}</td>
+                                            <td>{{$key + 1}}</td>
                                             <td><img src="{{$objU->avatar}}" alt="" width="100px" height="100px"></td>
                                             <td>{{$objU->email}}</td>
                                             <td>{{$objU->phone}}</td>
-                                            <td>{{$objU->coins}} Coins</td>
                                             <td class='{{$objU->role_id == 0 ? "text-primary" : "text-danger"}}'>
                                             {{$objU->role_id == 0 ? "Thành Viên" : "Quản Trị"}}</td>
                                             <td class='{{$objU->status == 0 ? "text-success" : "text-danger"}}'>
@@ -68,7 +66,6 @@
                                             <th style="visibility:hidden;">Ảnh</th>
                                             <th style="visibility:hidden;">Email</th>
                                             <th style="visibility:hidden;">SĐT</th>
-                                            <th style="visibility:hidden;">Coins</th>
                                             <th style="border:none">Quyền</th>
                                             <th style="border:none">Trạng thái</th>
                                             <th style="visibility:hidden;"><a href="{{route('admin.addUser')}}" class="btn btn-primary">Thêm</a></th>

@@ -16,7 +16,7 @@
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-info">Đơn hàng</h3>
-                    <span class="text-dark">( 0 )</span><br>
+                    <span class="text-dark">( {{$oders}} )</span><br>
                     <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;"
                             aria-hidden="true"></i></a>
                 </div>
@@ -33,7 +33,7 @@
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-success">Sản phẩm</h3>
-                    <span class="text-dark">( {{$product}} )</span><br>
+                    <span class="text-dark">( {{$products}} )</span><br>
                     <a href="{{route('admin.listProduct')}}"><i class="fa fa-product-hunt text-success"
                             style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
@@ -51,7 +51,7 @@
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-primary">Mã giảm giá</h3>
-                    <span class="text-dark">( {{$voucher}} )</span><br>
+                    <span class="text-dark">( {{$vouchers}} )</span><br>
                     <a href="{{route('admin.listVoucher')}}"><i class="fa fa-tags text-primary"
                             style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
@@ -60,7 +60,7 @@
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-danger">Tài khoản</h3>
-                    <span class="text-dark">( {{$voucher}} )</span><br>
+                    <span class="text-dark">( {{$users}} )</span><br>
                     <a href="{{route('admin.listUser')}}"><i class="fa fa-users text-danger" style="font-size: 100px;"
                             aria-hidden="true"></i></a>
                 </div>
@@ -194,9 +194,6 @@
                                 <h5>{{isset($item->user_comment) ? $item->user_comment->name : ''}}</h5>
                                 <span class="time">{{$item->created_at}}</span>
                                 <br /><span class="mail-desc">{{$item->ra_content}}</span>
-                                     <!-- <a href=""
-                                    class="btn btn btn-rounded btn-default btn-outline m-r-5"><i
-                                        class="fa fa-comments-o"></i> Phản hồi</a> -->
                                     <a onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
                                             href="{{route('admin.removeComment', ['id' => $item->id])}}"
                                     class="btn-rounded btn btn-default btn-outline"><i class="fa fa-trash"></i></a>

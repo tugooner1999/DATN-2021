@@ -23,7 +23,7 @@ class CommentController extends Controller
         $this->authorize('admin');
         $user_comment = User::all();
         $product_comment = Product::all();
-        $comment = Rating::all();
+        $comment = Rating::all()->sortByDesc('id');
         return view('admin.comment.index', compact('user_comment','product_comment','comment'));
     }
 

@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8 col-xs-12">
+                        <div class="col-md-12 col-xs-12">
                             <div class="white-box">
                             
                                 <form class="form-horizontal form-material" action="" method="POST" enctype="multipart/form-data" >
@@ -29,8 +29,7 @@
                                     @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
-                                            alt="">
+                                        <img id="image" src="frontend/image_cate\1.jpg" width="30%" height="300px" alt="">
                                     <hr>
                                     <div class="form-group">
                                         <label class="col-sm-12">Tải ảnh mới</label>

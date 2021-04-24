@@ -21,11 +21,5 @@ class Voucher extends Model
         'value',
         'status',
     ];
-    public function user(){
-        return $this->belongsTo(User::class, 'created_by');
-    }
-    public function voucher_type(){
-        return $this->belongsTo(Voucher_type::class, 'type_id');
-    }
 
 }

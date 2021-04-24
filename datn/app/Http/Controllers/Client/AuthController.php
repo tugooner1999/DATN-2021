@@ -63,10 +63,9 @@ class AuthController extends Controller
         $user->password= Hash::make($request->get('password'));
         $user->role_id = 0;
         $user->status = 0;
-        $user->coins = 0;
         
         $user->save();
-        Session::put('message','Thêm tài khoản thành công');
+        Session::put('message','Đăng kí thành công');
         return redirect()->route('client.login'); 
     }
 }

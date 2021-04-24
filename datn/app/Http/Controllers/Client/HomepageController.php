@@ -18,14 +18,15 @@ class HomepageController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
-        $cates = Category::all();
+        $cates = Category::all()->take(5);;
         $slider = Slider::all();
-        $product = Product::all();
         $ratings = Rating::all();
-        $cates->load([
-            'products'
-        ]);
-        return view('client.homepage.index',compact('cates','slider','product','ratings'));
+        $new_product = Product::all()->where('allow_market','1')->sortByDesc("id")->take(8);
+        $sortbyView = Product::all()->sortByDesc("views")->take(8);
+        $market_product = Product::all()->where('allow_market','2')->sortByDesc("id")->take(10);
+        $sortbyRate = Product::all()->sortByDesc("pro_total_number")->take(3);
+        $sortbyCmt = Product::all()->sortByDesc("pro_total_rating")->take(8);
+        return view('client.homepage.index',compact('cates','slider','ratings','new_product','sortbyView','sortbyCmt','market_product','sortbyRate'));
     }
     public function client_admin(){
         return view('welcome');

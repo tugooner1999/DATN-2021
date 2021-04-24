@@ -90,11 +90,11 @@
                                         <select class="form-control form-control-line" name="status">
                                             <@php         
                                             if($show->status == 1){
-                                                echo'<option value="1">Kích hoạt</option>';
+                                                echo'<option value="1">Đang kích hoạt</option>';
                                                 echo'<option value="2">Tắt</option>';
                                             }else{
-                                                echo'<option value="2">Đã khoá</option>';
-                                                echo'<option value="1">Tắt</option>';
+                                                echo'<option value="1">Đang Kích hoạt</option>';
+                                                echo'<option value="2">Tắt</option>';
                                                
                                             };
                                             @endphp

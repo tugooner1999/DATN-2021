@@ -110,14 +110,15 @@
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
-                        <div class="pro-details-cart btn-hover" >
-                        <a product-id='{{$product->id}}'
-                        @if(Auth::check())
-                        class="cart-btn"
-                        @else
-                        href="{{route('client.login')}}"
-                        @endif
-                        >Thêm vào giỏ</a></li>
+                        <div class="pro-details-cart btn-hover">
+                            <a 
+                                @if(Auth::check())
+                                    product-id='{{$product->id}}' class="cart-btn"
+                                @else
+                                    hidden
+                                @endif
+                                {{$product->quantily <= 0 ? "hidden" : ""}}
+                            >Thêm vào giỏ</a>
                         </div>
                         <div class="cart-plus-minus" style="visibility: hidden;">
                             <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
@@ -126,7 +127,13 @@
                     </div>
                     <div class="pro-details-wish-com">
                         <div class="pro-details-wishlist">
-                            <a href="#"><i class="ion-android-favorite-outline"></i>Thêm vào danh sách yêu thích</a>
+                            <a
+                                @if(Auth::check())
+                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$product->id])}}"><i class="ion-android-favorite-outline"
+                                    @else
+                                        hidden
+                                @endif
+                                > Thêm vào danh sách yêu thích</i></a>
                         </div>
                     </div>
                     <div class="pro-details-social-info">
@@ -185,7 +192,7 @@
                                 <div class="single-review">
                                     <div class="review-img">
                                         <img src="{{isset($item->user_comment) ? asset($item->user_comment->avatar) : ''}}"
-                                            width="60" height="80" style="border-radius:100px;" alt="" />
+                                            width="70" height="70" style="border-radius:100px;" alt="" />
                                     </div>
                                     <div class="review-content">
                                         <div class="review-top-wrap" style="margin: 0 0px 0px;">
@@ -352,42 +359,57 @@
         <!-- Recent Product slider Start -->
         <div class="recent-product-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
-            @foreach($cates as $item)
+            @foreach($related_pro as $item)
+            <?php
+                $avg = 0;
+                if($item->pro_total_rating){
+                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                }
+            ?>
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                        <img src="../../{{$item->image_gallery}}" alt="" />
+                        <img src="{{asset($item->image_gallery)}}" alt="" />
                     </a>
                 </div>
                 <ul class="product-flag">
-                    <li class="new">Mới</li>
+                    <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">
+                        {{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
                 </ul>
                 <div class="product-decs">
-                    <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC PHẨM</span></a>
+                    <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
                     <h2><a href="" class="product-link">{{$item->name}}</a></h2>
-                    <div class="rating-product">
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                    </div>
+                    <span class="rating-active">
+                        @for($i = 1; $i <= 5; $i++)
+                        <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                        @endfor
+                    </span>
                     <div class="pricing-meta">
                         <ul>
-                            <!-- <li class="old-price">{{$item->name}}</li> -->
-                            <li class="current-price">{{number_format($item->price)}}đ</li>
-                            <li class="discount-price">-20%</li>
+                            <li class="current-price">{{number_format($item->price)}} đ</li>
                         </ul>
                     </div>
                 </div>
                 <div class="add-to-link">
                     <ul>
-                        <li class="cart"><a @if(Auth::check()) class="cart-btn"  product-id='{{$item->id}}'
-                                            @else href="{{route('client.login')}}"
-                                            @endif>Thêm vào giỏ</a>
+                        <li class="cart">
+                            <a
+                                @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
+                                @else
+                                    hidden
+                                @endif
+                            {{$item->quantily <= 0 ? "hidden" : ""}}>
+                            Thêm vào giỏ</a>
                         </li>
                         <li>
-                            <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
+                            <a
+                            @if(Auth::check())
+                                onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                @else
+                                    hidden
+                            @endif
+                            >
+                            </i></a>
                         </li>
                     </ul>
                 </div>

@@ -17,16 +17,16 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                                }
+                            ?>
+                        </p>
                                 <h3 class="box-title">Slider</h3>
-                                <p class="success" style="color:green; font-size:20px; font-weight:bold;">
-                                    <?php
-                                    $message = Session::get('message');
-                                    if($message){
-                                        echo $message;
-                                        Session::put('message', NULL);
-                                    }
-                                ?>
-                                </p>
                             <div class="table-responsive">
                                 <table table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
@@ -34,7 +34,6 @@
                                             <th>#</th>
                                             <th>Tiêu đề</th>
                                             <th>Ảnh</th>
-                                            <th>Mô tả ngắn</th>
                                             <th>Show</th>
                                             <th><a href="{{route('admin.addSlider')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>

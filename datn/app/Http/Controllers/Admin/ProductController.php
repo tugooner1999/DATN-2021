@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function index(Request $request){
         $this->authorize('admin');
         $category = Category::all();
-        $pro = Product::all();
+        $pro = Product::all()->sortByDesc('id');
         $gallery = Gallery::all();
         return view('admin.product.index',compact('gallery','pro','category'));
     }

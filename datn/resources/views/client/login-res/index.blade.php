@@ -73,7 +73,7 @@
                                 <div class="login-register-form" >
                                     <form method="post" action="{{route('client.registration')}}"  enctype="multipart/form-data" class="was-validated">
                                     @csrf
-                                        <input type="text" name="name"  placeholder="Tên tài khoản"  />
+                                        <input type="text" name="name"  placeholder="Họ và tên"  />
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

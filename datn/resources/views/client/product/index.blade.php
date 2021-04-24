@@ -1,5 +1,10 @@
 @extends('layout-client')
 @section('content')
+<style>
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area" style="
     background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
@@ -12,17 +17,6 @@
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Sản phẩm</li>
                     </ul>
-                    <div class="col-md-3 text-right" style="margin-left: 37%; margin-top: 3%; margin-bottom: -3%">
-                        <div class="card bg-info text-white center " >
-                        <h3 class="card-title text-center ">
-                        <div class="d-flex flex-wrap justify-content-center mt-2">
-                        <a><span class="badge hours"></span></a> :
-                        <a><span class="badge min"></span></a> :
-                        <a><span class="badge sec"></span></a>
-                        </div>
-                        </h3>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +39,7 @@
                         <a href="#shop-2" data-toggle="tab">
                             <i class="fa fa-list-ul"></i>
                         </a>
-                        <p>Hiển thị {{ count($list_product) }} / {{ count($pro) }} sản phẩm</p>
+                        <p>Hiển thị 10 / 327 sản phẩm</p>
                     </div>
                     <!-- Left Side End -->
                     <!-- Right Side Start -->
@@ -75,7 +69,13 @@
                         <div id="shop-1" class="tab-pane active">
 
                             <div class="row">
-                            @foreach ($list_product as $item)
+                                @foreach ($list_product as $item)
+                                <?php
+                                    $avg = 0;
+                                    if($item->pro_total_rating){
+                                        $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                                    }
+                                ?>
                                 <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
 
                                     <article class="list-product">
@@ -99,53 +99,48 @@
                                                 @for($i = 1; $i <= 5; $i++) <i
                                                     class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
                                                     @endfor
-                                                    <p class="current-price">{{$item->price}}đ</p>
+                                                    <p class="current-price">{{number_format($item->price)}} đ</p>
                                             </div>
                                         </div>
-                                        <div class="pricing-meta">
+                                        <div class="add-to-link">
                                             <ul>
-                                                <li class="current-price">{{number_format($item->price)}}đ</li>
+                                                <li class="cart">
+                                                    <a
+                                                        @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
+                                                        @else
+                                                            hidden
+                                                        @endif
+                                                    {{$item->quantily <= 0 ? "hidden" : ""}}>
+                                                    Thêm vào giỏ</a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                    @if(Auth::check())
+                                                        onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                                        @else
+                                                            hidden
+                                                    @endif
+                                                    >
+                                                    </i></a>
+                                                </li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div class="add-to-link">
-                                        <ul>
-                                            <li class="cart">
-                                                @if ($today <= "09:00:00" && $item->allow_market ==2)
-                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                @endif
+                                    </article>
 
-                                                @if ($item->allow_market ==1)
-                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                @endif
-
-                                                @if($today > "09:00:00" && $item->allow_market ==2)
-                                                <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                @endif
-                                                
-                                                
-                                            </li>
-                                            <li>
-                                                <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </article>  
-                            
                                 </div>
-                                @endforeach    
+                                @endforeach
                             </div>
 
                         </div>
-            
+
                     </div>
                     <!-- Shop Tab Content End -->
                     <!--  Pagination Area Start -->
-                    <div class="pro-pagination-style text-center " >
-                    
+                    <div class="pro-pagination-style text-center">
+
                         <ul>
                             <li>
-                            {{$list_product->links()}}
+                                {{$list_product->links()}}
                             </li>
                         </ul>
                     </div>
@@ -164,7 +159,7 @@
                         <!-- Sidebar single item -->
                         <div class="sidebar-widget">
                             <h4 class="pro-sidebar-title">Danh mục</h4>
-                          
+
                             <div class="sidebar-widget-list">
                                 <ul>
                                     @foreach($cates as $item)
@@ -175,10 +170,10 @@
                                             <span class="checkmark"></span>
                                         </div>
                                     </li>
-                                    @endforeach   
+                                    @endforeach
                                 </ul>
                             </div>
-                            
+
                         </div>
                         <!-- Sidebar single item -->
                     </div>

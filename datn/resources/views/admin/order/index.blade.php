@@ -16,6 +16,15 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                                }
+                            ?>
+                        </p>
                             <h3 class="box-title">Danh sách</h3>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
@@ -33,9 +42,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($oder as $item)
+                                    @foreach($oder as $key => $item)
                                         <tr>
-                                            <td>{{$item->id}}</td>
+                                            <td>{{$key + 1}}</td>
                                             <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                             <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
@@ -44,7 +53,7 @@
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i>Xem</a></td>
+                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             </td>

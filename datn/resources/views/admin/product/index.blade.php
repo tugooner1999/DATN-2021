@@ -26,7 +26,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">Danh sách</h3>
                     <p class="success" style="color:green; font-size:20px; font-weight:bold;">
                         <?php
                         $message = Session::get('message');
@@ -36,6 +35,8 @@
                         }
                     ?>
                     </p>
+                    <h3 class="box-title">Danh sách</h3>
+                    
                     <div class="table-responsive">
                         <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
@@ -44,7 +45,7 @@
                                     <th>Ảnh</th>
                                     <th>Mô tả</th>
                                     <th>Tên</th>
-                                    <th>SL</th>
+                                    <th>Số lượng</th>
                                     <th>Loại hình</th>
                                     <th>Danh mục</th>
                                     <th>Đánh giá</th>
@@ -62,7 +63,7 @@
                                 }
                                 ?>
                                 <tr>
-                                    <td>{{$item->id}}</td>
+                                    <td>{{$no + 1}}</td>
                                     <td>
                                     <img src="{{$item->image_gallery}}" alt=""height="100px" width="100px">
                                     </td>
@@ -116,16 +117,17 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <tr style="border-top: 2px solid #000">
-                                    <th style="visibility:hidden;">#</th>
-                                    <th style="visibility:hidden;">Ảnh</th>
-                                    <th style="border:none">Tên</th>
-                                    <th style="border:none">SL</th>
-                                    <th style="border:none">Loại hình</th>
-                                    <th style="border:none">Danh mục</th>
-                                    <th style="visibility:hidden;">Giá</th>
-                                    <th style="visibility:hidden;">View</th>
-                                    <th style="visibility:hidden;">Hành động</th>
+                                <tr>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="border:none"></th>
+                                    <th style="border:none"></th>
+                                    <th style="border:none"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
                                 </tr>
                             </tfoot>
                         </table>

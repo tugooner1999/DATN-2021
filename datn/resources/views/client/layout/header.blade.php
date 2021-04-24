@@ -57,7 +57,8 @@
                                             <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                             @endif
                                             <li><a href="{{route('client.my-account')}}">Thông tin cá nhân</a></li>
-                                            <li><a href="#">Yêu thích</a></li>
+                                            <li><a href="#">Đơn hàng của tôi</a></li>
+                                            <li><a href="{{route('client.show-wishlist')}}">Sản phẩm Yêu thích</a></li>
                                             <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
                                             </li>
                                         </ul>
@@ -72,17 +73,13 @@
                         <!--Cart info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                                <a href="{{route('client.cart')}}" class="count-cart"></a>
+                                    @if(Auth::check())
+                                        <a href="{{route('client.cart')}}" class="count-cart"></a>
+                                    @else
+                                        <a href="#" class="count-cart"></a>
+                                    @endif
+                                
                             </div>
-                            <!--Login info End -->
-                            <!--Cart info Start -->
-                            <!-- <div class="cart-info d-flex">
-                                <div class="mini-cart-warp">
-                                    <a href="{{route('client.cart')}}" class="count-cart"></a>
-                                </div>
-                            </div> -->
-                            
-                            <!--Cart info End -->
                         </div>
                     </div>
                 </div>
@@ -100,8 +97,9 @@
                                     @if (Auth::user()->role_id == 1)
                                     <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                     @endif
-                                        <li><a href="#">Thông tin cá nhân</a></li>
-                                        <li><a href="#">Yêu thích</a></li>
+                                        <li><a href="{{route('client.my-account')}}">Thông tin cá nhân</a></li>
+                                        <li><a href="#">Đơn hàng của tôi</a></li>
+                                        <li><a href="{{route('client.show-wishlist')}}">Sản phẩm Yêu thích</a></li>
                                         <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
                                     </ul>
                                 </li>
@@ -114,7 +112,7 @@
                                 <li>
                                     <a href="{{route('client.shop')}}">Cửa hàng</a>
                                     <ul>
-                                        <li><a href="{{route('client.shop')}}">Sản phẩm thông thường</a></li>
+                                    <li><a href="{{route('client.shops')}}">Sản phẩm thông thường</a></li>
                                         <li><a href="{{route('client.allow-market')}}">Đi chợ hộ !</a></li>
                                     </ul>
                                 </li>

@@ -13,7 +13,7 @@ class OrderController extends Controller
      */
     public function index(){
         $this->authorize('admin');
-        $oder = Order::all();
+        $oder = Order::all()->sortByDesc('id');;
         return view('admin.order.index',compact('oder'));
     }
 
