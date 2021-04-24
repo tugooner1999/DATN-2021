@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
+        Route::get('/order/order-detail',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
 
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');

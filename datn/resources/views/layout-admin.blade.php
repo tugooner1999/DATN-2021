@@ -24,6 +24,7 @@
     <link href="{{asset('assets/admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
+    <link href="{{asset('assets/admin/css/order-detail.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
 </head>
