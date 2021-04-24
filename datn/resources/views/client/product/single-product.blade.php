@@ -278,7 +278,6 @@
                                         </div>
                                     </div>
                                     <br>
-
                                     @if(isset(Auth::user()->name))
                                     <?php
                                 $listRatingText = [
@@ -356,6 +355,12 @@
         <div class="recent-product-slider owl-carousel owl-nav-style">
             <!-- Single Item -->
             @foreach($cates as $item)
+            <?php
+    $avg = 0;
+    if($item->pro_total_rating){
+        $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+    }
+    ?>
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
@@ -368,13 +373,11 @@
                 <div class="product-decs">
                     <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC PHẨM</span></a>
                     <h2><a href="" class="product-link">{{$item->name}}</a></h2>
-                    <div class="rating-product">
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                        <i class="ion-android-star"></i>
-                    </div>
+                    <div class="rating-active">
+                                                @for($i = 1; $i <= 5; $i++) <i
+                                                    class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                                    @endfor
+                                            </div>
                     <div class="pricing-meta">
                         <ul>
                             <!-- <li class="old-price">{{$item->name}}</li> -->

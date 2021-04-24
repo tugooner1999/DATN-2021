@@ -35,6 +35,7 @@
                                             <th>Tiêu đề</th>
                                             <th>Ảnh</th>
                                             <th>Mô tả ngắn</th>
+                                            <th>Trạng thái</th>
                                             <th><a href="{{route('admin.addSlider')}}" class="btn btn-primary">Thêm</a></th>
                                         </tr>
                                     </thead>
@@ -45,6 +46,10 @@
                                                 <td>{{$item->title}}</td>
                                                 <td><img src="{{$item->image}}" width="200" height="150" alt=""></td>
                                                 <td>{{$item->description}}</td>
+                                                <td>
+                                                <button class='btn btn-{{$item->status == 0 ? "danger" : "success"}}' data-url="{{route('show-slider',['id' => $item->id])}}">
+                                                {{$item->status == 0 ? "Đang Ẩn" : "Đang hiện"}}
+                                            </button>
                                                 <td style="font-size: 20px;">
                                                     <a style="padding-left: 10px;" href="{{route('admin.editSlider',['id'=>$item->id])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                     <a class="text-danger" href="{{route( 'admin.deteleSlider',[ 'id'=>$item->id]) }}"  

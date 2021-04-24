@@ -53,6 +53,7 @@ class SliderController extends Controller
                     $path = $request->file('image')->move('frontend/slider', $request->file('image')->getClientOriginalName());
                     $slider['image'] =str_replace("public/", "public/", $path);
                 }
+                $slider['status']= $request->get('status');
             $slider->save();
             return redirect()->route('admin.listSlider');
             }
@@ -106,5 +107,13 @@ class SliderController extends Controller
         }
         return view('admin.slider.editSlider',compact('objU','dataView'));
 
+    }
+    public function show($id)
+    {
+        $slider = Slider::find($id);
+        $slider->status = 1;
+        $slider->save();
+        Session::put('message','Cập nhật thành công');
+        return response()->json(['data'=>'update'],200); // 200 là mã lỗi
     }
 }

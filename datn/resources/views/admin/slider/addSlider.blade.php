@@ -47,6 +47,11 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group">
+                                    <input type="checkbox" checked data-toggle="toggle" data-size="sm" name="status" value = "1">
+                                        <label class="form-check-label" for="exampleCheck1" style="padding: 0 20px;">Hiển thị lên trang chủ</label>
+                                        <br>
+                                        <br>
+                                    <div class="form-group">
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-danger">Thêm mới</button>
                                             <a href="{{route('admin.listSlider')}}" class="btn btn-success">Trở về</a>

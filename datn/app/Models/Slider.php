@@ -13,7 +13,8 @@ class Slider extends Model
         protected $fillable = [
         'title',
         'description',
-        'image'
+        'image',
+        'status'
     ];
     public function SaveUpdate($id, $objU){
         return DB::table($this->table)

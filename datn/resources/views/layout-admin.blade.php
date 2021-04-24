@@ -25,6 +25,7 @@
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
 </head>
 
@@ -154,6 +155,18 @@ $.ajaxSetup({
 						})
 					}
 				})
+        $('.btn-danger').click(function(){
+            var url = $(this).attr('data-url');
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function(response) {
+                    window.location.reload()
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            })
+        })
     </script>
     <script>
     $(document).ready(function(){
@@ -162,11 +175,13 @@ $.ajaxSetup({
         });
     });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script>
-CKEDITOR.replace('description');
+CKEDITOR.replace('description')
 </script>
 </body>
 

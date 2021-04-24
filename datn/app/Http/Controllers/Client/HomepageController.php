@@ -19,7 +19,7 @@ class HomepageController extends Controller
      */
     public function index(){
         $cates = Category::all();
-        $slider = Slider::all();
+        $slider = Slider::all()->where('status', 1);
         $product = Product::all();
         $ratings = Rating::all();
         $cates->load([
