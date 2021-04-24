@@ -29,13 +29,14 @@
                                     @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                                    <img id="image" src="../public/uploads/products/image-default.png" width="40%" height="300px"
-                                            alt="">
-                                    <hr>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Tải ảnh mới</label>
-                                        <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
-                                    </div>
+                            <div class="white-box">
+                                <img id="image" src="../public/uploads/products/image-default.png" width="100%" height="300px"
+                                        alt="">
+                                <div class="form-group">
+                                    <label class="col-sm-12">Tải ảnh mới</label>
+                                    <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
+                                </div>
+                            </div>
                                     @error('image')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
