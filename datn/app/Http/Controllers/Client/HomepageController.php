@@ -18,7 +18,7 @@ class HomepageController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
-        $cates = Category::all()->take(5);;
+        $cates = Category::all();
         $slider = Slider::all();
         $ratings = Rating::all();
         $new_product = Product::all()->where('allow_market','1')->sortByDesc("id")->take(8);

@@ -1,15 +1,16 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">Account Page</h1>
+                    <h1 class="breadcrumb-hrading">Tài khoản</h1>
                     <ul class="breadcrumb-links">
-                        <li><a href="index-2.html">Home</a></li>
-                        <li>My Account</li>
+                        <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
+                        <li>Tài khoản</li>
                     </ul>
                 </div>
             </div>
@@ -27,53 +28,52 @@
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
                                 <h3 class="panel-title"><span>1 .</span> <a data-toggle="collapse" data-parent="#faq"
-                                        href="#my-account-1">Edit your account information </a></h3>
+                                        href="#my-account-1">THÔNG TIN CÁ NHÂN </a></h3>
                             </div>
                             <div id="my-account-1" class="panel-collapse collapse show">
                                 <div class="panel-body">
                                     <div class="myaccount-info-wrapper">
                                         <div class="account-info-wrapper">
-                                            <h4>My Account Information</h4>
-                                            <h5>Your Personal Details</h5>
+                                            <h4>TÀI KHOẢN CỦA BẠN</h4>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
-                                                    <label>First Name</label>
+                                                    <label>Họ và tên</label>
                                                     <input type="text" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
-                                                    <label>Last Name</label>
+                                                    <label>Ảnh đại diện</label>
+                                                    <input type="file" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="billing-info">
+                                                    <label>Email</label>
+                                                    <input type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="billing-info">
+                                                    <label>Điện thoại</label>
                                                     <input type="text" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="billing-info">
-                                                    <label>Email Address</label>
-                                                    <input type="email" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info">
-                                                    <label>Telephone</label>
-                                                    <input type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info">
-                                                    <label>Fax</label>
+                                                    <label>Địa chỉ</label>
                                                     <input type="text" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="billing-back-btn">
                                             <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                                                <a href="#"><i class="fa fa-arrow-up"></i> Quay lại</a>
                                             </div>
                                             <div class="billing-btn">
-                                                <button type="submit">Continue</button>
+                                                <button type="submit">Cập nhật</button>
                                             </div>
                                         </div>
                                     </div>
@@ -83,35 +83,40 @@
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
                                 <h3 class="panel-title"><span>2 .</span> <a data-toggle="collapse" data-parent="#faq"
-                                        href="#my-account-2">Change your password </a></h3>
+                                        href="#my-account-2">Mật khẩu</a></h3>
                             </div>
                             <div id="my-account-2" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="myaccount-info-wrapper">
                                         <div class="account-info-wrapper">
-                                            <h4>Change Password</h4>
-                                            <h5>Your Password</h5>
+                                            <h4>Đổi mật khẩu</h4>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="billing-info">
-                                                    <label>Password</label>
+                                                    <label>Mật khẩu cũ</label>
                                                     <input type="password" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="billing-info">
-                                                    <label>Password Confirm</label>
+                                                    <label>Mật khẩu mới</label>
+                                                    <input type="password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="billing-info">
+                                                    <label>Nhập lại mật khẩu mới</label>
                                                     <input type="password" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="billing-back-btn">
                                             <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                                                <a href="#"><i class="fa fa-arrow-up"></i> Quay lại</a>
                                             </div>
                                             <div class="billing-btn">
-                                                <button type="submit">Continue</button>
+                                                <button type="submit">Cập nhật</button>
                                             </div>
                                         </div>
                                     </div>
@@ -120,52 +125,13 @@
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>3 .</span> <a data-toggle="collapse" data-parent="#faq"
-                                        href="#my-account-3">Modify your address book entries </a></h3>
-                            </div>
-                            <div id="my-account-3" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="myaccount-info-wrapper">
-                                        <div class="account-info-wrapper">
-                                            <h4>Address Book Entries</h4>
-                                        </div>
-                                        <div class="entries-wrapper">
-                                            <div class="row">
-                                                <div
-                                                    class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                    <div class="entries-info text-center">
-                                                        <p>Jone Deo</p>
-                                                        <p>hastech</p>
-                                                        <p>28 Green Tower,</p>
-                                                        <p>Street Name.</p>
-                                                        <p>New York City,</p>
-                                                        <p>USA</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                    <div class="entries-edit-delete text-center">
-                                                        <a class="edit" href="#">Edit</a>
-                                                        <a href="#">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="billing-back-btn">
-                                            <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
-                                            </div>
-                                            <div class="billing-btn">
-                                                <button type="submit">Continue</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 class="panel-title"><span>3 .</span> <a href="#">Đơn hàng
+                                    </a></h3>
                             </div>
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>4 .</span> <a href="wishlist.html">Modify your wish list
+                                <h3 class="panel-title"><span>4 .</span> <a href="{{route('client.show-wishlist')}}">Yêu thích
                                     </a></h3>
                             </div>
                         </div>
