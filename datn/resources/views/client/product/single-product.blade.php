@@ -255,18 +255,18 @@
                                                     ?>
 
                                                     <div class="item_rating" style="display:flex; align-items:center;">
-                                                        <div style="width:10%;">
+                                                        <div style="width:10%;" class="col-12 col-sm-12">
                                                             {{ $key }}<span class="fa fa-star"
                                                                 style="padding: 0 5px; color: #ff9705;"></span>
                                                         </div>
-                                                        <div style="width:70%; margin:0 20px;">
+                                                        <div style="width:70%; margin:0 20px;" class="col-12 col-sm-12">
                                                             <span class=""
                                                                 style="width:100%; height:8px; display:block; border:1px solid #dedede; border-radius:5px;">
                                                                 <b
                                                                     style="width:{{$itemAge}}%; background-color:#f25800; display:block; height:100%; border-radius:5px;"></b>
                                                             </span>
                                                         </div>
-                                                        <div style="width:20%;">
+                                                        <div style="width:20%;" class="col-12 col-sm-12">
                                                             <a style="color:#666;" href="">{{$arrayRating['total']}}
                                                                 đánh giá ({{$itemAge}}%)</a>
                                                         </div>

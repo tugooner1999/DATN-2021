@@ -69,4 +69,12 @@ class AuthController extends Controller
         Session::put('message','Thêm tài khoản thành công');
         return redirect()->route('client.login'); 
     }
+
+    public function forgotpassword(){
+        return view('client.login-res.forgotpassword');
+    }
+
+    public function resetpassword(){
+        return view('client.login-res.resetpassword');
+    }
 }

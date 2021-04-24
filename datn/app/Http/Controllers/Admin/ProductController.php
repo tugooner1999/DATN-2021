@@ -74,6 +74,7 @@ class ProductController extends Controller
         $data = $_POST;
         $product = new Product();
         $product->fill($data);
+
         $product->create_at= $dt_create;
         $product->allow_market=isset($_POST['allow_market']) ? $_POST['allow_market'] : 1;
             $rule = ['image_gallery'=>'required|image'];
@@ -89,6 +90,18 @@ class ProductController extends Controller
         }
         $product->views = 1;
         $product->save();
+        if($request->hasFile('gallery_img')){
+            foreach($request->File('gallery_img') as $file){
+            $product_img = new Gallery();
+            if(isset($file)){
+                $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
+                $product_img->gallery_img =str_replace("public/", "public/", $path);
+                $product_img->product_id = $product->id;
+                $product_img->create_at = $dt_create;
+                $product_img->save();
+            }
+        }
+        }
         Session::put('message','Thêm sản phẩm thành công');
         return Redirect::to('/admin/products');
     }
@@ -119,6 +132,7 @@ class ProductController extends Controller
                 $path = $file->move('frontend/images_gallery', $file->getClientOriginalName());
                 $product_img->gallery_img =str_replace("public/", "public/", $path);
                 $product_img->product_id = $product_id;
+                $product_img->create_at = $dt_update;
                 $product_img->save();
             }
         }

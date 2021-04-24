@@ -60,7 +60,7 @@
                                             <div class="login-toggle-btn">
                                                 <input type="checkbox"  class="form-check-input" name="remember_me" id="remember_me"/>
                                                 <label class="flote-none" for="remember_me">Lưu đăng nhập</label>
-                                                <a href="#">Quên mật khẩu?</a>
+                                                <a href="{{ route('client.forgotpassword') }}">Quên mật khẩu?</a>
                                             </div>
                                             <button type="submit"><span>Đăng nhập</span></button>
                                         </div>
