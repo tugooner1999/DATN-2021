@@ -42,23 +42,6 @@
                             @enderror
                             </div>
                         </div>
-                        <img id="image" src="{{$item->image_gallery}}" width="100%"  height="500px"/>
-                        <div class="form-group">
-                            <label class="col-sm-12">Tải ảnh mới</label>
-                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
-                        </div>
-                        @error('image_gallery')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        <div class="form-group">
-                            <label class="col-md-12">Số lượng</label>
-                            <div class="col-md-12">
-                                <input type="number" name="quantily" value="{{$item->quantily}}" class="form-control form-control-line">
-                                @error('quantily')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-md-12">Mô tả</label>
                             <div class="col-md-12">
@@ -84,6 +67,23 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Số lượng</label>
+                            <div class="col-md-12">
+                                <input type="number" name="quantily" value="{{$item->quantily}}" class="form-control form-control-line">
+                                @error('quantily')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            </div>
+                        </div>
+                        <img id="image" src="{{$item->image_gallery}}" width="auto"  height="300px"/>
+                        <div class="form-group">
+                            <label class="col-sm-12">Tải ảnh mới</label>
+                            <input class="col-sm-12" name="image_gallery" type="file" onchange="changeImage()" id="fileImage">
+                        </div>
+                        @error('image_gallery')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" name="allow_market" id="allow_market" value="2" 
                             @if($item->allow_market == 2) checked
