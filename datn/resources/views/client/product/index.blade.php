@@ -133,7 +133,14 @@
                                                 
                                             </li>
                                             <li>
-                                                <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
+                                                <a
+                                                @if(Auth::check())
+                                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                                    @else
+                                                        hidden
+                                                @endif
+                                                >
+                                                </i></a>
                                             </li>
                                         </ul>
                                     </div>

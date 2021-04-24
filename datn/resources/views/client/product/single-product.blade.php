@@ -128,7 +128,14 @@
                     </div>
                     <div class="pro-details-wish-com">
                         <div class="pro-details-wishlist">
-                            <a href="#"><i class="ion-android-favorite-outline"></i>Thêm vào danh sách yêu thích</a>
+                            <a
+                                @if(Auth::check())
+                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$product->id])}}"><i class="ion-android-favorite-outline"
+                                    @else
+                                        hidden
+                                @endif
+                                >
+                                </i>Thêm vào danh sách yêu thích</a>
                         </div>
                     </div>
                     <div class="pro-details-social-info">
@@ -376,14 +383,14 @@
                 <div class="product-decs">
                     <a class="inner-link" href="{{route('client.single-product',['id'=>$item->id])}}"><span>THỰC
                             PHẨM</span></a>
-                    <h2><a href="" class="product-link">{{$item->name}}</a></h2>
+                    <h2><a href="{{route('client.single-product',['id'=>$item->id])}}" class="product-link">{{$item->name}}</a></h2>
                     <div class="rating-active">
                         @for($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
                             @endfor
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <!-- <li class="old-price">{{$item->name}}</li> -->
+                            
                             <li class="current-price">{{number_format($item->price)}}đ</li>
 
                         </ul>
@@ -395,7 +402,14 @@
                                 href="{{route('client.login')}}" @endif>Thêm vào giỏ</a>
                         </li>
                         <li>
-                            <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
+                            <a
+                                @if(Auth::check())
+                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$product->id])}}"><i class="ion-android-favorite-outline"
+                                    @else
+                                        hidden
+                                @endif
+                                >
+                                </i></a>
                         </li>
                     </ul>
                 </div>

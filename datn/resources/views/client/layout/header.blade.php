@@ -57,7 +57,7 @@
                                             <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                             @endif
                                             <li><a href="{{route('client.my-account')}}">Thông tin cá nhân</a></li>
-                                            <li><a href="#">Yêu thích</a></li>
+                                            <li><a href="{{route('client.show-wishlist')}}">Sản phẩm Yêu thích</a></li>
                                             <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
                                             </li>
                                         </ul>

@@ -43,6 +43,9 @@
                     luận</a>
             </li>
             <li>
+                <a href="{{route('admin.wishlist.index')}}" class="waves-effect"><i class="fa fa-heart" aria-hidden="true"></i> Yêu thích</a>
+            </li>
+            <li>
                 <a href="{{route('admin.listSlider')}}" class="waves-effect"><i class="fa fa-sliders" aria-hidden="true"></i> Slider</a>
             </li>
             <li>

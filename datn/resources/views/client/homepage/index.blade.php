@@ -145,7 +145,14 @@
                         </li>
                        
                         <li>
-                            <a href="{{route('client.wishlist')}}"><i class="ion-android-favorite-outline"></i></a>
+                            <a
+                            @if(Auth::check())
+                                onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                @else
+                                    hidden
+                            @endif
+                            >
+                            </i></a>
                         </li>
                     </ul>
                 </div>
@@ -220,11 +227,16 @@
                                 <ul>
                                     <li class="cart"><a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ </a></li>
                                     <li>
-                                        <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
+                                        <a
+                                        @if(Auth::check())
+                                            onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                            @else
+                                                hidden
+                                        @endif
+                                        >
+                                        </i></a>
                                     </li>
-                                    <li>
-                                        <a href="compare.html"><i class="ion-ios-shuffle-strong"></i></a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             <div class="in-stock" style="padding:10px;">Số lượng: <span>{{$item->quantily}} trong kho</span></div>
@@ -294,10 +306,14 @@
                                 <ul>
                                     <li class="cart"><a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ </a></li>
                                     <li>
-                                        <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="compare.html"><i class="ion-ios-shuffle-strong"></i></a>
+                                        <a
+                                        @if(Auth::check())
+                                            onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                            @else
+                                                hidden
+                                        @endif
+                                        >
+                                        </i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -354,10 +370,14 @@
                                 <ul>
                                     <li class="cart"><a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào giỏ </a></li>
                                     <li>
-                                        <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="compare.html"><i class="ion-ios-shuffle-strong"></i></a>
+                                        <a
+                                        @if(Auth::check())
+                                            onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                            @else
+                                                hidden
+                                        @endif
+                                        >
+                                        </i></a>
                                     </li>
                                 </ul>
                             </div>

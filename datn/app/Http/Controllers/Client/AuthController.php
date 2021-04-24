@@ -53,7 +53,6 @@ class AuthController extends Controller
     }
     public function registration(RegistrationRequest $request){
         $data = $_POST;
-
         $user = new User();
         $user->fill($data);
         if($request->hasFile('avatar')){
@@ -63,8 +62,6 @@ class AuthController extends Controller
         $user->password= Hash::make($request->get('password'));
         $user->role_id = 0;
         $user->status = 0;
-        $user->coins = 0;
-        
         $user->save();
         Session::put('message','Thêm tài khoản thành công');
         return redirect()->route('client.login'); 

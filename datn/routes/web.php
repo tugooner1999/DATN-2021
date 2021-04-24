@@ -94,6 +94,10 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
         Route::match(['get', 'post'], '/slider/edit-slider/{id}', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
         Route::match(['get','post'],'/slider/delete/{id}',[Admin\SliderController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleSlider');
+
+        // wish-list
+        Route::get('/wish-list',  [Admin\WishlistController::class , 'index'])->name('admin.wishlist.index');
+        Route::match(['get','post'],'/wish-list/remove/{id}',  [Admin\WishlistController::class , 'remove_wishlist'])->name('admin.remove-wishlist');
 });
 
 
@@ -144,10 +148,13 @@ Route::prefix('admin')->group(function () {
         // resetpassword
         Route::get('resetpassword', [Client\AuthController::class, 'resetpassword'])->name('client.resetpassword');
 
-        Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
+        Route::get('/logout', [Client\AuthController::class, 'Logout'])->name('Auth.Logout');
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
+
         // wishlist
-        Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
+        Route::get('/wish-list',  [Client\WishlistController::class , 'index'])->name('client.show-wishlist');
+        Route::match(['get','post'],'/add-wish-list/{id}',  [Client\WishlistController::class , 'add_wishlist'])->name('client.add-wishlist');
+        Route::match(['get','post'],'/wish-list/remove/{id}',  [Client\WishlistController::class , 'remove_wishlist'])->name('client.remove-wishlist');
 
         //my-account
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');

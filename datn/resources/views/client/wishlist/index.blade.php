@@ -1,15 +1,16 @@
 @extends('layout-client')
 @section('content')
 <!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
+<section class="breadcrumb-area" style="
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">Danh sách yêu thích</h1>
+                    <h1 class="breadcrumb-hrading">Sản phẩm yêu thích</h1>
                     <ul class="breadcrumb-links">
                         <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
-                        <li>Danh sách yêu thích</li>
+                        <li>Sản phẩm yêu thích</li>
                     </ul>
                 </div>
             </div>
@@ -20,71 +21,45 @@
 <!-- cart area start -->
 <div class="cart-main-area mtb-60px">
     <div class="container">
-        <h3 class="cart-page-title">Danh sách sản phẩm được yêu thích nhất</h3>
+        <h3 class="cart-page-title">Danh sách</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
                     <div class="table-content table-responsive cart-table-content">
-                        <table>
+                        <table width="100%">
                             <thead>
                                 <tr>
+                                    <th>STT</th>
                                     <th>Ảnh</th>
                                     <th>Tên Sản phẩm</th>
                                     <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Thành tiền</th>
                                     <th>Thêm vào giỏ hàng</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                            @if (session('alert'))
+                                <div class="alert alert-success">
+                                    {{ session('alert') }}
+                                </div>
+                            @endif
+                            @foreach ($wish_lists as $item)
+                                <tr>   
+                                    <td>{{$item->id }}</td>
                                     <td class="product-thumbnail">
-                                        <a href="#"><img src="{{asset('assets/client/images/product-image/mini-cart/1.jpg')}}" alt="" /></a>
+                                        <a href="{{route('client.single-product',['id'=>$item->product->id])}}"><img width="100" height="100" src="{{asset($item->product->image_gallery)}}" alt="" /></a>
                                     </td>
-                                    <td class="product-name"><a href="#">Product Name</a></td>
-                                    <td class="product-price-cart"><span class="amount">$60.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$70.00</td>
+                                    <td class="product-name"><a href="{{route('client.single-product',['id'=>$item->product->id])}}">{{$item->product->name}}</a></td>
+                                    <td class="product-price-cart"><span class="amount">{{number_format($item->product->price)}} đ</span></td>
                                     <td class="product-wishlist-cart">
-                                        <a href="#">Thêm vào giỏ hàng</a>
+                                        <a class="cart-btn {{$item->product->quantily <= 0 ? ' bg-danger' : ''}}" {{$item->product->quantily <= 0 ? "" : "product-id="}} '{{$item->product->id}}'>
+                                        {{$item->product->quantily <= 0 ? "Hết hàng" : "Thêm vào giỏ"}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="text-dark" onclick="return confirm('Bạn muốn xóa sản phẩm này khỏi mục yêu thích?')" href="{{route('client.remove-wishlist',['id'=>$item->id])}}"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="{{asset('assets/client/images/product-image/mini-cart/2.jpg')}}" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Product Name</a></td>
-                                    <td class="product-price-cart"><span class="amount">$50.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$80.00</td>
-                                    <td class="product-wishlist-cart">
-                                        <a href="#">Thêm vào giỏ hàng</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="{{asset('assets/client/images/product-image/mini-cart/3.jpg')}}" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Product Name</a></td>
-                                    <td class="product-price-cart"><span class="amount">$70.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$90.00</td>
-                                    <td class="product-wishlist-cart">
-                                        <a href="#">Thêm vào giỏ hàng</a>
-                                    </td>
-                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
