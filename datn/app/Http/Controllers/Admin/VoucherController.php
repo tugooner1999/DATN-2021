@@ -20,7 +20,6 @@ class VoucherController extends Controller
         $this->authorize('admin');
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $voucher = Voucher::all();
-        $voucher = Voucher::paginate(5);
         return view('admin.voucher.index',compact('voucher','today'));
 
     }
@@ -36,11 +35,24 @@ class VoucherController extends Controller
             );
         }
         else{
+            $totalPriceInCart = 0;
+            foreach($_SESSION['cart'] as $val){
+                $totalPriceInCart += $val['price'] * $val['quantity'];
+            }
             if($voucherCode->finish_date < $today){
                 return response(
                     [
                         'status' => false,
                         'msg'=>"Mã giảm giá đã hết hạn sử dụng"
+    
+                    ]
+                );
+            }
+            elseif($totalPriceInCart < 300000){
+                return response(
+                    [
+                        'status' => false,
+                        'msg'=>"Đơn hàng từ 300k trở lên mới có thể áp dụng mã giảm giá"
     
                     ]
                 );
@@ -54,10 +66,7 @@ class VoucherController extends Controller
                     ]
                 );
             }
-            $totalPriceInCart = 0;
-            foreach($_SESSION['cart'] as $val){
-                $totalPriceInCart += $val['price'] * $val['quantity'];
-            }    
+                
             return response(
                 [
                     'totalPriceInCart' => $totalPriceInCart,
@@ -134,8 +143,8 @@ class VoucherController extends Controller
     public function destroy($id)
     {   
         $this->authorize('admin');
-        $User = Voucher::find($id);
-        $User->delete();
+        $voucher = Voucher::find($id);
+        $voucher->delete();
         return back();
         
     }

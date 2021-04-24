@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +21,15 @@ Route::prefix('admin')->group(function () {
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
 
+        // about
+        Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
+        Route::get('/about/add', [Admin\AboutController::class , 'create_about'])->name('admin.createAbout');
+        Route::post('about/add', [Admin\AboutController::class , 'saveAbout'])->name('admin.saveAbout');
+        Route::match(['get','post'],'/about/delete/{id}',[Admin\AboutController::class, 'destroy'])
+        ->where(['id'=>'[0-9]+'])
+        ->name('admin.deteleAbout');
+        Route::get('/about/editAbout/{id}',[Admin\AboutController::class , 'edit_about'])->name('admin.editAbout');
+        Route::post('/about/editAbout/{id}', [Admin\AboutController::class, 'update_about'])->name('admin.save-update-form');
 
         // category
         Route::get('/categories', [Admin\CategoryController::class , 'index'])->name('admin.listCate');
@@ -32,14 +39,19 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], '/categories/update/{id}',  [Admin\CategoryController::class, 'update_category']);
         // product
         Route::get('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
+        Route::post('/products', [Admin\ProductController::class , 'index'])->name('admin.listProduct');
         Route::get('/products/add', [Admin\ProductController::class , 'create_product'])->name('admin.createProduct');
         Route::match(['get','post'], '/products/edit/{id}', [Admin\ProductController::class , 'edit_product'])->name('admin.editProduct');
         Route::match(['get','post'],'/products/remove/{id}', [Admin\ProductController::class , 'deleteProduct'])->name('admin.removeProduct');
         Route::post('/products/add', [Admin\ProductController::class, 'addProduct'])->name('admin.addProduct');
         Route::match(['get','post'], '/products/update/{id}',  [Admin\ProductController::class, 'updateProduct'])->name('admin.updateProduct');
+        Route::get('/product/{id}',[Admin\ProductController::class, 'show'])->name('product-show');
+        Route::get('product/edit/{id}',[Admin\ProductController::class, 'destroy'])->name('product-delete');
+        
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
+        Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
 
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
@@ -53,7 +65,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'],'/voucher/delete/{id}',[Admin\VoucherController::class, 'destroy'])
         ->where(['id'=>'[0-9]+'])
         ->name('admin.deteleVoucher');
-        
+
         // mail
         Route::get('/send-mail-voucher/{id}',  [Admin\MailController::class , 'sendMailVoucher'])->name('admin.sendMailVoucher');
 
@@ -70,6 +82,7 @@ Route::prefix('admin')->group(function () {
 
         // comment
         Route::get('/comment', [Admin\CommentController::class , 'index'])->name('admin.listComment');
+        Route::match(['get','post'], '/comment/remove/{id}', [Admin\CommentController::class, 'deleteComment'])->name('admin.removeComment');
 
         // profile
         Route::get('/profile', [Admin\ProfileController::class , 'index'])->name('admin.profile');
@@ -79,6 +92,9 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], '/slider/add-slider', [Admin\SliderController::class , 'addSlider'])->name('admin.addSlider');
         Route::match(['get', 'post'], '/slider/edit-slider/{id}', [Admin\SliderController::class , 'editSlider'])->name('admin.editSlider');
         Route::match(['get','post'],'/slider/delete/{id}',[Admin\SliderController::class , 'destroy'])->where(['id'=>'[0-9]+'])->name('admin.deteleSlider');
+
+        Route::get('/wish-list',  [Admin\WishlistController::class , 'index'])->name('admin.wishlist.index');
+        Route::match(['get','post'],'/wish-list/remove/{id}',  [Admin\WishlistController::class , 'remove_wishlist'])->name('admin.remove-wishlist');
 });
 
 
@@ -92,20 +108,27 @@ Route::prefix('admin')->group(function () {
 
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
+        Route::get('/conventional', [Client\ProductController::class , 'shops'])->name('client.shops');
+        Route::get('/shop/{id}', [Client\ProductController::class , 'cate_product'])->where('id', '[0-9]+')->name('client.cate-product');
         Route::get('/allow-market', [Client\ProductController::class , 'allow_market'])->name('client.allow-market');
         Route::get('/single-product/{id}', [Client\ProductController::class , 'single_Product'])->where('id', '[0-9]+')->name('client.single-product');
-
+        
+        // comment product
+        Route::match(['get', 'post'], '/single-product/rating/{id}', [Client\CommentController::class , 'postComment'])->where('id', '[0-9]+')
+        ->name('client.comment_product');
 
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');
 
         // contact
         Route::get('/contact', [Client\ContactController::class , 'index'])->name('client.contact');
-        Route::post('/contact', [Client\ContactController::class , 'sendMail'])->name('client.sendMail');
+        Route::post('/contact', [Client\ContactController::class , 'postcontact'])->name('client.postcontact');
+
         // Add voucher
         Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
+        Route::post('/check-out', [Client\CartController::class , 'checkOut'])->name('client.checkOut');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
         Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
         Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
@@ -119,7 +142,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
         // wishlist
-        Route::get('/wishlist',  [Client\WishlistController::class , 'index'])->name('client.wishlist');
+        Route::get('/wish-list',  [Client\WishlistController::class , 'index'])->name('client.show-wishlist');
+        Route::match(['get','post'],'/add-wish-list/{id}',  [Client\WishlistController::class , 'add_wishlist'])->name('client.add-wishlist');
+        Route::match(['get','post'],'/wish-list/remove/{id}',  [Client\WishlistController::class , 'remove_wishlist'])->name('client.remove-wishlist');
+        
+
+        //my-account
+        Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
+
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

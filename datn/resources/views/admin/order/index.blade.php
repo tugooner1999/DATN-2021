@@ -16,6 +16,15 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                                }
+                            ?>
+                        </p>
                             <h3 class="box-title">Danh sách</h3>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
@@ -33,62 +42,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($oder as $key => $item)
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>675.000đ</td>
+                                            <td>{{$key + 1}}</td>
+                                            <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
+                                            <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
                                             <td class="text-success">Đã thanh toán</td>
-                                            <td class="text-warning">Chưa hoàn thành</td>
-                                            <td>24/7/2021</td>
+                                            <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
+                                            {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
+                                            </td>
+                                            <td>{{$item->created_at}}</td>
                                             <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan2</a></td>
-                                            <td>245.000đ</td>
-                                            <td>Thông thường</td>
-                                            <td class="text-success">Đã thanh toán</td>
-                                            <td class="text-success">Đã hoàn thành</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>155.000đ</td>
-                                            <td>Đi chợ</td>
-                                            <td class="text-warning">Chưa thanh toán</td>
-                                            <td class="text-warning">Chưa hoàn thành</td>
-                                            <td>28/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="profile.html">taikhoan1</a></td>
-                                            <td>123.000đ</td>
-                                            <td>Đi chợ</td>
-                                            <td class="text-warning">Chưa thanh toán</td>
-                                            <td class="text-danger">Đã Hủy</td>
-                                            <td>24/7/2021</td>
-                                            <td><a href="#"><i class="fa fa-edit"></i> Xem</a></td>
-                                            <td style="font-size: 20px;">
-                                                <a style="padding-left: 10px;" href="{{route('admin.editOrder')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                <a style="padding-left: 10px;" href="deleteOder.html" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>

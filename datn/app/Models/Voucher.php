@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Voucher extends Model
@@ -23,11 +21,5 @@ class Voucher extends Model
         'value',
         'status',
     ];
-    public function user(){
-        return $this->belongsTo(User::class, 'created_by');
-    }
-    public function voucher_type(){
-        return $this->belongsTo(Voucher_type::class, 'type_id');
-    }
-    
+
 }

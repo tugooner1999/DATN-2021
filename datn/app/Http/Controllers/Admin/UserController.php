@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use DB;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -68,10 +68,9 @@ class UserController extends Controller
                 $user->fill($request->all());
                 $user->password= Hash::make($request->get('password'));
                 if($request->hasFile('avatar')){
-                    $path = $request->file('avatar')->store('public/frontend/avatar');
-                    $user->avatar = str_replace("public/", "storage/", $path);
-                                }
-            $user->coins= 0;
+                    $path = $request->file('avatar')->move('storage/avatars', $request->file('avatar')->getClientOriginalName());
+                    $user->avatar =str_replace("public/", "public/", $path);
+                }
             $user->Save();
             Session::put('message','Thêm tài khoản thành công');
             return redirect()->route('admin.listUser');
@@ -94,9 +93,8 @@ class UserController extends Controller
             $user->fill($request->all());
 
             if($request->hasFile('avatar')){
-                $path = $request->file('avatar')->store('public/avatars');
-                $user->avatar = str_replace("public/", "storage/", $path);
-                
+                $path = $request->file('avatar')->move('storage/avatars', $request->file('avatar')->getClientOriginalName());
+                $user->avatar =str_replace("public/", "public/", $path);
             }
             $user->save();
             Session::put('message','Cập nhật tài khoản thành công');

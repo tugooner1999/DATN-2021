@@ -1,5 +1,10 @@
 @extends('layout-admin')
 @section('content')
+<style>
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -19,13 +24,24 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
+                    <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                        <?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', NULL);
+                            }
+                        ?>
+                    </p>
                     <h3 class="box-title">Danh sách</h3>
                     <div class="table-responsive">
                         <table class="table table-hover" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th style="width:3%;">#</th>
+                                    <th>Người dùng</th>
                                     <th>Tài khoản</th>
+                                    <th>Điện thoại</th>
                                     <th>Nội dung</th>
                                     <th>Đánh giá</th>
                                     <th>Sản phẩm</th>
@@ -33,77 +49,69 @@
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
+                                @foreach($comment as $no => $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
+                                    <td>{{$no + 1}}</td>
+                                    <td style="font-weight:bold;">
+                                        {{isset($item->user_comment) ? $item->user_comment->name : ''}}</td>
+                                    <td>{{isset($item->user_comment) ? $item->user_comment->email : ''}}</td>
+                                    <td style="font-weight:bold;">
+                                        {{isset($item->user_comment) ? $item->user_comment->phone : ''}}</td>
+                                    
+                                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Show</button>
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Mô Tả</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body" style="text-align: center;">
+                                                    {{$item->ra_content}}
+
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                  
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></td>
                                     <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <span class="rating-active">
+                                            @for($i = 1; $i <= 5; $i++) <i
+                                                class="fa fa-star {{ $i <= $item->ra_number ? 'active' : '' }}"></i>
+                                            @endfor
+                                        </span>
                                     </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
+                                    <td class="text-info">{{isset($item->product_comment) ? $item->product_comment->name : ''}}</td>
+                                    <td>{{$item->created_at}}</td>
                                     <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a style="padding-left: 10px;"
+                                            onclick="return confirm('Bạn có chắc muốn xoá bình luận này: {{$item->ra_content}}')"
+                                            href="{{route('admin.removeComment', ['id' => $item->id])}}"
+                                            class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="profile.html">taikhoan1</a></td>
-                                    <td>Nguyên phịch thủ hahahahahahaha</td>
-                                    <td>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    </td>
-                                    <td class="text-info"><a href="">Mì tôm Omachi</a></td>
-                                    <td>24/7/2021</td>
-                                    <td style="font-size: 20px;">
-                                        <a style="padding-left: 10px;" href="deleteComment.html" class="text-danger"><i
-                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th style="visibility:hidden;">#</th>
+                                    <th style="border:none">Người dùng</th>
+                                    <th style="border:none">Tài khoản</th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
+                                    <th style="border:none">Sản phẩm</th>
+                                    <th style="border:none">Ngày đăng</th>
+                                    <<th style="visibility:hidden;"></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

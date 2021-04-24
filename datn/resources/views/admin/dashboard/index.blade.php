@@ -16,47 +16,53 @@
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-info">Đơn hàng</h3>
-                    <span class="text-dark" >( 0 )</span><br>
-                    <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( {{$oders}} )</span><br>
+                    <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title">Doanh Thu</h3>
-                    <span class="text-dark" >( 7.8M )</span><br>
-                    <a href="{{route('admin.totalCash')}}"><i class="fa fa-signal" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( 7.8M )</span><br>
+                    <a href="{{route('admin.totalCash')}}"><i class="fa fa-signal" style="font-size: 100px;"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-success">Sản phẩm</h3>
-                    <span class="text-dark" >( {{$product}} )</span><br>
-                    <a href="{{route('admin.listProduct')}}"><i class="fa fa-product-hunt text-success" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( {{$products}} )</span><br>
+                    <a href="{{route('admin.listProduct')}}"><i class="fa fa-product-hunt text-success"
+                            style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-warning">Bình luận</h3>
-                    <span class="text-dark" >( 0 )</span><br>
-                    <a href="{{route('admin.listComment')}}"><i class="fa fa-comments-o text-warning" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( {{$comments}} )</span><br>
+                    <a href="{{route('admin.listComment')}}"><i class="fa fa-comments-o text-warning"
+                            style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-primary">Mã giảm giá</h3>
-                    <span class="text-dark" >( {{$voucher}} )</span><br>
-                    <a href="{{route('admin.listVoucher')}}"><i class="fa fa-tags text-primary" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( {{$vouchers}} )</span><br>
+                    <a href="{{route('admin.listVoucher')}}"><i class="fa fa-tags text-primary"
+                            style="font-size: 100px;" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-danger">Tài khoản</h3>
-                    <span class="text-dark" >( {{$voucher}} )</span><br>
-                    <a href="{{route('admin.listUser')}}"><i class="fa fa-users text-danger" style="font-size: 100px;" aria-hidden="true"></i></a>
+                    <span class="text-dark">( {{$users}} )</span><br>
+                    <a href="{{route('admin.listUser')}}"><i class="fa fa-users text-danger" style="font-size: 100px;"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -177,48 +183,23 @@
                 <div class="white-box">
                     <h3 class="box-title">Bình luận gần đây</h3>
                     <div class="comment-center p-t-10">
+                    @foreach($ratings as $item)
                         <div class="comment-body">
-                            <div class="user-img"> <img src="{{asset('assets/admin/plugins/images/users/pawandeep.jpg')}}" alt="user"
+                            <div class="user-img"> 
+                            <img
+                                    src="{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}" alt="user"
                                     class="img-circle">
                             </div>
                             <div class="mail-contnet">
-                                <h5>Nguyên</h5><span class="time">10:20 AM 20 may 2016</span>
-                                <br /><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium
-                                    lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie
-                                    feugiat. Aenean commodo dui pellentesque molestie feugiat</span> <a href=""
-                                    class="btn btn btn-rounded btn-default btn-outline m-r-5"><i
-                                        class="fa fa-comments-o"></i> Phản hồi</a><a href="#"
+                                <h5>{{isset($item->user_comment) ? $item->user_comment->name : ''}}</h5>
+                                <span class="time">{{$item->created_at}}</span>
+                                <br /><span class="mail-desc">{{$item->ra_content}}</span>
+                                    <a onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
+                                            href="{{route('admin.removeComment', ['id' => $item->id])}}"
                                     class="btn-rounded btn btn-default btn-outline"><i class="fa fa-trash"></i></a>
                             </div>
                         </div>
-                        <div class="comment-body">
-                            <div class="user-img"> <img src="{{asset('assets/admin/plugins/images/users/pawandeep.jpg')}}" alt="user"
-                                    class="img-circle">
-                            </div>
-                            <div class="mail-contnet">
-                                <h5>Nguyên</h5><span class="time">10:20 AM 20 may 2016</span>
-                                <br /><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium
-                                    lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie
-                                    feugiat. Aenean commodo dui pellentesque molestie feugiat</span> <a href=""
-                                    class="btn btn btn-rounded btn-default btn-outline m-r-5"><i
-                                        class="fa fa-comments-o"></i> Phản hồi</a><a href="#"
-                                    class="btn-rounded btn btn-default btn-outline"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>
-                        <div class="comment-body">
-                            <div class="user-img"> <img src="{{asset('assets/admin/plugins/images/users/pawandeep.jpg')}}" alt="user"
-                                    class="img-circle">
-                            </div>
-                            <div class="mail-contnet">
-                                <h5>Nguyên</h5><span class="time">10:20 AM 20 may 2016</span>
-                                <br /><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium
-                                    lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie
-                                    feugiat. Aenean commodo dui pellentesque molestie feugiat</span> <a href=""
-                                    class="btn btn btn-rounded btn-default btn-outline m-r-5"><i
-                                        class="fa fa-comments-o"></i> Phản hồi</a><a href="#"
-                                    class="btn-rounded btn btn-default btn-outline"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -238,7 +219,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Varun Dhavan <small
                                                     class="text-success">online</small></span></a>
                                     </li>
@@ -249,7 +231,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/genu.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/genu.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small
                                                     class="text-warning">Away</small></span></a>
                                     </li>
@@ -260,7 +243,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/ritesh.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/ritesh.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small
                                                     class="text-danger">Busy</small></span></a>
                                     </li>
@@ -271,7 +255,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/arijit.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/arijit.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Arijit Sinh <small
                                                     class="text-muted">Offline</small></span></a>
                                     </li>
@@ -282,7 +267,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/govinda.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/govinda.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Govinda Star <small
                                                     class="text-success">online</small></span></a>
                                     </li>
@@ -293,7 +279,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/hritik.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/hritik.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>John Abraham<small
                                                     class="text-success">online</small></span></a>
                                     </li>
@@ -304,7 +291,8 @@
                                             <button class="btn btn-info btn-circle btn-lg" type="button"><i
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
-                                        <a href="javascript:void(0)"><img src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
+                                        <a href="javascript:void(0)"><img
+                                                src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
                                                 alt="user-img" class="img-circle"> <span>Varun Dhavan <small
                                                     class="text-success">online</small></span></a>
                                     </li>

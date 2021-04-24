@@ -17,16 +17,16 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                                <h3 class="box-title">Danh sách</h3>
                                 <p class="success" style="color:green; font-size:20px; font-weight:bold;">
-                        <?php
-                        $message = Session::get('message');
-                        if($message){
-                            echo $message;
-                            Session::put('message', NULL);
-                        }
-                    ?>
-                    </p>
+                                    <?php
+                                    $message = Session::get('message');
+                                    if($message){
+                                        echo $message;
+                                        Session::put('message', NULL);
+                                        }
+                                    ?>
+                                </p>
+                                <h3 class="box-title">Danh sách</h3>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
@@ -39,9 +39,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($category as $item)
+                                        @foreach ($category as $key => $item)
                                             <tr>
-                                                <td>{{$item->id}}</td>
+                                                <td>{{$key +1 }}</td>
                                                 <td>{{$item->name}}</td>
                                                 <td><img src="{{$item->image}}" width="100" height="100" alt=""></td>
                                                 <td>({{ count($item->products) }}) Sản phẩm</td>

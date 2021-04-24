@@ -1,9 +1,17 @@
 @extends('layout-client')
 @section('content')
+
+<style>
+body {
+    line-height: 30px;
+}
+.rating-active .active {
+    color: #ff9705 !important;
+}
+</style>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area" style="
-    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);
-">
+    background: repeating-linear-gradient(21deg, #4fb68d96, #edb1b100 244px);">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -31,61 +39,57 @@
             </div>
             <div class="col-lg-6">
                 <div class="about-content">
+
+                    @foreach ($about as $item)
+
                     <div class="about-title">
-                        <h2>Chào mừng đến với tạp hoá Chúc An</h2>
+                        <h2>{!!$item->title!!}</h2>
                     </div>
                     <p class="mb-30px">
-                        Cửa hàng tạp hoá Chúc An là cửa hàng nhỏ lẻ nằm trên phố Đại Từ sầm uất của phường Đại Kim, quận Hoàng Mai. Được khai trương và đi vào kinh doanh từ ngày 26/08/1999
-                        cho đến nay đã được 22 năm, là một trong những cửa hàng tạp hoá lâu đời và uy tín nhất của phố Đại Từ. Là một cửa hàng tạp hoá kinh doanh theo mô hình hộ gia đình, không
-                        phải tư nhân nên cửa hàng không có nhiều cơ sở ở những nơi khác. Với phương châm là mang đến cho khách hàng những mặt hàng thiết yếu và chất lương với giá thành hợp lý, tạp hoá 
-                        Chúc An luôn chọn lọc những sản phẩm theo nhu cầu sử dụng của người tiêu dùng. Một điểm cộng nữa của Chúc An đó là thái độ của nhân viên rất thân thiện và vô cùng xinh đẹp:))
-
-                    </p>
-                    </br>
-                    <p>
-                        ! số thành tích của cửa hàng
-                        </br>- Năm 2010, kỉ niệm 1000 năm Thăng Long - Hà Nội, cửa hàng đã vinh dự được nhân bằng khen hộ gia đình kinh doanh tạp hoá xuất sắc của quận
-                        </br>- Năm 2015, bằng khen về chất lượng sản phẩm tốt
-                        </br>- Năm 2019, Bằng khen về thu nhập tạp hoá hộ gia đình đạt mức trên 69% so với các kinh doanh hộ gia đình khác
-                        </br>- Năm 2020, Thi đua xuất sắc của tỉnh
+                        {!!$item->description!!}
                     </p>
                 </div>
+
+                @endforeach
             </div>
         </div>
-        <div class="row mt-60px">
-            <div class="col-md-4 mb-res-sm-30px">
-                <div class="single-about">
-                    <h4>Our Company</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur
-                        adipisicing
-                        elit.
-                    </p>
+
+        <div class="row mt-60px feature-slider owl-carousel owl-nav-style">
+            @foreach ($product as $item)
+            <?php
+                    $avg = 0;
+                    if($item->pro_total_rating){
+                        $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                    }
+                ?>
+            <article class="list-product">
+                <div class="feature-slider-item">
+                    <div class="img-block">
+                        <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
+                            <img class="first-img" src="{{asset($item->image_gallery)}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="product-decs">
+                        <a class="inner-link"
+                            href="#"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                        <h2><a href="{{route('client.single-product', ['id'=>$item->id])}}"
+                                class="product-link">{{$item->name}}</a></h2>
+                    </div>
+                    <div class="rating-active">
+                        @for($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                            @endfor
+                    </div>
+                    <div class="pricing-meta">
+                        <ul>
+                            <li class="">{{($item->views)}} Views</li>
+                        </ul>
+                        <ul>
+                            <li class="current-price">{{number_format($item->price)}}đ</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-res-sm-30px">
-                <div class="single-about">
-                    <h4>Our Team</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur
-                        adipisicing
-                        elit.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-about">
-                    <h4>Testimonial</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur
-                        adipisicing
-                        elit.
-                    </p>
-                </div>
-            </div>
+            </article>
+            @endforeach
         </div>
     </div>
 </section>

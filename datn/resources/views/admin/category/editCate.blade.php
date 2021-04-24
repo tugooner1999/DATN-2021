@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-xs-12">
+            <div class="col-md-12 col-xs-12">
                 <div class="white-box">
                     <form class="form-horizontal form-material"  action="{{URL::to('/admin/categories/update/'.$objU->id)}}" method="POST" enctype="multipart/form-data">
         
@@ -36,12 +36,15 @@
                             </div>
                            
                         </div>
-                        <img id="image" src="{{$objU->image}}" width="40%" height="300px" alt="">
+                        <img id="image" src="{{$objU->image}}" width="30%" height="300px" alt="">
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-12">Tải ảnh mới</label>
                             <input class="col-sm-12" name="image" type="file" onchange="changeImage()" id="fileImage">
                         </div>
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-danger">Cập nhật</button>

@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Client;
 session_start();
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Order;
+use Illuminate\Support\Facades\Http;
+use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 class CartController extends Controller
 {
     //
@@ -42,6 +47,118 @@ class CartController extends Controller
             );
         }
         // return redirect()->route('client.homepage');
+        
+        
+    }
+    public function checkOut(Request $rq){
+        // dd($rq);
+        if($rq->isMethod('POST')){
+            if(!$rq->paymentMethod){
+                return response()->json(
+                    [
+                        'status' => false,
+                        'msg' => 'Bạn chưa chọn phương thức thanh toán',
+                        
+                    ]
+                );
+            }
+            else if($rq->paymentMethod=='vnpay'){
+                return response()->json(
+                    [
+                        'status' => false,
+                        'msg' => 'Phương thức thanh toán này chưa được hỗ trợ, vui lòng chọn phương thức thanh toán khác!',
+                        
+                    ]
+                );
+            }
+            else if($rq->paymentMethod=='cod'){
+                $rule = [
+                    'fullname'=>'required|max:100',
+                    'email'=>'required|email|max:255',
+                    'phone'=>'required|min:10|numeric',
+                    'address'=>'required',
+    
+                    ];
+                $msg = [
+                    'fullname.required' =>'Vui lòng nhập đầy đủ họ tên',
+                    'fullname.max' =>'Họ tên tối đa 100 kí tự',
+                    'email.required'=>'Vui lòng nhập Email',
+                    'email.email'=>'Email không đúng định dạng',
+                    'email.max'=>'Email tối đa 255 kí tự',
+                    'phone.required'=> 'Nhập số điện thoại',
+                    'phone.min'=> 'Nhập số điện thoại có 10 chữ số',
+                    'phone.numeric'=> 'Số điện thoại không đúng định dạng',
+                    'address.required'=>'Bạn chưa nhập địa chỉ'
+                    
+                ];
+                $validator = Validator::make($rq->all(), $rule, $msg);
+                if ($validator->fails()) {
+                    return response()->json(
+                        [
+                            'status' => false,
+                            'msg'=> [$validator->errors()]
+                            
+                        ]
+                    );
+                }
+                $totalPriceInCart = 0;
+                foreach($_SESSION['cart'] as $val){
+
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                //insert order into database
+                $voucherId = isset($_SESSION['voucher']) ? $_SESSION['voucher']['id'] : 0;
+                $insertOrder = Order::insert([
+                    'customer_email' =>$rq->email,
+                    'customer_phone' =>$rq->phone,
+                    'customer_address' =>$rq->address,
+                    'customer_fullname' =>$rq->fullname,
+                    'payment_method' =>$rq->paymentMethod,
+                    'voucher_id' => $voucherId,
+                    'totalMoney' => $totalPriceInCart
+
+                ]);
+                $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
+                if($insertOrder){
+                    foreach($_SESSION['cart'] as $val){
+                        $insertOderDetail = OrderDetail::insert([
+                            'order_id' =>$getOrderId->id,
+                            'product_id' =>$val['id'],
+                            'total' =>$val['price'] * $val['quantity'],
+                            'unit_price' =>$val['price']
+                        ]);
+                        if($insertOderDetail){
+                            unset($_SESSION['cart']);
+                            unset($_SESSION['voucher']);
+                        }
+                    }
+                    $HostDomain = config('common.HostDomain_servesms');
+                                    $key        = config('common.key_servesms');       
+                                    $devices    = config('common.devices_servesms');
+                                    $number     = $rq->phone;
+                                    $message    = "Cửa Hàng Tạp Hóa Chúc An cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi";
+                                    $Api_SMS    = $HostDomain .'key=' . $key .'&number=' . $number .'&message='.$message. '&devices=' . $devices;
+                                    $response   = Http::get($Api_SMS);
+                    return response()->json(
+                        [
+                            'status' => true,
+                            'msg' => 'Đặt hàng thành công',
+                            
+                        ]
+                    );
+                }
+                
+            }
+            else{
+                return response()->json(
+                    [
+                        'status' => false,
+                        'msg' => 'Vui lòng chọn phương thức thanh toán hợp lệ! ',
+                        
+                    ]
+                );
+            }
+        }
         
         
     }

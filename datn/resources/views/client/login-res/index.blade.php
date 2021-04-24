@@ -73,12 +73,34 @@
                                 <div class="login-register-form" >
                                     <form method="post" action="{{route('client.registration')}}"  enctype="multipart/form-data" class="was-validated">
                                     @csrf
-                                        <input type="text" name="name" class="form-control" placeholder="Tên tài khoản"  required/>
-                                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required/>
-                                        <input type="file" class="form-control" name="avatar" required/>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" required />
-                                        <input name="phone" class="form-control" placeholder="Điện thoại" type="number" required/>
-                                        <input name="address" class="form-control" placeholder="Địa chỉ" type="text" required/>
+                                        <input type="text" name="name"  placeholder="Họ và tên"  />
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="password"  name="password" placeholder="Mật khẩu" />
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input id="password-confirm" type="password" placeholder="Nhập lại Mật khẩu"   name="password_confirmation" autocomplete="new-password">
+                                        @error('password_confirmation')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="file"  name="avatar" />
+                                        @error('avatar')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email"  id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}"  />
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                        <input name="phone"  placeholder="Điện thoại" type="number" />
+                                        @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                        <input name="address"  placeholder="Địa chỉ" type="text"/>
+                                        @error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                         <div class="button-box">
                                             <button type="submit"><span>Đăng ký</span></button>
                                         </div>

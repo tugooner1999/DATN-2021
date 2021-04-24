@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,10 +12,15 @@ class Category extends Model
         'image',
         'name'
     ];
-    public function products(){
+
+
+
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Product::class, 'category_id');
     }
-    public function SaveUpdate($id, $objU){
+    public function SaveUpdate($id, $objU): int
+    {
         return DB::table($this->table)
             ->where('id',$id)
             ->update($objU);
