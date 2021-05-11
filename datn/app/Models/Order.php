@@ -22,5 +22,8 @@ class Order extends Model
     'customer_fullname',
     'status'
     ];
-
+    public function order_details(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(OrderDetail::class, 'order_id');
+    }
 }

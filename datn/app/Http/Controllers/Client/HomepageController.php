@@ -9,6 +9,7 @@ use App\Models\Slider;
 use App\Models\Rating;
 use DB;
 use App\Models;
+use Illuminate\Support\Carbon;
 use App\Models\Product;
 
 class HomepageController extends Controller
@@ -21,12 +22,13 @@ class HomepageController extends Controller
         $cates = Category::all();
         $slider = Slider::all();
         $ratings = Rating::all();
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $new_product = Product::all()->where('allow_market','1')->sortByDesc("id")->take(8);
         $sortbyView = Product::all()->sortByDesc("views")->take(8);
         $market_product = Product::all()->where('allow_market','2')->sortByDesc("id")->take(10);
         $sortbyRate = Product::all()->sortByDesc("pro_total_number")->take(3);
         $sortbyCmt = Product::all()->sortByDesc("pro_total_rating")->take(8);
-        return view('client.homepage.index',compact('cates','slider','ratings','new_product','sortbyView','sortbyCmt','market_product','sortbyRate'));
+        return view('client.homepage.index',compact('cates','slider','ratings','new_product','sortbyView','sortbyCmt','market_product','sortbyRate','today'));
     }
     public function client_admin(){
         return view('welcome');

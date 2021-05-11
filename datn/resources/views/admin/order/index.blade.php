@@ -44,7 +44,7 @@
                                     <tbody>
                                     @foreach($oder as $key => $item)
                                         <tr>
-                                            <td>{{$key + 1}}</td>
+                                            <td>{{$item->id}}</td>
                                             <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                             <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>Thông thường</td>
@@ -53,7 +53,7 @@
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>
-                                            <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
+                                            <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             </td>

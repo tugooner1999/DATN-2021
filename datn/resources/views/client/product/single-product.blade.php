@@ -111,14 +111,15 @@
                     </div>
                     <div class="pro-details-quality mt-0px">
                         <div class="pro-details-cart btn-hover">
-                            <a 
-                                @if(Auth::check())
-                                    product-id='{{$product->id}}' class="cart-btn"
-                                @else
-                                    hidden
+                                @if ($today <= "09:00:00" && $product->allow_market ==2)
+                                <a class="cart-btn" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
                                 @endif
-                                {{$product->quantily <= 0 ? "hidden" : ""}}
-                            >Thêm vào giỏ</a>
+                                @if ($product->allow_market ==1)
+                                <a class="cart-btn" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif
+                                @if($today > "09:00:00" && $product->allow_market ==2)
+                                <a class="cart-btns" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif  
                         </div>
                         <div class="cart-plus-minus" style="visibility: hidden;">
                             <input class="cart-plus-minus-box" type="text" name="quantily" value="1" />
@@ -393,13 +394,15 @@
                 <div class="add-to-link">
                     <ul>
                         <li class="cart">
-                            <a
-                                @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
-                                @else
-                                    hidden
-                                @endif
-                            {{$item->quantily <= 0 ? "hidden" : ""}}>
-                            Thêm vào giỏ</a>
+                            @if ($today <= "09:00:00" && $item->allow_market ==2)
+                            <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                            @endif
+                            @if ($item->allow_market ==1)
+                            <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                            @endif
+                            @if($today > "09:00:00" && $item->allow_market ==2)
+                            <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                            @endif  
                         </li>
                         <li>
                             <a

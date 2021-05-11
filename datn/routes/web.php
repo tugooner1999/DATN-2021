@@ -51,8 +51,9 @@ Route::prefix('admin')->group(function () {
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
+        Route::get('/order/order-detail/{id}',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
-        Route::get('/order/order-detail',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
+        
 
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
@@ -127,6 +128,7 @@ Route::prefix('admin')->group(function () {
 
         // Add voucher
         Route::post('/add-voucher-to-cart', [Admin\VoucherController::class , 'addVoucherToCart'])->name('client.addVoucherToCart');
+
         // cart
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/check-out', [Client\CartController::class , 'checkOut'])->name('client.checkOut');

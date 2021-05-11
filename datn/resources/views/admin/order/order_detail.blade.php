@@ -135,22 +135,11 @@
 }
 
 .name-kh {
-    position: absolute;
-    top: 30%;
+    top: 0%;
     bottom: 0;
-    left: 8%;
+    left: 10%;
     right: 0;
     margin: 0;
-}
-
-.name-kh a {
-    color: #000;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.name-kh a:hover {
-    color: #f33155;
 }
 
 .info-product-order {
@@ -215,8 +204,8 @@
                             </g>
                         </svg> <a style="color: rgba(0,0,0,.54);" href="{{route('admin.listOrder')}}">TRỞ LẠI</a>
                     </div>
-                    <div class="order-detail-header__note"><span class="order-content__header__order-sn">ID ĐƠN HÀNG.
-                            21040474K2HU3G</span><span class="order-detail-header__separator"></span>
+                    <div class="order-detail-header__note"><span class="order-content__header__order-sn">ID ĐƠN HÀNG :
+                            {{ $order_detail->id }}</span><span class="order-detail-header__separator"></span>
                     </div>
 
                     <div class="order-detail-page__delivery__container-wrapper">
@@ -228,12 +217,10 @@
                             <div class="order-detail-page__delivery__content">
                                 <div class="order-detail-page__delivery__shipping-address__container">
                                     <div class="order-detail-page__delivery__shipping-address">
-                                        <div class="order-detail-page__delivery__shipping-address__shipping-name">Lê
-                                            Hữu Tú</div>
+                                        <div class="order-detail-page__delivery__shipping-address__shipping-name">{{ $order_detail->customer_fullname }}</div>
                                         <div class="order-detail-page__delivery__shipping-address__detail">
-                                            <span>(+84)367361426</span>
-                                            <br>, toà nhà Đơn Nguyên 3, KTX Mỹ Đình, đường
-                                            Nguyễn Cơ Thạch, Phường Mỹ Đình Ii, Quận Nam Từ Liêm, Hà Nội <br>
+                                            <span>{{ $order_detail->customer_phone }}</span>
+                                            <br>{{ $order_detail->customer_address }} <br>
                                             <div class="_1AwALX"></div>
                                         </div>
                                     </div>
@@ -242,41 +229,49 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="info-bottom">
                     <div class=" col-sm-12 info-people">
                         <div class="images-name-order">
-                            <img src="{{asset('storage/avatars/081d8846dec2750c5ac918ccdb03d195.jpg')}}" alt="">
+                            <img src="" width="35" class="img-circle">
                         </div>
                         <div class="name-kh">
-                            <a href="">lehuutu99@gmail.com</a>
+                            <h3>{{ $order_detail->customer_email }}</h3>
                         </div>
                     </div>
-
+                    
+                    @foreach($order_product as $item)
                     <div class=" col-sm-12 info-product-order">
                         <div class="col-sm-8" style="padding: 15px 5px;float:left;">
                             <div class="all-info">
                                 <div class="image-item-product">
-                                    <img src="{{asset('assets/client/images/product-image/cosmatic/1.jpg')}}" alt="">
+                                    <img src="{{$item->product_order->image_gallery}}" alt="">
                                 </div>
-
                                 <div class="content-info">
-                                    <div class="name-product" style="padding:5px;"><span style="font-size:18px;">Son lì
-                                            A12 Blackground</span></div>
-                                    <div class="category-product" style="padding:5px;"><span style="color: #777;">Văn
-                                            phòng phẩm</span></div>
-                                    <div class="quantily-product" style="padding:5px;"><span>x 2</span></div>
+                                    <div class="name-product" style="padding:5px;"><span style="font-size:18px;">{{ isset($item->product_order) ? $item->product_order->name : '' }}</span></div>
+                                    
+                                    <div class="category-product" style="padding:5px;"><span style="color: #777;">
+                                        <?php 
+                                        $parent = App\Models\Category::find($item->product_order->category_id);
+                                        $cate_t = $parent->name;    
+                                        ?>
+                                        {{  $cate_t }}
+                                    </span></div>
+                                    <div class="quantily-product" style="padding:5px;"><span>{{ $item->total / $item->unit_price }}</span></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-4" style="padding: 15px 5px;">
-                            <div class="price-product"><span>150.000</span></div>
+                            <div class="price-product"><span>{{ number_format($item->unit_price) }}VND</span></div>
                         </div>
                     </div>
+                    @endforeach
+                    <div class=" col-sm-12 info-product-order">
+                        Tổng : {{number_format($order_detail->totalMoney)}}VND
+                    </div>
                 </div>
-            </div>
+            </div>             
+          
         </div>
     </div>
 </div>

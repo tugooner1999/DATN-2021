@@ -54,7 +54,7 @@
                 @else
                     Giảm {{$voucher['value']  }} %
                 @endif
-                    cho đơn hàng từ 500k trở lên
+                    cho đơn hàng từ 300k trở lên
             </i></b></h2>
             <div class="container">
                 <p class="code">Sử dụng code sau: <span class="promo"><b>{{ $voucher['code'] }}</b> </span> chỉ còn <b>{{ $voucher['amount'] }}</b> mã giảm giá. nhanh tay đặt mua kẻo hết</p>
