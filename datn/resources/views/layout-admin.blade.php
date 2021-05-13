@@ -26,6 +26,7 @@
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link href="{{asset('assets/admin/css/order-detail.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
 </head>
 
@@ -40,23 +41,22 @@
         @include('admin/layout/sidebar')
         @yield('content')
         @include('admin/layout/footer')
-
     </div>
 
     <script>
-        function changeImage() {
-              var fileImage = document.getElementById("fileImage").files;
-              if (fileImage.length > 0) {
-                var fileToLoad = fileImage[0];
-                var fileReader = new FileReader();
-                fileReader.onload = function(fileLoadedEvent) {
-                  var srcData = fileLoadedEvent.target.result;
-                  var newImage = document.getElementById('image');
-                  newImage.src = srcData;
-                }
-                fileReader.readAsDataURL(fileToLoad);
-              }
+    function changeImage() {
+        var fileImage = document.getElementById("fileImage").files;
+        if (fileImage.length > 0) {
+            var fileToLoad = fileImage[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result;
+                var newImage = document.getElementById('image');
+                newImage.src = srcData;
+            }
+            fileReader.readAsDataURL(fileToLoad);
         }
+    }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -67,7 +67,9 @@
     <script src="{{asset('assets/admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/counterup/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/chartist-js/dist/chartist.min.js')}}"></script>
-    <script src="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <script
+        src="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}">
+    </script>
     <script src="{{asset('assets/admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
@@ -78,55 +80,60 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function() {
-        $('#example').DataTable( {
-            initComplete: function () {
-                this.api().columns().every( function () {
+        $('#example').DataTable({
+            initComplete: function() {
+                this.api().columns().every(function() {
                     var column = this;
-                    var select = $('<select style="width: 100%; padding: 5px 10px"><option value="">All</option></select>')
-                        .appendTo( $(column.footer()).empty() )
-                        .on( 'change', function () {
+                    var select = $(
+                            '<select style="width: 100%; padding: 5px 10px"><option value="">All</option></select>'
+                        )
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
                             column
-                                .search( val ? '^'+val+'$' : '', true, false )
+                                .search(val ? '^' + val + '$' : '', true, false)
                                 .draw();
-                        } );
-                    column.data().unique().sort().each( function ( d, j ) {
-                        select.append( '<option value="'+d+'">'+d+'</option>' )
-                    } );
-                } );
+                        });
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d +
+                            '</option>')
+                    });
+                });
             }
-        } );
-        } );
-        </script>
+        });
+    });
+    </script>
 
     <script type="text/javascript" charset="UTF-8">
-$.ajaxSetup({
-    header:{
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-})
+    $.ajaxSetup({
+        header: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
     </script>
+
     <script>
-        $('.btn-show').click(function(){
-            var url = $(this).attr('data-url');
-            $.ajax({
-                type: 'get',
-                url: url,
-                dataType:"json",
-                success: function(response) {
-                    console.log(response)
-                    $('p#id').html(response.data.description)
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    //xử lý lỗi tại đây
-                }
-            })
+    $('.btn-show').click(function() {
+        var url = $(this).attr('data-url');
+        $.ajax({
+            type: 'get',
+            url: url,
+            dataType: "json",
+            success: function(response) {
+                console.log(response)
+                $('p#id').html(response.data.description)
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                //xử lý lỗi tại đây
+            }
         })
-        $('.btn-warning').click(function(){
-            var url = $(this).attr('data-url');
-            if (confirm('Hóa đơn này đã được hoàn thành')) {
+    })
+    $('.btn-warning').click(function() {
+        var url = $(this).attr('data-url');
+        if (confirm('Hóa đơn này đã được hoàn thành')) {
             $.ajax({
                 type: 'get',
                 url: url,
@@ -134,31 +141,32 @@ $.ajaxSetup({
                     window.location.reload()
                     toastr.success('Cập nhật thành công', 'Thông báo')
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
+                error: function(jqXHR, textStatus, errorThrown) {}
+            })
+        }
+    })
+    $('.btn-outline-info').click(function() {
+        var url = $(this).attr('data-url');
+        if (confirm('Bạn có chắc muốn xóa không?')) {
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function(response) {
+                    window.location.reload()
+                    toastr.success('Xóa thành công', 'Thông báo')
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //xử lý lỗi tại đây
                 }
             })
-            }
-        })
-        $('.btn-outline-info').click(function(){
-            var url = $(this).attr('data-url');
-					if (confirm('Bạn có chắc muốn xóa không?')) {
-						$.ajax({
-							type: 'get',
-							url: url,
-							success: function(response) {
-                                window.location.reload()
-                                toastr.success('Xóa thành công', 'Thông báo')
-							},
-							error: function (jqXHR, textStatus, errorThrown) {
-								//xử lý lỗi tại đây
-							}
-						})
-					}
-				})
+        }
+    })
+
     </script>
+
     <script>
-    $(document).ready(function(){
-        $("#btnThemFile").click(function(){
+    $(document).ready(function() {
+        $("#btnThemFile").click(function() {
             $("#chonFile").append("<br><input class='col-sm-12' name='gallery_img[]' type='file'>");
         });
     });
@@ -166,9 +174,44 @@ $.ajaxSetup({
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('description');
-</script>
-</body>
+    <script>
+    CKEDITOR.replace('description');
+    </script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+                new Morris.Area({
+                    element: 'myfirstchart',
+                    data: [{
+                            year: '2008',
+                            value: 20
+                        },
+                        {
+                            year: '2009',
+                            value: 10
+                        },
+                        {
+                            year: '2010',
+                            value: 5
+                        },
+                        {
+                            year: '2011',
+                            value: 5
+                        },
+                        {
+                            year: '2012',
+                            value: 20
+                        }
+                    ],
+
+                    xkey: 'year',
+                    ykeys: ['value'],
+                    labels: ['Value']
+                });
+            });
+    </script>
+</body>
 </html>

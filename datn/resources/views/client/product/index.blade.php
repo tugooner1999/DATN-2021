@@ -107,27 +107,28 @@
                                                
                                                 <li class="cart">
                                                     @if ($today <= "09:00:00" && $item->allow_market ==2)
-                                                        <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào
-                                                            giỏ</a>
-                                                        @endif
-
-                                                        @if ($item->allow_market ==1)
-                                                        <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào
-                                                            giỏ</a>
-                                                        @endif
-
-                                                        @if($today > "09:00:00" && $item->allow_market ==2)
-                                                        <a class="cart-btns" product-id='{{$item->id}}' href="#">Thêm
-                                                            vào giỏ</a>
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
                                                     @endif
-
+    
+                                                    @if ($item->allow_market ==1)
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+    
+                                                    @if($today > "09:00:00" && $item->allow_market ==2)
+                                                    <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+                                                    
+                                                    
                                                 </li>
                                                 <li>
-                                                    <a @if(Auth::check())
-                                                        onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')"
-                                                        href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i
-                                                            class="ion-android-favorite-outline" @else hidden @endif>
-                                                        </i></a>
+                                                    <a
+                                                    @if(Auth::check())
+                                                        onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                                        @else
+                                                        href="{{route('client.login')}}"
+                                                    @endif
+                                                    >
+                                                    </i></a>
                                                 </li>
                                             </ul>
                                         </div>

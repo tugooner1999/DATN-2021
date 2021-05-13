@@ -49,7 +49,7 @@ class ProductController extends Controller
     public function single_Product($id){
         $product= Product::find($id);
         // comment
-        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+        
         $comments = Rating::where('ra_product_id', $id)->get();
         $product->views += 1;
         $product->save();
@@ -80,6 +80,7 @@ class ProductController extends Controller
         $id_cate = $product->category_id;
         $related_pro = Product::all()->where('category_id', $id_cate)->except($id);
         $img_url = Gallery::all()->where('product_id', $id);
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         return view('client.product.single-product',compact('product','img_url','related_pro','comments','arrayRatings','today'));
     }
 }
