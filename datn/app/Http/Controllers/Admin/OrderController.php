@@ -17,6 +17,7 @@ class OrderController extends Controller
         return view('admin.order.index',compact('oder'));
     }
 
+
     /**
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */

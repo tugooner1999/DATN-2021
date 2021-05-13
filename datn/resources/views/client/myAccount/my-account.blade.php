@@ -28,7 +28,7 @@
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
                                 <h3 class="panel-title"><span>1 .</span> <a data-toggle="collapse" data-parent="#faq"
-                                        href="#my-account-1">THÔNG TIN CÁ NHÂN </a></h3>
+                                        href="#my-account-1" aria-expanded="false">THÔNG TIN CÁ NHÂN </a></h3>
                             </div>
                             <div id="my-account-1" class="panel-collapse collapse show">
                                 <div class="panel-body">

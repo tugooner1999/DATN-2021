@@ -20,31 +20,36 @@ class ProductController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::paginate(12);
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','cates','today'));
     }
 
     public function shops(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::where('allow_market','1')->paginate(12);
         $cates  = Category::all();        
-        return view('client.product.index', compact('list_product','cates',));
+        return view('client.product.index', compact('list_product','cates','today'));
     }
 
     public function allow_market(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product = Product::where('allow_market','2')->paginate(12);
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','cates','today'));
     }
 
     public function cate_product($id){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $list_product= Product::where('category_id',$id)->paginate(12);
         $cates  = Category::all();
-        return view('client.product.index', compact('list_product','cates'));
+        return view('client.product.index', compact('list_product','cates','today'));
     }
     public function single_Product($id){
         $product= Product::find($id);
         // comment
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $comments = Rating::where('ra_product_id', $id)->get();
         $product->views += 1;
         $product->save();
@@ -75,6 +80,6 @@ class ProductController extends Controller
         $id_cate = $product->category_id;
         $related_pro = Product::all()->where('category_id', $id_cate)->except($id);
         $img_url = Gallery::all()->where('product_id', $id);
-        return view('client.product.single-product',compact('product','img_url','related_pro','comments','arrayRatings'));
+        return view('client.product.single-product',compact('product','img_url','related_pro','comments','arrayRatings','today'));
     }
 }
