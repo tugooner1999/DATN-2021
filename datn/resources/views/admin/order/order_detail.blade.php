@@ -232,7 +232,11 @@
                 <div class="info-bottom">
                     <div class=" col-sm-12 info-people">
                         <div class="images-name-order">
-                            <img src="" width="35" class="img-circle">
+                            <?php 
+                                        $parent = App\Models\User::find($order_detail->order_by);
+                                        $avt = $parent->avatar;                                        
+                                        ?>
+                            <img src="{{$avt}}" width="35" class="img-circle">
                         </div>
                         <div class="name-kh">
                             <h3>{{ $order_detail->customer_email }}</h3>

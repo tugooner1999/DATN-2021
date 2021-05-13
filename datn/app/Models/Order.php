@@ -26,4 +26,8 @@ class Order extends Model
     {
         return $this->belongsTo(OrderDetail::class, 'order_id');
     }
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'order_by');
+    }
 }

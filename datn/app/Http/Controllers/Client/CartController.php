@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 class CartController extends Controller
 {
@@ -46,6 +48,7 @@ class CartController extends Controller
                 ]
             );
         }
+
         // return redirect()->route('client.homepage');
         
         
@@ -101,13 +104,25 @@ class CartController extends Controller
                         ]
                     );
                 }
+                
                 $totalPriceInCart = 0;
                 foreach($_SESSION['cart'] as $val){
-
                     $totalPriceInCart += $val['price'] * $val['quantity'];
+                    
                 }
+                
                 //insert order into database
                 $voucherId = isset($_SESSION['voucher']) ? $_SESSION['voucher']['id'] : 0;
+                $voucherPrice = 0;
+                                        if(isset($_SESSION['voucher'])){
+                                            if($_SESSION['voucher']['type'] == 1){
+                                                $voucherPrice = ($_SESSION['voucher']['value']);
+                                            }
+                                            else if($_SESSION['voucher']['type'] == 2){
+                                                $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
+                                            }   
+                                        }
+                
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -115,7 +130,9 @@ class CartController extends Controller
                     'customer_fullname' =>$rq->fullname,
                     'payment_method' =>$rq->paymentMethod,
                     'voucher_id' => $voucherId,
-                    'totalMoney' => $totalPriceInCart
+                    'order_by'=> Auth::user()->id,
+                    'order_market'=> 1,
+                    'totalMoney' => $totalPriceInCart - $voucherPrice
 
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
@@ -127,11 +144,15 @@ class CartController extends Controller
                             'total' =>$val['price'] * $val['quantity'],
                             'unit_price' =>$val['price']
                         ]);
+                        $sl = Product::find($val['id']);
+                        $sl->quantily = $sl->quantily - $val['quantity'];
+                            $sl->save();
                         if($insertOderDetail){
                             unset($_SESSION['cart']);
                             unset($_SESSION['voucher']);
                         }
                     }
+                
                     $HostDomain = config('common.HostDomain_servesms');
                                     $key        = config('common.key_servesms');       
                                     $devices    = config('common.devices_servesms');
