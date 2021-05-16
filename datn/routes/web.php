@@ -117,7 +117,6 @@ Route::prefix('admin')->group(function () {
         // comment product
         Route::match(['get', 'post'], '/single-product/rating/{id}', [Client\CommentController::class , 'postComment'])->where('id', '[0-9]+')
         ->name('client.comment_product');
-
         // about
         Route::get('/about',  [Client\AboutController::class , 'index'])->name('client.about');
 

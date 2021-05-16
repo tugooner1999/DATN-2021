@@ -169,6 +169,7 @@ $.ajaxSetup({
 <script>
 CKEDITOR.replace('description');
 </script>
+
 </body>
 
 </html>

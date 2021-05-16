@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Comment;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Rating;
@@ -27,9 +26,9 @@ class CommentController extends Controller
         return view('admin.comment.index', compact('user_comment','product_comment','comment'));
     }
 
-    public function deleteComment($rating_id){
-        Rating::destroy($rating_id);
-        Session::put('message','Xoá sản phẩm thành công');
+    public function deleteComment($id){
+        Rating::destroy($id);
+        Session::put('message','Xoá bình luận thành công');
         return  redirect()->back();; 
     }
 }

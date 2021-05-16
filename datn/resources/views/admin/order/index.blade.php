@@ -56,6 +56,9 @@
                                             <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
+                                            <a style="padding-left: 10px;"
+                                            href="{{route('admin.editOrder')}}"><i
+                                                class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

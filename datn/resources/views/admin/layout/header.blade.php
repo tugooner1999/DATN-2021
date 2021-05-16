@@ -17,7 +17,7 @@
         <!-- /Logo -->
         <ul class="nav navbar-top-links navbar-right pull-right">
             <li>
-                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="@if(Auth::user()) {{Auth::user()->avatar}} @endif" alt="user-img"
+                <a class="profile-pic" href="{{route('admin.profile')}}"> <img src="@if(Auth::user()) {{asset(Auth::user()->avatar)}} @endif" alt="user-img"
                         width="35" class="img-circle"><b class="hidden-xs">@if(Auth::user()) {{Auth::user()->name}} @endif</b></a>
             </li>
         </ul>

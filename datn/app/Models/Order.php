@@ -20,7 +20,7 @@ class Order extends Model
     'customer_address',
     'customer_phone',
     'customer_fullname',
-    'status'
+    'status',
     ];
 
 }
