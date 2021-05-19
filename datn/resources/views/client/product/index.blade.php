@@ -105,20 +105,27 @@
                                         <div class="add-to-link">
                                             <ul>
                                                 <li class="cart">
-                                                    <a
-                                                        @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
-                                                        @else
-                                                            hidden
-                                                        @endif
-                                                    {{$item->quantily <= 0 ? "hidden" : ""}}>
-                                                    Thêm vào giỏ</a>
+                                                    <!-- @if ($today <= "09:00:00" && $item->allow_market ==2)
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+    
+                                                    @if ($item->allow_market ==1)
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+    
+                                                    @if($today > "09:00:00" && $item->allow_market ==2)
+                                                    <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif -->
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+
+                                                    
                                                 </li>
                                                 <li>
                                                     <a
                                                     @if(Auth::check())
                                                         onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
                                                         @else
-                                                            hidden
+                                                        href="{{route('client.login')}}"
                                                     @endif
                                                     >
                                                     </i></a>

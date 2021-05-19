@@ -20,7 +20,8 @@
         <div class="row">
             <div class="col-md-8 col-xs-12">
                 <div class="white-box">
-                    <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="{{URL::to('/admin/user/update/'.$objU->id)}}">
+                    <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="{{URL::to('/admin/user/update/'.
+                    $objU->id)}}">
                                 @csrf
                         <div class="form-group">
                             <label class="col-md-12">Tên tài khoản</label>

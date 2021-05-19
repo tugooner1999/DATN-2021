@@ -68,7 +68,7 @@
                                     <label class="col-sm-12">Loại</label>
                                     <div class="col-sm-12">
                                         <select name="type" class="form-control form-control-line">
-                                            <@php         
+                                            @php         
                                             if($show->value > 100){
                                                 echo'<option value="1">Giảm theo giá tiền</option>';
                                                 echo'<option value="2">Giảm theo %</option>';

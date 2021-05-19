@@ -34,7 +34,7 @@
                                             <th>Tài khoản</th>
                                             <th>Giá trị</th>
                                             <th>Loại</th>
-                                            <th>Trạng thái</th>
+                                            {{-- <th>Trạng thái</th> --}}
                                             <th>Tình trạng</th>
                                             <th>Ngày đặt</th>
                                             <th>Chi tiết</th>
@@ -44,16 +44,18 @@
                                     <tbody>
                                     @foreach($oder as $key => $item)
                                         <tr>
-                                            <td>{{$key + 1}}</td>
+                                            <td>{{$item->id}}</td>
                                             <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                             <td>{{number_format($item->totalMoney)}}đ</td>
-                                            <td>Thông thường</td>
-                                            <td class="text-success">Đã thanh toán</td>
+                                            <td>
+                                                {{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}
+                                            </td>
+                                            {{-- <td class="text-success">Đã thanh toán</td> --}}
                                             <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>
-                                            <td><a href="{{route('admin.order-detail')}}"><i class="fa fa-edit"></i> Xem</a></td>
+                                            <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
                                             <a style="padding-left: 10px;"
@@ -69,7 +71,7 @@
                                             <th style="visibility:hidden;">Tài khoản</th>
                                             <th style="visibility:hidden;">Giá trị</th>
                                             <th style="border:none">Loại</th>
-                                            <th style="border:none">Trạng thái</th>
+                                            {{-- <th style="border:none">Trạng thái</th> --}}
                                             <th style="border:none">Tình trạng</th>
                                             <th style="border:none">Ngày đặt</th>
                                             <th style="visibility:hidden;">Chi tiết</th>

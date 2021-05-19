@@ -126,20 +126,26 @@
                 <div class="add-to-link">
                     <ul>
                         <li class="cart">
-                            <a
-                                @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
-                                @else
-                                    hidden
-                                @endif
-                            {{$item->quantily <= 0 ? "hidden" : ""}}>
-                            Thêm vào giỏ</a>
+                            @if ($today <= "09:00:00" && $item->allow_market ==2)
+                            <a @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}' @else
+                                href="{{route('client.login')}}" @endif >Thêm vào giỏ</a>
+                            @endif
+                            @if ($item->allow_market ==1)
+                            <a @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}' @else
+                                href="{{route('client.login')}}" @endif >Thêm vào giỏ</a>
+                            @endif
+
+                            @if($today > "09:00:00" && $item->allow_market ==2)
+                            <a @if(Auth::check()) class="cart-btns" product-id='{{$item->id}}' @else
+                                href="{{route('client.login')}}" @endif >Thêm vào giỏ</a>
+                            @endif
                         </li>
                         <li>
                             <a
                             @if(Auth::check())
                                 onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
                                 @else
-                                    hidden
+                                href="{{route('client.login')}}"
                             @endif
                             >
                             </i></a>
@@ -214,7 +220,7 @@
                                         <a
                                             @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                             @endif
                                         {{$item->quantily <= 0 ? "hidden" : ""}}>
                                         Thêm vào giỏ</a>
@@ -224,7 +230,7 @@
                                         @if(Auth::check())
                                             onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                         @endif
                                         >
                                         </i></a>
@@ -293,7 +299,7 @@
                                         <a
                                             @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                             @endif
                                         {{$item->quantily <= 0 ? "hidden" : ""}}>
                                         Thêm vào giỏ</a>
@@ -303,7 +309,7 @@
                                         @if(Auth::check())
                                             onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                         @endif
                                         >
                                         </i></a>
@@ -367,7 +373,7 @@
                                         <a
                                             @if(Auth::check()) class="cart-btn" product-id='{{$item->id}}'
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                             @endif
                                         {{$item->quantily <= 0 ? "hidden" : ""}}>
                                         Thêm vào giỏ</a>
@@ -377,7 +383,7 @@
                                         @if(Auth::check())
                                             onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
                                             @else
-                                                hidden
+                                            href="{{route('client.login')}}"
                                         @endif
                                         >
                                         </i></a>

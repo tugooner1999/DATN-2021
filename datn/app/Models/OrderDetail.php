@@ -4,21 +4,30 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderDetail extends Model
 {
     protected $table = "order_details";
-    // public $timestamps = true;
-    //     protected $fillable = [
-    //     'image',
-    //     'name'
-    // ];
-    // public function products(){
-    //     return $this->hasMany(Product::class, 'category_id');
-    // }
-    // public function SaveUpdate($id, $objU){
-    //     return DB::table($this->table)
-    //         ->where('id',$id)
-    //         ->update($objU);
-    // }
+    public $timestamps = true;
+        protected $fillable = [
+        'order_id',
+        'product_id',
+        'total',
+        'unit_price'
+    ];
+    public function product_order()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function category_order()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
