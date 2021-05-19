@@ -21,8 +21,34 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Biên động doanh thu</h3>
-                    <div id="myfirstchart" style="height: 450px;"></div>
+                <h3 class="box-title" style=" text-align: center;font-weight: 600;font-size:22px;">Biên động doanh thu</h3>
+                    <form autocomplete="off" class="form-group">
+                        @csrf
+                        <div class="col-md-2">
+                            <p>Từ ngày : <input type="text" id="datepicker" class="form-control"></p>
+                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
+                                value="Lọc kết quả">
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>Đến ngày : <input type="text" id="datepicker2" class="form-control"></p>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>
+                                Lọc theo:
+                                <select class="dashboard-filter form-control">
+                                    <option value="">--Chọn--</option>
+                                    <option value="7ngay">7 ngày qua</option>
+                                    <option value="thangtruoc">tháng trước</option>
+                                    <option value="thangnay">tháng này</option>
+                                    <option value="365ngayqua">365 ngày qua</option>
+                                </select>
+                            </p>
+                        </div>
+                    </form>
+                
+                    <div id="myfirstchart" style="height: 450px;margin-top:130px;"></div>
                 </div>
             </div>
         </div>

@@ -66,19 +66,38 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Biên động doanh thu</h3>
-                    <ul class="list-inline text-right">
-                        <li>
-                            <h5><i class="fa fa-circle m-r-5 text-info"></i>Tháng này</h5>
-                        </li>
-                        <li>
-                            <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Tháng trước</h5>
-                        </li>
-                    </ul>
-                    <div id="ct-visits" style="height: 405px;"></div>
+                <h3 class="box-title">Biên động doanh thu</h3>
+                    <form autocomplete="off" class="form-group">
+                        @csrf
+                        <div class="col-md-2">
+                            <p>Từ ngày : <input type="text" id="datepicker" class="form-control"></p>
+                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
+                                value="Lọc kết quả">
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>Đến ngày : <input type="text" id="datepicker2" class="form-control"></p>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>
+                                Lọc theo:
+                                <select class="dashboard-filter form-control">
+                                    <option value="">--Chọn--</option>
+                                    <option value="7ngay">7 ngày qua</option>
+                                    <option value="thangtruoc">tháng trước</option>
+                                    <option value="thangnay">tháng này</option>
+                                    <option value="365ngayqua">365 ngày qua</option>
+                                </select>
+                            </p>
+                        </div>
+                    </form>
+                
+                    <div id="myfirstchart" style="height: 450px;margin-top:130px;"></div>
                 </div>
             </div>
         </div>

@@ -26,11 +26,8 @@ class OrderDetail extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
-
 }

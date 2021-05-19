@@ -28,6 +28,7 @@
 <!-- Breadcrumb Area End -->
 <!-- cart area start -->
 <div class="cart-main-area mtb-60px">
+
     <div class="container">
         @if (isset($_SESSION['cart']) && !empty($_SESSION['cart']))
         <h3 class="cart-page-title">Giỏ hàng của bạn</h3>

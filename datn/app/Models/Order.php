@@ -13,6 +13,7 @@ class Order extends Model
     'voucher_id',
     'totalMoney',
     'order_by',
+    'order_date',
     'created_at',
     'type_id',
     'payment_method',
@@ -25,5 +26,9 @@ class Order extends Model
     public function order_details(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(OrderDetail::class, 'order_id');
+    }
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'order_by');
     }
 }

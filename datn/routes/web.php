@@ -20,6 +20,9 @@ Route::prefix('admin')->group(function () {
 
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
+        Route::post('/filter-by-date',[Admin\TotalCashController::class , 'filter_by_date'])->name('admin.filter-by-date');
+        Route::post('/days-order',[Admin\TotalCashController::class , 'days_order']);
+        Route::post('/dashboard-filter',[Admin\TotalCashController::class , 'dashboard_filter']);
 
         // about
         Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
@@ -53,7 +56,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
         Route::get('/order/order-detail/{id}',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
-        
+        Route::get('/update-order-qty',  [Admin\OrderController::class , 'update_order_qty'])->name('update_order_qty');
+        Route::get('/statis_date',  [Admin\OrderController::class , 'statis'])->name('admin.outset');
 
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');

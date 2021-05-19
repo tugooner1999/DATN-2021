@@ -26,7 +26,9 @@
                             ?>
                         </p>
                             <h3 class="box-title">Danh sách</h3>
-                            <div class="table-responsive">
+                            <a href="{{route('admin.outset')}}"><button class="btn btn-success">Kết ngày</button></a>
+                            </br>
+                            <div class="table-responsive" style="margin-top: 15px;">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
@@ -34,7 +36,7 @@
                                             <th>Tài khoản</th>
                                             <th>Giá trị</th>
                                             <th>Loại</th>
-                                            <th>Trạng thái</th>
+                                            {{-- <th>Trạng thái</th> --}}
                                             <th>Tình trạng</th>
                                             <th>Ngày đặt</th>
                                             <th>Chi tiết</th>
@@ -47,8 +49,10 @@
                                             <td>{{$item->id}}</td>
                                             <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                             <td>{{number_format($item->totalMoney)}}đ</td>
-                                            <td>Thông thường</td>
-                                            <td class="text-success">Đã thanh toán</td>
+                                            <td>
+                                                {{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}
+                                            </td>
+                                            {{-- <td class="text-success">Đã thanh toán</td> --}}
                                             <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
                                             {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
@@ -66,7 +70,7 @@
                                             <th style="visibility:hidden;">Tài khoản</th>
                                             <th style="visibility:hidden;">Giá trị</th>
                                             <th style="border:none">Loại</th>
-                                            <th style="border:none">Trạng thái</th>
+                                            {{-- <th style="border:none">Trạng thái</th> --}}
                                             <th style="border:none">Tình trạng</th>
                                             <th style="border:none">Ngày đặt</th>
                                             <th style="visibility:hidden;">Chi tiết</th>

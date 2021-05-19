@@ -26,8 +26,11 @@
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link href="{{asset('assets/admin/css/order-detail.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
     <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
+
+    <!-- jquey calendar -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body class="fix-header">
@@ -78,6 +81,7 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
     $(document).ready(function() {
         $('#example').DataTable({
@@ -112,7 +116,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
-
     </script>
 
     <script>
@@ -161,7 +164,6 @@
             })
         }
     })
-
     </script>
 
     <script>
@@ -178,40 +180,97 @@
     CKEDITOR.replace('description');
     </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <!-- jquery calendar -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            duration: "slow",
+        });
+        $("#datepicker2").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            duration: "slow",
+        });
+    });
+    </script>
     <script type="text/javascript">
     $(document).ready(function() {
-                new Morris.Area({
-                    element: 'myfirstchart',
-                    data: [{
-                            year: '2008',
-                            value: 20
-                        },
-                        {
-                            year: '2009',
-                            value: 10
-                        },
-                        {
-                            year: '2010',
-                            value: 5
-                        },
-                        {
-                            year: '2011',
-                            value: 5
-                        },
-                        {
-                            year: '2012',
-                            value: 20
-                        }
-                    ],
+        chart30daysorder();
+        var chart =  new Morris.Area({
+            element: 'myfirstchart',
 
-                    xkey: 'year',
-                    ykeys: ['value'],
-                    labels: ['Value']
-                });
+            lineColors: ['#819C79', '#FC8710'],
+            hideHover: 'auto',
+            parseTime: false,
+
+            xkey: 'period',
+            ykeys: ['order', 'sales'],
+            labels: ['đơn hàng', 'doanh số'],
+        });
+
+
+        function chart30daysorder(){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/admin/days-order')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{_token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
             });
+        }
+
+
+
+        $('#btn-dashboard-filter').click(function(){
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            // alert(from_date);
+            // alert(to_date);
+            $.ajax({
+                url:"{{url('/admin/filter-by-date')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{from_date:from_date, to_date:to_date, _token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
+            });
+        });
+
+
+
+        $('.dashboard-filter').change(function(){
+            var dashboard_value = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{url('/admin/dashboard-filter')}}",
+                method: "POST",
+                dataType:"JSON",
+                data:{dashboard_value:dashboard_value,_token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
+            });
+        });
+    });
     </script>
 </body>
+
 </html>

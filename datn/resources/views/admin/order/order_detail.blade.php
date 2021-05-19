@@ -232,8 +232,12 @@
                 </div>
                 <div class="info-bottom">
                     <div class=" col-sm-12 info-people">
-                        <div class="images-name-order">
-                            <img src="#" width="35" class="img-circle">
+                        <div class="images-name-order" style="padding: 10px;">
+                            <?php 
+                                $parent = App\Models\User::find($order_detail->order_by);
+                                $avt = $parent->avatar;                                        
+                            ?>
+                            <img src="{{$avt}}" width="35" class="img-circle">
                         </div>
                         <div class="name-kh">
                             <h3>{{ $order_detail->customer_email }}</h3>
@@ -259,14 +263,14 @@
                                         ?>
                                             {{  $cate_t }}
                                         </span></div>
-                                    <div class="quantily-product" style="padding:5px;"><span>Số lượng :
+                                    <div class="product_quantily" style="padding:5px;"><span>Số lượng :
                                             {{ $item->total / $item->unit_price }}</span></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-4" style="padding: 15px 5px;">
-                            <div class="price-product"><span>₫{{ number_format($item->unit_price) }}</span></div>
+                            <div class="price-product"><span>₫{{ number_format($item->total) }}</span></div>
                         </div>
                     </div>
                     @endforeach

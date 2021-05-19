@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\OrderDetail;
+use App\Models\Statistical;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class OrderController extends Controller
 {
     //
@@ -42,5 +46,29 @@ class OrderController extends Controller
         $order_detail = Order::where('id',$id)->first();
         $order_product = OrderDetail::where('order_id',$id)->get();
         return view('admin.order.order_detail',compact('order_detail','order_product'));
+    }
+    
+    public function statis(Request $request){
+        $this->authorize('admin');
+        $data = $request->all();
+        $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+       $order = Order::all()->where('order_date',$carbon);
+        $a = Statistical::all()->where('order_date',$carbon)->first();
+        if(isset($a)){
+            $statis = Statistical::find($a['id']);
+            $statis->order_date = $carbon;
+            $statis->sales = $order->sum('totalMoney');
+            $statis->total_order = $order->count('id');
+            $statis->save();
+            return view('admin.total-cash.index');
+        }
+        elseif(!isset($a)){
+            $statis = new Statistical();
+            $statis->order_date = $carbon;
+            $statis->sales = $order->sum('totalMoney');
+            $statis->total_order = $order->count('id');
+            $statis->save();
+            return view('admin.total-cash.index');
+        }
     }
 }
