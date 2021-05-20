@@ -30,7 +30,7 @@
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>STT</th>
                                             <th>Tài khoản</th>
                                             <th>Giá trị</th>
                                             <th>Loại</th>
@@ -44,7 +44,7 @@
                                     <tbody>
                                     @foreach($oder as $key => $item)
                                         <tr>
-                                            <td>{{$item->id}}</td>
+                                            <td>{{$key}}</td>
                                             <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                             <td>{{number_format($item->totalMoney)}}đ</td>
                                             <td>
@@ -67,7 +67,6 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th style="visibility:hidden;">#</th>
                                             <th style="visibility:hidden;">Tài khoản</th>
                                             <th style="visibility:hidden;">Giá trị</th>
                                             <th style="border:none">Loại</th>

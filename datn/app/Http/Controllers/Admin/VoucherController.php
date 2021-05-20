@@ -47,6 +47,14 @@ class VoucherController extends Controller
     
                     ]
                 );
+            }elseif($voucherCode->amount <= 0 ){
+                return response(
+                    [
+                        'status' => false,
+                        'msg'=>"Mã giảm giá đã hết lần sử dụng"
+    
+                    ]
+                );
             }
             elseif($totalPriceInCart < 300000){
                 return response(

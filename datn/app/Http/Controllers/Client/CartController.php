@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 use App\Models\OrderDetail;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -137,6 +138,11 @@ class CartController extends Controller
                 }
                 //insert order into database
                 $voucherId = isset($_SESSION['voucher']) ? $_SESSION['voucher']['id'] : 0;
+                if($voucherId > 0){
+                    $voucher = Voucher::find($voucherId);
+                    $voucher->amount += -1;
+                    $voucher->save();
+                }
                 $voucherPrice = 0;
                                         if(isset($_SESSION['voucher'])){
                                             if($_SESSION['voucher']['type'] == 1){
@@ -263,6 +269,11 @@ class CartController extends Controller
                 }
                 //insert order into database
                 $voucherId = isset($_SESSION['voucher']) ? $_SESSION['voucher']['id'] : 0;
+                if($voucherId > 0){
+                    $voucher = Voucher::find($voucherId);
+                    $voucher->amount += -1;
+                    $voucher->save();
+                }
                 $voucherPrice = 0;
                                         if(isset($_SESSION['voucher'])){
                                             if($_SESSION['voucher']['type'] == 1){
@@ -399,6 +410,11 @@ class CartController extends Controller
                 }
                 //insert order into database
                 $voucherId = isset($_SESSION['voucher']) ? $_SESSION['voucher']['id'] : 0;
+                if($voucherId > 0){
+                    $voucher = Voucher::find($voucherId);
+                    $voucher->amount += -1;
+                    $voucher->save();
+                }
                 $voucherPrice = 0;
                                         if(isset($_SESSION['voucher'])){
                                             if($_SESSION['voucher']['type'] == 1){
