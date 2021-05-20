@@ -6,7 +6,7 @@
                 <!-- Logo Start -->
                 <div class="col-md-2 col-sm-2">
                     <div class="logo">
-                        <a href="{{route('client.homepage')}}"><img style="width:190px;"
+                        <a href="{{route('client.homepage')}}"><img style="width:80%;"
                                 src="{{asset('assets/client/images/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             <div class="main-navigation" style="margin: 0px;">
                                 <ul>
                                     <li class="menu-dropdown">
-                                        <span><b><i class="fa fa-user" aria-hidden="true"></i> Hello:
+                                        <span><b style="width:10%;"><i class="fa fa-user" aria-hidden="true"></i> Hello:
                                                 {{Auth::user()->name}}</b></span>
                                         <ul class="sub-menu">
                                             @if (Auth::user()->role_id == 1)

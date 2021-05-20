@@ -30,8 +30,8 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="contact-info-dec">
-                            <p>+012 345 678 102</p>
-                            <p>+012 345 678 102</p>
+                            <p>(+84) 333507696</p>
+                            <p>(+84) 973476045</p>
                         </div>
                     </div>
                     <div class="single-contact-info">
@@ -39,8 +39,8 @@
                             <i class="fa fa-globe"></i>
                         </div>
                         <div class="contact-info-dec">
-                            <p><a href="#">urname@email.com</a></p>
-                            <p><a href="#">urwebsitenaem.com</a></p>
+                            <p><a href="#">cuahangtaphoachucan@gmail.com</a></p>
+                            <p><a href="#">cuahangtaphoachucan.com</a></p>
                         </div>
                     </div>
                     <div class="single-contact-info">
@@ -48,8 +48,8 @@
                             <i class="fa fa-map-marker"></i>
                         </div>
                         <div class="contact-info-dec">
-                            <p>Address goes here,</p>
-                            <p>street, Crossroad 123.</p>
+                            <p>Số 265 Trung Hoà, Phường Trung Hoà </p>
+                            <p>Quận Cầu Giấy,TP Hà Nội</p>
                         </div>
                     </div>
                     <div class="contact-social">

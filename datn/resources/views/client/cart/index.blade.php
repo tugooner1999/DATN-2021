@@ -17,7 +17,7 @@
                 <div class="breadcrumb-content">
                     <h1 class="breadcrumb-hrading">Giỏ Hàng</h1>
                     <ul class="breadcrumb-links">
-                        <li><a href="index-2.html">Trang chủ</a></li>
+                        <li><a href="{{route('client.homepage')}}">Trang chủ</a></li>
                         <li>Giỏ hàng</li>
                     </ul>
                 </div>

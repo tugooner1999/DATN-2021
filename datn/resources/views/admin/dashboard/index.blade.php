@@ -94,84 +94,35 @@
                             <option>30 ngày</option>
                         </select>
                     </div>
-                    <h3 class="box-title">Giao dịch gần đây</h3>
+                    <h3 class="box-title">Đơn hàng hôm nay</h3>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Tài khoản</th>
-                                    <th>Loại GD</th>
-                                    <th>Ngày GD</th>
-                                    <th>Số tiền</th>
+                                    <th>Giá trị</th>
+                                    <th>Loại</th>
+                                    <th>Tình trạng</th>
+                                    <th>Ngày đặt</th>
                                     <th>Chi tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="txt-oflo">Đào Hùng</td>
-                                    <td>Nạp tiền</td>
-                                    <td class="txt-oflo">April 18, 2017</td>
-                                    <td><span class="text-success">+240.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="txt-oflo">Nguyên</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+20.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="txt-oflo">Tú</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+32.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="txt-oflo">Thanh</td>
-                                    <td>Thanh toán</td>
-                                    <td class="txt-oflo">April 20, 2017</td>
-                                    <td><span class="text-danger">-30.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="txt-oflo">Đào Hùng</td>
-                                    <td>Nạp tiền</td>
-                                    <td class="txt-oflo">April 18, 2017</td>
-                                    <td><span class="text-success">+240.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="txt-oflo">Nguyên</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+20.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="txt-oflo">Tú</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+32.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="txt-oflo">Thanh</td>
-                                    <td>Thanh toán</td>
-                                    <td class="txt-oflo">April 20, 2017</td>
-                                    <td><span class="text-danger">-30.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
+                                @foreach($order as $key => $item)    
+                                    @if($today <= "24:00:00" && $item->created_at >= $today)
+                                        <tr>
+                                            <td>{{$item->id}}</td>
+                                            <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
+                                            <td>{{number_format($item->totalMoney)}}VND</td>
+                                            <td>{{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}</td>
+                                            <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>{{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}</td>
+                                            <td>{{$item->created_at}}</td>
+                                            <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
+                                        </tr>
+                                        @endif
+                                      
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

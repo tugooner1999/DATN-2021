@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
@@ -23,12 +26,9 @@ class OrderController extends Controller
     /**
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit_order(){
-        $this->authorize('admin');
-        return view('admin.order.edit-order');
-    }
+    
 
-
+    
 
     public function order_update($id){
         $this->authorize('admin');

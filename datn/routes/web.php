@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
         
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
-        Route::get('/order/edit',  [Admin\OrderController::class , 'edit_order'])->name('admin.editOrder');
+        
         Route::get('/order/order-detail/{id}',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
         
@@ -141,9 +141,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/login', [Client\AuthController::class , 'postLogin']);
         Route::get('loginErr', [Client\AuthController::class, 'login_form_err'])->name('client.login.err');
         Route::post('/loginErr', [Client\AuthController::class , 'postLogin']);
-
         Route::get('/logout', [Client\AuthController::class, 'Logout'])     ->name('Auth.Logout');
         Route::post('/registration', [Client\AuthController::class , 'registration'])->name('client.registration');
+        
+        // forgotpassword
+        Route::match(['get','post'],'/forgotpassword',  [Client\AuthController::class , 'forgotpassword'])->name('client.forgotpassword');
+        Route::match(['get','post'],'/sendSmsToken',  [Client\AuthController::class , 'sendSmsToken'])->name('client.sendSmsToken');
+        // resetpassword
+        Route::get('/resetpassword/{id}',  [Client\AuthController::class , 'resetpassword'])->name('client.resetpassword');
+        Route::Post('/resetpasswords/{id}',  [Client\AuthController::class , 'resetpasswords'])->name('client.resetpasswords');
         // wishlist
         Route::get('/wish-list',  [Client\WishlistController::class , 'index'])->name('client.show-wishlist');
         Route::match(['get','post'],'/add-wish-list/{id}',  [Client\WishlistController::class , 'add_wishlist'])->name('client.add-wishlist');
@@ -152,7 +158,7 @@ Route::prefix('admin')->group(function () {
 
         //my-account
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
-
+        Route::match(['get','post'], '/my-account/update/{id}',  [Client\MyAccountController::class, 'update_Account'])->name('admin.update_Account');
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

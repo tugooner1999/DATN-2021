@@ -220,7 +220,7 @@
                                         <div class="order-detail-page__delivery__shipping-address__shipping-name">{{ $order_detail->customer_fullname }}</div>
                                         <div class="order-detail-page__delivery__shipping-address__detail">
                                             <span>{{ $order_detail->customer_phone }}</span>
-                                            <br>{{ $order_detail->customer_address }} <br>
+                                            <br>{!!$order_detail->customer_address!!} <br>
                                             <div class="_1AwALX"></div>
                                         </div>
                                     </div>
@@ -233,9 +233,9 @@
                     <div class=" col-sm-12 info-people">
                         <div class="images-name-order">
                             <?php 
-                                        $parent = App\Models\User::find($order_detail->order_by);
-                                        $avt = $parent->avatar;                                        
-                                        ?>
+                                $parent = App\Models\User::find($order_detail->order_by);
+                                $avt = $parent->avatar;                                        
+                            ?>
                             <img src="{{$avt}}" width="35" class="img-circle">
                         </div>
                         <div class="name-kh">

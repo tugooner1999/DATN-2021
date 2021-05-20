@@ -52,7 +52,7 @@
                                     <td class="product-name"><a href="{{route('client.single-product',['id'=>$item->product->id])}}">{{$item->product->name}}</a></td>
                                     <td class="product-price-cart"><span class="amount">{{number_format($item->product->price)}} đ</span></td>
                                     <td class="product-wishlist-cart">
-                                        <a class="cart-btn {{$item->product->quantily <= 0 ? ' bg-danger' : ''}}" {{$item->product->quantily <= 0 ? "" : "product-id="}} '{{$item->product->id}}'>
+                                        <a class="cart-btn {{$item->product->quantily <= 0 ? ' bg-danger' : ''}}" {{$item->product->quantily <= 0 ? "" : "product-id="}} {{$item->product->id}}>
                                         {{$item->product->quantily <= 0 ? "Hết hàng" : "Thêm vào giỏ"}}</a>
                                     </td>
                                     <td>

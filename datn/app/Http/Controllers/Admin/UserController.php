@@ -90,7 +90,9 @@ class UserController extends Controller
         $this->authorize('admin');
         try{
             $user = User::find($id);
-            $user->fill($request->all());
+
+                $user->fill($request->all());
+                $user->password= Hash::make($request->get('password'));
 
             if($request->hasFile('avatar')){
                 $path = $request->file('avatar')->move('storage/avatars', $request->file('avatar')->getClientOriginalName());

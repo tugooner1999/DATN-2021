@@ -50,14 +50,16 @@
                                             <td>
                                                 {{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}
                                             </td>
-                                            {{-- <td class="text-success">Đã thanh toán</td> --}}
+                                            {{-- <td class="text-success">Đã thanh toán</td> --}}   
                                             <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
-                                            {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}
+                                            {{$item->status == 0 ? "Chưa hoàn thành" : "Đã hoàn thành"}}
                                             </td>
                                             <td>{{$item->created_at}}</td>
                                             <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
+                                            
                                             <td style="font-size: 20px;">
                                             <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
+                                            
                                             </td>
                                         </tr>
                                     @endforeach

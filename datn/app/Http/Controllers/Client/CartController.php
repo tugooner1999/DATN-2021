@@ -132,6 +132,7 @@ class CartController extends Controller
                     'voucher_id' => $voucherId,
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
+                    'status'=> 0,
                     'totalMoney' => $totalPriceInCart - $voucherPrice
 
                 ]);
@@ -142,7 +143,8 @@ class CartController extends Controller
                             'order_id' =>$getOrderId->id,
                             'product_id' =>$val['id'],
                             'total' =>$val['price'] * $val['quantity'],
-                            'unit_price' =>$val['price']
+                            'unit_price' =>$val['price'],
+                            'quantily'=> $val['quantity']
                         ]);
                         $sl = Product::find($val['id']);
                         $sl->quantily = $sl->quantily - $val['quantity'];

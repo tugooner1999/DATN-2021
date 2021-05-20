@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Voucher;
 use App\Models\Rating;
 use App\Models\Order;
+use Illuminate\Pagination\Paginator;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class DashboardController extends Controller
@@ -21,6 +23,8 @@ class DashboardController extends Controller
         $comments = count(Rating::all());
         $oders = count(Order::all());
         $ratings = Rating::all()->sortByDesc("id")->take(4);
-        return view('admin.dashboard.index',compact('products','vouchers','ratings','users','comments','oders'));
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $order = Order::all();
+        return view('admin.dashboard.index',compact('products','vouchers','ratings','users','comments','oders','order','today'));
     }
 }
