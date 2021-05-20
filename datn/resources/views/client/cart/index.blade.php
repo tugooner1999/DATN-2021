@@ -86,7 +86,7 @@
                                             <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
+                                                    <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton"  value="{{$item['quantity']}}" />
                                                 </div>
                                             </td>
                                             <td class="product-subtotals" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>

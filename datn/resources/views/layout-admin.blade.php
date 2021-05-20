@@ -21,6 +21,7 @@
     <link
         href="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}"
         rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('assets/client/css/style.min.css')}}">
     <link href="{{asset('assets/admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">

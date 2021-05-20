@@ -50,8 +50,10 @@ Route::prefix('admin')->group(function () {
         
         // order
         Route::get('/order',  [Admin\OrderController::class , 'index'])->name('admin.listOrder');
-        
+        // Route::get('/order/edit/{id}',  [Admin\OrderController::class , 'editOrder'])->name('admin.editOrder');
+       
         Route::get('/order/order-detail/{id}',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
+        Route::get('/order/order/{id}',[Admin\OrderController::class, 'show'])->name('order-show');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
         
 

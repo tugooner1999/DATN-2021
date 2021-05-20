@@ -231,6 +231,7 @@
                 </div>
                 <div class="info-bottom">
                     <div class=" col-sm-12 info-people">
+                        
                         <div class="images-name-order">
                             <?php 
                                 $parent = App\Models\User::find($order_detail->order_by);
@@ -238,9 +239,105 @@
                             ?>
                             <img src="{{$avt}}" width="35" class="img-circle">
                         </div>
+                        
                         <div class="name-kh">
-                            <h3>{{ $order_detail->customer_email }}</h3>
+                            <button type="button" style="float: right; margin-top:15px; margin-right:20px;"   
+                            data-url="{{route('order-show',['id' => $order_detail->id])}}" 
+                            class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
+                                Thêm sản phẩm
+                            </button>
+                            
+                            <div class="modal fade" id="show">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                   
+                                    <div id="shop-1" class="tab-pane active">
+                                        <style>
+                                            .rating-active .active {
+                                                color: #ff9705 !important;
+                                            }
+                                            </style>
+                                        <div class="row">
+                                            @foreach ($list_product as $item)
+                                            <?php
+                                                $avg = 0;
+                                                if($item->pro_total_rating){
+                                                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
+                                                }
+                                            ?>
+                                            
+                                            <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
+                                                
+                                                <article class="list-product">
+                                                    <div class="img-block">
+                                                        <a href="{{route('client.single-product',['id'=>$item->id])}}"
+                                                            class="thumbnail">
+                                                            <img src="{{asset($item->image_gallery)}}" alt="" width="256"
+                                                                height="256" />
+                                                        </a>
+                                                    </div>
+                                                    <ul class="product-flag">
+                                                        <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">
+                                                            {{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
+                                                    </ul>
+                                                    <div class="product-decs">
+                                                        <a class="inner-link"
+                                                            href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
+                                                        <h2><a href="{{route('client.single-product',['id'=>$item->id])}}"
+                                                                class="product-link">{{$item->name}}</a></h2>
+                                                        <div class="rating-active">
+                                                            @for($i = 1; $i <= 5; $i++) <i
+                                                                class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
+                                                                @endfor
+                                                                <p class="current-price">{{number_format($item->price)}} đ</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-to-link">
+                                                        <ul>
+                                                            <li class="cart">
+                                                                
+                                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+            
+                                                                
+                                                            </li>
+                                                            <li>
+                                                                <a
+                                                                @if(Auth::check())
+                                                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
+                                                                    @else
+                                                                    href="{{route('client.login')}}"
+                                                                @endif
+                                                                >
+                                                                </i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </article>
+            
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                       
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <h3>{{ $order_detail->customer_email }}</h3> 
+                            
                         </div>
+                        {{-- <a style="padding-left: 10px;"
+                            href="{{route('admin.editOrder',['id'=> $order_detail->order_id])}}"><i
+                        class="fa fa-pencil-square" aria-hidden="true"></i></a> --}}
+                        
                     </div>
                     
                     @foreach($order_product as $item)
