@@ -28,6 +28,8 @@
                             <h3 class="box-title">Danh sách</h3>
                             <a href="{{route('admin.outset')}}"><button class="btn btn-success">Kết ngày</button></a>
                             </br>
+                            <h5 style="font-size:16px;font-weight:700;">Tổng tiền đã thu : {{number_format($sum_price_1)}} ₫</h5>
+                            <h5 style="font-size:16px;font-weight:700;">Tổng tiền chưa thu : {{number_format($sum_price_0)}} ₫</h5>
                             <div class="table-responsive" style="margin-top: 15px;">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>

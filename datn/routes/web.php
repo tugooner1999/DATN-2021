@@ -157,6 +157,10 @@ Route::prefix('admin')->group(function () {
         //my-account
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
 
+        // my-order
+        Route::get('/my-order',  [Client\OrderController::class , 'my_Orders'])->name('client.show.my_order');
+        Route::get('/order/order-detail/{id}',  [Client\OrderController::class , 'order_detail']);
+
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

@@ -31,4 +31,8 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'order_by');
     }
+    public function voucher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Voucher::class, 'voucher_id');
+    }
 }

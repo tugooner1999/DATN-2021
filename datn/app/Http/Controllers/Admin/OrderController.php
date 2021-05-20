@@ -20,7 +20,11 @@ class OrderController extends Controller
     public function index(){
         $this->authorize('admin');
         $oder = Order::all()->sortByDesc('id');
-        return view('admin.order.index',compact('oder'));
+        $order_sum_1 = Order::where('status', 1)->get();
+        $order_sum_0 = Order::where('status', 0)->get();
+        $sum_price_1 = $order_sum_1->sum('totalMoney');
+        $sum_price_0 = $order_sum_0->sum('totalMoney');
+        return view('admin.order.index',compact('oder','sum_price_1','sum_price_0'));
     }
 
     /**
@@ -30,8 +34,6 @@ class OrderController extends Controller
         $this->authorize('admin');
         return view('admin.order.edit-order');
     }
-
-
 
     public function order_update($id){
         $this->authorize('admin');
@@ -52,23 +54,25 @@ class OrderController extends Controller
         $this->authorize('admin');
         $data = $request->all();
         $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-       $order = Order::all()->where('order_date',$carbon);
+        $order = Order::all()->where('order_date',$carbon)->where('status', 1);
         $a = Statistical::all()->where('order_date',$carbon)->first();
-        if(isset($a)){
-            $statis = Statistical::find($a['id']);
-            $statis->order_date = $carbon;
-            $statis->sales = $order->sum('totalMoney');
-            $statis->total_order = $order->count('id');
-            $statis->save();
-            return view('admin.total-cash.index');
-        }
-        elseif(!isset($a)){
-            $statis = new Statistical();
-            $statis->order_date = $carbon;
-            $statis->sales = $order->sum('totalMoney');
-            $statis->total_order = $order->count('id');
-            $statis->save();
-            return view('admin.total-cash.index');
+        if($order->status = 1){
+            if(isset($a)){
+                $statis = Statistical::find($a['id']);
+                $statis->order_date = $carbon;
+                $statis->sales = $order->sum('totalMoney');
+                $statis->total_order = $order->count('id');
+                $statis->save();
+                return view('admin.total-cash.index');
+            }
+            elseif(!isset($a)){
+                $statis = new Statistical();
+                $statis->order_date = $carbon;
+                $statis->sales = $order->sum('totalMoney');
+                $statis->total_order = $order->count('id');
+                $statis->save();
+                return view('admin.total-cash.index');
+            }
         }
     }
 }

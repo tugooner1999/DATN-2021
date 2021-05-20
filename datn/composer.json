@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.5",
         "realrashid/sweet-alert": "^3.2",
         "spatie/laravel-query-builder": "^3.3",
-        "wildbit/swiftmailer-postmark": "^3.3"
+        "wildbit/swiftmailer-postmark": "^3.3",
+        "rackspace/php-opencloud": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
