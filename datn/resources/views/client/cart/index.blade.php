@@ -7,6 +7,11 @@
             $totalPriceInCart += $val['price'] * $val['quantity'];
         }
     }
+    if(isset($_SESSION['carts'])){
+        foreach($_SESSION['carts'] as $val){
+            $totalPriceInCart += $val['price'] * $val['quantity'];
+        }
+    }
 ?>
 <!-- Breadcrumb Area start -->
 <section class="breadcrumb-area" style="
@@ -28,9 +33,7 @@
 <!-- Breadcrumb Area End -->
 <!-- cart area start -->
 <div class="cart-main-area mtb-60px">
-
     <div class="container">
-        @if (isset($_SESSION['cart']) && !empty($_SESSION['cart']))
         <h3 class="cart-page-title">Giỏ hàng của bạn</h3>
         <div class="row content-cart">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -41,6 +44,7 @@
                                 <tr>
                                     <th>Ảnh</th>
                                     <th>Tên Sản phẩm</th>
+                                    <th>Loại sản phẩm</th>
                                     <th>Giá</th>
                                     <th>Số lượng</th>
                                     <th>Thành tiền</th>
@@ -48,14 +52,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    
-                                    @foreach ($_SESSION['cart'] as $item)
-                                        
+                            @if (isset($_SESSION['cart']) && !empty($_SESSION['cart']) || isset($_SESSION['carts']) && !empty($_SESSION['carts']))
+                            <?php if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) :  ?>
+                                    @foreach ($_SESSION['cart'] as $item)  
                                     <tr id="{{$item['id']}}">
                                         <td class="product-thumbnail">
                                             <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$item['name']}}</a></td>
+                                        <td class="product-market"><a href="#">{{$item['allow_market'] == 1 ? "Thông Thường" : "Đi chợ"}}</a></td>
                                         <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
@@ -68,8 +73,29 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                
-                                
+                                <?php endif ?>
+                                <?php if(isset($_SESSION['carts']) && !empty($_SESSION['carts'])) :  ?>
+                                @foreach ($_SESSION['carts'] as $item)
+                                        
+                                        <tr id="{{$item['id']}}">
+                                            <td class="product-thumbnail">
+                                                <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
+                                            </td>
+                                            <td class="product-name"><a href="#">{{$item['name']}}</a></td>
+                                            <td class="product-market"><a href="#">{{$item['allow_market'] == 2 ? "Đi chợ" : "Thông Thường"}}</a></td>
+                                            <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
+                                            <td class="product-quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton" value="{{$item['quantity']}}" />
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotals" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>
+                                            <td class="product-remove">
+                                                <a href="#" prod-id="{{$item['id']}}"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <?php endif ?>
                             </tbody>
                         </table>
                     </div>
@@ -80,7 +106,7 @@
                                     <a href="{{route('client.homepage')}}">Tiếp tục mua sắm</a>
                                 </div>
                                 <div class="cart-clear">
-                                    <button id="update-cart">Cập nhật giỏ hàng</button>
+                                    <a href="#" id="update-cart">Cập nhật giỏ hàng</a>
                                     <a href="#" id="delete-cart">Xóa giỏ hàng</a>
                                 </div>
                             </div>
@@ -97,7 +123,7 @@
                                 <h4 class="cart-bottom-title section-bg-gray">Mã giảm giá</h4>
                             </div>
                             <div class="discount-code">
-                                <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
+                                <i>Phiếu giảm giá chỉ áp dụng cho sản phẩm thông thường.</i>
                                 <form>
                                     <input type="text" id="voucher-code" required="" name="name" />
                                     <button id="add-voucher" class="cart-btn-2" type="submit">Áp dụng phiếu giảm giá</button>
@@ -112,7 +138,10 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn chi tiết</h4>
                             </div>
-                            <h5>Tổng tiền sản phẩm <span id="total-price-cart">{{number_format($totalPriceInCart)}} VNĐ</span></h5>
+                            <?php 
+                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart);
+                            ?>
+                            <h5>Tổng tiền sản phẩm <span id="total-price-cart">{{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h5>
                             <h5>Giảm giá 
                                 <span id="sale-off">
                                     <?php 
@@ -134,7 +163,7 @@
                                     ?> 
                                 </span>
                             </h5>
-                            
+                            <h5>VAT (10%)<span>{{number_format($totalPriceInCart*0.1)}} VNĐ</span></h5>
                             <h5>Phí giao hàng <span>0 VNĐ</span></h5>
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đặt hàng</h4>
@@ -145,18 +174,18 @@
                             <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" value="@if(Auth::user()) {{Auth::user()->email}} @endif">
                             {{-- <label for="">Số điện thoại</label> --}}
                             <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="phone-customer" value="@if(Auth::user()) {{Auth::user()->phone}} @endif">
-                            <textarea class="mt-4 pl-2" rows="5" type="text" style="width:100%;height:px;" id="address-customer" placeholder="Địa chỉ nhận hàng"></textarea>
+                            <textarea class="mt-4 pl-2" rows="5" type="text" style="width:100%;height:px;" id="address-customer" placeholder="Địa chỉ nhận hàng">@if(Auth::user()) {{Auth::user()->address}} @endif</textarea>
                             <div class="total-shipping">
-                                <h5>Phí phát sinh</h5>
+                                <h5>Loại hình thanh toán</h5>
                                 <ul>
                                     <li><input type="checkbox" class="select-payment-method" value="cod"/> Thanh toán khi nhận hàng</li>
                                     <li><input type="checkbox" class="select-payment-method" value="vnpay"/> Thanh toán online qua VNPay</li>
                                 </ul>
                             </div>
                             <?php 
-                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice;
+                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice +($totalPriceInCart*0.1);
                             ?>
-                            <h4 class="grand-totall-title">Tổng tiền {{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h4>
+                            <h4 class="grand-totall-title">Tổng tiền : {{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h4>
                             <a id="checkout" href="">Thanh toán</a>
                         </div>
                     </div>

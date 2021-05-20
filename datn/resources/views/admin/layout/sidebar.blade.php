@@ -21,9 +21,9 @@
             <li>
                 <a href="{{route('admin.listOrder')}}" class="waves-effect"><i class="fa fa-table" aria-hidden="true"></i> Đơn hàng</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="{{route('admin.listTransaction')}}" class="waves-effect"><i class="fa fa-history" aria-hidden="true"></i> Lịch sử giao dịch</a>
-            </li>
+            </li> -->
             <li>
                 <a href="{{route('admin.listVoucher')}}" class="waves-effect"><i class="fa fa-tags" aria-hidden="true"></i> Voucher</a>
             </li>

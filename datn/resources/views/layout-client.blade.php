@@ -109,8 +109,10 @@
                                         if(item.address){
                                             toastr.error(item.address[index],'Lỗi')
                                         }
-                                       
                                     })
+                                }
+                                if(result.status ==='error'){
+                                    Swal.fire('Quá số lượng',result.msg , 'error')
                                 }
                                 if(result.status ===true){
                                     Swal.fire('',result.msg , 'success')
@@ -121,6 +123,7 @@
                                         $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
                                     },200)
                                 }
+
                             }
                         })
                     }
@@ -162,6 +165,7 @@
                             if(result.status === true){
                                 var totalPriceInCart = result.totalPriceInCart
                                 Swal.fire('',result.msg , 'success')
+                                window.location.reload()
                                 $('.voucher-box').empty()
                                 if(result.data.type ==2){
                                     sessionStorage.setItem("typeVoucher",result.data.type);
@@ -169,7 +173,7 @@
                                     sessionStorage.setItem('voucherValue',result.data.value);
                                     // voucherValue =result.data.value
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * result.data.value / 100) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * result.data.value / 100) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * result.data.value / 100 ) + " VNĐ")
                                 }
                                 if(result.data.type ==1){
                                     // typeVoucher =result.data.type
@@ -217,6 +221,7 @@
                     arrayProduct.push(idProduct)
                     arrayQuantity.push(quantity)
                 })
+                window.location.reload()
                 $.ajax({
                         type:"POST",
                         url: "{{route('client.update-cart')}}",
@@ -231,6 +236,14 @@
                                 console.log(typeVoucher)
                                 var totalPriceInCart = result.totalPriceInCart
                                 Swal.fire('', 'Cập nhật giỏ hàng thành công', 'success')
+                                $('.product-subtotals').each(function(item){
+                                    var proId =$(this).attr("prod-id")
+                                    var totalPrice = new Intl.NumberFormat('en-GB').format(result.market[proId].quantity * result.market[proId].price)
+                                    if(result.market[proId].id == proId){
+                                        $(this).html(totalPrice + " VNĐ")
+                                        $('head').append(`<style>.count-cart::after{ content:'${result.totalItem}' !important}</style>`);
+                                    }
+                                })
                                 $('.product-subtotal').each(function(item){
                                     var proId =$(this).attr("prod-id")
                                     var totalPrice = new Intl.NumberFormat('en-GB').format(result.data[proId].quantity * result.data[proId].price)
@@ -241,15 +254,15 @@
                                 })
                                 if(typeVoucher==2){
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * voucherValue / 100) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100 + (totalPriceInCart*0.1)) + " VNĐ")
                                 }
                                 else if(typeVoucher==1){
                                     console.log(1)
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(voucherValue) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue + (totalPriceInCart*0.1)) + " VNĐ")
                                 }
                                 else{
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart +  (totalPriceInCart*0.1)) + " VNĐ")
                                 }
                                 $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
                             }
@@ -266,6 +279,7 @@
                 var voucherValue =sessionStorage.getItem('voucherValue')
                 var idProduct = $(this).attr('prod-id')
                 $("#" +idProduct).fadeOut(1000,function(){
+                    window.location.reload()
                     $.ajax({
                         type:"POST",
                         url: "{{route('client.remove-product-in-cart')}}",
@@ -329,6 +343,7 @@
                     })
                 }
             })
+            
         })
         
     </script>

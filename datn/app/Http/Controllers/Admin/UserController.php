@@ -29,12 +29,11 @@ class UserController extends Controller
                 'avatar'=>'required|image',
                 'role_id'=>'required',
                 'email'=>'required|email|max:255|unique:users',
-                'phone'=>'required|min:10|numeric',
+                'phone'=>'required|digits:10|numeric',
                 'status'=>'required|min:1',
                 'address'=>'required',
                 'password' => 'required|string|min:6|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/',
                 'password-confirm'=>'requied|min4',
-
                 ];
             $msgE = [
                 'name.required' =>'Bạn cần nhập Tên tài khoản',
@@ -44,7 +43,7 @@ class UserController extends Controller
                 'email.required'=>'Vui lòng nhập Email',
                 'email.unique'=>'Email đã tồn tại',
                 'phone.required'=> 'Nhập số điện thoại',
-                'phone.min'=> 'Nhập số điện thoại có 10 chữ số',
+                'phone.digits'=> 'Nhập số điện thoại có 10 chữ số',
                 'status.required'=>'Chọn trạng thái',
                 'password.required' => 'Bạn cần nhập mật khẩu ',
                 'password.min'=>'Mật khẩu phải có chữ hoa chữ thường và số từ 6 đến 16 kí tự',

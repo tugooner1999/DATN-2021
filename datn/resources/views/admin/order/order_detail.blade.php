@@ -260,7 +260,7 @@
                                         ?>
                                         {{  $cate_t }}
                                     </span></div>
-                                    <div class="quantily-product" style="padding:5px;"><span>{{ $item->total / $item->unit_price }}</span></div>
+                                    <div class="quantily-product" style="padding:5px;"><span>x{{$item->quantily}}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +271,26 @@
                     </div>
                     @endforeach
                     <div class=" col-sm-12 info-product-order">
-                        Tổng : {{number_format($order_detail->totalMoney)}}VND
+                    <h5>VAT(10%) : {{number_format($order_product->sum('total')*0.1)}} VND</h5>
+                        <h4><i>Áp dụng mã giảm giá : 
+                        <?php 
+                        if($order_detail->voucher_id == 0){
+                            $voucher =  'Không sử dụng';
+                        }else{
+                                        $parent = App\Models\Voucher::find($order_detail->voucher_id);
+                                        if($parent->type == 2){
+                                            $voucher = $parent->value . ' %';    
+                                        }
+                                        if($parent->type == 1){
+                                            $voucher = $parent->value . ' VND';    
+                                        }
+                                    }
+                                        ?>
+                                        {{$voucher}}</i>
+                        </h5>
+                    </div>
+                    <div class=" col-sm-12 info-product-order">
+                        <h3>Tổng : {{number_format($order_detail->totalMoney)}}VND</h3>
                     </div>
                 </div>
             </div>             

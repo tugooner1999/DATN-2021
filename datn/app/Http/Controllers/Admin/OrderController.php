@@ -19,7 +19,9 @@ class OrderController extends Controller
      */
     public function index(){
         $this->authorize('admin');
-        $oder = Order::all()->sortByDesc('id');
+        $oder = Order::all()->sortBy([
+            ['id', 'desc']
+        ]);
         return view('admin.order.index',compact('oder'));
     }
 
@@ -35,7 +37,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 1;
         $order->save();
-        return response()->json(['data'=>'update'],200);
+        return response()->json(['data'=>'.'],200);
     }
 
     public function order_detail($id){

@@ -8,8 +8,7 @@
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <a href="{{route('client.homepage')}}" target="_blank"
-                    class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade to
-                    Pro</a>
+                    class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Trang Chủ</a>
                 <ol class="breadcrumb">
                     <li><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
                     <li class="active">Thông tin cá nhân</li>
@@ -22,13 +21,11 @@
                     <div class="user-bg"> <img width="100%" alt="user" src="plugins/images/large/img1.jpg">
                         <div class="overlay-box">
                             <div class="user-content">
-                                <a href="javascript:void(0)"><img src="{{Auth::user()->avatar}}"
+                                <a href="javascript:void(0)"><img src="{{asset(Auth::user()->avatar)}}"
                                         class="thumb-lg img-circle" alt="img"></a>
                                 <h4 class="text-white">{{Auth::user()->name}}</h4>
                                 <h5 class="text-white"><i class="fa fa-envelope" aria-hidden="true"></i>
                                 {{Auth::user()->email}}</h5>
-                                <h3 class="text-white" style="color:#00ffe7;">
-                                ${{Auth::user()->coins}}</h3>
                             </div>
                         </div>
                     </div>
