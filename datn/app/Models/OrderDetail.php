@@ -9,13 +9,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderDetail extends Model
 {
     protected $table = "order_details";
-    public $timestamps = true;
+    public $timestamps = False;
         protected $fillable = [
         'order_id',
         'product_id',
         'total',
-        'unit_price'
+        'unit_price',
+        'showid'
     ];
+    protected  $primaryKey = 'order_id';
+
     public function product_order()
     {
         return $this->belongsTo(Product::class, 'product_id');
@@ -30,4 +33,6 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+
 }

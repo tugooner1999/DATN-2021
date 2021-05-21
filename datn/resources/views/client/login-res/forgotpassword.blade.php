@@ -26,16 +26,21 @@
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
+                                <p class="success" style="color:red; font-size:15px; font-weight:bold;">
+                                    <?php
+                                    $message = Session::get('error');
+                                    if($message){
+                                        echo $message;
+                                        Session::put('error', NULL);
+                                        }
+                                    ?>
+                                </p>
                                 <div class="login-register-form">
-                                    <form method="post" action="" class="was-validated">
+                                    <form  method="POST" action="{{URL::to('/client/sendSmsToken')}}" class="was-validated">
                                         @csrf
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}" required />
-                                        @error('email')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                       
+                                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" value="{{(old('phone'))}}" required />
                                         <div class="button-box">
-                                            <button type="submit"><span>Lấy lại mật khẩu</span></button>
+                                            <button type="submit"><span>Gửi mã OTP</span></button>
                                         </div>
                                     </form>
                                 </div>

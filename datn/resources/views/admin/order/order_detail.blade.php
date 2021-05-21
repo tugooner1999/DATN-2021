@@ -220,7 +220,7 @@
                                         <div class="order-detail-page__delivery__shipping-address__shipping-name">{{ $order_detail->customer_fullname }}</div>
                                         <div class="order-detail-page__delivery__shipping-address__detail">
                                             <span>{{ $order_detail->customer_phone }}</span>
-                                            <br>{{ $order_detail->customer_address }} <br>
+                                            <br>{!!$order_detail->customer_address!!} <br>
                                             <div class="_1AwALX"></div>
                                         </div>
                                     </div>
@@ -230,17 +230,72 @@
                     </div>
                 </div>
                 <div class="info-bottom">
+                <p class="success" style="color:green; font-size:20px; font-weight:bold;text-align: center;">
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                                }
+                            ?>
+                        </p>
                     <div class=" col-sm-12 info-people">
+                    
                         <div class="images-name-order">
                             <?php 
-                                        $parent = App\Models\User::find($order_detail->order_by);
-                                        $avt = $parent->avatar;                                        
-                                        ?>
+                                $parent = App\Models\User::find($order_detail->order_by);
+                                $avt = $parent->avatar;                                        
+                            ?>
                             <img src="{{$avt}}" width="35" class="img-circle">
+
                         </div>
+                        
                         <div class="name-kh">
-                            <h3>{{ $order_detail->customer_email }}</h3>
+                            <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
+                                Thêm sản phẩm
+                            </button>
+                            <div class="modal fade" id="show">
+                                <div class="modal-dialog modal-lg">
+                                    <form class="form-horizontal form-material" action="{{route('admin.addOrder',['id'=>$order_detail->id])}}" method="POST" style="width:100%;"
+                                        enctype="multipart/form-data" role="form">
+                                        @csrf
+                                        <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-12" style="margin-top:10px;">Tên sản phẩm</label>
+                                            <div class="col-sm-12">
+                                                <select name="product_id" class="form-control form-control-line">
+                                                    @foreach($list_product as $item)
+                                                    <option  value="{{$item->id }}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12" >Số lượng</label>
+                                            <div class="col-md-12" >
+                                                <input type="number"  name="quantily" value="{{(old('quantily'))}}" class="form-control form-control-line">
+                                                @error('quantily')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                            </div>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Thêm mới</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <h3>{{ $order_detail->customer_email }}</h3> 
+                            
                         </div>
+                        
                     </div>
                     
                     @foreach($order_product as $item)
@@ -251,7 +306,7 @@
                                     <img src="{{$item->product_order->image_gallery}}" alt="">
                                 </div>
                                 <div class="content-info">
-                                    <div class="name-product" style="padding:5px;"><span style="font-size:18px;">{{ isset($item->product_order) ? $item->product_order->name : '' }}</span></div>
+                                    <div class="name-product" style="padding:5px;"><span style="font-size:18px;">{{isset($item->product_order) ? $item->product_order->name : '' }}</span></div>
                                     
                                     <div class="category-product" style="padding:5px;"><span style="color: #777;">
                                         <?php 
@@ -266,7 +321,45 @@
                         </div>
 
                         <div class="col-sm-4" style="padding: 15px 5px;">
-                            <div class="price-product"><span>{{ number_format($item->unit_price) }}VND</span></div>
+                            <div class="price-product"><span>Giá: {{ number_format($item->unit_price) }}VND</span>
+                            <!-- nút sửa sản phảm đi chợ -->
+                            <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-primarySave"
+                            data-url="{{route('update-productDetail',['id' =>$item->showid])}}"
+                            data-toggle="modal" data-target="#myModall">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i><b>Sửa</b>
+                            </button>
+                            <!-- The Modal -->
+                            <div class="modal fade" id="myModall">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">Sửa sản phẩm :</h4>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <form class="form-horizontal form-material" action="" method="POST" style="width:100%;"
+                                        enctype="multipart/form-data" role="form">
+                                        @csrf
+                                    <div class="modal-body">
+                                    <div class="col-md-12" >
+                                    <label for="">Tên Sản phẩm : <strong id="tensp"></strong></label><br>
+                                    <label for="">Số lượng sản phẩm</label>
+                                    <input type="number"  name="price_product" class="themsl" value=""><br>
+                                    <label for="">Giá sản phẩm</label>
+                                    <input type="number"  name="price_product" value="{{$item->unit_price}}" class="themgia">
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Lưu</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div> 
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -287,7 +380,7 @@
                                     }
                                         ?>
                                         {{$voucher}}</i>
-                        </h>
+                        </h5>
                     </div>
                     <div class=" col-sm-12 info-product-order">
                         <h3>Tổng : {{number_format($order_detail->totalMoney)}}VND</h3>

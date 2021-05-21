@@ -39,7 +39,7 @@
                         <a href="#shop-2" data-toggle="tab">
                             <i class="fa fa-list-ul"></i>
                         </a>
-                        <p>Hiển thị 10 / 327 sản phẩm</p>
+                        <p>Hiển thị {{ count($list_product) }} / {{ count($pro) }}</p>
                     </div>
                     <!-- Left Side End -->
                     <!-- Right Side Start -->

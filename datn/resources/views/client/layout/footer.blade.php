@@ -6,7 +6,8 @@
                 <div class="col-md-6 col-lg-4">
                     <!-- footer logo -->
                     <div class="footer-logo">
-                        <a href="{{route('client.homepage')}}"><img src="{{asset('assets/client/images/logo/footer-logo.png')}}" alt="" /></a>
+                        <a href="{{route('client.homepage')}}"><img style="width:30%;"
+                            src="{{asset('assets/client/images/logo/logo.png')}}" alt="" /></a>
                     </div>
                     <!-- footer logo -->
                     <div class="about-footer">
@@ -81,7 +82,7 @@
                             <p>Bạn có thể hủy đăng ký bất cứ lúc nào. Vì mục đích đó, vui lòng tìm thông tin liên hệ của
                                 chúng tôi trong thông báo pháp lý.</p>
                         </div>
-                        <div id="mc_embed_signup" class="subscribe-form">
+                        {{-- <div id="mc_embed_signup" class="subscribe-form">
                             <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank"
                                 name="mc-embedded-subscribe-form" method="post"
                                 action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
@@ -98,7 +99,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                         <div class="img_app">
                             <a href="#"><img src="{{asset('assets/client/images/icons/app_store.png')}}" alt="" /></a>
                             <a href="#"><img src="{{asset('assets/client/images/icons/google_play.png')}}" alt="" /></a>

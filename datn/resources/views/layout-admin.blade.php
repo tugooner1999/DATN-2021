@@ -21,12 +21,29 @@
     <link
         href="{{asset('assets/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}"
         rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('assets/client/css/style.min.css')}}">
     <link href="{{asset('assets/admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link href="{{asset('assets/admin/css/order-detail.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script type="text/javascrip" src="{{asset('assets/admin/jquery/jquery-3.6.0.min.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+#myBtntb {
+  width: 300px;
+  padding: 10px;
+  font-size:20px;
+  position: absolute;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  bottom: 50px;
+  z-index: 9999;
+}
+</style>
 </head>
 
 <body class="fix-header">
@@ -73,9 +90,6 @@
     <script src="{{asset('assets/admin/js/dashboard1.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable( {
@@ -169,7 +183,26 @@ $.ajaxSetup({
 <script>
 CKEDITOR.replace('description');
 </script>
-
+<script>
+        $('.btn-primarySave').click(function(){
+            var url = $(this).attr('data-url');
+				$.ajax({
+                type: 'get',
+                url: url,
+                dataType:"json",
+                success: function(response) {
+                    console.log(response)
+                    $('strong#tensp').text(response.data.tensp);
+                    var sl = response.data.quantily
+                    $(".themsl").val(`${sl}`);
+                    $(".themgia").val(response.data.unit_price)               
+},
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //xử lý lỗi tại đây
+                }
+            })	
+        })
+</script>
 </body>
 
 </html>

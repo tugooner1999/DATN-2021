@@ -73,14 +73,6 @@ class VoucherController extends Controller
                     ]
                 );
             }
-            else if(!isset($_SESSION['cart'])){
-                return response(
-                    [
-                        'status' => false,
-                        'msg'=>"Mã giảm giá áp dụng cho sản phẩm thông thường"
-                    ]
-                );
-            }
                 
             return response(
                 [
