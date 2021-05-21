@@ -107,8 +107,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('client')->group(function () {
         // homepage
         Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
-
-
+        
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
         Route::get('/conventional', [Client\ProductController::class , 'shops'])->name('client.shops');

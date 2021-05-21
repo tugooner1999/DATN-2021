@@ -105,7 +105,7 @@
                                         <div class="add-to-link">
                                             <ul>
                                                 <li class="cart">
-                                                    <!-- @if ($today <= "09:00:00" && $item->allow_market ==2)
+                                                    {{-- <!-- @if ($today <= "09:00:00" && $item->allow_market ==2)
                                                     <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
                                                     @endif
     
@@ -115,7 +115,7 @@
     
                                                     @if($today > "09:00:00" && $item->allow_market ==2)
                                                     <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                    @endif -->
+                                                    @endif --> --}}
                                                     <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
 
                                                     

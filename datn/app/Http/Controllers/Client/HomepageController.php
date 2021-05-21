@@ -28,9 +28,11 @@ class HomepageController extends Controller
         $market_product = Product::all()->where('allow_market','2')->sortByDesc("id")->take(10);
         $sortbyRate = Product::all()->sortByDesc("pro_total_number")->take(3);
         $sortbyCmt = Product::all()->sortByDesc("pro_total_rating")->take(8);
+
         return view('client.homepage.index',compact('cates','slider','ratings','new_product','sortbyView','sortbyCmt','market_product','sortbyRate','today'));
     }
     public function client_admin(){
         return view('welcome');
     }
+    
 }

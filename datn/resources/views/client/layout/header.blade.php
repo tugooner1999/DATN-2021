@@ -38,8 +38,8 @@
                         <div class="header_account_list search_list">
                             <a href="javascript:void(0)"><i class="ion-ios-search-strong"></i></a>
                             <div class="dropdown_search">
-                                <form action="#">
-                                    <input placeholder="Tìm mọi thứ ở đây ..." type="text" />
+                                <form action="">
+                                    <input placeholder="Tìm mọi thứ ở đây ..." type="text"  />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
