@@ -9,8 +9,10 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderDetail;
+use App\Models\Statistical;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class OrderController extends Controller
 {
     //
@@ -22,7 +24,12 @@ class OrderController extends Controller
         $oder = Order::all()->sortBy([
             ['id', 'desc']
         ]);
-        return view('admin.order.index',compact('oder'));
+        $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
+        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
+        $sum_price_1 = $order_sum_1->sum('totalMoney');
+        $sum_price_0 = $order_sum_0->sum('totalMoney');
+        return view('admin.order.index',compact('oder','sum_price_1','sum_price_0','carbon'));
     }
 
     /**
@@ -39,7 +46,7 @@ class OrderController extends Controller
     public function order_update($id){
         $this->authorize('admin');
         $order = Order::find($id);
-        $order->status = 1;
+        $order->status += 1;
         $order->save();
         return response()->json(['data'=>'.'],200);
     }
@@ -48,9 +55,10 @@ class OrderController extends Controller
         $this->authorize('admin');
         $order_detail = Order::where('id',$id)->first();
         $order_product = OrderDetail::where('order_id',$id)->get();
+        $tien = $order_product->sum('total');
         $ids = $order_detail->order_market;
         $list_product = Product::all()->where('allow_market',$ids);     
-        return view('admin.order.order_detail',compact('order_detail','order_product','list_product'));
+        return view('admin.order.order_detail',compact('order_detail','tien','order_product','list_product'));
     }
 
     public function addOrder($id,Request $request){
@@ -90,4 +98,52 @@ class OrderController extends Controller
         return response()->json(['data'=>$show],200); // 200 là mã lỗi
     }
 
+    public function statis(Request $request){
+        $this->authorize('admin');
+        $data = $request->all();
+        $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $order = Order::all()->where('order_date',$carbon)->where('status', 1);
+        $a = Statistical::all()->where('order_date',$carbon)->first();
+        if($order->status = 1){
+            if(isset($a)){
+                $statis = Statistical::find($a['id']);
+                $statis->order_date = $carbon;
+                $statis->sales = $order->sum('totalMoney');
+                $statis->total_order = $order->count('id');
+                $statis->save();
+        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
+        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
+        $sum_price_1 = $order_sum_1->sum('totalMoney');
+        $sum_price_0 = $order_sum_0->sum('totalMoney');
+                return view('admin.total-cash.index',compact('sum_price_1','sum_price_0','carbon'));
+            }
+            elseif(!isset($a)){
+                $statis = new Statistical();
+                $statis->order_date = $carbon;
+                $statis->sales = $order->sum('totalMoney');
+                $statis->total_order = $order->count('id');
+                $statis->save();
+        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
+        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
+        $sum_price_1 = $order_sum_1->sum('totalMoney');
+        $sum_price_0 = $order_sum_0->sum('totalMoney');
+                return view('admin.total-cash.index',compact('sum_price_1','sum_price_0','carbon'));
+            }
+        }
+    }
+    public function update_product_detail($id,Request $request){
+        $data = $request->all();
+        $order_detail = OrderDetail::find($data['id']);
+        $order_detail->quantily = $data['quantily'];
+        $order_detail->unit_price = $data['price_product'];
+        $order_detail->total = $data['price_product']*$data['quantily'];
+        $order_detail->save();
+        $order = Order::find($order_detail->order_id);
+        $sumTaltal = OrderDetail::all()->where('order_id',$order_detail->order_id);
+        $tien = $sumTaltal->sum('total');
+        $order->totalMoney = $tien + ($tien*0.1);
+        $order->save();
+        return back();
+    }
+    
 }

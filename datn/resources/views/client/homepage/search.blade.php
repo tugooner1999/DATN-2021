@@ -39,7 +39,7 @@
                         <a href="#shop-2" data-toggle="tab">
                             <i class="fa fa-list-ul"></i>
                         </a>
-                        <p>Hiển thị {{ count($list_product) }} / {{ count($pro) }}</p>
+                        <p>Hiển thị {{ count($search_product) }} / {{ count($pro) }}</p>
                     </div>
                     <!-- Left Side End -->
                     <!-- Right Side Start -->
@@ -69,7 +69,7 @@
                         <div id="shop-1" class="tab-pane active">
 
                             <div class="row">
-                                @foreach ($list_product as $item)
+                                @foreach ($search_product as $item)
                                 <?php
                                     $avg = 0;
                                     if($item->pro_total_rating){
@@ -105,30 +105,32 @@
                                         <div class="add-to-link">
                                             <ul>
                                                 <li class="cart">
-                                                    {{-- <!-- @if ($today <= "09:00:00" && $item->allow_market ==2)
-                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @if ($today <= "09:00:00" && $item->allow_market ==2)
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào
+                                                    giỏ</a>
                                                     @endif
-    
-                                                    @if ($item->allow_market ==1)
-                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                    @endif
-    
-                                                    @if($today > "09:00:00" && $item->allow_market ==2)
-                                                    <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                                                    @endif --> --}}
-                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
 
-                                                    
+                                                    @if ($item->allow_market ==1)
+                                                    <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào
+                                                        giỏ</a>
+                                                    @endif
+
+                                                    @if($today > "09:00:00" && $item->allow_market ==2)
+                                                    <a class="cart-btns" product-id='{{$item->id}}' href="#">Thêm vào
+                                                        giỏ</a>
+                                                    @endif
+                                                    <!-- <a class="cart-btn" product-id='{{$item->id}}' href="#">Thêm vào
+                                                        giỏ</a> -->
+
+
                                                 </li>
                                                 <li>
-                                                    <a
-                                                    @if(Auth::check())
-                                                        onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
-                                                        @else
-                                                        href="{{route('client.login')}}"
-                                                    @endif
-                                                    >
-                                                    </i></a>
+                                                    <a @if(Auth::check())
+                                                        onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')"
+                                                        href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i
+                                                            class="ion-android-favorite-outline" @else
+                                                            href="{{route('client.login')}}" @endif>
+                                                        </i></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -144,10 +146,9 @@
                     <!-- Shop Tab Content End -->
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center">
-
                         <ul>
                             <li>
-                                {{$list_product->links()}}
+                                {{$search_product->links()}}
                             </li>
                         </ul>
                     </div>
@@ -172,7 +173,9 @@
                                     @foreach($cates as $item)
                                     <li>
                                         <div class="sidebar-widget-list-left">
-                                            <input type="checkbox"/><a href="{{route('client.cate-product',['id'=>$item->id])}}">{{ $item->name }} ({{ count($item->products) }})</span>
+                                            <input type="checkbox" /><a
+                                                href="{{route('client.cate-product',['id'=>$item->id])}}">{{ $item->name }}
+                                                ({{ count($item->products) }})</span>
                                             </a>
                                             <span class="checkmark"></span>
                                         </div>

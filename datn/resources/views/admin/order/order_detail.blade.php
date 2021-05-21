@@ -144,15 +144,17 @@
 
 .info-product-order {
     background: #fafafa;
+    margin-top: 1px;
 }
 
 .info-product-order .all-info {
     width: 100%;
     height: 120px;
+    padding: 0 20px;
 }
 
 .info-product-order .all-info .image-item-product {
-    width: 18%;
+    width: 20%;
     height: 100%;
     float: left;
 }
@@ -163,16 +165,14 @@
 }
 
 .info-product-order .all-info .content-info {
-    width: 82%;
-    height: 100%;
-    border: 1px solid #000;
+    width: 80%;
+    height: 100px;
     float: right;
-    padding: 14px;
+    padding: 14px 55px;
 }
 .info-product-order .price-product{
     width:100%;
     height:120px;
-    border:1px solid #000;
 }
 </style>
 <div id="page-wrapper">
@@ -283,8 +283,8 @@
                                         </div>
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-danger">Thêm mới</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success">Thêm mới</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         </div>
                                     </form>
                                     </div>
@@ -338,20 +338,21 @@
                                     <button type="button" class="close" data-dismiss="modal">×</button>
                                     </div>
                                     <!-- Modal body -->
-                                    <form class="form-horizontal form-material" action="" method="POST" style="width:100%;"
+                                    <form class="form-horizontal form-material" action="{{route('update-product-Detail',['id' =>$item->showid])}}" method="POST" style="width:100%;"
                                         enctype="multipart/form-data" role="form">
                                         @csrf
-                                    <div class="modal-body">
+                                    <input type="number"  name="id" class="showid" hidden>
+                                    <div class="modal-body" style = "padding-bottom: 0;">
                                     <div class="col-md-12" >
                                     <label for="">Tên Sản phẩm : <strong id="tensp"></strong></label><br>
                                     <label for="">Số lượng sản phẩm</label>
-                                    <input type="number"  name="price_product" class="themsl" value=""><br>
+                                    <input type="number"  name="quantily" class="themsl" ><br>
                                     <label for="">Giá sản phẩm</label>
-                                    <input type="number"  name="price_product" value="{{$item->unit_price}}" class="themgia">
+                                    <input type="number"  name="price_product" class="themgia">
                                     </div>
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Lưu</button>
+                                    <button type="submit" class="btn btn-success">Lưu</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                     </div> 
                                     </div>
@@ -364,11 +365,12 @@
                     </div>
                     @endforeach
                     <div class=" col-sm-12 info-product-order">
-                    <h5>VAT(10%) : {{number_format($order_product->sum('total')*0.1)}} VND</h5>
-                        <h4><i>Áp dụng mã giảm giá : 
+                    <h5><i>VAT(10%) : {{number_format($order_product->sum('total')*0.1)}} VND</i></h5>
+                    <h5>Tổng tiền sản phẩm : {{number_format($tien)}} VND</h5>
+                        <h4><i>Mã giảm giá : 
                         <?php 
                         if($order_detail->voucher_id == 0){
-                            $voucher =  'Không sử dụng';
+                            $voucher =  'Không';
                         }else{
                                         $parent = App\Models\Voucher::find($order_detail->voucher_id);
                                         if($parent->type == 2){
@@ -380,10 +382,10 @@
                                     }
                                         ?>
                                         {{$voucher}}</i>
-                        </h5>
+                        </h4>
                     </div>
                     <div class=" col-sm-12 info-product-order">
-                        <h3>Tổng : {{number_format($order_detail->totalMoney)}}VND</h3>
+                        <h3>Tổng đơn hàng: {{number_format($order_detail->totalMoney)}}VND</h3>
                     </div>
                 </div>
             </div>             

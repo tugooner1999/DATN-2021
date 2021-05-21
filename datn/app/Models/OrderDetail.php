@@ -17,7 +17,7 @@ class OrderDetail extends Model
         'unit_price',
         'showid'
     ];
-    protected  $primaryKey = 'order_id';
+    protected  $primaryKey = 'showid';
 
     public function product_order()
     {
@@ -33,6 +33,5 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
 
 }

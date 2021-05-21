@@ -20,6 +20,9 @@ Route::prefix('admin')->group(function () {
 
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
+        Route::post('/filter-by-date',[Admin\TotalCashController::class , 'filter_by_date'])->name('admin.filter-by-date');
+        Route::post('/days-order',[Admin\TotalCashController::class , 'days_order']);
+        Route::post('/dashboard-filter',[Admin\TotalCashController::class , 'dashboard_filter']);
 
         // about
         Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
@@ -56,10 +59,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
         //orderdetail
         Route::get('/order/order-details/{id}',[Admin\OrderController::class, 'show'])->name('update-productDetail');
-
+        Route::match(['get','post'], '/order/order-detailss/{id}', [Admin\OrderController::class , 'update_product_detail'])->name('update-product-Detail');
+        Route::get('/statis_date',  [Admin\OrderController::class , 'statis'])->name('admin.outset');
         // transaction
         Route::get('/transaction', [Admin\TransactionController::class , 'index'])->name('admin.listTransaction');
-
         // voucher
         Route::get('/voucher',  [Admin\VoucherController::class , 'index'])->name('admin.listVoucher');
         Route::get('/voucher/add',  [Admin\VoucherController::class , 'create_voucher'])->name('admin.addVoucher');
@@ -108,8 +111,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('client')->group(function () {
         // homepage
         Route::get('/',  [Client\HomepageController::class , 'index'])->name('client.homepage');
-
-
+        
         // product
         Route::get('/shop', [Client\ProductController::class , 'index'])->name('client.shop');
         Route::get('/conventional', [Client\ProductController::class , 'shops'])->name('client.shops');
@@ -134,7 +136,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/cart', [Client\CartController::class , 'index'])->name('client.cart');
         Route::post('/check-out', [Client\CartController::class , 'checkOut'])->name('client.checkOut');
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
-        Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
+        Route::match(['get','post'], '/update-cart',  [Client\CartController::class, 'updateCart'])->name('client.update-cart');
         Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
         Route::get('/remove-product-in-carts', [Client\CartController::class , 'removeCart'])->name('client.remove-product-in-carts');
         // login - register
@@ -160,6 +162,17 @@ Route::prefix('admin')->group(function () {
         //my-account
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
         Route::match(['get','post'], '/my-account/update/{id}',  [Client\MyAccountController::class, 'update_Account'])->name('admin.update_Account');
+        // my-order
+        Route::get('/my-order',  [Client\OrderController::class , 'my_Orders'])->name('client.show.my_order');
+        Route::get('/order/order-detail/{id}',  [Client\OrderController::class , 'order_detail']);
+        //xóa đơn hàng của khách hàng vừa đặt
+        Route::get('/my-order/delete/{id}',  [Client\OrderController::class , 'delete_my_Order'])->name('client.delete-order');
+        Route::get('/my-order/add2/{id}',  [Client\OrderController::class , 'add2_Order'])->name('client.add2-order');
+        Route::get('/my-order/delete2/{id}',  [Client\OrderController::class , 'delete2_Order'])->name('client.delete2-order');
+        Route::get('/my-order/exit/{id}',  [Client\OrderController::class , 'exit_Order'])->name('client.exit-order');
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');
+
+        // tìm kiếm
+        Route::post('/search',[Client\HomepageController::class , 'search']);

@@ -152,7 +152,7 @@
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>3 .</span> <a href="#">Đơn hàng
+                                <h3 class="panel-title"><span>3 .</span> <a href="{{route('client.show.my_order')}}">Đơn hàng
                                     </a></h3>
                             </div>
                         </div>

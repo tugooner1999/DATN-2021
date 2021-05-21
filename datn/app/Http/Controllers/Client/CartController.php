@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 class CartController extends Controller
 {
     //
@@ -105,8 +106,11 @@ class CartController extends Controller
                 'totalPriceInCart' => $totalPriceInCart
             ]
         );
-    }}       
     }
+}       
+    }
+
+
     public function checkOut(Request $rq){
         // dd($rq);
         if($rq->isMethod('POST') && isset($_SESSION['cart'])&& isset($_SESSION['carts'])){
@@ -179,7 +183,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -190,8 +194,8 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
-
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
                 if($insertOrder){
@@ -310,7 +314,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -321,7 +325,8 @@ class CartController extends Controller
                     'status'=> 0,
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 2,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
 
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
@@ -451,7 +456,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -462,7 +467,8 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
 
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
@@ -558,34 +564,23 @@ class CartController extends Controller
     public function updateCart(Request $rq){
         $idPro = $rq->id;
         $quantityPro = $rq->quantity;
-        // dd($quantityPro);
         $product = Product::whereIn('id',$idPro)->get();
         if($product){
             foreach($product as $key => $pro){
-                if(!is_numeric($quantityPro[$key])){
+                if($quantityPro[$key] <= 0 ){
                     return response()->json(
                         [
-                            'msg' => 'Số lượng k đúng định dạng',
-                            'status' => false,   
-                        ]
-                    );
-                }
-                else if($quantityPro[$key] < 1 ){
-                    return response()->json(
-                        [
-                            'msg' => 'Số lượng k được nhỏ hơn 1',
+                            'msg' => 'Số lượng k được nhỏ hơn 0',
                             'status' => false,
                             
                         ]
                     );
                 }
-                elseif(isset($_SESSION['cart'][$pro->id])){ 
+                if(isset($_SESSION['cart'][$pro->id])){ 
                     if(isset($_SESSION['cart'][$idPro[$key]]['id']) == $idPro[$key]){
                         $_SESSION['cart'][$idPro[$key]]['id'] = $idPro[$key];
                         $_SESSION['cart'][$idPro[$key]]['quantity'] =$quantityPro[$key];
                     } 
-                    
-                   
                 }
                 if(isset($_SESSION['carts'][$pro->id])){ 
                     if(isset($_SESSION['carts'][$idPro[$key]]['id']) == $idPro[$key]){
@@ -599,23 +594,53 @@ class CartController extends Controller
             }
             $totalItem = 0;
             $totalPriceInCart = 0;
-            foreach($_SESSION['cart'] as $val){
-                $totalItem += $val['quantity'];
-                $totalPriceInCart += $val['price'] * $val['quantity'];
+            if(isset($_SESSION['cart']) && isset($_SESSION['carts'])){ 
+                foreach($_SESSION['cart'] as $val){
+                    $totalItem += $val['quantity'];
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                foreach($_SESSION['carts'] as $val){
+                    $totalItem += $val['quantity'];
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                return response()->json(
+                    [
+                        'status' => true,
+                        'data' => $_SESSION['cart'],
+                        'market' => $_SESSION['carts'],
+                        'totalItem' => $totalItem,
+                        'totalPriceInCart' => $totalPriceInCart
+                    ]
+                );
             }
-            foreach($_SESSION['carts'] as $val){
-                $totalItem += $val['quantity'];
-                $totalPriceInCart += $val['price'] * $val['quantity'];
+            if(isset($_SESSION['cart'])){ 
+                foreach($_SESSION['cart'] as $val){
+                    $totalItem += $val['quantity'];
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                return response()->json(
+                    [
+                        'status' => true,
+                        'data' => $_SESSION['cart'],
+                        'totalItem' => $totalItem,
+                        'totalPriceInCart' => $totalPriceInCart
+                    ]
+                );
             }
-            return response()->json(
-                [
-                    'status' => true,
-                    'data' => $_SESSION['cart'],
-                    'market' => $_SESSION['carts'],
-                    'totalItem' => $totalItem,
-                    'totalPriceInCart' => $totalPriceInCart
-                ]
-            );
+            if(isset($_SESSION['carts'])){ 
+                foreach($_SESSION['carts'] as $val){
+                    $totalItem += $val['quantity'];
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                return response()->json(
+                    [
+                        'status' => true,
+                        'market' => $_SESSION['carts'],
+                        'totalItem' => $totalItem,
+                        'totalPriceInCart' => $totalPriceInCart
+                    ]
+                );
+            }
         }
     }
     public function removeCart(Request $rq){

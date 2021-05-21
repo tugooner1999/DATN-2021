@@ -26,6 +26,11 @@
                             ?>
                         </p>
                             <h3 class="box-title">Danh sách</h3>
+                            <a href="{{route('admin.outset')}}"><button class="btn btn-success">Kết ngày</button></a>
+                        <br>
+                        <h5 style="font-size:16px;font-weight:700;">Hôm nay : {{$carbon}}</h5>
+                        <h5 style="font-size:16px;font-weight:700;">Tổng tiền đã thu : {{number_format($sum_price_1)}} ₫</h5>
+                        <h5 style="font-size:16px;font-weight:700;">Tổng tiền chưa thu : {{number_format($sum_price_0)}} ₫</h5>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example" class="display" style="width:100%">
                                     <thead>
@@ -51,17 +56,80 @@
                                                 {{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}
                                             </td>
                                             {{-- <td class="text-success">Đã thanh toán</td> --}}   
-                                            <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
-                                            {{$item->status == 0 ? "Chưa hoàn thành" : "Đã hoàn thành"}}
+                                            <td class=' {{$item->status == 0 || $item->status == 4 ? "text-danger" : "text-success"}}'>
+                                            <?php
+                                        if($item->status == 0){
+                                            echo "Chờ xác nhận";
+                                        }
+                                        if($item->status == 1){
+                                            echo "Đã nhận đơn";
+                                        }
+                                        if($item->status == 2){
+                                            echo "Đang giao";
+                                        }
+                                        if($item->status == 3){
+                                            echo "Đã thanh toán";
+                                        }
+                                        if($item->status == 4){
+                                            echo "Đơn hàng đã hủy";
+                                        }
+                                            ?>
                                             </td>
                                             <td>{{$item->created_at}}</td>
                                             <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             
                                             <td style="font-size: 20px;">
-                                            <button type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='btn btn-warning'>Hoàn Thành</button>
-                                            
+                                            <input type="button" data-url="{{route('order-update',['id' => $item->id])}}" data-target="#update" class='
+                                            <?php
+                                        if($item->status == 0){
+                                            echo "btn btn-warning";
+                                        }
+                                        if($item->status == 1){
+                                            echo "btn btn-warning";
+                                        }
+                                        if($item->status == 2){
+                                            echo "btn btn-warning";
+                                        }
+                                        if($item->status == 3){
+                                            echo "btn btn-success";
+                                        }
+                                        ?>
+                                            ' value = "
+                                            <?php
+                                        if($item->status == 0){
+                                            echo "Xác nhận đơn";
+                                        }
+                                        if($item->status == 1){
+                                            echo "Giao hàng";
+                                        }
+                                        if($item->status == 2){
+                                            echo "Hoàn thành";
+                                        }
+                                        if($item->status == 3){
+                                            echo "Đã hoàn thành";
+                                        }
+                                        ?>"
+                                        <?php
+                                        if($item->status == 4){
+                                            echo "hidden";
+                                        }
+                                        ?>
+                                            </input>
+                                            <a href="{{route('client.delete2-order',['id'=>$item->id])}}" 
+                                    <?php
+                                        if(empty($item->status == 4)){
+                                            echo "hidden";
+                                        }
+                                    ?>
+                                    class="btn btn-danger">Xóa</a>
+                                    <a href="{{route('client.exit-order',['id'=>$item->id])}}"
+                                    <?php
+                                        if(!empty($item->status == 4)){
+                                            echo "hidden";
+                                        }
+                                    ?>
+                                     class="previous">&laquo;&laquo;</a>
                                             </td>
-                                            
                                         </tr>
                                     @endforeach
                                     </tbody>

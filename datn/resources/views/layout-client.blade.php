@@ -9,6 +9,11 @@
             $totalItem += $val['quantity'];
         }
     }
+    if(isset($_SESSION['carts'])){
+        foreach($_SESSION['carts'] as $val){
+            $totalItem += $val['quantity'];
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +35,7 @@
     <link rel="stylesheet" href="{{asset('assets/client/css/style.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{asset('assets/client/css/responsive.min.css')}}">
+    <link href="{{asset('assets/client/css/order-detail.css')}}" id="theme" rel="stylesheet">
 
 
     <style>
@@ -270,7 +276,6 @@
                             }
                         }
                 })
-                window.location.reload()
             })
             //remove item cart
             $('.product-remove a').click(function(e){

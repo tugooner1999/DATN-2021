@@ -38,8 +38,9 @@
                         <div class="header_account_list search_list">
                             <a href="javascript:void(0)"><i class="ion-ios-search-strong"></i></a>
                             <div class="dropdown_search">
-                                <form action="#">
-                                    <input placeholder="Tìm mọi thứ ở đây ..." type="text" />
+                                <form action="{{URL::to('/search')}}" method="POST">
+                                @csrf
+                                    <input placeholder="Tìm mọi thứ ở đây ..." type="text" name="keyword_submit" />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
@@ -57,7 +58,7 @@
                                             <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                             @endif
                                             <li><a href="{{route('client.my-account')}}">Thông tin cá nhân</a></li>
-                                            <li><a href="#">Đơn hàng của tôi</a></li>
+                                            <li><a href="{{route('client.show.my_order')}}">Đơn hàng của tôi</a></li>
                                             <li><a href="{{route('client.show-wishlist')}}">Sản phẩm Yêu thích</a></li>
                                             <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
                                             </li>
@@ -98,7 +99,7 @@
                                     <li><a href="{{route('admin.dashboard')}}">Trang Quản Trị</a></li>
                                     @endif
                                         <li><a href="{{route('client.my-account')}}">Thông tin cá nhân</a></li>
-                                        <li><a href="#">Đơn hàng của tôi</a></li>
+                                        <li><a href="{{route('client.show.my_order')}}">Đơn hàng của tôi</a></li>
                                         <li><a href="{{route('client.show-wishlist')}}">Sản phẩm Yêu thích</a></li>
                                         <li><a href="{{route('Auth.Logout')}}" class="text-danger">Đăng xuất</a>
                                     </ul>
