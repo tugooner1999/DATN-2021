@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 class CartController extends Controller
 {
     //
@@ -78,8 +79,11 @@ class CartController extends Controller
                 'totalPriceInCart' => $totalPriceInCart
             ]
         );
-    }}       
     }
+}       
+    }
+
+
     public function checkOut(Request $rq){
         // dd($rq);
         if($rq->isMethod('POST') && isset($_SESSION['cart'])&& isset($_SESSION['carts'])){
@@ -152,7 +156,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -163,8 +167,8 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
-
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
                 if($insertOrder){
@@ -283,7 +287,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -294,7 +298,8 @@ class CartController extends Controller
                     'status'=> 0,
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 2,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
 
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
@@ -424,7 +429,7 @@ class CartController extends Controller
                                                 $voucherPrice = ($totalPriceInCart * ($_SESSION['voucher']['value']) /100);
                                             }   
                                         }
-                
+                $order_date  =  Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
                 $insertOrder = Order::insert([
                     'customer_email' =>$rq->email,
                     'customer_phone' =>$rq->phone,
@@ -435,7 +440,8 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'order_date' => $order_date,
 
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');

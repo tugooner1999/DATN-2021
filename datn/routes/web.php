@@ -20,6 +20,9 @@ Route::prefix('admin')->group(function () {
 
         // total-cash
         Route::get('/total-cash',[Admin\TotalCashController::class , 'index'])->name('admin.totalCash');
+        Route::post('/filter-by-date',[Admin\TotalCashController::class , 'filter_by_date'])->name('admin.filter-by-date');
+        Route::post('/days-order',[Admin\TotalCashController::class , 'days_order']);
+        Route::post('/dashboard-filter',[Admin\TotalCashController::class , 'dashboard_filter']);
 
         // about
         Route::get('/about', [Admin\AboutController::class , 'index'])->name('admin.listAbout');
@@ -54,6 +57,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get','post'], 'order/add-order/{id}', [Admin\OrderController::class , 'addOrder'])->name('admin.addOrder');
         Route::get('/order/order-detail/{id}',  [Admin\OrderController::class , 'order_detail'])->name('admin.order-detail');
         Route::get('/order/{id}',  [Admin\OrderController::class , 'order_update'])->name('order-update');
+        Route::get('/statis_date',  [Admin\OrderController::class , 'statis'])->name('admin.outset');
         
 
         // transaction
@@ -158,6 +162,9 @@ Route::prefix('admin')->group(function () {
         //my-account
         Route::get('/my-account',  [Client\MyAccountController::class , 'my_Account'])->name('client.my-account');
         Route::match(['get','post'], '/my-account/update/{id}',  [Client\MyAccountController::class, 'update_Account'])->name('admin.update_Account');
+        // my-order
+        Route::get('/my-order',  [Client\OrderController::class , 'my_Orders'])->name('client.show.my_order');
+        Route::get('/order/order-detail/{id}',  [Client\OrderController::class , 'order_detail']);
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

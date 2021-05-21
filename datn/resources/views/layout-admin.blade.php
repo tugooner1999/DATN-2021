@@ -171,6 +171,98 @@ $.ajaxSetup({
 CKEDITOR.replace('description');
 </script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <!-- jquery calendar -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            duration: "slow",
+        });
+        $("#datepicker2").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng sau",
+            dateFormat: "yy-mm-dd",
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            duration: "slow",
+        });
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        chart30daysorder();
+        var chart =  new Morris.Area({
+            element: 'myfirstchart',
+
+            lineColors: ['#819C79', '#FC8710'],
+            hideHover: 'auto',
+            parseTime: false,
+
+            xkey: 'period',
+            ykeys: ['order', 'sales'],
+            labels: ['đơn hàng', 'doanh số'],
+        });
+
+
+        function chart30daysorder(){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/admin/days-order')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{_token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
+            });
+        }
+
+
+
+        $('#btn-dashboard-filter').click(function(){
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            // alert(from_date);
+            // alert(to_date);
+            $.ajax({
+                url:"{{url('/admin/filter-by-date')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{from_date:from_date, to_date:to_date, _token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
+            });
+        });
+
+
+
+        $('.dashboard-filter').change(function(){
+            var dashboard_value = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{url('/admin/dashboard-filter')}}",
+                method: "POST",
+                dataType:"JSON",
+                data:{dashboard_value:dashboard_value,_token:_token},
+
+                success:function(data){
+                    chart.setData(data);
+                }
+            });
+        });
+    });
+    </script>
+
 </body>
 
 </html>
