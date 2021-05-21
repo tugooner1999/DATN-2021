@@ -15,52 +15,103 @@
                     </div>
                 </div>
                 <div class="row">
+                
                     <div class="col-md-8 col-xs-12">
-                        <div class="white-box">
-                            <form class="form-horizontal form-material">
+                        <form class="form-horizonthal form-material" action="{{URL::to('/admin/order/update/'.$order->id)}}" method="POST" >
+                            <div class="white-box">
+                                @csrf
                                 <div class="form-group">
                                     <label class="col-sm-12">Loại</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Thông thường</option>
-                                            <option>Đi chợ</option>
+                                        <select class="form-control form-control-line" name="order_market">
+                                            @php
+                                                if($order->order_market == 1){
+                                                    echo'<option value = "1" >Thông thường</option>';
+                                                    echo'<option value = "2" >Đi chợ</option>';
+                                                }else{
+                                                    echo'<option value = "2" >Đi chợ</option>';
+                                                    echo'<option value = "1" >Thông thường</option>';
+                                                    
+                                                }
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-12">Tình trạng</label>
                                     <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Đã thanh toán</option>
-                                            <option>Chưa thanh toán</option>
+                                        <select class="form-control form-control-line" name="status">
+                                            @php
+                                                if($order->status == 0){
+                                                    echo'<option value = "0" >Chưa hoàn thành</option>';
+                                                    echo'<option value = "1" >Hoàn thành</option>';
+                                                }else{
+                                                    echo'<option value = "1" >Hoàn Thành</option>';
+                                                    echo'<option value = "0" >Chưa hoàn thành</option>';
+                                                    
+                                                }
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
+                               
                                 <div class="form-group">
-                                    <label class="col-sm-12">Trạng thái</label>
-                                    <div class="col-sm-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Hoàn thành</option>
-                                            <option>Chưa hoàn thành</option>
-                                            <option>Hủy</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Ngày đặt</label>
+                                    <label class="col-sm-12">Ngày đặt: {{ $order->created_at }}</label>
                                     <div class="col-md-12">
-                                        <input type="date" value="27/01/2021" class="form-control form-control-line">
+                                        <input type="datetime-local" value="{{ $order->created_at }}" name="created_at" class="form-control form-control-line">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Địa chỉ nhận hàng</label>
+                                    <div class="col-md-12">
+                                        <textarea rows="5"  name="customer_address"  id="description" class="form-control form-control-line">{{(old('customer_address'))}}{{ $order->customer_address }}</textarea>
+                                    </div>
+                                </div>
+                                
+                        @if ($order->order_market == 2)
+                        
+                                    @foreach ($order_detail as $item)
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Sô lượng
+                                        <?php 
+                                            $parent = App\Models\Product::find($item->product_order->id);
+                                            $cate_t = $parent->name;    
+                                        ?>
+                                            {{  $cate_t }}
+                                        </label>
+                                        
+                                        <input type="number" step="0.1" name="quantily[]" value="{{$item->quantily}}"  class="form-control form-control-line">
+                                        
+                                    </div>
+                                    @endforeach
+                        
+                        @endif
+                                @if ($order->order_market == 1)
+                                    @foreach ($order_detail as $item)
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Sô lượng
+                                        <?php 
+                                            $parent = App\Models\Product::find($item->product_order->id);
+                                            $cate_t = $parent->name;    
+                                        ?>
+                                            {{  $cate_t }}
+                                        </label>
+                                       
+                                        <input type="number" name="quantily[]" value="{{ $item->quantily }}"   class="form-control form-control-line">
+                                        
+                                    </div>
+                                    @endforeach
+                              
+                                @endif
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-danger">Cập nhật</button>
                                         <a href="{{route('admin.listOrder')}}" class="btn btn-success">Trở về</a>
                                     </div>
                                 </div>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
+    </div>
+</div>
 @endsection

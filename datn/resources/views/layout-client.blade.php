@@ -9,6 +9,11 @@
             $totalItem += $val['quantity'];
         }
     }
+    if(isset($_SESSION['carts'])){
+        foreach($_SESSION['carts'] as $val){
+            $totalItem += $val['quantity'];
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +35,7 @@
     <link rel="stylesheet" href="{{asset('assets/client/css/style.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{asset('assets/client/css/responsive.min.css')}}">
+    <link href="{{asset('assets/client/css/order-detail.css')}}" id="theme" rel="stylesheet">
 
 
     <style>
@@ -221,7 +227,6 @@
                     arrayProduct.push(idProduct)
                     arrayQuantity.push(quantity)
                 })
-                window.location.reload()
                 $.ajax({
                         type:"POST",
                         url: "{{route('client.update-cart')}}",
@@ -279,7 +284,6 @@
                 var voucherValue =sessionStorage.getItem('voucherValue')
                 var idProduct = $(this).attr('prod-id')
                 $("#" +idProduct).fadeOut(1000,function(){
-                    window.location.reload()
                     $.ajax({
                         type:"POST",
                         url: "{{route('client.remove-product-in-cart')}}",
@@ -319,30 +323,6 @@
                 })
             })
             //remove all item cart
-            $('#delete-cart').click(function(e){
-                e.preventDefault();
-                if(confirm("Bạn chắc chắn muốn xóa toàn bộ giỏ hàng ?")){
-                    $.ajax({
-                        type:"POST",
-                        url: "{{route('client.remove-product-in-cart')}}",
-                        dataType:"json",
-                        data:{
-                            action:'remove-all',
-                            _token:"{{csrf_token()}}"
-                        },
-                        success: function(result){
-                            if(result.status === true){
-                                sessionStorage.clear()
-                                $('head').append(`<style>.count-cart::after{ content:'${0}' !important}</style>`);
-                                $(".content-cart, .cart-page-title").empty()
-                                setTimeout(function(){
-                                    $(".content-cart").append(`<h3 class="container-fluid text-center">Giỏ hàng trống!</h3>`)
-                                },200)
-                            }
-                        }
-                    })
-                }
-            })
             
         })
         

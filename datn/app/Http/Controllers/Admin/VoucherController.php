@@ -65,7 +65,6 @@ class VoucherController extends Controller
                     ]
                 );
             }
-           
             else if($voucherCode->status != 1){
                 return response(
                     [

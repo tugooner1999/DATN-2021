@@ -18,14 +18,37 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Biên động doanh thu</h3>
-                            <ul class="list-inline text-right">
-                                <li>
-                                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Tháng này</h5> </li>
-                                <li>
-                                    <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Tháng trước</h5> </li>
-                            </ul>
-                            <div id="ct-visits" style="height: 405px;"></div>
+                        <h3 class="box-title" style=" text-align: center;font-weight: 600;font-size:22px;">Biên động doanh thu</h3>
+                        <h5 style="font-size:16px;font-weight:700;">Hôm nay : <i>{{$carbon}}</i></h5>
+                        <h5 style="font-size:16px;font-weight:700;">Tổng tiền đã thu : {{number_format($sum_price_1)}} ₫</h5>
+                        <h5 style="font-size:16px;font-weight:700;">Tổng tiền chưa thu : {{number_format($sum_price_0)}} ₫</h5>
+                            <form autocomplete="off" class="form-group">
+                                @csrf
+                                <div class="col-md-2">
+                                    <p>Từ ngày : <input type="text" id="datepicker" class="form-control" placeholder="--chọn ngày--"></p>
+                                    <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
+                                        value="Lọc kết quả" style="margin-top:15px;" >
+                                </div>
+        
+                                <div class="col-md-2">
+                                    <p>Đến ngày : <input type="text" id="datepicker2" class="form-control" placeholder="--chọn ngày--"></p>
+                                </div>
+        
+                                <div class="col-md-2">
+                                    <p>
+                                        Lọc theo:
+                                        <select class="dashboard-filter form-control">
+                                            <option value="">--Chọn--</option>
+                                            <option value="7ngay">7 ngày qua</option>
+                                            <option value="thangtruoc">tháng trước</option>
+                                            <option value="thangnay">tháng này</option>
+                                            <option value="365ngayqua">365 ngày qua</option>
+                                        </select>
+                                    </p>
+                                </div>
+                            </form>
+                        
+                            <div id="myfirstchart" style="height: 450px;margin-top:150px;"></div>
                         </div>
                     </div>
                 </div>

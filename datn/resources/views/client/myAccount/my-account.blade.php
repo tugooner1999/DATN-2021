@@ -31,7 +31,18 @@
                                         href="#my-account-1">THÔNG TIN CÁ NHÂN </a></h3>
                             </div>
                             <div id="my-account-1" class="panel-collapse collapse show">
+                                <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                                    <?php
+                                    $message = Session::get('message');
+                                    if($message){
+                                        echo $message;
+                                        Session::put('message', NULL);
+                                        }
+                                    ?>
+                                </p>
                                 <div class="panel-body">
+                                    <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="{{URL::to('/client/my-account/update/'.Auth::user()->id)}}">
+                                        @csrf
                                     <div class="myaccount-info-wrapper">
                                         <div class="account-info-wrapper">
                                             <h4>TÀI KHOẢN CỦA BẠN</h4>
@@ -40,32 +51,47 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
                                                     <label>Họ và tên</label>
-                                                    <input type="text" />
+                                                    <input type="text" value="{{ Auth::user()->name }}" name="name"/>
                                                 </div>
+                                                @error('name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
+                                            <div class="col-lg-6 col-md-6 ">
                                                 <div class="billing-info">
-                                                    <label>Ảnh đại diện</label>
-                                                    <input type="file" />
+                                                    <img id="image" src="{{asset(Auth::user()->avatar)}}" width="60%" height="200px" alt="{{Auth::user()->avatar}}">
+                                                    <input name="avatar" type="file" onchange="changeImage()" id="fileImage" alt="{{Auth::user()->avatar}}"/>
                                                 </div>
+                                                @error('avatar')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
                                                     <label>Email</label>
-                                                    <input type="text" />
+                                                    <input type="text" value="{{ Auth::user()->email }}" name="email"/>
                                                 </div>
+                                                @error('email')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
                                                     <label>Điện thoại</label>
-                                                    <input type="text" />
+                                                    <input type="text" value="{{ Auth::user()->phone }}" name="phone"/>
                                                 </div>
+                                                @error('phone')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="billing-info">
                                                     <label>Địa chỉ</label>
-                                                    <input type="text" />
+                                                    <input type="text" value="{{ Auth::user()->address }}" name="address"/>
                                                 </div>
+                                                @error('address')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="billing-back-btn">
@@ -73,10 +99,11 @@
                                                 <a href="#"><i class="fa fa-arrow-up"></i> Quay lại</a>
                                             </div>
                                             <div class="billing-btn">
-                                                <button type="submit">Cập nhật</button>
+                                                <button type="submit" class="btn btn-danger">Cập nhật</button>
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +152,7 @@
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>3 .</span> <a href="#">Đơn hàng
+                                <h3 class="panel-title"><span>3 .</span> <a href="{{route('client.show.my_order')}}">Đơn hàng
                                     </a></h3>
                             </div>
                         </div>

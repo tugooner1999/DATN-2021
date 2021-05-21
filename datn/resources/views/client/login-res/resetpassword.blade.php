@@ -27,11 +27,22 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form method="post" action="" class="was-validated">
+                                    <p style="text-align: center;font-size: 150%;color: #4fb68d;font-weight: bold;"><?php
+                                        $message = Session::get('message');
+                                        if($message){
+                                            echo $message;
+                                            Session::put('message', NULL);
+                                        }
+                                    ?></p>
+                                    <form method="post" action="{{route('client.resetpasswords', ['id' => $user->id])}}"  class="was-validated">
                                     @csrf
-                                    <input type="password"  name="password" placeholder="Nhập Mật Khẩu Mới" />
-                                     <input id="password-confirm" type="password" placeholder="Nhập lại Mật khẩu"   name="password_confirmation" autocomplete="new-password">
-                                        <div class="button-box">
+                                    <input type="text"  name="token" value="{{(old('token'))}}" placeholder="Nhập mã OTP" required/>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu mới" />
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        
+                                     <div class="button-box">
                                             <button type="submit"><span>Đổi mật khẩu</span></button>
                                         </div>
                                     </form>

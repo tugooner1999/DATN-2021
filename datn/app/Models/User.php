@@ -53,4 +53,9 @@ class User extends \Eloquent implements Authenticatable
     {
         return $this->password;
     }
+    public function resetpassword($id)
+    {
+        DB::table($this->table)
+            ->where('id',$id);
+    }
 }

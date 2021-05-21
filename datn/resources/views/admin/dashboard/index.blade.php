@@ -69,16 +69,35 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Biên động doanh thu</h3>
-                    <ul class="list-inline text-right">
-                        <li>
-                            <h5><i class="fa fa-circle m-r-5 text-info"></i>Tháng này</h5>
-                        </li>
-                        <li>
-                            <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Tháng trước</h5>
-                        </li>
-                    </ul>
-                    <div id="ct-visits" style="height: 405px;"></div>
+                    <h3 class="box-title" style=" text-align: center;font-weight: 600;font-size:22px;">Biên động doanh
+                        thu</h3>
+                    <form autocomplete="off" class="form-group">
+                        @csrf
+                        <div class="col-md-2">
+                            <p>Từ ngày : <input type="text" id="datepicker" class="form-control"></p>
+                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
+                                value="Lọc kết quả" style="margin-top:15px;">
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>Đến ngày : <input type="text" id="datepicker2" class="form-control"></p>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>
+                                Lọc theo:
+                                <select class="dashboard-filter form-control">
+                                    <option value="">--Chọn--</option>
+                                    <option value="7ngay">7 ngày qua</option>
+                                    <option value="thangtruoc">tháng trước</option>
+                                    <option value="thangnay">tháng này</option>
+                                    <option value="365ngayqua">365 ngày qua</option>
+                                </select>
+                            </p>
+                        </div>
+                    </form>
+
+                    <div id="myfirstchart" style="height: 450px;margin-top:130px;"></div>
                 </div>
             </div>
         </div>
@@ -94,87 +113,49 @@
                             <option>30 ngày</option>
                         </select>
                     </div>
-                    <h3 class="box-title">Giao dịch gần đây</h3>
+                    <h3 class="box-title">Đơn hàng hôm nay</h3>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Tài khoản</th>
-                                    <th>Loại GD</th>
-                                    <th>Ngày GD</th>
-                                    <th>Số tiền</th>
+                                    <th>Giá trị</th>
+                                    <th>Loại</th>
+                                    <th>Tình trạng</th>
+                                    <th>Ngày đặt</th>
                                     <th>Chi tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="txt-oflo">Đào Hùng</td>
-                                    <td>Nạp tiền</td>
-                                    <td class="txt-oflo">April 18, 2017</td>
-                                    <td><span class="text-success">+240.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="txt-oflo">Nguyên</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+20.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="txt-oflo">Tú</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+32.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="txt-oflo">Thanh</td>
-                                    <td>Thanh toán</td>
-                                    <td class="txt-oflo">April 20, 2017</td>
-                                    <td><span class="text-danger">-30.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="txt-oflo">Đào Hùng</td>
-                                    <td>Nạp tiền</td>
-                                    <td class="txt-oflo">April 18, 2017</td>
-                                    <td><span class="text-success">+240.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="txt-oflo">Nguyên</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+20.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="txt-oflo">Tú</td>
-                                    <td>Hoàn tiền</td>
-                                    <td class="txt-oflo">April 19, 2017</td>
-                                    <td><span class="text-info">+32.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="txt-oflo">Thanh</td>
-                                    <td>Thanh toán</td>
-                                    <td class="txt-oflo">April 20, 2017</td>
-                                    <td><span class="text-danger">-30.000đ</span></td>
-                                    <td><a href="#"><i class="fa fa-edit"></i> Xem chi tiết</a></td>
-                                </tr>
+                                @foreach($order as $key => $item)
+                                @if($today <= "24:00:00" && $item->created_at >= $today)
+                                    <tr>
+                                        <td>{{$item->id}}</td>
+                                        <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
+                                        <td>{{number_format($item->totalMoney)}}VND</td>
+                                        <td>{{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}</td>
+                                        <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
+                                            {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}</td>
+                                        <td>{{$item->created_at}}</td>
+                                        <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i
+                                                    class="fa fa-edit"></i> Xem</a></td>
+                                    </tr>
+                                    @endif
+
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <!--  Pagination Area Start -->
+                    <div class="pro-pagination-style text-center">
+                        <ul>
+                            <li>
+                                {{$order->links()}}
+                            </li>
+                        </ul>
+                    </div>
+                    <!--  Pagination Area End -->
                 </div>
             </div>
         </div>
@@ -183,19 +164,18 @@
                 <div class="white-box">
                     <h3 class="box-title">Bình luận gần đây</h3>
                     <div class="comment-center p-t-10">
-                    @foreach($ratings as $item)
+                        @foreach($ratings as $item)
                         <div class="comment-body">
-                            <div class="user-img"> 
-                            <img
-                                    src="{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}" alt="user"
+                            <div class="user-img">
+                                <img src="{{isset($item->user_comment) ? $item->user_comment->avatar : ''}}" alt="user"
                                     class="img-circle">
                             </div>
                             <div class="mail-contnet">
                                 <h5>{{isset($item->user_comment) ? $item->user_comment->name : ''}}</h5>
                                 <span class="time">{{$item->created_at}}</span>
                                 <br /><span class="mail-desc">{{$item->ra_content}}</span>
-                                    <a onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
-                                            href="{{route('admin.removeComment', ['id' => $item->id])}}"
+                                <a onclick="return confirm('Bạn có chắc muốn xoá bình luận này')"
+                                    href="{{route('admin.removeComment', ['id' => $item->id])}}"
                                     class="btn-rounded btn btn-default btn-outline"><i class="fa fa-trash"></i></a>
                             </div>
                         </div>
