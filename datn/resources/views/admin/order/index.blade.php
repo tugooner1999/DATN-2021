@@ -154,3 +154,7 @@
             <footer class="footer text-center"> 2021 &copy; Ample Admin brought to you by MarketNow.com </footer>
         </div>
 @endsection
+<script>
+$( window ).load(function() {
+});
+</script>

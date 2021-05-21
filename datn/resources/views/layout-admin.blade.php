@@ -143,7 +143,6 @@ $.ajaxSetup({
         })
         $('.btn-warning').click(function(){
             var url = $(this).attr('data-url');
-            if (confirm('Hóa đơn này đã được hoàn thành')) {
             $.ajax({
                 type: 'get',
                 url: url,
@@ -153,7 +152,6 @@ $.ajaxSetup({
                 error: function (jqXHR, textStatus, errorThrown) {
                 }
             })
-            }
         })
         $('.btn-outline-info').click(function(){
             var url = $(this).attr('data-url');

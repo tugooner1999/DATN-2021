@@ -76,7 +76,6 @@
                                 <?php endif ?>
                                 <?php if(isset($_SESSION['carts']) && !empty($_SESSION['carts'])) :  ?>
                                 @foreach ($_SESSION['carts'] as $item)
-                                        
                                         <tr id="{{$item['id']}}">
                                             <td class="product-thumbnail">
                                                 <a href="#"><img width="60" height="60" src="{{asset('/')}}{{$item['image']}}" alt="" /></a>
@@ -86,7 +85,13 @@
                                             <td class="product-price-cart"><span class="amount">{{number_format($item['price'])}} VNĐ</span></td>
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="text" name="qtybutton"  value="{{$item['quantity']}}" />
+                                                    <input class="cart-plus-minus-box" prod-id="{{$item['id']}}" type="number" name="qtybutton"  value="{{$item['quantity']}}" 
+                                                    step ="<?php $parent = App\Models\Category::all()->where('id',35);
+                                                        if(isset($parent)){
+                                                            print "0.2";
+                                                        }
+                                                    ?>"
+                                                    />
                                                 </div>
                                             </td>
                                             <td class="product-subtotals" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>

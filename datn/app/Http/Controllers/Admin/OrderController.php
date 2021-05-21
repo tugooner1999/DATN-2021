@@ -25,10 +25,12 @@ class OrderController extends Controller
             ['id', 'desc']
         ]);
         $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
-        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
+        $order_sum_1 = Order::where('status', 3)->where('order_date',$carbon)->get();
+        $order_sum_0 = Order::where('status', 1)->where('order_date',$carbon)->get();
+        $order_sum_2 = Order::where('status', 2)->where('order_date',$carbon)->get();
+        $sum_price_2 = $order_sum_2->sum('totalMoney');
         $sum_price_1 = $order_sum_1->sum('totalMoney');
-        $sum_price_0 = $order_sum_0->sum('totalMoney');
+        $sum_price_0 = $order_sum_0->sum('totalMoney') + $sum_price_2;
         return view('admin.order.index',compact('oder','sum_price_1','sum_price_0','carbon'));
     }
 
@@ -102,19 +104,21 @@ class OrderController extends Controller
         $this->authorize('admin');
         $data = $request->all();
         $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        $order = Order::all()->where('order_date',$carbon)->where('status', 1);
+        $order = Order::all()->where('order_date',$carbon)->where('status', 3);
         $a = Statistical::all()->where('order_date',$carbon)->first();
-        if($order->status = 1){
+        if($order->status = 3){
             if(isset($a)){
                 $statis = Statistical::find($a['id']);
                 $statis->order_date = $carbon;
                 $statis->sales = $order->sum('totalMoney');
                 $statis->total_order = $order->count('id');
                 $statis->save();
-        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
-        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
-        $sum_price_1 = $order_sum_1->sum('totalMoney');
-        $sum_price_0 = $order_sum_0->sum('totalMoney');
+                $order_sum_1 = Order::where('status', 3)->where('order_date',$carbon)->get();
+                $order_sum_0 = Order::where('status', 1)->where('order_date',$carbon)->get();
+                $order_sum_2 = Order::where('status', 2)->where('order_date',$carbon)->get();
+                $sum_price_2 = $order_sum_2->sum('totalMoney');
+                $sum_price_1 = $order_sum_1->sum('totalMoney');
+                $sum_price_0 = $order_sum_0->sum('totalMoney') + $sum_price_2;
                 return view('admin.total-cash.index',compact('sum_price_1','sum_price_0','carbon'));
             }
             elseif(!isset($a)){
@@ -123,10 +127,12 @@ class OrderController extends Controller
                 $statis->sales = $order->sum('totalMoney');
                 $statis->total_order = $order->count('id');
                 $statis->save();
-        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
-        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
-        $sum_price_1 = $order_sum_1->sum('totalMoney');
-        $sum_price_0 = $order_sum_0->sum('totalMoney');
+                $order_sum_1 = Order::where('status', 3)->where('order_date',$carbon)->get();
+                $order_sum_0 = Order::where('status', 1)->where('order_date',$carbon)->get();
+                $order_sum_2 = Order::where('status', 2)->where('order_date',$carbon)->get();
+                $sum_price_2 = $order_sum_2->sum('totalMoney');
+                $sum_price_1 = $order_sum_1->sum('totalMoney');
+                $sum_price_0 = $order_sum_0->sum('totalMoney') + $sum_price_2;
                 return view('admin.total-cash.index',compact('sum_price_1','sum_price_0','carbon'));
             }
         }

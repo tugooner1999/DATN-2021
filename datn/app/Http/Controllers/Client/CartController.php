@@ -19,13 +19,14 @@ class CartController extends Controller
     //
     public function index(){
         $this->authorize('member');
+
         return view('client.cart.index');
     }
     public function addToCart(Request $rq){
         $this->authorize('member');
         $id = $rq ->id;
         $product = Product::where('id',$id)->first();
-        if($product->allow_market==2&& $product->category_id ==35){
+        if($product->allow_market==2 && $product->category_id ==35){
             if($product){
                 if(!isset($_SESSION['carts'][$id])){
                     $_SESSION['carts'][$id]['id'] =$product->id;
@@ -33,10 +34,10 @@ class CartController extends Controller
                     $_SESSION['carts'][$id]['allow_market'] = $product->allow_market;
                     $_SESSION['carts'][$id]['image'] =$product->image_gallery;
                     $_SESSION['carts'][$id]['price'] =$product->price;
-                    $_SESSION['carts'][$id]['quantity'] = 0.1;
+                    $_SESSION['carts'][$id]['quantity'] = 0.2;
                 }
                 else{
-                    $_SESSION['carts'][$id]['quantity'] += 0.1;
+                    $_SESSION['carts'][$id]['quantity'] += 0.2;
                 }
                 $totalItem = 0;
                 $totalPriceInCart = 0;

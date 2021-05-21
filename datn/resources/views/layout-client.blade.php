@@ -284,7 +284,6 @@
                 var voucherValue =sessionStorage.getItem('voucherValue')
                 var idProduct = $(this).attr('prod-id')
                 $("#" +idProduct).fadeOut(1000,function(){
-                    window.location.reload()
                     $.ajax({
                         type:"POST",
                         url: "{{route('client.remove-product-in-cart')}}",
