@@ -19,9 +19,10 @@ class OrderController extends Controller
      */
     public function index(){
         $this->authorize('admin');
+        $carbon = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $oder = Order::all()->sortByDesc('id');
-        $order_sum_1 = Order::where('status', 1)->get();
-        $order_sum_0 = Order::where('status', 0)->get();
+        $order_sum_1 = Order::where('status', 1)->where('order_date',$carbon)->get();
+        $order_sum_0 = Order::where('status', 0)->where('order_date',$carbon)->get();
         $sum_price_1 = $order_sum_1->sum('totalMoney');
         $sum_price_0 = $order_sum_0->sum('totalMoney');
         return view('admin.order.index',compact('oder','sum_price_1','sum_price_0'));

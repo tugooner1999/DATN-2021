@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function my_Orders(){
         $this->authorize('member');
         $id_user = Auth::user()->id;
-        $my_order = Order::where('order_by',$id_user)->orderBy('created_at', 'DESC')->get();
+        $my_order = Order::where('order_by',$id_user)->orderBy('created_at', 'DESC')->take(5)->get();
         return view('client.order.index', compact('my_order'));
     }
 
