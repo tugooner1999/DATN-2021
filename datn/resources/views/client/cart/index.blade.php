@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="cart-clear">
                                     <a href="#" id="update-cart">Cập nhật giỏ hàng</a>
-                                    <a href="#" id="delete-cart">Xóa giỏ hàng</a>
+                                    <a href="{{route('client.remove-product-in-carts')}}" onclick="return confirm('Bạn muốn xóa toàn bộ giỏ hàng')" id="delete-cart">Xóa giỏ hàng</a>
                                 </div>
                             </div>
                         </div>

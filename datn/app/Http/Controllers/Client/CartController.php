@@ -24,6 +24,33 @@ class CartController extends Controller
         $this->authorize('member');
         $id = $rq ->id;
         $product = Product::where('id',$id)->first();
+        if($product->allow_market==2&& $product->category_id ==35){
+            if($product){
+                if(!isset($_SESSION['carts'][$id])){
+                    $_SESSION['carts'][$id]['id'] =$product->id;
+                    $_SESSION['carts'][$id]['name'] =$product->name;
+                    $_SESSION['carts'][$id]['allow_market'] = $product->allow_market;
+                    $_SESSION['carts'][$id]['image'] =$product->image_gallery;
+                    $_SESSION['carts'][$id]['price'] =$product->price;
+                    $_SESSION['carts'][$id]['quantity'] = 0.1;
+                }
+                else{
+                    $_SESSION['carts'][$id]['quantity'] += 0.1;
+                }
+                $totalItem = 0;
+                $totalPriceInCart = 0;
+                foreach($_SESSION['carts'] as $val){
+                    $totalItem += $val['quantity'];
+                    $totalPriceInCart += $val['price'] * $val['quantity'];
+                }
+                return response()->json(
+                    [
+                        'status' => true,
+                        'totalItem' => $totalItem,
+                        'totalPriceInCart' => $totalPriceInCart
+                    ]
+                );
+            }}
     if($product->allow_market==1){
         if($product){
             if(!isset($_SESSION['cart'][$id])){
@@ -32,7 +59,7 @@ class CartController extends Controller
                 $_SESSION['cart'][$id]['allow_market'] = $product->allow_market;
                 $_SESSION['cart'][$id]['image'] =$product->image_gallery;
                 $_SESSION['cart'][$id]['price'] =$product->price;
-                $_SESSION['cart'][$id]['quantity'] =1;
+                $_SESSION['cart'][$id]['quantity'] = 1;
             }
             else{
                 $_SESSION['cart'][$id]['quantity'] += 1;
@@ -318,7 +345,7 @@ class CartController extends Controller
                             'product_id' =>$val['id'],
                             'total' =>$val['price'] * $val['quantity'],
                             'unit_price' =>$val['price'],
-                            'quantily' =>$val['quantity']
+                            'quantily' => $val['quantity']
 
                         ]);
                         if($insertOderDetail){
@@ -520,7 +547,6 @@ class CartController extends Controller
             unset($_SESSION['voucher']);
             unset($_SESSION['carts']);
         }
-
         return response()->json(
             [
                 'status' => true,
@@ -592,6 +618,11 @@ class CartController extends Controller
             );
         }
     }
-
+    public function removeCart(Request $rq){
+        unset($_SESSION['cart']);
+        unset($_SESSION['voucher']);
+        unset($_SESSION['carts']);
+        return back();
+}
 
 }

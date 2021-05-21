@@ -65,12 +65,19 @@ class VoucherController extends Controller
                     ]
                 );
             }
-           
             else if($voucherCode->status != 1){
                 return response(
                     [
                         'status' => false,
                         'msg'=>"Mã giảm giá chưa được kích hoạt"
+                    ]
+                );
+            }
+            else if(!isset($_SESSION['cart'])){
+                return response(
+                    [
+                        'status' => false,
+                        'msg'=>"Mã giảm giá áp dụng cho sản phẩm thông thường"
                     ]
                 );
             }

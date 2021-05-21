@@ -134,7 +134,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/add-to-cart', [Client\CartController::class , 'addToCart'])->name('client.add-to-cart');
         Route::post('/update-cart', [Client\CartController::class , 'updateCart'])->name('client.update-cart');
         Route::post('/remove-product-in-cart', [Client\CartController::class , 'removeProductInCart'])->name('client.remove-product-in-cart');
-
+        Route::get('/remove-product-in-carts', [Client\CartController::class , 'removeCart'])->name('client.remove-product-in-carts');
         // login - register
         Route::get('login', [Client\AuthController::class, 'login_form'])->name('client.login');
         Route::post('/login', [Client\AuthController::class , 'postLogin']);
