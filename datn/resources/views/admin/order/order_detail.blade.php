@@ -239,93 +239,53 @@
                             ?>
                             <img src="{{$avt}}" width="35" class="img-circle">
                         </div>
-                        
+                        <p class="success" style="color:green; font-size:20px; font-weight:bold;">
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo $message;
+                                Session::put('message', NULL);
+                                }
+                            ?>
+                        </p>
                         <div class="name-kh">
-                            <button type="button" style="float: right; margin-top:15px; margin-right:20px;"   
-                            data-url="{{route('order-show',['id' => $order_detail->id])}}" 
-                            class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
+                            <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
                                 Thêm sản phẩm
                             </button>
-                            
                             <div class="modal fade" id="show">
                                 <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
+                                    <form class="form-horizontal form-material" action="{{route('admin.addOrder',['id'=>$order_detail->id])}}" method="POST" style="width:100%;"
+                                        enctype="multipart/form-data" role="form">
+                                        @csrf
+                                        <div class="modal-content">
                                         <!-- Modal Header -->
-                                   
-                                    <div id="shop-1" class="tab-pane active">
-                                        <style>
-                                            .rating-active .active {
-                                                color: #ff9705 !important;
-                                            }
-                                            </style>
-                                        <div class="row">
-                                            @foreach ($list_product as $item)
-                                            <?php
-                                                $avg = 0;
-                                                if($item->pro_total_rating){
-                                                    $avg = round($item->pro_total_number / $item->pro_total_rating, 2);
-                                                }
-                                            ?>
-                                            
-                                            <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 col-xs-12">
-                                                
-                                                <article class="list-product">
-                                                    <div class="img-block">
-                                                        <a href="{{route('client.single-product',['id'=>$item->id])}}"
-                                                            class="thumbnail">
-                                                            <img src="{{asset($item->image_gallery)}}" alt="" width="256"
-                                                                height="256" />
-                                                        </a>
-                                                    </div>
-                                                    <ul class="product-flag">
-                                                        <li class="{{$item->quantily <= 0 ? 'new bg-danger' : 'new'}}">
-                                                            {{$item->quantily <= 0 ? "Hết hàng" : "Mới"}}</li>
-                                                    </ul>
-                                                    <div class="product-decs">
-                                                        <a class="inner-link"
-                                                            href="shop-4-column.html"><span>{{isset($item->category) ? $item->category->name : ''}}</span></a>
-                                                        <h2><a href="{{route('client.single-product',['id'=>$item->id])}}"
-                                                                class="product-link">{{$item->name}}</a></h2>
-                                                        <div class="rating-active">
-                                                            @for($i = 1; $i <= 5; $i++) <i
-                                                                class="fa fa-star {{ $i <= $avg ? 'active' : '' }}"></i>
-                                                                @endfor
-                                                                <p class="current-price">{{number_format($item->price)}} đ</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="add-to-link">
-                                                        <ul>
-                                                            <li class="cart">
-                                                                
-                                                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-            
-                                                                
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                @if(Auth::check())
-                                                                    onclick="return confirm('Bạn muốn thêm sản phẩm vừa chọn vào mục yêu thích?')" href="{{route('client.add-wishlist',['id'=>$item->id])}}"><i class="ion-android-favorite-outline"
-                                                                    @else
-                                                                    href="{{route('client.login')}}"
-                                                                @endif
-                                                                >
-                                                                </i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </article>
-            
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-12" style="margin-top:10px;">Tên sản phẩm</label>
+                                            <div class="col-sm-12">
+                                                <select name="product_id" class="form-control form-control-line">
+                                                    @foreach($list_product as $item)
+                                                    <option  value="{{$item->id }}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            @endforeach
                                         </div>
-                                       
-                                    </div>
-                                    
-                                       
+                                        <div class="form-group">
+                                            <label class="col-md-12" >Số lượng</label>
+                                            <div class="col-md-12" >
+                                                <input type="number"  name="quantily" value="{{(old('quantily'))}}" class="form-control form-control-line">
+                                                @error('quantily')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                
+                                            </div>
+                                        </div>
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Thêm mới</button>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
