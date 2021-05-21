@@ -22,13 +22,13 @@
                             <form autocomplete="off" class="form-group">
                                 @csrf
                                 <div class="col-md-2">
-                                    <p>Từ ngày : <input type="text" id="datepicker" class="form-control"></p>
+                                    <p>Từ ngày : <input type="text" id="datepicker" class="form-control" placeholder="--chọn ngày--"></p>
                                     <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
-                                        value="Lọc kết quả">
+                                        value="Lọc kết quả" style="margin-top:15px;" >
                                 </div>
         
                                 <div class="col-md-2">
-                                    <p>Đến ngày : <input type="text" id="datepicker2" class="form-control"></p>
+                                    <p>Đến ngày : <input type="text" id="datepicker2" class="form-control" placeholder="--chọn ngày--"></p>
                                 </div>
         
                                 <div class="col-md-2">
@@ -45,7 +45,7 @@
                                 </div>
                             </form>
                         
-                            <div id="myfirstchart" style="height: 450px;margin-top:130px;"></div>
+                            <div id="myfirstchart" style="height: 450px;margin-top:150px;"></div>
                         </div>
                     </div>
                 </div>

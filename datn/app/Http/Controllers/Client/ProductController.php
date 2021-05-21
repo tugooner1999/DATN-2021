@@ -50,6 +50,8 @@ class ProductController extends Controller
         $pro = Product::all()->where('allow_market','1');
         return view('client.product.index', compact('list_product','pro','cates','today'));
     }
+
+    
     public function single_Product($id){
         $product= Product::find($id);
         // comment

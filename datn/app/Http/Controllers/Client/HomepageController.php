@@ -11,6 +11,7 @@ use DB;
 use App\Models;
 use Illuminate\Support\Carbon;
 use App\Models\Product;
+use Illuminate\Support\Collection;
 
 class HomepageController extends Controller
 {
@@ -33,6 +34,16 @@ class HomepageController extends Controller
     }
     public function client_admin(){
         return view('welcome');
+    }
+
+    public function search(Request $request){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+        $cates  = Category::all();
+        $pro = Product::all();
+
+        $keywords = $request->keyword_submit;
+        $search_product = DB::table('products')->where('name','like','%'.$keywords.'%')->paginate(12);
+        return view('client.homepage.search',compact('today','cates','search_product','pro'));
     }
     
 }

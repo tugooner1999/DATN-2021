@@ -168,3 +168,6 @@ Route::prefix('admin')->group(function () {
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');
+
+        // tìm kiếm
+        Route::post('/search',[Client\HomepageController::class , 'search']);

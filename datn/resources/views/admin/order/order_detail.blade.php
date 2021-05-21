@@ -144,15 +144,17 @@
 
 .info-product-order {
     background: #fafafa;
+    margin-top: 1px;
 }
 
 .info-product-order .all-info {
     width: 100%;
     height: 120px;
+    padding: 0 20px;
 }
 
 .info-product-order .all-info .image-item-product {
-    width: 18%;
+    width: 20%;
     height: 100%;
     float: left;
 }
@@ -163,16 +165,14 @@
 }
 
 .info-product-order .all-info .content-info {
-    width: 82%;
-    height: 100%;
-    border: 1px solid #000;
+    width: 80%;
+    height: 100px;
     float: right;
-    padding: 14px;
+    padding: 14px 55px;
 }
 .info-product-order .price-product{
     width:100%;
     height:120px;
-    border:1px solid #000;
 }
 </style>
 <div id="page-wrapper">
@@ -232,7 +232,7 @@
                 <div class="info-bottom">
                     <div class=" col-sm-12 info-people">
                         
-                        <div class="images-name-order">
+                        <div class="images-name-order" style="padding: 10px 19px;">
                             <?php 
                                 $parent = App\Models\User::find($order_detail->order_by);
                                 $avt = $parent->avatar;                                        
@@ -248,7 +248,7 @@
                                 }
                             ?>
                         </p>
-                        <div class="name-kh">
+                        <div class="name-kh" style="padding: 10px 19px;">
                             <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
                                 Thêm sản phẩm
                             </button>
@@ -322,7 +322,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4" style="padding: 15px 5px;">
+                        <div class="col-sm-4" style="padding: 15px 70px;">
                             <div class="price-product"><span>{{ number_format($item->unit_price) }}VND</span></div>
                         </div>
                     </div>
