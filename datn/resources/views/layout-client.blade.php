@@ -269,7 +269,8 @@
                                 else{
                                     $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart +  (totalPriceInCart*0.1)) + " VNĐ")
                                 }
-                                $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ")
+                                $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ");
+                                $('#total-price-carts').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart *0.1) + " VNĐ")
                             }
                             if(result.status === false){
                                 toastr.error(result.msg,'Lỗi')

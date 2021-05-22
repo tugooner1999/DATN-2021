@@ -168,7 +168,10 @@
                                     ?> 
                                 </span>
                             </h5>
-                            <h5>VAT (10%)<span>{{number_format($totalPriceInCart*0.1)}} VNĐ</span></h5>
+                            <?php 
+                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart*0.1);
+                            ?>
+                            <h5>VAT(10%) <span id="total-price-carts">{{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h5>
                             <h5>Phí giao hàng <span>0 VNĐ</span></h5>
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đặt hàng</h4>
