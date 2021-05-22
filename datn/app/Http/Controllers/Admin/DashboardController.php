@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $oders = count(Order::all());
         $ratings = Rating::all()->sortByDesc("id")->take(4);
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        $order = Order::orderBy('created_at','DESC')->paginate(12);
+        $order = Order::where('order_date' ,$today )->orderBy('created_at','DESC')->paginate(10);
         $user = User::all()->sortByDesc("id")->take(7);
         return view('admin.dashboard.index',compact('products','vouchers','ratings','users','user','comments','oders','order','today'));
     }

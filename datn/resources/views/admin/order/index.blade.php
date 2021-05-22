@@ -115,7 +115,7 @@
                                         }
                                         ?>
                                             </input>
-                                            <a href="{{route('client.delete2-order',['id'=>$item->id])}}" 
+                                    <a href="{{route('client.delete2-order',['id'=>$item->id])}}" 
                                     <?php
                                         if(empty($item->status == 4)){
                                             echo "hidden";
@@ -128,7 +128,7 @@
                                             echo "hidden";
                                         }
                                     ?>
-                                     class="previous">&laquo;&laquo;</a>
+                                     class="previous">&laquo;</a>
                                             </td>
                                         </tr>
                                     @endforeach

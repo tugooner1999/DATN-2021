@@ -170,6 +170,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/my-order/add2/{id}',  [Client\OrderController::class , 'add2_Order'])->name('client.add2-order');
         Route::get('/my-order/delete2/{id}',  [Client\OrderController::class , 'delete2_Order'])->name('client.delete2-order');
         Route::get('/my-order/exit/{id}',  [Client\OrderController::class , 'exit_Order'])->name('client.exit-order');
+        Route::get('/my-order/huy/{id}',  [Client\OrderController::class , 'huy_Order'])->name('client.huy-order');
+        Route::get('/my-order/huys/{id}',  [Client\OrderController::class , 'huys_Order'])->name('client.huys-order');
 });
         //chuyển trang phân quyền user
         Route::get('/client-admin',[Client\HomepageController::class , 'client_admin'])->name('client-admin');

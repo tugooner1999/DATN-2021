@@ -111,14 +111,18 @@
                     </div>
                     <div class="pro-details-quality mt-0px">
                         <div class="pro-details-cart btn-hover">
-                                @if ($today <= "09:00:00" && $product->allow_market ==2)
+                                @if ($today <= "09:00:00" && $product->allow_market ==2 && $product->quantily > 0)
                                 <a class="cart-btn" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
                                 @endif
-                                @if ($product->allow_market ==1)
+                                @if ($product->allow_market ==1 && $product->quantily > 0)
                                 <a class="cart-btn" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
                                 @endif
-                                @if($today > "09:00:00" && $product->allow_market ==2)
+                                @if($today > "09:00:00" && $product->allow_market ==2 && $product->quantily > 0)
                                 <a class="cart-btns" product-id='{{$product->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif
+                                @if ($product->quantily == 0)
+                                <p><li> Sản phẩm đã hết hàng</li></p>
+                                <p><li><i>Mong quý khách thông cảm</i></li></p>
                                 @endif  
                         </div>
                         <div class="cart-plus-minus" style="visibility: hidden;">

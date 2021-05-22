@@ -104,13 +104,6 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="white-box">
                     <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
-                        <select class="form-control pull-right row b-none">
-                            <option>Hôm nay</option>
-                            <option>3 ngày</option>
-                            <option>7 ngày</option>
-                            <option>15 ngày</option>
-                            <option>30 ngày</option>
-                        </select>
                     </div>
                     <h3 class="box-title">Đơn hàng hôm nay</h3>
                     <div class="table-responsive">
