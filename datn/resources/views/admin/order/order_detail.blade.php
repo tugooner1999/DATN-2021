@@ -254,15 +254,6 @@
                             <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-info btn-show" data-toggle="modal" data-target="#show">
                                 Thêm sản phẩm
                             </button>
-                            <a style="float: right; margin-top:15px; margin-right:20px;" href="{{route('client.huy-order',['id'=>$order_detail->id])}}" 
-                                    ><button class="btn btn-info btn-danger">Hủy đơn hàng</button></a>
-                                    <a  style="float: right; margin-top:15px; margin-right:20px;" href="{{route('client.huys-order',['id'=>$order_detail->id])}}" 
-                                     <?php
-                                        if(empty($order_detail->status == 4)){
-                                            echo "hidden";
-                                        }
-                                    ?>
-                                    ><button class="btn btn-primary">Đặt lại</button></a>
                             <div class="modal fade" id="show">
                                 <div class="modal-dialog modal-lg">
                                     <form class="form-horizontal form-material" action="{{route('admin.addOrder',['id'=>$order_detail->id])}}" method="POST" style="width:100%;"
@@ -355,7 +346,7 @@
                                     <div class="col-md-12" >
                                     <label for="">Tên Sản phẩm : <strong id="tensp"></strong></label><br>
                                     <label for="">Số lượng sản phẩm</label>
-                                    <input type="int"  name="quantily" class="themsl" ><br>
+                                    <input type="number"  name="quantily" class="themsl" ><br>
                                     <label for="">Giá sản phẩm</label>
                                     <input type="number"  name="price_product" class="themgia">
                                     </div>

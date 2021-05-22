@@ -19,6 +19,8 @@ class MyAccountController extends Controller
     }
 
     public function update_Account($id, MyAccountRequest $request){
+        $this->authorize('member');
+        $this->authorize('admin');
         try{
             $user = User::find($id);
             $user->fill($request->all());

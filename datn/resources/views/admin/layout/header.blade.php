@@ -4,8 +4,8 @@
         <div class="top-left-part">
             <!-- Logo -->
             <a class="logo" href="{{route('admin.dashboard')}}"><b>
-                    <img src="{{asset('assets/client/images/favicon/favicon.png')}}" alt="home" class="dark-logo" />
-                    <!--This is light logo icon--><img src="{{asset('assets/client/images/favicon/favicon.png')}}" alt="home"
+                    <img src="plugins/images/admin-logo.png" alt="home" class="dark-logo" />
+                    <!--This is light logo icon--><img src="{{asset('assets/admin/plugins/images/admin-logo-dark.png')}}" alt="home"
                         class="light-logo" />
                 </b>
                 <span class="hidden-xs">

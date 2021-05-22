@@ -141,23 +141,14 @@ class OrderController extends Controller
         $data = $request->all();
         $order_detail = OrderDetail::find($data['id']);
         $order_detail->quantily = $data['quantily'];
-        if($order_detail->quantily < 0.2){
-            Session::put('message','Số lượng không nhỏ hơn 0.2');
-            return back();
-        }
         $order_detail->unit_price = $data['price_product'];
-        $order_detail->total = $data['price_product']*$order_detail->quantily;
-        if($order_detail->total < 1000){
-            Session::put('message','Giá sản phẩm không nhỏ hơn 1000đ');
-            return back();
-        }
+        $order_detail->total = $data['price_product']*$data['quantily'];
         $order_detail->save();
         $order = Order::find($order_detail->order_id);
         $sumTaltal = OrderDetail::all()->where('order_id',$order_detail->order_id);
         $tien = $sumTaltal->sum('total');
         $order->totalMoney = $tien + ($tien*0.1);
         $order->save();
-        Session::put('message','Thành công');
         return back();
     }
     

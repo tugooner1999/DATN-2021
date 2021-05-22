@@ -568,28 +568,10 @@ class CartController extends Controller
         $product = Product::whereIn('id',$idPro)->get();
         if($product){
             foreach($product as $key => $pro){
-                if($quantityPro[$key] < 0.2 && $product->category_id = 38){
+                if($quantityPro[$key] <= 0 ){
                     return response()->json(
                         [
-                            'msg' => 'Số lượng k được nhỏ hơn 0.2',
-                            'status' => false,
-                            
-                        ]
-                    );
-                }
-                if($quantityPro[$key] < 1 && empty($product->category_id = 38)){
-                    return response()->json(
-                        [
-                            'msg' => 'Số lượng k được nhỏ hơn 1',
-                            'status' => false,
-                            
-                        ]
-                    );
-                }
-                if($quantityPro[$key] > 500){
-                    return response()->json(
-                        [
-                            'msg' => 'Số lượng quá lớn vui lòng liên hệ tới cửa hàng',
+                            'msg' => 'Số lượng k được nhỏ hơn 0',
                             'status' => false,
                             
                         ]

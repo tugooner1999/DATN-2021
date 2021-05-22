@@ -75,7 +75,7 @@
                                         }
                                             ?>
                                             </td>
-                                            <td>{{$item->order_date}}</td>
+                                            <td>{{$item->created_at}}</td>
                                             <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             
                                             <td style="font-size: 20px;">
@@ -115,7 +115,7 @@
                                         }
                                         ?>
                                             </input>
-                                    <a href="{{route('client.delete2-order',['id'=>$item->id])}}" 
+                                            <a href="{{route('client.delete2-order',['id'=>$item->id])}}" 
                                     <?php
                                         if(empty($item->status == 4)){
                                             echo "hidden";
@@ -128,7 +128,7 @@
                                             echo "hidden";
                                         }
                                     ?>
-                                     class="previous">&laquo;</a>
+                                     class="previous">&laquo;&laquo;</a>
                                             </td>
                                         </tr>
                                     @endforeach
