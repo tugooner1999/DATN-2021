@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Session;
 
 class RegistrationRequest extends FormRequest
 {
@@ -35,6 +36,7 @@ class RegistrationRequest extends FormRequest
     }
     
     public function messages(){
+        Session::put('message','Thêm tài khoản không thành công');
         return [
             'name.required' =>'Bạn cần nhập Tên tài khoản',
                 'avatar.required'=>'Không để trống ảnh của user',

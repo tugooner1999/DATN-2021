@@ -15,21 +15,20 @@
         <div class="row">
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
-                    <h3 class="box-title text-info">Đơn hàng</h3>
-                    <span class="text-dark">( {{$oders}} )</span><br>
-                    <a href="{{route('admin.listOrder')}}"><i class="fa fa-table text-info" style="font-size: 100px;"
-                            aria-hidden="true"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-6 col-xs-12">
-                <div class="white-box analytics-info text-center">
                     <h3 class="box-title">Doanh Thu</h3>
                     <span class="text-dark">( 7.8M )</span><br>
                     <a href="{{route('admin.totalCash')}}"><i class="fa fa-signal" style="font-size: 100px;"
                             aria-hidden="true"></i></a>
                 </div>
             </div>
-
+            <div class="col-lg-2 col-sm-6 col-xs-12">
+                <div class="white-box analytics-info text-center">
+                    <h3 class="box-title text-info">Đơn hàng</h3>
+                    <span class="text-dark">( {{$oders}} )</span><br>
+                    <a href="{{route('admin.listOrder')}}"><i class="fa fa-table" style="font-size: 107px;"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
             <div class="col-lg-2 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info text-center">
                     <h3 class="box-title text-success">Sản phẩm</h3>
@@ -129,20 +128,33 @@
                             </thead>
                             <tbody>
                                 @foreach($order as $key => $item)
-                                @if($today <= "24:00:00" && $item->created_at >= $today)
                                     <tr>
                                         <td>{{$item->id}}</td>
                                         <td><a href="profile.html">{{$item->customer_fullname}}</a></td>
                                         <td>{{number_format($item->totalMoney)}}VND</td>
                                         <td>{{$item->order_market == 1 ? "Thông Thường" : "Đi chợ"}}</td>
                                         <td class=' {{$item->status == null ? "text-danger" : "text-success"}}'>
-                                            {{$item->status == null ? "Chưa hoàn thành" : "Đã hoàn thành"}}</td>
-                                        <td>{{$item->created_at}}</td>
+                                        <?php
+                                        if($item->status == 0){
+                                            echo "Chờ xác nhận";
+                                        }
+                                        if($item->status == 1){
+                                            echo "Đã nhận đơn";
+                                        }
+                                        if($item->status == 2){
+                                            echo "Đang giao";
+                                        }
+                                        if($item->status == 3){
+                                            echo "Đã thanh toán";
+                                        }
+                                        if($item->status == 4){
+                                            echo "Đơn hàng đã hủy";
+                                        }
+                                            ?></td>
+                                        <td>{{$item->order_date}}</td>
                                         <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i
                                                     class="fa fa-edit"></i> Xem</a></td>
                                     </tr>
-                                    @endif
-
                                     @endforeach
                             </tbody>
                         </table>
@@ -188,10 +200,11 @@
                     <div class="sk-chat-widgets">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                CHAT LISTING
+                                Tài khoản mới nhất
                             </div>
                             <div class="panel-body">
                                 <ul class="chatonline">
+                                @foreach($user as $item)
                                     <li>
                                         <div class="call-chat">
                                             <button class="btn btn-success btn-circle btn-lg" type="button"><i
@@ -200,82 +213,11 @@
                                                     class="fa fa-comments-o"></i></button>
                                         </div>
                                         <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Varun Dhavan <small
-                                                    class="text-success">online</small></span></a>
+                                                src="{{asset($item->avatar)}}"
+                                                alt="user-img" class="img-circle"> <span>{{$item->name}}<small
+                                                    class="text-success">{{$item->phone}}</small></span></a>
                                     </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/genu.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small
-                                                    class="text-warning">Away</small></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/ritesh.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small
-                                                    class="text-danger">Busy</small></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/arijit.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Arijit Sinh <small
-                                                    class="text-muted">Offline</small></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/govinda.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Govinda Star <small
-                                                    class="text-success">online</small></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/hritik.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>John Abraham<small
-                                                    class="text-success">online</small></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="call-chat">
-                                            <button class="btn btn-success btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-phone"></i></button>
-                                            <button class="btn btn-info btn-circle btn-lg" type="button"><i
-                                                    class="fa fa-comments-o"></i></button>
-                                        </div>
-                                        <a href="javascript:void(0)"><img
-                                                src="{{asset('assets/admin/plugins/images/users/varun.jpg')}}"
-                                                alt="user-img" class="img-circle"> <span>Varun Dhavan <small
-                                                    class="text-success">online</small></span></a>
-                                    </li>
+                                @endforeach
                                 </ul>
                             </div>
                         </div>

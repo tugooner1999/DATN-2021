@@ -48,7 +48,7 @@
                                     <th>Giá</th>
                                     <th>Số lượng</th>
                                     <th>Thành tiền</th>
-                                    <th>Hạnh động</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

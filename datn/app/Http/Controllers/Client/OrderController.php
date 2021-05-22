@@ -56,6 +56,12 @@ class OrderController extends Controller
         $this->authorize('member');
         $order = Order::find($id);
         $order->status += -1;
+        if($order->status < 0){
+            $order->status = 4;
+            $order->save();
+            Session::put('message','Đơn hàng đã bị hủy');
+            return back();
+        }
         $order->save();
         return back();
     }

@@ -311,7 +311,7 @@
                                     <div class="row">
                                         <br>
                                         <div class="col-md-12">
-                                            <form method="POST">
+                                            <form method="POST" >
                                                 @csrf
                                                 <input type="hidden" value="" class="number_rating">
                                                 <input type="hidden" value="{{$product->id}}" class="id_product">
@@ -326,7 +326,7 @@
                                                         placeholder="Viết bình luận ..."></textarea>
 
                                                     <input type="submit" class="js_rating_product"
-                                                        value="Bình Luận" />
+                                                        value="Bình Luận" data-url="{{route('client.comment_product',['id' => $product->id])}}"/>
                                                     
                                                 </div>
                                             </form>
@@ -461,11 +461,11 @@ $(function() {
         event.preventDefault();
         let number = $(".number_rating").val();
         let content = $("#ra_content").val();
-        let url = $(this).attr('href');
+        var url = $(this).attr('data-url');
         let idProduct = $(".id_product").val();
         if (content && number) {
             $.ajax({
-                url: '/DATN-2021/datn/public/client/single-product/rating/' + idProduct,
+                url: url,
                 type: 'POST',
                 data: {
                     number: number,

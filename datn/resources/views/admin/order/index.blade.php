@@ -75,7 +75,7 @@
                                         }
                                             ?>
                                             </td>
-                                            <td>{{$item->created_at}}</td>
+                                            <td>{{$item->order_date}}</td>
                                             <td><a href="{{URL::to('/admin/order/order-detail/'.$item->id)}}"><i class="fa fa-edit"></i> Xem</a></td>
                                             
                                             <td style="font-size: 20px;">

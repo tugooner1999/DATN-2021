@@ -346,7 +346,7 @@
                                     <div class="col-md-12" >
                                     <label for="">Tên Sản phẩm : <strong id="tensp"></strong></label><br>
                                     <label for="">Số lượng sản phẩm</label>
-                                    <input type="number"  name="quantily" class="themsl" ><br>
+                                    <input type="int"  name="quantily" class="themsl" ><br>
                                     <label for="">Giá sản phẩm</label>
                                     <input type="number"  name="price_product" class="themgia">
                                     </div>
