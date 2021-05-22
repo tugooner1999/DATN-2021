@@ -90,7 +90,7 @@
                                     <th style="visibility:hidden;"></th>
                                     <th style="border:none">Sản phẩm</th>
                                     <th style="border:none">Ngày đăng</th>
-                                    <<th style="visibility:hidden;"></th>
+                                    <th style="visibility:hidden;"></th>
                                 </tr>
                             </tfoot>
                         </table>

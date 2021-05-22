@@ -52,8 +52,21 @@
                                     <td class="product-name"><a href="{{route('client.single-product',['id'=>$item->product->id])}}">{{$item->product->name}}</a></td>
                                     <td class="product-price-cart"><span class="amount">{{number_format($item->product->price)}} đ</span></td>
                                     <td class="product-wishlist-cart">
-                                        <a class="cart-btn {{$item->product->quantily <= 0 ? ' bg-danger' : ''}}" {{$item->product->quantily <= 0 ? "" : "product-id="}} {{$item->product->id}}>
-                                        {{$item->product->quantily <= 0 ? "Hết hàng" : "Thêm vào giỏ"}}</a>
+                                    <?php
+                                    $today = Carbon\Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+                                    $items = App\Models\Product::find($item->product_id);
+                                    ?>
+                                                    @if ($today <= "09:00:00" && $items->allow_market ==2)
+                                                    <a class="cart-btn" product-id='{{$item->product->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+    
+                                                    @if ($items->allow_market ==1)
+                                                    <a class="cart-btn" product-id='{{$item->product->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif
+    
+                                                    @if($today > "09:00:00" && $items->allow_market ==2)
+                                                    <a class="cart-btns" product-id='{{$item->product->id}}' href="#" >Thêm vào giỏ</a>
+                                                    @endif 
                                     </td>
                                     <td>
                                         <a class="text-dark" onclick="return confirm('Bạn muốn xóa sản phẩm này khỏi mục yêu thích?')" href="{{route('client.remove-wishlist',['id'=>$item->id])}}"><i class="fa fa-times"></i></a>

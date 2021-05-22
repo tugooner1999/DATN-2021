@@ -26,8 +26,9 @@ class WishlistController extends Controller
         $this->authorize('member');
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
         $id_user = Auth::user()->id;
+        $product = Product::all();
         $wish_lists = Wishlist::all()->where('user_id',$id_user);
-        return view('client.wishlist.index', compact('wish_lists','today'));
+        return view('client.wishlist.index', compact('wish_lists','today','product'));
     }
 
     public function remove_wishlist($id){
