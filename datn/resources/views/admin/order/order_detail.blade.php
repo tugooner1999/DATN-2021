@@ -324,13 +324,13 @@
                                         ?>
                                         {{  $cate_t }}
                                     </span></div>
-                                    <div class="quantily-product" style="padding:5px;"><span>x{{$item->quantily}}</span></div>
+                                    <div class="quantily-product" style="padding:5px;"><span><b>Số lượng: {{$item->quantily}}</b></span></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-4" style="padding: 15px 5px;">
-                            <div class="price-product"><span>Giá: {{ number_format($item->unit_price) }}VND</span>
+                            <div class="price-product"><span>Giá: {{ number_format($item->unit_price) }} đ</span>
                             <!-- nút sửa sản phảm đi chợ -->
                             <button type="button" style="float: right; margin-top:15px; margin-right:20px;" class="btn btn-primarySave"
                             data-url="{{route('update-productDetail',['id' =>$item->showid])}}"
@@ -374,8 +374,8 @@
                     </div>
                     @endforeach
                     <div class=" col-sm-12 info-product-order">
-                    <h5><i>VAT(10%) : {{number_format($order_product->sum('total')*0.1)}} VND</i></h5>
-                    <h5>Tổng tiền sản phẩm : {{number_format($tien)}} VND</h5>
+                    <h5><i>VAT(10%) : {{number_format($order_product->sum('total')*0.1)}} đ</i></h5>
+                    <h5>Tổng tiền sản phẩm : {{number_format($tien)}} đ</h5>
                         <h4><i>Mã giảm giá : 
                         <?php 
                         if($order_detail->voucher_id == 0){
@@ -386,15 +386,20 @@
                                             $voucher = $parent->value . ' %';    
                                         }
                                         if($parent->type == 1){
-                                            $voucher = $parent->value . ' VND';    
+                                            $voucher = $parent->value . ' đ';    
                                         }
                                     }
                                         ?>
                                         {{$voucher}}</i>
                         </h4>
                     </div>
+                    @if(empty($order_detail->time_ship == null))
                     <div class=" col-sm-12 info-product-order">
-                        <h3>Tổng đơn hàng: {{number_format($order_detail->totalMoney)}}VND</h3>
+                    <h3>Thời gian nhận hàng: <input type="time" value="{{$order_detail->time_ship}}" disabled> </h3>
+                    </div>
+                    @endif
+                    <div class=" col-sm-12 info-product-order">
+                        <h3>Tổng đơn hàng: {{number_format($order_detail->totalMoney)}} đ</h3>
                     </div>
                 </div>
             </div>             

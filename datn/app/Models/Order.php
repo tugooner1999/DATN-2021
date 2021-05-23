@@ -21,6 +21,7 @@ class Order extends Model
     'customer_phone',
     'customer_fullname',
     'status',
+    'time_ship'
     ];
     public function order_details(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

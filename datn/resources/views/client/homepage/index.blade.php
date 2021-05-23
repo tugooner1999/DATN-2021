@@ -270,7 +270,7 @@
                         <article class="list-product mb-30px">
                             <div class="img-block">
                                 <a href="{{route('client.single-product', ['id'=>$item->id])}}" class="thumbnail">
-                                    <img class="first-img" src="{{$item->image_gallery}}" alt="" />
+                                    <img class="first-img" src="{{$item->image_gallery}}" height="230" alt="" />
                                 </a>
                             </div>
                             <ul class="product-flag">
@@ -344,7 +344,7 @@
                         <article class="list-product mb-30px">
                             <div class="img-block">
                                 <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                                    <img class="first-img" src="{{$item->image_gallery}}" alt="" />
+                                    <img class="first-img" src="{{$item->image_gallery}}" height="230" alt="" />
                                 </a>
                             </div>
                             <ul class="product-flag">

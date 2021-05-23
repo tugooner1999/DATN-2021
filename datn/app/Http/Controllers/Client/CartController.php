@@ -139,7 +139,7 @@ class CartController extends Controller
                     'email'=>'required|email|max:255',
                     'phone'=>'required|min:10|numeric',
                     'address'=>'required',
-    
+                    
                     ];
                 $msg = [
                     'fullname.required' =>'Vui lòng nhập đầy đủ họ tên',
@@ -150,8 +150,7 @@ class CartController extends Controller
                     'phone.required'=> 'Nhập số điện thoại',
                     'phone.min'=> 'Nhập số điện thoại có 10 chữ số',
                     'phone.numeric'=> 'Số điện thoại không đúng định dạng',
-                    'address.required'=>'Bạn chưa nhập địa chỉ'
-                    
+                    'address.required'=>'Bạn chưa nhập địa chỉ',
                 ];
                 $validator = Validator::make($rq->all(), $rule, $msg);
                 if ($validator->fails()) {
@@ -195,7 +194,7 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)+15000,
                     'order_date' => $order_date,
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
@@ -219,7 +218,7 @@ class CartController extends Controller
                             'product_id' =>$val['id'],
                             'total' =>$val['price'] * $val['quantity'],
                             'unit_price' =>$val['price'],
-                            'quantily' =>$val['quantity']
+                            'quantily' =>$val['quantity'],
                         ]);
                         if($insertOderDetail){
                             unset($_SESSION['cart']);
@@ -270,7 +269,7 @@ class CartController extends Controller
                     'email'=>'required|email|max:255',
                     'phone'=>'required|min:10|numeric',
                     'address'=>'required',
-    
+                    'time_ship'=>'required',
                     ];
                 $msg = [
                     'fullname.required' =>'Vui lòng nhập đầy đủ họ tên',
@@ -281,7 +280,8 @@ class CartController extends Controller
                     'phone.required'=> 'Nhập số điện thoại',
                     'phone.min'=> 'Nhập số điện thoại có 10 chữ số',
                     'phone.numeric'=> 'Số điện thoại không đúng định dạng',
-                    'address.required'=>'Bạn chưa nhập địa chỉ'
+                    'address.required'=>'Bạn chưa nhập địa chỉ',
+                    'time_ship.required'=>'Bạn chưa chọn thời gian giao hàng'
                     
                 ];
                 $validator = Validator::make($rq->all(), $rule, $msg);
@@ -326,9 +326,9 @@ class CartController extends Controller
                     'status'=> 0,
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 2,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1)+15000,
                     'order_date' => $order_date,
-
+                    'time_ship'=>$rq->time_ship
                 ]);
                 $getOrderId = Order::where('customer_email',$rq->email)->orderBy('created_at','desc')->first('id');
                 if($insertOrder){
@@ -351,8 +351,8 @@ class CartController extends Controller
                             'product_id' =>$val['id'],
                             'total' =>$val['price'] * $val['quantity'],
                             'unit_price' =>$val['price'],
-                            'quantily' => $val['quantity']
-
+                            'quantily' => $val['quantity'],
+                            'time_ship'=>$rq->time_ship
                         ]);
                         if($insertOderDetail){
                             unset($_SESSION['carts']);
@@ -468,7 +468,7 @@ class CartController extends Controller
                     'order_by'=> Auth::user()->id,
                     'order_market'=> 1,
                     'status'=> 0,
-                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1),
+                    'totalMoney' => $totalPriceInCart - $voucherPrice + ($totalPriceInCart*0.1) +15000,
                     'order_date' => $order_date,
 
                 ]);

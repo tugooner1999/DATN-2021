@@ -50,7 +50,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status += 1;
         $order->save();
-        return response()->json(['data'=>'.'],200);
+        return response()->json(['data'=> $order ],200);
     }
 
     public function order_detail($id){

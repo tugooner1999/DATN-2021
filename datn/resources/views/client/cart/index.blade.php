@@ -93,6 +93,13 @@
                                                     ?>"
                                                     />
                                                 </div>
+                                                
+                                                <div>
+                                                <?php $parent = App\Models\Product::find($item['id']);
+                                                $idcate = $parent->category_id;
+                                                    ?>
+                                                    {{ $item['allow_market'] == 2 && !empty($idcate == 35) ? "( 0,1 = 100g )" : ""}}
+                                                </div>
                                             </td>
                                             <td class="product-subtotals" prod-id="{{$item['id']}}">{{number_format($item['price'] * $item['quantity'])}} VNĐ</td>
                                             <td class="product-remove">
@@ -171,18 +178,27 @@
                             <?php 
                                 $totalPriceInCartAfterAddVoucher = ($totalPriceInCart*0.1);
                             ?>
-                            <h5>VAT (10%)<span id="total-price-carts">{{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h5>                            
-                            <h5>Phí giao hàng <span>0 VNĐ</span></h5>
+                            <h5>VAT (10%)<span id="total-price-carts">{{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h5>  
+                            <?php 
+                                $ship = 15000;
+                            ?>                          
+                            <h5>Phí ship quanh khu vực Cửa hàng (<i>Bán kính : 5km</i> )<span>{{number_format($ship)}} VNĐ</span></h5>
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đặt hàng</h4>
                                 
                             </div>
                             {{-- <label for="">Họ Tên</label> --}}
                             <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="full-name-customer" value="@if(Auth::user()) {{Auth::user()->name}} @endif">
-                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" value="@if(Auth::user()) {{Auth::user()->email}} @endif">
-                            {{-- <label for="">Số điện thoại</label> --}}
+                            <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="email-customer" value="@if(Auth::user()) {{Auth::user()->email}} @endif" disabled hidden>
+                            <h6 style="margin-bottom: -16px;margin-top: 10px;">Số điện thoại:</h6>
                             <input class="mt-4 pl-2" type="text" style="width:100%;height:36px;" id="phone-customer" value="@if(Auth::user()) {{Auth::user()->phone}} @endif">
+                            <h6 style="margin-bottom: -16px;margin-top: 10px;">Địa chỉ nhận hàng:</h6>
                             <textarea class="mt-4 pl-2" rows="5" type="text" style="width:100%;height:px;" id="address-customer" placeholder="Địa chỉ nhận hàng">@if(Auth::user()) {{Auth::user()->address}} @endif</textarea>
+                            @if(isset($_SESSION['carts']))
+                            <h6 style="margin-bottom: -16px;margin-top: 10px;"><b>Thời gian nhận hàng đi chợ mong muốn:</b></h6>
+                            <input class="mt-4 pl-2" type="time" id="time_ship" min="09:30:00" max="19:00:00" required  value ="10:00">
+                            <small>Giờ hành chính là 9 giờ sáng đến 7 giờ chiều</small>
+                            @endif
                             <div class="total-shipping">
                                 <h5>Loại hình thanh toán</h5>
                                 <ul>
@@ -191,10 +207,10 @@
                                 </ul>
                             </div>
                             <?php 
-                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice +($totalPriceInCart*0.1);
+                                $totalPriceInCartAfterAddVoucher = ($totalPriceInCart) - $voucherPrice +($totalPriceInCart*0.1) + $ship;
                             ?>
                             <h4 class="grand-totall-title">Tổng tiền : {{number_format($totalPriceInCartAfterAddVoucher)}} VNĐ</span></h4>
-                            <a id="checkout" href="">Thanh toán</a>
+                            <a id="checkout" href="#">Thanh toán</a>
                         </div>
                     </div>
                 </div>
