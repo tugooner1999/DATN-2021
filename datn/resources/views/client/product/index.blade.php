@@ -112,7 +112,7 @@
                                 <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
                                 @endif
                                 @if($today > "09:00:00" && $item->allow_market ==2 && $item->quantily > 0)
-                                <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
                                 @endif
                                 @if ($item->quantily == 0)
                                 <p>Sản phẩm đã hết hàng</p>
@@ -173,6 +173,7 @@
                                         <div class="sidebar-widget-list-left">
                                             <input type="checkbox"/><a href="{{route('client.cate-product',['id'=>$item->id])}}">{{ $item->name }} ({{ count($item->products) }})</span>
                                             </a>
+                                            <span class="checkmark"></span>
                                         </div>
                                     </li>
                                     @endforeach
