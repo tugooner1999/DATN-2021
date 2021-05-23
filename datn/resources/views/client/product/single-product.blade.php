@@ -374,7 +374,7 @@
             <article class="list-product">
                 <div class="img-block">
                     <a href="{{route('client.single-product',['id'=>$item->id])}}" class="thumbnail">
-                        <img src="{{asset($item->image_gallery)}}" alt="" />
+                        <img src="{{asset($item->image_gallery)}}" height="200" alt="" />
                     </a>
                 </div>
                 <ul class="product-flag">
@@ -398,15 +398,18 @@
                 <div class="add-to-link">
                     <ul>
                         <li class="cart">
-                            @if ($today <= "09:00:00" && $item->allow_market ==2)
-                            <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                            @endif
-                            @if ($item->allow_market ==1)
-                            <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                            @endif
-                            @if($today > "09:00:00" && $item->allow_market ==2)
-                            <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
-                            @endif  
+                        @if ($today <= "09:00:00" && $item->allow_market ==2 && $item->quantily > 0)
+                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif
+                                @if ($item->allow_market ==1 && $item->quantily > 0)
+                                <a class="cart-btn" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif
+                                @if($today > "09:00:00" && $item->allow_market ==2 && $item->quantily > 0)
+                                <a class="cart-btns" product-id='{{$item->id}}' href="#" >Thêm vào giỏ</a>
+                                @endif
+                                @if ($item->quantily == 0)
+                                <p>Sản phẩm đã hết hàng</p>
+                                @endif 
                         </li>
                         <li>
                             <a

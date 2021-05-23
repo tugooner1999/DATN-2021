@@ -15,6 +15,7 @@ class OrderDetail extends Model
         'product_id',
         'total',
         'unit_price',
+        'time_ship',
         'showid'
     ];
     protected  $primaryKey = 'showid';

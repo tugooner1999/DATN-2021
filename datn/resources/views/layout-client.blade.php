@@ -79,6 +79,7 @@
                 var addressCustomer = $('#address-customer').val()
                 var phoneCustomer = $('#phone-customer').val()
                 var emailCustomer = $('#email-customer').val()
+                var time_ship = $('#time_ship').val()
                 if(checkBoxPayment ===true){
                     if(paymentMethod == 'vnpay'){
                         Swal.fire({
@@ -98,6 +99,7 @@
                                 address:addressCustomer,
                                 phone:phoneCustomer,
                                 email:emailCustomer,
+                                time_ship:time_ship,
                                 _token:"{{csrf_token()}}"
                             },
                             success: function(result){
@@ -114,6 +116,9 @@
                                         }
                                         if(item.address){
                                             toastr.error(item.address[index],'Lỗi')
+                                        }
+                                        if(item.time_ship){
+                                            toastr.error(item.time_ship[index],'Lỗi')
                                         }
                                     })
                                 }
@@ -227,6 +232,7 @@
                     arrayProduct.push(idProduct)
                     arrayQuantity.push(quantity)
                 })
+                var ship = 15000;
                 $.ajax({
                         type:"POST",
                         url: "{{route('client.update-cart')}}",
@@ -259,15 +265,15 @@
                                 })
                                 if(typeVoucher==2){
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * voucherValue / 100) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100 + (totalPriceInCart*0.1)) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - totalPriceInCart * voucherValue / 100 + (totalPriceInCart*0.1) +ship) + " VNĐ")
                                 }
                                 else if(typeVoucher==1){
                                     console.log(1)
                                     $('#sale-off').html(new Intl.NumberFormat('en-GB').format(voucherValue) + " VNĐ")
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue + (totalPriceInCart*0.1)) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart - voucherValue + (totalPriceInCart*0.1) + ship) + " VNĐ")
                                 }
                                 else{
-                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart +  (totalPriceInCart*0.1)) + " VNĐ")
+                                    $('.grand-totall-title').html("Tổng tiền " + new Intl.NumberFormat('en-GB').format(totalPriceInCart +  (totalPriceInCart*0.1) + ship) +  " VNĐ")
                                 }
                                 $('#total-price-cart').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart) + " VNĐ");
                                 $('#total-price-carts').html(new Intl.NumberFormat('en-GB').format(totalPriceInCart * 0.1) + " VNĐ")

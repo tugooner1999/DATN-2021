@@ -137,6 +137,17 @@
                                         </div>
                             </div>
                         </div>
+
+                        @if(empty($order_detail->time_ship == null))
+                        <div class="payment-detail__item">
+                            <div class="payment-detail__item__description">Thời gian ship</div>
+                            <div class="payment-detail__item__value">
+                                <div class="payment-detail__item__value-text"> 
+                                <input type="time" value="{{$order_detail->time_ship}}" disabled> 
+                                        </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="payment-detail__item payment-detail__item--last">
                             <div class="payment-detail__item__description">Tổng số tiền</div>
                             <div class="payment-detail__item__value payment-detail__item__value--highlighted">

@@ -91,7 +91,7 @@
                                             echo "btn btn-warning";
                                         }
                                         if($item->status == 3){
-                                            echo "btn btn-success";
+                                            echo "btn btn-outline-success";
                                         }
                                         ?>
                                             ' value = "
@@ -106,7 +106,7 @@
                                             echo "Hoàn thành";
                                         }
                                         if($item->status == 3){
-                                            echo "Đã hoàn thành";
+                                            echo "&#10004;";
                                         }
                                         ?>"
                                         <?php
@@ -127,8 +127,12 @@
                                         if(!empty($item->status == 4)){
                                             echo "hidden";
                                         }
+                                        if(!empty($item->status == 3)){
+                                            echo "hidden";
+                                        }
                                     ?>
-                                     class="previous">&laquo;</a>
+                                     class="previous"><i class="fa fa-undo"></i>
+</a>
                                             </td>
                                         </tr>
                                     @endforeach
