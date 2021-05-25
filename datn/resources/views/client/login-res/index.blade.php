@@ -85,10 +85,10 @@
                                         @error('password_confirmation')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="file"  name="avatar" />
+                                        <!-- <input type="file"  name="avatar" />
                                         @error('avatar')
                                             <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror -->
                                         <input type="email"  id="email" name="email" placeholder="Nhập Email" value="{{(old('email'))}}"  />
                                         @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
