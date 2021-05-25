@@ -141,8 +141,8 @@
                                         <tr>
                                             <th style="visibility:hidden;">Tài khoản</th>
                                             <th style="visibility:hidden;">Giá trị</th>
-                                            <th style="border:none">Loại</th>
-                                            {{-- <th style="border:none">Trạng thái</th> --}}
+                                            <th style="visibility:hidden;">Loại</th>
+                                            <th style="border:none">Trạng thái</th>
                                             <th style="border:none">Tình trạng</th>
                                             <th style="border:none">Ngày đặt</th>
                                             <th style="visibility:hidden;">Chi tiết</th>

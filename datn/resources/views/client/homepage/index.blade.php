@@ -19,7 +19,7 @@
                         {{$ad->title}}
                     </h1>
                     <p class="animated">Giao hàng miễn phí trong 500m</p>
-                    <a href="shop-4-column.html" class="shop-btn animated">ĐẶT HÀNG</a>
+                    <p class="animated" >Cửa hàng tạp hóa Chúc AN kính chào quý khách !</p>
                 </div>
             </div>
         </div>

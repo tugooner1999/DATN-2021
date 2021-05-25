@@ -57,17 +57,12 @@ class AuthController extends Controller
     }
     public function registration(RegistrationRequest $request){
         $data = $_POST;
-
         $user = new User();
         $user->fill($data);
-        if($request->hasFile('avatar')){
-            $path = $request->file('avatar')->store('public/avatars');
-            $user->avatar = str_replace("public/", "storage/", $path);
-        }
+        $user->avatar = 'storage/avatars\53178293_2051948701589471_8931920156058189824_n.png';
         $user->password= Hash::make($request->get('password'));
         $user->role_id = 0;
         $user->status = 0;
-        
         $user->save();
         Session::put('message','Đăng kí thành công');
         return redirect()->route('client.login'); 
